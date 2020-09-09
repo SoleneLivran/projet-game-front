@@ -8,11 +8,29 @@
 
 @media (max-width: 640px) {
   .nav__list {
-    transition: all 0.7s ease-out;
+    transition: all 0.5s ease-out;
     max-height: 0;
   }
 
   .nav__list--active {
     max-height: 270px;
+  }
+}
+
+.nav__logo {
+  animation-direction: alternate;
+  animation-duration: 0.8s;
+  animation-name: upanddown;
+  animation-iteration-count: infinite;
+  transform: translateX(-50%);
+  top: 10px;
+}
+
+@keyframes upanddown {
+  from {
+    margin-top: 7px;
+  }
+  to {
+    margin-top: 0;
   }
 }

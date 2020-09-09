@@ -30,7 +30,7 @@ const Nav = () => {
         </span>
       </button>
       <ul
-        className={`nav__list overflow-hidden ${ulClassName} sm:static sm:opacity-100 sm:h-auto uppercase sm:py-5 sm:py-16 text-gray-100 text-xl flex flex-col sm:flex-row justify-between sm:items-center font-bold`}
+        className={`nav__list overflow-hidden ${ulClassName} sm:static sm:opacity-100 sm:h-auto uppercase sm:py-5 text-gray-100 text-xl flex flex-col sm:flex-row justify-around sm:items-center font-bold`}
       >
         {/* Display all button in nav, except home */}
         {navDatas.map((item, key) => (
@@ -48,10 +48,10 @@ const Nav = () => {
         ))}
 
         {/* display the home button with a img, always in center, depend of the nav length */}
-        <NavLink to="/" className={`order-${Math.ceil(navDatas.length / 2)}`}>
+        <NavLink to="/" className={`md:order-${Math.ceil(navDatas.length / 2)}`}>
           <img
             src="/assets/img/logo.png"
-            className="nav__logo -my-10 transform duration-200 ease-in-out h-64 hover:scale-110 hidden md:block"
+            className="nav__logo absolute transform duration-200 ease-in-out h-64 hover:scale-110 hidden md:block"
             alt=""
           />
         </NavLink>
