@@ -1,21 +1,26 @@
 export default [
   {
     order: 1,
-    name: "create",
-    route: "/create",
+    name: "accueil",
+    route: "/",
   },
   {
     order: 2,
-    name: "play",
-    route: "/play",
+    name: "créer",
+    route: "/create",
   },
   {
     order: 3,
-    name: "about",
-    route: "/about",
+    name: "jouer",
+    route: "/play",
   },
   {
     order: 4,
+    name: "à propos",
+    route: "/about",
+  },
+  {
+    order: 5,
     name: "contact",
     route: "/contact",
   },
