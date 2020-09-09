@@ -3,7 +3,7 @@ import "./Nav.css"
 
 const Nav = () => (
   <div className="Nav bg-gray-900 h-full w-screen ">
-    <ul className="uppercase flex justify-evenly">
+    <ul className="uppercase py-16 text-gray-100 text-xl flex justify-evenly">
       <li>Créer</li>
       <li>Jouer</li>
       <li>LOGO</li>
@@ -13,4 +13,4 @@ const Nav = () => (
   </div>
 )
 
-export default App
+export default Nav
