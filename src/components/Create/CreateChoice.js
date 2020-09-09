@@ -11,6 +11,7 @@ const cardsNames = {
     "lieu-1": { id: 0, content: "Forêt" },
     "lieu-2": { id: 1, content: "Desert" },
     "lieu-3": { id: 2, content: "Taverne" },
+    "lieu-4": { id: 3, content: "Espace" },
   },
   // Column where the items are curently in
   columns: {
@@ -18,7 +19,7 @@ const cardsNames = {
       id: "column-1",
       title: "select card",
       // We declare the ownership : lieu-1 is currently in column-1
-      lieuIDs: ["lieu-1", "lieu-2", "lieu-3"],
+      lieuIDs: ["lieu-1", "lieu-2", "lieu-3", "lieu-4"],
     },
     // We define the column order
     columnOrder: ["column-1"],
