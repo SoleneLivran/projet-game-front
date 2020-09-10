@@ -2,6 +2,10 @@
 
 }
 
+.nav__user {
+  background-image: url("/assets/img/default_visitor.jpg");
+}
+
 .nav__selected {
   color: red   
 }
@@ -14,6 +18,14 @@
 
   .nav__list--active {
     max-height: 270px;
+  }
+  .nav__list-user {
+    transition: all 0.5s ease-out;
+    max-height: 0;
+  }
+
+  .nav__list-user--active {
+    max-height: 200px;
   }
 }
 
