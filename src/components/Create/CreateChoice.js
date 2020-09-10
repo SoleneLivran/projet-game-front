@@ -1,4 +1,5 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
+
 import "./Create.css"
 
 const CreateGame = () => {
@@ -95,6 +96,7 @@ const CreateGame = () => {
   // State of current "Action" module
   const [currentActionState, setCurrentAction] = useState({
     currentAction: "ACTION",
+    array: [],
     bgImage: "",
   })
   // Current Module State to display
@@ -102,6 +104,7 @@ const CreateGame = () => {
     currentCards: "lieuState",
     bgImage: "",
   })
+
   // When module "Lieu" is clicked
   const lieuOnClick = () => {
     setCards({
@@ -130,7 +133,25 @@ const CreateGame = () => {
   }
   // Set "Action" current State to the clicked module
   const chooseActionOnClick = (props) => {
-    setCurrentAction({ currentAction: props.name })
+    setCurrentAction({
+      currentAction: props.name,
+      array: [...currentActionState.array, props.name],
+    })
+  }
+
+  const onDelete = (index) => {
+    // Clone the current state array
+    const actions = currentActionState.array.slice(0)
+    // Remove the element from the array
+    actions.splice(index, 1)
+    if (currentActionState.array.length == 1) {
+      setCurrentAction({ currentAction: "ACTION", array: [], bgImage: "" })
+      return
+    }
+    setCurrentAction({
+      ...currentActionState,
+      array: actions,
+    })
   }
 
   return (
@@ -172,16 +193,37 @@ const CreateGame = () => {
         </div>
         {/* /Evenement module */}
         {/* Action module */}
-        <div
-          onClick={actionOnClick}
-          className={
-            currentActionState.currentAction === "ACTION"
-              ? "select-none my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center border-4 border-dashed border-gray-500 items-center text-gray-500 font-bold text-2xl"
-              : "select-none my-4 w-48 h-48 rounded-lg bg-gray-700 mx-8 flex justify-center shadow-lg items-center text-gray-100 font-bold text-2xl"
-          }
-        >
-          {currentActionState.currentAction}
-        </div>
+        {currentActionState.array == false ? (
+          <div
+            onClick={actionOnClick}
+            className={
+              currentActionState.currentAction === "ACTION"
+                ? "select-none my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center border-4 border-dashed border-gray-500 items-center text-gray-500 font-bold text-2xl"
+                : "select-none my-4 w-48 h-48 rounded-lg bg-gray-700 mx-8 flex justify-center shadow-lg items-center text-gray-100 font-bold text-2xl"
+            }
+          >
+            {currentActionState.currentAction}
+          </div>
+        ) : (
+          currentActionState.array.map((item, index) => (
+            <div
+              onClick={actionOnClick}
+              className={
+                currentActionState.currentAction === "ACTION"
+                  ? "select-none my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center border-4 border-dashed border-gray-500 items-center text-gray-500 font-bold text-2xl"
+                  : "select-none my-4 w-48 h-48 rounded-lg bg-gray-700 mx-8 flex justify-center shadow-lg items-center text-gray-100 font-bold text-2xl"
+              }
+            >
+              <div className="flex flex-col">
+                {item}
+                <span onClick={() => onDelete(index)} className="py-4">
+                  X
+                </span>
+              </div>
+            </div>
+          ))
+        )}
+
         {/* /Action module */}
       </div>
       {/* /Modules */}
