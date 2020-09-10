@@ -19,7 +19,7 @@ const Nav = () => {
   const handlePanel = () => setPanel(!isOpen)
 
   return (
-    <div className="nav bg-gray-900 h-full w-screen relative">
+    <div className="nav bg-gray-900 bg-opacity-75 sm:bg-opacity-50 h-auto w-screen relative">
       <button
         onClick={() => handlePanel()}
         className={`${hamburgerClassName}`}
@@ -30,7 +30,7 @@ const Nav = () => {
         </span>
       </button>
       <ul
-        className={`nav__list overflow-hidden ${ulClassName} sm:static sm:opacity-100 sm:h-auto uppercase sm:py-5 text-gray-100 text-xl flex flex-col sm:flex-row justify-around sm:items-center font-bold`}
+        className={`nav__list overflow-hidden ${ulClassName} sm:static sm:opacity-100 sm:h-auto uppercase text-center sm:py-5 text-gray-100 text-xl flex flex-col sm:flex-row justify-around sm:items-center font-bold`}
       >
         {/* Display all button in nav, except home */}
         {navDatas.map((item, key) => (
