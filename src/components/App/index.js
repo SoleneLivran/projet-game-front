@@ -3,7 +3,7 @@ import "./App.css"
 import Nav from "src/components/Nav/index"
 
 const App = () => (
-  <div className="App bg-gray-900 h-full w-screen ">
+  <div className="app bg-center bg-cover h-full w-screen ">
     <Nav />
   </div>
 )
