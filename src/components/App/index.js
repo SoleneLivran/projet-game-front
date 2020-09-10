@@ -4,7 +4,7 @@ import Nav from "src/components/Nav/index"
 import Home from "src/components/Home/index"
 
 const App = () => (
-  <div className="app bg-center bg-cover h-full w-screen ">
+  <div className="app bg-center bg-cover h-auto w-screen ">
     <Nav />
     <Home />
   </div>

@@ -4,7 +4,7 @@ import Card from "src/components/Card/index"
 
 const Home = () => (
   <div className="home">
-    <section className="home__stories mx-16 my-16">
+    <section className="home__stories mx-8 my-16">
       <h1 className="home__title uppercase text-white text-3xl font-bold">
         Populaires
       </h1>

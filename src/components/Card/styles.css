@@ -1,11 +1,23 @@
+.card {
+  max-width: 700px;
+}
+
 .card__img {
   object-position: 0% 30%;
+}
+
+.card__title-top {
+  max-height: 60px;
+}
+
+.card__title-bottom {
+  max-height: 2.2em;
 }
 
 /* hr ressources: https://codepen.io/joeyhoer/pen/BmqIx */
 hr {
   border: 0;
-  margin: 1.35em auto;
+  margin: 0.8em auto;
   max-width: 100%;
   background-position: 50%;
   box-sizing: border-box;
