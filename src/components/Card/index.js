@@ -4,7 +4,7 @@ import "./styles.css"
 const Card = () => (
   <li className="card border-0 rounded">
     <img
-      className="card__img h-24 w-full object-cover border-b-2 border-gray-700"
+      className="card__img h-24 md:h-32 w-full object-cover border-b-2 border-gray-700"
       src="/assets/img/dragon.jpg"
       alt=""
     />

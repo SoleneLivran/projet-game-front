@@ -1,5 +1,5 @@
 .card {
-  max-width: 700px;
+  max-width: 900px;
 }
 
 .card__img {
@@ -29,4 +29,10 @@ hr {
   color: grey;
   border-image: linear-gradient(90deg, rgba(135, 206, 235, 0), grey 50%, rgba(135, 206, 235, 0) 100%) 0 0 100%;
   border-style: solid;
+}
+
+@media (min-width: 1280px) {
+  .card__img {
+    object-position: 0% 32%;
+  }
 }
