@@ -6,7 +6,7 @@ export const initialState = {
 const app = (state = initialState, action = {}) => {
   switch (action.type) {
     case "SAVE_POPULAR_STORIES": {
-      console.log("SAVE POPULAR STORIES");
+      console.log("App reducer: SAVE POPULAR STORIES");
       return {
         ...state,
       }
