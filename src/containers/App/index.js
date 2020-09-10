@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import App from 'src/components/App/index';
+import { fetchPopularStories } from 'src/actions/app'
 
 /* === State (données) ===
  * - mapStateToProps retroune un objet de props pour le composant de présentation
@@ -20,6 +21,7 @@ const mapStateToProps = null;
 const mapDispatchToProps = (dispatch) => ({
   fetchPopularStories: () => {
     console.log('Hello !');
+    dispatch(fetchPopularStories())
   }
 });
 
