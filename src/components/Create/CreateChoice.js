@@ -1,152 +1,243 @@
-import React, { Component } from "react"
-import ReactDOM from "react-dom"
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
+import React, { useState } from "react"
+import "./Create.css"
 
-const getItems = (count, offset = 0) =>
-  Array.from({ length: count }, (v, k) => k).map((k) => ({
-    id: `item-${k + offset}`,
-    content: `Action ${k + offset}`,
-    description: `Descrition du module`,
-  }))
+const CreateGame = () => {
+  /* Lieu State  */
+  const [lieuState, setLieu] = useState({
+    lieux: [
+      {
+        name: "Fôret",
+        id: 0,
+        description: "Une fôret silencieuse",
+        image: "assets/img/lieux/forest.jpg",
+      },
+      {
+        name: "Desert",
+        id: 1,
+        description: "Un desert aride",
+        image: "assets/img/lieux/desert.jpg",
+      },
+      {
+        name: "Taverne",
+        id: 2,
+        description: "Une taverne chaleureuse",
+        image: "assets/img/lieux/taverne.jpg",
+      },
+      {
+        name: "Espace",
+        id: 2,
+        description: "Une planète lointaine",
+        image: "assets/img/lieux/space.jpg",
+      },
+    ],
+  })
+  /* Evenement State  */
+  const [eventState, setEvenement] = useState({
+    event: [
+      {
+        name: "Ours",
+        id: 0,
+        description: "",
+        image: "assets/img/evenements/bear.jpg",
+      },
+      {
+        name: "Bagarre",
+        id: 1,
+        description: "",
+        image: "assets/img/evenements/bagarre.jpg",
+      },
+      {
+        name: "Boire",
+        id: 2,
+        description: "",
+        image: "assets/img/evenements/beer.jpg",
+      },
+      {
+        name: "Alien",
+        id: 3,
+        description: "",
+        image: "assets/img/evenements/alien.jpg",
+      },
+    ],
+  })
+  /* Action State  */
+  const [actionsState, setActions] = useState({
+    actions: [
+      { name: "Se battre", id: 0, description: "" },
+      {
+        name: "Boire",
+        id: 1,
+        description: "",
+      },
+      {
+        name: "Entrer",
+        id: 2,
+        description: "",
+      },
+      {
+        name: "Fuir",
+        id: 3,
+        description: "",
+      },
+    ],
+  })
 
-const reorder = (list, startIndex, endIndex) => {
-  const result = Array.from(list)
-  const [removed] = result.splice(startIndex, 1)
-  result.splice(endIndex, 0, removed)
-
-  return result
-}
-
-const move = (source, destination, droppableSource, droppableDestination) => {
-  const sourceClone = Array.from(source)
-  const destClone = Array.from(destination)
-  const [removed] = sourceClone.splice(droppableSource.index, 1)
-
-  destClone.splice(droppableDestination.index, 0, removed)
-
-  const result = {}
-  result[droppableSource.droppableId] = sourceClone
-  result[droppableDestination.droppableId] = destClone
-
-  return result
-}
-
-const grid = 8
-
-class CreateChoice extends Component {
-  state = {
-    items: getItems(0),
-    selected: getItems(3, 10),
+  // State of current "Lieu" module
+  const [currentLieuState, setCurrentLieu] = useState({
+    currentLieu: "LIEU",
+    bgImage: "",
+  })
+  // State of current "Evenement" module
+  const [currentEventState, setCurrentEvent] = useState({
+    currentEvent: "EVENEMENT",
+    bgImage: "",
+  })
+  // State of current "Action" module
+  const [currentActionState, setCurrentAction] = useState({
+    currentAction: "ACTION",
+    bgImage: "",
+  })
+  // Current Module State to display
+  const [cardsState, setCards] = useState({
+    currentCards: "lieuState",
+    bgImage: "",
+  })
+  // When module "Lieu" is clicked
+  const lieuOnClick = () => {
+    setCards({
+      currentCards: "lieuState",
+    })
+  }
+  // When module "Evenement" is clicked
+  const eventOnClick = () => {
+    setCards({
+      currentCards: "evenementState",
+    })
+  }
+  // When module "Action" is clicked
+  const actionOnClick = () => {
+    setCards({
+      currentCards: "actionState",
+    })
+  }
+  // Set "Lieu" current State to the clicked module
+  const chooseLieuOnClick = (props) => {
+    setCurrentLieu({ currentLieu: props.name, bgImage: props.image })
+  }
+  // Set "Evenement" current State to the clicked module
+  const chooseEventOnClick = (props) => {
+    setCurrentEvent({ currentEvent: props.name, bgImage: props.image })
+  }
+  // Set "Action" current State to the clicked module
+  const chooseActionOnClick = (props) => {
+    setCurrentAction({ currentAction: props.name })
   }
 
-  id2List = {
-    droppable: "items",
-    droppable2: "selected",
-  }
-
-  getList = (id) => this.state[this.id2List[id]]
-
-  onDragEnd = (result) => {
-    const { source, destination } = result
-
-    if (!destination) {
-      return
-    }
-
-    if (source.droppableId === destination.droppableId) {
-      const items = reorder(
-        this.getList(source.droppableId),
-        source.index,
-        destination.index
-      )
-
-      let state = { items }
-
-      if (source.droppableId === "droppable2") {
-        state = { selected: items }
-      }
-
-      this.setState(state)
-    } else {
-      const result = move(
-        this.getList(source.droppableId),
-        this.getList(destination.droppableId),
-        source,
-        destination
-      )
-
-      this.setState({
-        items: result.droppable,
-        selected: result.droppable2,
-      })
-    }
-  }
-
-  render() {
-    return (
-      <DragDropContext onDragEnd={this.onDragEnd}>
-        <div className="flex justify-evenly mx-auto">
-          <div className="select-none  my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center border-4 border-dashed border-gray-500 items-center text-gray-500 font-bold text-2xl">
-            LIEU
-          </div>
-          <div className="select-none my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center border-4 border-dashed border-gray-500 items-center text-gray-500 font-bold text-2xl">
-            EVENEMENT
-          </div>
-          <Droppable droppableId="droppable" direction="horizontal">
-            {(provided, snapshot) => (
-              <div
-                ref={provided.innerRef}
-                className="select-none flex flex-col my-4 w-full flex-1 h-48  rounded-lg bg-gray-200 mx-8 flex justify-center border-4 border-dashed border-gray-500 items-center text-gray-500 font-bold text-2xl"
-              >
-                ACTIONS
-                <div className="flex">
-                  {this.state.items.map((item, index) => (
-                    <Draggable key={item.id} draggableId={item.id} index={index}>
-                      {(provided, snapshot) => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          className="select-none  w-32 h-32 rounded-lg bg-gray-800 mx-8 flex justify-center items-center text-white font-bold text-2xl transform hover:-translate-y-3"
-                        >
-                          {item.content}
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
-                </div>
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
+  return (
+    <div className="Nav bg-gray-900 h-full w-screen ">
+      {/* Modules */}
+      <div className="flex justify-center">
+        {/* Lieu module */}
+        <div
+          onClick={lieuOnClick}
+          className={
+            currentLieuState.currentLieu === "LIEU"
+              ? "select-none bg-cover my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center border-4 border-dashed border-gray-500 items-center text-gray-500 font-bold text-2xl"
+              : "select-none bg-cover my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center  border-gray-500 items-center text-gray-100 shadow-lg font-bold text-2xl"
+          }
+          style={{
+            backgroundImage: currentLieuState.bgImage
+              ? `url(${currentLieuState.bgImage})`
+              : "",
+          }}
+        >
+          {currentLieuState.currentLieu}
         </div>
-        <Droppable droppableId="droppable2" direction="horizontal">
-          {(provided, snapshot) => (
-            <div ref={provided.innerRef} className="flex p-8">
-              {this.state.selected.map((item, index) => (
-                <Draggable key={item.id} draggableId={item.id} index={index}>
-                  {(provided, snapshot) => (
-                    <div
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                      className="select-none w-48 h-64 rounded-lg bg-gray-800 mx-8 flex justify-center items-center text-white font-bold text-2xl transform hover:-translate-y-3"
-                    >
-                      <div className="flex flex-col">
-                        <p> {item.content}</p>
-                        <p className="text-lg font-normal">{item.description}</p>
-                      </div>
-                    </div>
-                  )}
-                </Draggable>
-              ))}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
-    )
-  }
+        {/* /Lieu module */}
+        {/* Evenement module */}
+        <div
+          onClick={eventOnClick}
+          className={
+            currentEventState.currentEvent === "EVENEMENT"
+              ? "select-none bg-cover my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center border-4 border-dashed border-gray-500 items-center text-gray-500 font-bold text-2xl"
+              : "select-none bg-cover my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center  border-gray-500 items-center text-gray-100 shadow-lg font-bold text-2xl"
+          }
+          style={{
+            backgroundImage: currentEventState.bgImage
+              ? `url(${currentEventState.bgImage})`
+              : "",
+          }}
+        >
+          {currentEventState.currentEvent}
+        </div>
+        {/* /Evenement module */}
+        {/* Action module */}
+        <div
+          onClick={actionOnClick}
+          className={
+            currentActionState.currentAction === "ACTION"
+              ? "select-none my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center border-4 border-dashed border-gray-500 items-center text-gray-500 font-bold text-2xl"
+              : "select-none my-4 w-48 h-48 rounded-lg bg-gray-700 mx-8 flex justify-center shadow-lg items-center text-gray-100 font-bold text-2xl"
+          }
+        >
+          {currentActionState.currentAction}
+        </div>
+        {/* /Action module */}
+      </div>
+      {/* /Modules */}
+      {/* Cards */}
+      <div className=" my-16 flex">
+        {/* Display Lieu data cards */}
+        {cardsState.currentCards === "lieuState"
+          ? lieuState.lieux.map((item, i) => (
+              <div
+                key={i}
+                onClick={() => chooseLieuOnClick(item)}
+                className="select-none bg-cover text-gray-200 w-48 h-64 rounded-lg bg-gray-800 mx-8 flex justify-center items-center text-white font-bold text-2xl transform  duration-200 ease-in-out hover:-translate-y-2"
+                style={{ backgroundImage: `url(${item.image})` }}
+              >
+                <div className="flex flex-col  ">
+                  <p> {item.name} </p>
+                  <p className="text-lg font-normal ">{item.description}</p>
+                </div>
+              </div>
+            ))
+          : ""}
+        {/* Display Evement data cards */}
+        {cardsState.currentCards === "evenementState"
+          ? eventState.event.map((item, i) => (
+              <div
+                key={i}
+                onClick={() => chooseEventOnClick(item)}
+                className="select-none bg-cover text-gray-200 w-48 h-64 rounded-lg bg-gray-800 mx-8 flex justify-center items-center text-white font-bold text-2xl transform  duration-200 ease-in-out hover:-translate-y-2"
+                style={{ backgroundImage: `url(${item.image})` }}
+              >
+                <div className="flex flex-col  ">
+                  <p> {item.name} </p>
+                  <p className="text-lg font-normal ">{item.description}</p>
+                </div>
+              </div>
+            ))
+          : ""}
+        {/* Display Action data cards */}
+        {cardsState.currentCards === "actionState"
+          ? actionsState.actions.map((item, i) => (
+              <div
+                key={i}
+                onClick={() => chooseActionOnClick(item)}
+                className="select-none  text-gray-200 w-48 h-64 rounded-lg bg-gray-800 mx-8 flex justify-center items-center text-white font-bold text-2xl transform  duration-200 ease-in-out hover:-translate-y-2"
+              >
+                <div className="flex flex-col  ">
+                  <p> {item.name} </p>
+                  <p className="text-lg font-normal ">{item.description}</p>
+                </div>
+              </div>
+            ))
+          : ""}
+      </div>
+      {/* /Cards */}
+    </div>
+  )
 }
 
-export default CreateChoice
+export default CreateGame
