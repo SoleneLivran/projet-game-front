@@ -4,11 +4,11 @@ import Card from "src/components/Card/index"
 import UserPanel from "src/components/UserPanel/index"
 
 const Home = () => (
-  <div className="home md:mt-32 mx-8">
-    <section className="home__user hidden sm:block md:hidden">
+  <div className="home md:mt-32 mx-8 md:flex md:my-16 md:justify-around">
+    <section className="home__user-mobile hidden mt-8 sm:block md:hidden">
       <UserPanel />
     </section>
-    <section className="home__stories my-16 sm:my-8 md:my-16 ">
+    <section className="home__stories my-16 sm:my-8 md:w-2/3 md:my-0 md:mr-12">
       <h1 className="home__title uppercase text-white text-3xl font-bold">
         Populaires
       </h1>
@@ -29,6 +29,9 @@ const Home = () => (
           <li className="home_item">Story 3</li>
         </ul>
       </section>
+    </section>
+    <section className="home__user-desktop hidden mt-24 md:block md:w-1/3">
+      <UserPanel />
     </section>
   </div>
 )
