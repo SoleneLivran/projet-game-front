@@ -83,11 +83,6 @@ const CreateGame = () => {
     ],
   })
 
-  // State of current "SaveScene" button
-  const [currentSaveSceneState, setCurrentSaveScene] = useState({
-    currentSaveScene: false,
-  })
-
   // State of current "Lieu" module
   const [currentLieuState, setCurrentLieu] = useState({
     currentLieu: "LIEU",
@@ -106,6 +101,11 @@ const CreateGame = () => {
     array: [],
     bgImage: "",
   })
+
+  // State of nextSceneId => Current Scene ID
+  const [currentNextSceneId, setNextSceneId] = useState({
+    nextSceneId: 0,
+  })
   // Current Module State to display
   const [cardsState, setCards] = useState({
     currentCards: "lieuState",
@@ -116,6 +116,34 @@ const CreateGame = () => {
   const [scenesState, setScenes] = useState({
     scenes: [],
   })
+  // Scenes Id State to Save
+  // TODO Need to be the length of the Array of the total of the transition
+  const [scenesIDTrackerState, setScenesIDTracker] = useState({
+    id: 0,
+  })
+
+  const [actionDoneState, setActionDone] = useState({
+    array: [""],
+  })
+
+  // Set "Action" current State to the clicked module
+  const chooseActionOnClick = (props) => {
+    setCurrentAction({
+      currentAction: props.name,
+      array: [
+        ...currentActionState.array,
+        {
+          actionName: props.name,
+          actionID: props.id,
+          nextSceneId: scenesIDTrackerState.id + 1,
+        },
+      ],
+    })
+    /* trackTransitionIds() */
+    setScenesIDTracker({
+      id: scenesIDTrackerState.id + 1,
+    })
+  }
 
   // When module "Lieu" is clicked
   const lieuOnClick = () => {
@@ -151,16 +179,17 @@ const CreateGame = () => {
       currentEventId: props.id,
     })
   }
-  // Set "Action" current State to the clicked module
-  const chooseActionOnClick = (props) => {
-    setCurrentAction({
-      currentAction: props.name,
-      array: [
-        ...currentActionState.array,
-        { actionName: props.name, actionID: props.id },
-      ],
+
+  // Track transition Ids
+  /*   const trackTransitionIds = () => {
+    setScenesIDTracker({
+      id: scenesIDTrackerState.id + 1,
     })
-  }
+  } */
+
+  /*   useEffect(() => {
+
+  }, [currentActionState]) */
 
   const onDelete = (index) => {
     // Clone the current state array
@@ -178,20 +207,25 @@ const CreateGame = () => {
   }
 
   const saveCurrentScene = () => {
+    /*     setScenesIDTracker({
+      id: scenesIDTrackerState.id + 1,
+    }) */
     if (
       currentLieuState.currentLieu != "LIEU" &&
       currentEventState.currentEvent != "EVENEMENT" &&
-      currentActionState.currentAction != "ACTION"
+      currentActionState.currentAction != "ACTION" &&
+      scenesState.scenes.length < 1
     ) {
       setScenes({
+        // TODO
         scenes: [
           ...scenesState.scenes,
           {
-            id: 1,
-            previousID: null,
+            id: 0,
             lieu: {
               lieuID: currentLieuState.currentLieuId,
               lieuName: currentLieuState.currentLieu,
+              lieuBg: currentLieuState.bgImage,
             },
             evenement: {
               evenementID: currentEventState.currentEventId,
@@ -201,12 +235,48 @@ const CreateGame = () => {
           },
         ],
       })
+    } else if (
+      currentLieuState.currentLieu != "LIEU" &&
+      currentEventState.currentEvent != "EVENEMENT" &&
+      currentActionState.currentAction != "ACTION"
+    ) {
+      setScenes({
+        scenes: [
+          ...scenesState.scenes,
+          {
+            id: currentNextSceneId.nextSceneId,
+            lieu: {
+              lieuID: currentLieuState.currentLieuId,
+              lieuName: currentLieuState.currentLieu,
+              lieuBg: currentLieuState.bgImage,
+            },
+            evenement: {
+              evenementID: currentEventState.currentEventId,
+              evenementName: currentEventState.currentEvent,
+            },
+            actions: [...currentActionState.array],
+          },
+        ],
+      })
+      setActionDone({
+        array: [...actionDoneState.array, currentNextSceneId.nextSceneId],
+      })
     } else {
       return
     }
   }
+  // Update the ID of the Current Scene for the Transition
+  const nextSceneId = (props) => {
+    console.log(props)
+    setNextSceneId({
+      nextSceneId: props.nextSceneId,
+    })
+    /*     setScenesIDTracker({
+      id: currentNextSceneId.nextSceneId,
+    }) */
+  }
 
-  // Execute when scenesState change (when the author save the current scene)
+  // Execute when the author save the current scene with saveCurrentScene
   useEffect(() => {
     // Reset modules state
     setCurrentLieu({ currentLieu: "LIEU", currentLieuId: 0, bgImage: "" })
@@ -218,16 +288,43 @@ const CreateGame = () => {
     <div className="Nav bg-gray-900 h-full w-screen ">
       <div className="flex w-screen">
         {/* Saved Scenes */}
-        <div className="flex flex-col w-1/4 justify-center items-center">
+        <div className="flex flex-wra   ">
           {scenesState.scenes.length > 0
             ? scenesState.scenes.map((item, index) => (
-                <div className="flex my-4 w-48 flex-col bg-white p-8 rounded-lg">
-                  <div className="">Lieu : {item.lieu.lieuName}</div>
-                  <div className="">Evenement : {item.evenement.evenementName}</div>
+                <div
+                  className="select-none bg-cover mx-8 my-4 w-48 py-4 rounded-lg bg-gray-200  flex flex-col justify-center  border-gray-500 items-center text-gray-100 shadow-lg font-bold text-2xl"
+                  style={{
+                    backgroundImage: `url(${item.lieu.lieuBg})`,
+                  }}
+                >
+                  <div className="">{item.lieu.lieuName}</div>
+                  <div className="">{item.evenement.evenementName}</div>
                   <div className="">
-                    Actions :
                     {item.actions.map((action) => (
-                      <p>{action.actionName}</p>
+                      /* {actionDoneState.array.includes(item.nextSceneId) ?  : } */
+
+                      <div
+                        onClick={() =>
+                          actionDoneState.array.includes(action.nextSceneId)
+                            ? ""
+                            : nextSceneId(
+                                actionDoneState.array.includes(item.nextSceneId)
+                                  ? ""
+                                  : action
+                              )
+                        }
+                        className={
+                          actionDoneState.array.includes(action.nextSceneId)
+                            ? "py-2 select-none my-4 rounded-lg px-4 bg-teal-500 is-disabled shadow-md text-white font-bold"
+                            : action.nextSceneId === currentNextSceneId.nextSceneId
+                            ? "py-2 select-none my-4 rounded-lg px-4 bg-blue-600 shadow-md text-white font-bold transform duration-100 ease-in-out hover:scale-95"
+                            : "py-2 select-none my-4 rounded-lg px-4 bg-gray-900 shadow-md text-white font-bold transform duration-100 ease-in-out hover:scale-95"
+                        }
+                      >
+                        <div className={scenesState.scenes.actions}>
+                          {action.actionName}
+                        </div>
+                      </div>
                     ))}
                   </div>
                 </div>
