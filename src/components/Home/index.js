@@ -4,11 +4,11 @@ import Card from "src/components/Card/index"
 import UserPanel from "src/components/UserPanel/index"
 
 const Home = () => (
-  <div className="home md:mt-32">
-    <section className="home__stories mx-8 my-16">
-      <section className="home__user hidden sm:block md:hidden">
-        <UserPanel/>
-      </section>
+  <div className="home md:mt-32 mx-8">
+    <section className="home__user hidden sm:block md:hidden">
+      <UserPanel />
+    </section>
+    <section className="home__stories my-16 sm:my-8 md:my-16 ">
       <h1 className="home__title uppercase text-white text-3xl font-bold">
         Populaires
       </h1>
