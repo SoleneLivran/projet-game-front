@@ -1,0 +1,8 @@
+@media (min-width: 1280px) {
+  .home__stories {
+    max-width: 56.25rem;
+  }
+  .home__user-desktop {
+    max-width: 28.125rem;
+  }
+} 
