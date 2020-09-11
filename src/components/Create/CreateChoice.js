@@ -83,14 +83,21 @@ const CreateGame = () => {
     ],
   })
 
+  // State of current "SaveScene" button
+  const [currentSaveSceneState, setCurrentSaveScene] = useState({
+    currentSaveScene: false,
+  })
+
   // State of current "Lieu" module
   const [currentLieuState, setCurrentLieu] = useState({
     currentLieu: "LIEU",
+    currentLieuId: 0,
     bgImage: "",
   })
   // State of current "Evenement" module
   const [currentEventState, setCurrentEvent] = useState({
     currentEvent: "EVENEMENT",
+    currentEventId: 0,
     bgImage: "",
   })
   // State of current "Action" module
@@ -103,6 +110,11 @@ const CreateGame = () => {
   const [cardsState, setCards] = useState({
     currentCards: "lieuState",
     bgImage: "",
+  })
+
+  // Scenes Module State to Save
+  const [scenesState, setScenes] = useState({
+    scenes: [],
   })
 
   // When module "Lieu" is clicked
@@ -125,17 +137,28 @@ const CreateGame = () => {
   }
   // Set "Lieu" current State to the clicked module
   const chooseLieuOnClick = (props) => {
-    setCurrentLieu({ currentLieu: props.name, bgImage: props.image })
+    setCurrentLieu({
+      currentLieu: props.name,
+      bgImage: props.image,
+      currentLieuId: props.id,
+    })
   }
   // Set "Evenement" current State to the clicked module
   const chooseEventOnClick = (props) => {
-    setCurrentEvent({ currentEvent: props.name, bgImage: props.image })
+    setCurrentEvent({
+      currentEvent: props.name,
+      bgImage: props.image,
+      currentEventId: props.id,
+    })
   }
   // Set "Action" current State to the clicked module
   const chooseActionOnClick = (props) => {
     setCurrentAction({
       currentAction: props.name,
-      array: [...currentActionState.array, props.name],
+      array: [
+        ...currentActionState.array,
+        { actionName: props.name, actionID: props.id },
+      ],
     })
   }
 
@@ -153,6 +176,43 @@ const CreateGame = () => {
       array: actions,
     })
   }
+
+  const saveCurrentScene = () => {
+    if (
+      currentLieuState.currentLieu != "LIEU" &&
+      currentEventState.currentEvent != "EVENEMENT" &&
+      currentActionState.currentAction != "ACTION"
+    ) {
+      setScenes({
+        scenes: [
+          ...scenesState.scenes,
+          {
+            id: 1,
+            previousID: null,
+            lieu: {
+              lieuID: currentLieuState.currentLieuId,
+              lieuName: currentLieuState.currentLieu,
+            },
+            evenement: {
+              evenementID: currentEventState.currentEventId,
+              evenementName: currentEventState.currentEvent,
+            },
+            actions: [...currentActionState.array],
+          },
+        ],
+      })
+    } else {
+      return
+    }
+  }
+
+  // Execute when scenesState change (when the author save the current scene)
+  useEffect(() => {
+    // Reset modules state
+    setCurrentLieu({ currentLieu: "LIEU", currentLieuId: 0, bgImage: "" })
+    setCurrentEvent({ currentEvent: "EVENEMENT", currentEventId: 0, bgImage: "" })
+    setCurrentAction({ currentAction: "ACTION", array: [], bgImage: "" })
+  }, [scenesState])
 
   return (
     <div className="Nav bg-gray-900 h-full w-screen ">
@@ -205,76 +265,92 @@ const CreateGame = () => {
             {currentActionState.currentAction}
           </div>
         ) : (
-          currentActionState.array.map((item, index) => (
-            <div
-              onClick={actionOnClick}
-              className={
-                currentActionState.currentAction === "ACTION"
-                  ? "select-none my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center border-4 border-dashed border-gray-500 items-center text-gray-500 font-bold text-2xl"
-                  : "select-none my-4 w-48 h-48 rounded-lg bg-gray-700 mx-8 flex justify-center shadow-lg items-center text-gray-100 font-bold text-2xl"
-              }
-            >
-              <div className="flex flex-col">
-                {item}
-                <span onClick={() => onDelete(index)} className="py-4">
-                  X
+            currentActionState.array.map((item, index) => (
+              <div
+                key={index}
+                onClick={actionOnClick}
+                className={
+                  currentActionState.currentAction === "ACTION"
+                    ? "select-none my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center border-4 border-dashed border-gray-500 items-center text-gray-500 font-bold text-2xl"
+                    : "select-none my-4 w-48 h-48 rounded-lg bg-gray-700 mx-8 flex justify-center shadow-lg items-center text-gray-100 font-bold text-2xl"
+                }
+              >
+                <div className="flex flex-col">
+                  {item.actionName}
+                  <span onClick={() => onDelete(index)} className="py-4">
+                    X
                 </span>
+                </div>
               </div>
-            </div>
-          ))
-        )}
-
+            ))
+          )}
         {/* /Action module */}
       </div>
       {/* /Modules */}
+      {/* Save Current Scene Button */}
+      {currentLieuState.currentLieu != "LIEU" &&
+        currentEventState.currentEvent != "EVENEMENT" &&
+        currentActionState.currentAction != "ACTION" ? (
+          <div>
+            <button
+              onClick={saveCurrentScene}
+              className="text-white text-lg py-2 px-4 bg-gray-700 shadow-lg rounded-md"
+            >
+              Ajouter une nouvelle scène
+          </button>
+          </div>
+        ) : (
+          ""
+        )}
+      {/* /Save Current Scene Button */}
       {/* Cards */}
       <div className=" my-16 flex">
         {/* Display Lieu data cards */}
         {cardsState.currentCards === "lieuState"
           ? lieuState.lieux.map((item, i) => (
-              <div
-                key={i}
-                onClick={() => chooseLieuOnClick(item)}
-                className="select-none bg-cover text-gray-200 w-48 h-64 rounded-lg bg-gray-800 mx-8 flex justify-center items-center text-white font-bold text-2xl transform  duration-200 ease-in-out hover:-translate-y-2"
-                style={{ backgroundImage: `url(${item.image})` }}
-              >
-                <div className="flex flex-col  ">
-                  <p> {item.name} </p>
-                  <p className="text-lg font-normal ">{item.description}</p>
-                </div>
+            <div
+              key={i}
+              onClick={() => chooseLieuOnClick(item)}
+              className="select-none bg-cover text-gray-200 w-48 h-64 rounded-lg bg-gray-800 mx-8 flex justify-center items-center text-white font-bold text-2xl transform  duration-200 ease-in-out hover:-translate-y-2"
+              style={{ backgroundImage: `url(${item.image})` }}
+            >
+              <div className="flex flex-col  ">
+                <p> {item.name} </p>
+                <p className="text-lg font-normal ">{item.description}</p>
               </div>
-            ))
+            </div>
+          ))
           : ""}
         {/* Display Evement data cards */}
         {cardsState.currentCards === "evenementState"
           ? eventState.event.map((item, i) => (
-              <div
-                key={i}
-                onClick={() => chooseEventOnClick(item)}
-                className="select-none bg-cover text-gray-200 w-48 h-64 rounded-lg bg-gray-800 mx-8 flex justify-center items-center text-white font-bold text-2xl transform  duration-200 ease-in-out hover:-translate-y-2"
-                style={{ backgroundImage: `url(${item.image})` }}
-              >
-                <div className="flex flex-col  ">
-                  <p> {item.name} </p>
-                  <p className="text-lg font-normal ">{item.description}</p>
-                </div>
+            <div
+              key={i}
+              onClick={() => chooseEventOnClick(item)}
+              className="select-none bg-cover text-gray-200 w-48 h-64 rounded-lg bg-gray-800 mx-8 flex justify-center items-center text-white font-bold text-2xl transform  duration-200 ease-in-out hover:-translate-y-2"
+              style={{ backgroundImage: `url(${item.image})` }}
+            >
+              <div className="flex flex-col  ">
+                <p> {item.name} </p>
+                <p className="text-lg font-normal ">{item.description}</p>
               </div>
-            ))
+            </div>
+          ))
           : ""}
         {/* Display Action data cards */}
         {cardsState.currentCards === "actionState"
           ? actionsState.actions.map((item, i) => (
-              <div
-                key={i}
-                onClick={() => chooseActionOnClick(item)}
-                className="select-none  text-gray-200 w-48 h-64 rounded-lg bg-gray-800 mx-8 flex justify-center items-center text-white font-bold text-2xl transform  duration-200 ease-in-out hover:-translate-y-2"
-              >
-                <div className="flex flex-col  ">
-                  <p> {item.name} </p>
-                  <p className="text-lg font-normal ">{item.description}</p>
-                </div>
+            <div
+              key={i}
+              onClick={() => chooseActionOnClick(item)}
+              className="select-none  text-gray-200 w-48 h-64 rounded-lg bg-gray-800 mx-8 flex justify-center items-center text-white font-bold text-2xl transform  duration-200 ease-in-out hover:-translate-y-2"
+            >
+              <div className="flex flex-col  ">
+                <p> {item.name} </p>
+                <p className="text-lg font-normal ">{item.description}</p>
               </div>
-            ))
+            </div>
+          ))
           : ""}
       </div>
       {/* /Cards */}
