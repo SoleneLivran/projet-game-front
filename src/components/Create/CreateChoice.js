@@ -216,77 +216,101 @@ const CreateGame = () => {
 
   return (
     <div className="Nav bg-gray-900 h-full w-screen ">
-      {/* Modules */}
-      <div className="flex justify-center">
-        {/* Lieu module */}
-        <div
-          onClick={lieuOnClick}
-          className={
-            currentLieuState.currentLieu === "LIEU"
-              ? "select-none bg-cover my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center border-4 border-dashed border-gray-500 items-center text-gray-500 font-bold text-2xl"
-              : "select-none bg-cover my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center  border-gray-500 items-center text-gray-100 shadow-lg font-bold text-2xl"
-          }
-          style={{
-            backgroundImage: currentLieuState.bgImage
-              ? `url(${currentLieuState.bgImage})`
-              : "",
-          }}
-        >
-          {currentLieuState.currentLieu}
+      <div className="flex w-screen">
+        {/* Saved Scenes */}
+        <div className="flex flex-col w-1/4 justify-center items-center">
+          {scenesState.scenes.length > 0
+            ? scenesState.scenes.map((item, index) => (
+                <div className="flex my-4 w-48 flex-col bg-white p-8 rounded-lg">
+                  <div className="">Lieu : {item.lieu.lieuName}</div>
+                  <div className="">Evenement : {item.evenement.evenementName}</div>
+                  <div className="">
+                    Actions :
+                    {item.actions.map((action) => (
+                      <p>{action.actionName}</p>
+                    ))}
+                  </div>
+                </div>
+              ))
+            : ""}
         </div>
-        {/* /Lieu module */}
-        {/* Evenement module */}
-        <div
-          onClick={eventOnClick}
-          className={
-            currentEventState.currentEvent === "EVENEMENT"
-              ? "select-none bg-cover my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center border-4 border-dashed border-gray-500 items-center text-gray-500 font-bold text-2xl"
-              : "select-none bg-cover my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center  border-gray-500 items-center text-gray-100 shadow-lg font-bold text-2xl"
-          }
-          style={{
-            backgroundImage: currentEventState.bgImage
-              ? `url(${currentEventState.bgImage})`
-              : "",
-          }}
-        >
-          {currentEventState.currentEvent}
-        </div>
-        {/* /Evenement module */}
-        {/* Action module */}
-        {currentActionState.array == false ? (
-          <div
-            onClick={actionOnClick}
-            className={
-              currentActionState.currentAction === "ACTION"
-                ? "select-none my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center border-4 border-dashed border-gray-500 items-center text-gray-500 font-bold text-2xl"
-                : "select-none my-4 w-48 h-48 rounded-lg bg-gray-700 mx-8 flex justify-center shadow-lg items-center text-gray-100 font-bold text-2xl"
-            }
-          >
-            {currentActionState.currentAction}
-          </div>
-        ) : (
-          currentActionState.array.map((item, index) => (
+        {/* /Saved Scenes */}
+        {/* Modules */}
+        <div className="flex flex-col w-3/4 justify-center items-center">
+          {/* Lieu module */}
+          <div className="flex">
             <div
-              key={index}
-              onClick={actionOnClick}
+              onClick={lieuOnClick}
               className={
-                currentActionState.currentAction === "ACTION"
-                  ? "select-none my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center border-4 border-dashed border-gray-500 items-center text-gray-500 font-bold text-2xl"
-                  : "select-none my-4 w-48 h-48 rounded-lg bg-gray-700 mx-8 flex justify-center shadow-lg items-center text-gray-100 font-bold text-2xl"
+                currentLieuState.currentLieu === "LIEU"
+                  ? "select-none bg-cover my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center border-4 border-dashed border-gray-500 items-center text-gray-500 font-bold text-2xl"
+                  : "select-none bg-cover my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center  border-gray-500 items-center text-gray-100 shadow-lg font-bold text-2xl"
               }
+              style={{
+                backgroundImage: currentLieuState.bgImage
+                  ? `url(${currentLieuState.bgImage})`
+                  : "",
+              }}
             >
-              <div className="flex flex-col">
-                {item.actionName}
-                <span onClick={() => onDelete(index)} className="py-4">
-                  X
-                </span>
-              </div>
+              {currentLieuState.currentLieu}
             </div>
-          ))
-        )}
-        {/* /Action module */}
+            {/* /Lieu module */}
+            {/* Evenement module */}
+            <div
+              onClick={eventOnClick}
+              className={
+                currentEventState.currentEvent === "EVENEMENT"
+                  ? "select-none bg-cover my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center border-4 border-dashed border-gray-500 items-center text-gray-500 font-bold text-2xl"
+                  : "select-none bg-cover my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center  border-gray-500 items-center text-gray-100 shadow-lg font-bold text-2xl"
+              }
+              style={{
+                backgroundImage: currentEventState.bgImage
+                  ? `url(${currentEventState.bgImage})`
+                  : "",
+              }}
+            >
+              {currentEventState.currentEvent}
+            </div>
+          </div>
+          {/* /Evenement module */}
+          {/* Action module */}
+          <div className="flex">
+            {currentActionState.array == false ? (
+              <div
+                onClick={actionOnClick}
+                className={
+                  currentActionState.currentAction === "ACTION"
+                    ? "select-none my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center border-4 border-dashed border-gray-500 items-center text-gray-500 font-bold text-2xl"
+                    : "select-none my-4 w-48 h-48 rounded-lg bg-gray-700 mx-8 flex justify-center shadow-lg items-center text-gray-100 font-bold text-2xl"
+                }
+              >
+                {currentActionState.currentAction}
+              </div>
+            ) : (
+              currentActionState.array.map((item, index) => (
+                <div
+                  key={index}
+                  onClick={actionOnClick}
+                  className={
+                    currentActionState.currentAction === "ACTION"
+                      ? "select-none my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center border-4 border-dashed border-gray-500 items-center text-gray-500 font-bold text-2xl"
+                      : "select-none my-4 w-48 h-48 rounded-lg bg-gray-700 mx-8 flex justify-center shadow-lg items-center text-gray-100 font-bold text-2xl"
+                  }
+                >
+                  <div className="flex flex-col">
+                    {item.actionName}
+                    <span onClick={() => onDelete(index)} className="py-4">
+                      X
+                    </span>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+          {/* /Action module */}
+        </div>
+        {/* /Modules */}
       </div>
-      {/* /Modules */}
       {/* Save Current Scene Button */}
       {currentLieuState.currentLieu != "LIEU" &&
       currentEventState.currentEvent != "EVENEMENT" &&
