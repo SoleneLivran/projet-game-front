@@ -7,19 +7,12 @@ import Modal from "src/components/Modal/index"
 
 const Home = ({ popularStories }) => {
   // Modal state, display on button or hiddne when closing it
-  const [showModal, setModal] = useState(false)
+  const [showModal, setModal] = useState(true)
   const handleModal = () => setModal(true)
 
   return (
     <div className="home md:mt-32 mx-8 md:flex md:my-16 md:justify-around">
       {showModal && <Modal showModal={showModal} onClose={() => setModal(false)} />}
-      <button
-        onClick={() => handleModal()}
-        className="w-16 h-16 bg-blue-500"
-        type="button"
-      >
-        Button
-      </button>
       <section className="home__user-mobile hidden mt-8 sm:block md:hidden">
         <UserPanel />
       </section>
@@ -30,7 +23,7 @@ const Home = ({ popularStories }) => {
         <section className="home__popular mb-12 mt-4">
           <ul className="home__list-popular">
             {popularStories.map((story) => (
-              <Card key={story.id} {...story} />
+              <Card key={story.id} {...story} handleModal={handleModal} />
             ))}
           </ul>
         </section>
