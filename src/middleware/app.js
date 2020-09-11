@@ -6,20 +6,14 @@ const app = (store) => (next) => (action) => {
     case FETCH_POPULAR_STORIES: {
       console.log("Middleware: Je fetch les stories popular")
       axios
-        .get(
-          "http://ec2-18-234-186-84.compute-1.amazonaws.com/projet-jeu/gwith_back/public/api/stories",
-          {
-            headers: {
-            },
-          }
-        )
+        .get("http://ec2-18-234-186-84.compute-1.amazonaws.com/api/stories/top_ten/")
         .then((response) => {
           console.log(response)
+          store.dispatch(savePopularStories(response.data))
         })
         .catch((error) => {
-          console.log(error);
+          console.log(error)
         })
-      store.dispatch(savePopularStories())
     }
     default:
       next(action)

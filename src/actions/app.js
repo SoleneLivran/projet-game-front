@@ -5,6 +5,7 @@ export const fetchPopularStories = () => ({
   type: FETCH_POPULAR_STORIES,
 })
 
-export const savePopularStories = () => ({
+export const savePopularStories = (data) => ({
   type: SAVE_POPULAR_STORIES,
+  popularStories: data,
 })
