@@ -5,7 +5,7 @@ import "./App.css"
 
 import Nav from "src/components/Nav/index"
 import Home from "src/containers/Home/index"
-import Login from "src/components/Login/index"
+import LoginForm from "src/components/LoginForm/index"
 
 const App = ({ fetchPopularStories }) => {
   useEffect(() => {
@@ -16,7 +16,7 @@ const App = ({ fetchPopularStories }) => {
     <div className="app bg-center bg-cover h-auto w-screen ">
       <Nav />
       <Route path="/" component={Home} exact />
-      <Route path="/login" component={Login} exact />
+      <Route path="/login" component={LoginForm} exact />
     </div>
   )
 }
