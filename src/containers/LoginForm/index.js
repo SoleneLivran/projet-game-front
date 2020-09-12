@@ -4,7 +4,7 @@ import { login } from "src/actions/auth"
 
 const mapStateToProps = null
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = (dispatch) => ({
   // dispatch in auth actions
   handleLogin: () => {
     dispatch(login())
