@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import "./styles.css"
 
 const Login = () => (
-  <div className="login mt-8">
+  <div className="login mt-8 md:flex">
     <div className="login__panel w-64 flex flex-col justify-center mx-auto p-4 border-2 border-orange-400 bg-orange-900 font-bold">
       <h1 className="login__title text-xl font-bold text-center text-orange-400">
         Prouvez que vous n'êtes pas n'importe quel guerrier.
@@ -37,8 +37,9 @@ const Login = () => (
         type="submit"
         value="Entrer dans la légende"
       />
-
-      <p className="login__signup text-center mt-8">Pas encore de compte ?</p>
+    </div>
+    <section className="login__noaccount w-64 h-32 flex flex-col justify-center mx-auto p-4 border-2 border-orange-400 bg-orange-900 font-bold mt-4">
+      <p className="login__signup text-center">Pas encore de compte ?</p>
       <Link to="/signup" className="mx-auto">
         <button
           type="button"
@@ -47,7 +48,7 @@ const Login = () => (
           Créer un compte
         </button>
       </Link>
-    </div>
+    </section>
   </div>
 )
 
