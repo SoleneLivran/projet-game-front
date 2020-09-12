@@ -1,0 +1,11 @@
+.login__submit {
+  box-shadow: 0 0 10px 1px black;
+}
+
+.login__submit:active {
+  box-shadow: 0 0 20px 1px black;
+}
+
+.login__input {
+  box-shadow: inset 0 0 4px 1px black;
+}
