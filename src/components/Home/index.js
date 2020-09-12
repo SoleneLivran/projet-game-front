@@ -7,7 +7,7 @@ import Modal from "src/components/Modal/index"
 
 const Home = ({ popularStories }) => {
   // Modal state, display on button or hiddne when closing it
-  const [showModal, setModal] = useState(true)
+  const [showModal, setModal] = useState(false)
   const handleModal = () => setModal(true)
 
   return (
