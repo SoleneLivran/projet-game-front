@@ -6,6 +6,8 @@ const auth = (store) => (next) => (action) => {
     case LOGIN: {
       // access data in store
       const state = store.getState()
+      // axios'll come here
+      // after receive the correct status response from POST request:
       store.dispatch(saveUser())
     }
     default:

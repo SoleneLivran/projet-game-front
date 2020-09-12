@@ -11,10 +11,12 @@ export const changeValue = (value, key) => ({
   key,
 })
 
+// action type for auth middleware
 export const login = () => ({
   type: LOGIN,
 })
 
+// action type from auth middleware, got to auth reducer
 export const saveUser = () => ({
   type: SAVE_USER,
 })
