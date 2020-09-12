@@ -1,9 +1,14 @@
-import React, { useState, useEffect, useRef } from "react"
+import React, { useEffect, useRef } from "react"
 import "./styles.css"
 
 const Modal = ({ showModal, onClose }) => {
   const displayModal = showModal === true ? "block" : "hidden"
+
+  // useRef to define a current object => only the modal part who display content
   const ref = useRef(null)
+
+  // useEffect only when the component is mounted
+  // Remove the listener for performance and avoid error between many listener
   useEffect(() => {
     document.addEventListener("click", clickListener)
     document.addEventListener("keyup", escapeListener)
@@ -13,6 +18,7 @@ const Modal = ({ showModal, onClose }) => {
     }
   }, [])
 
+  // true if the ref object exist and the click is not on it
   const clickListener = (e) => {
     if (ref.current && !ref.current.contains(e.target)) {
       onClose()
