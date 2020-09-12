@@ -89,17 +89,17 @@ const Nav = () => {
       <ul
         className={`nav__list-user ${ulUserClassName} overflow-hidden uppercase text-center text-gray-100 text-xl flex flex-col justify-around font-bold sm:hidden`}
       >
-        <NavLink className="p-3 sm:p-5" to="/login">
+        <NavLink activeClassName="nav__selected" className="p-3 sm:p-5" to="/login">
           connexion
         </NavLink>
-        <NavLink className="p-3 sm:p-5" to="/signin">
+        <NavLink activeClassName="nav__selected" className="p-3 sm:p-5" to="/signin">
           inscription
         </NavLink>
         {/* Deconnexion and profil path depend of connected user */}
-        {/* <NavLink className="p-3 sm:p-5" to="/login">
+        {/* <NavLink activeClassName="nav__selected"  className="p-3 sm:p-5" to="/login">
           mon profil
         </NavLink> 
-        <NavLink className="p-3 sm:p-5" to="/login">
+        <NavLink activeClassName="nav__selected" className="p-3 sm:p-5" to="/login">
           déconnexion
         </NavLink> */}
       </ul>
