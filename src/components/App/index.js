@@ -5,7 +5,7 @@ import "./App.css"
 
 import Nav from "src/components/Nav/index"
 import Home from "src/containers/Home/index"
-import LoginForm from "src/components/LoginForm/index"
+import LoginForm from "src/containers/LoginForm/index"
 
 const App = ({ fetchPopularStories }) => {
   useEffect(() => {
