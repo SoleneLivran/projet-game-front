@@ -70,7 +70,7 @@ const Nav = () => {
             to={item.route}
             exact
             className={`order-${item.order} ${
-              item.route == "/" ? "md:hidden" : ""
+              item.route === "/" ? "md:hidden" : ""
             } p-3 sm:p-5`}
           >
             {item.name}

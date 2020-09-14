@@ -1,11 +1,13 @@
-import React, { useState } from "react"
+import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import "./styles.css"
 import Card from "src/components/Card/index"
 import UserPanel from "src/components/UserPanel/index"
 import Modal from "src/components/Modal/index"
 
-const Home = ({ popularStories }) => {
+const Home = ({ popularStories, fetchPopularStories }) => {
+  useEffect(fetchPopularStories, [])
   // Modal state, display on button or hidden when closing it
   const [showModal, setModal] = useState(false)
 
@@ -48,6 +50,7 @@ const Home = ({ popularStories }) => {
 }
 
 Home.propTypes = {
+  fetchPopularStories: PropTypes.func.isRequired,
   popularStories: PropTypes.array.isRequired,
 }
 export default Home

@@ -50,8 +50,8 @@ const Card = ({ author, category, difficulty, pictureFile, rating, title, handle
 )
 
 Card.propTypes = {
-  author: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired,
+  author: PropTypes.object.isRequired,
+  category: PropTypes.object.isRequired,
   difficulty: PropTypes.number.isRequired,
   pictureFile: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
