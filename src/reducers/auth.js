@@ -26,6 +26,8 @@ const auth = (state = initialState, action = {}) => {
       }
     }
     case SAVE_NEW_USER: {
+      // return the state and clean previous input for secure
+      // isSignedUp false -> true fore redirection
       return {
         ...state,
         pseudo: "",
