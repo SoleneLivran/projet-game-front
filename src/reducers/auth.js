@@ -1,9 +1,9 @@
 import { CHANGE_INPUT, SAVE_USER, SAVE_NEW_USER } from "src/actions/auth"
 
 export const initialState = {
-  pseudo: "user",
-  email: "user@mail.com",
-  password: "azerty1234",
+  pseudo: "",
+  email: "",
+  password: "",
   passwordCheck: "",
   isSignedUp: false,
   isLogged: false,

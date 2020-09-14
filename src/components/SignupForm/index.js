@@ -19,10 +19,10 @@ const SignupForm = ({
       <form
         onSubmit={(e) => {
           e.preventDefault()
-          handleSignup()
-          // if (Object.keys(errors).length === 0) {
-          //   handleSignup()
-          // }
+          console.log(errors)
+          if (Object.keys(errors).length === 0) {
+            handleSignup()
+          }
         }}
         className="signup-form__panel w-64 flex flex-col justify-center mx-auto p-4 border-2 border-orange-400 bg-orange-900 font-bold"
       >
