@@ -1,5 +1,5 @@
 import axios from "axios"
-import { LOGIN, saveUser } from "src/actions/auth"
+import { LOGIN, saveUser, SIGNUP, saveNewUser } from "src/actions/auth"
 
 const auth = (store) => (next) => (action) => {
   switch (action.type) {
@@ -9,6 +9,21 @@ const auth = (store) => (next) => (action) => {
       // axios'll come here
       // after receive the correct status response from POST request:
       store.dispatch(saveUser())
+      break
+    }
+    case SIGNUP: {
+      // access data in store
+      const state = store.getState()
+      const newUser = {
+        pseudo: state.auth.pseudo,
+        email: state.auth.email,
+        password: state.auth.password,
+      }
+      store.dispatch(saveNewUser())
+      // console.log(JSON.stringify(newUser))
+      // axios'll come here
+      // after receive the correct status response from POST request:
+      break
     }
     default:
       next(action)

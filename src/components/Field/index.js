@@ -20,7 +20,7 @@ Field.propTypes = {
   type: PropTypes.string,
   placeholder: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  inputValue: PropTypes.string.isRequired,
   setInputValue: PropTypes.func.isRequired,
 }
 export default Field
