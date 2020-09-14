@@ -4,21 +4,14 @@ import "./styles.css"
 import "./hamburger.css"
 import { NavLink } from "react-router-dom"
 import navDatas from "src/datas/nav"
+import { fetchDatasUserPanel } from "src/selectors/nav"
 
 const Nav = ({ isLogged }) => {
   const [navIsOpen, setPanel] = useState(false)
   const [userNavIsOpen, setUserPanel] = useState(false)
 
   // datas depends of only when user is connected
-  const navListUserData = isLogged
-    ? [
-        { name: "mon profil", path: "/profil" },
-        { name: "deconnexion", path: "/logout" },
-      ]
-    : [
-        { name: "connexion", path: "/login" },
-        { name: "inscription", path: "/signup" },
-      ]
+  const navListUserData = fetchDatasUserPanel(isLogged)
 
   // hamburger depends of isOpen state
   const hamburgerClassName =
@@ -103,9 +96,10 @@ const Nav = ({ isLogged }) => {
       <ul
         className={`nav__list-user ${ulUserClassName} overflow-hidden uppercase text-center text-gray-100 text-xl flex flex-col justify-around font-bold sm:hidden`}
       >
-      {/* map the user nav, depends of the status of isLogged */}
-        {navListUserData.map((navUser) => (
+        {/* map the user nav, depends of the status of isLogged */}
+        {navListUserData.map((navUser, key) => (
           <NavLink
+            key={key}
             activeClassName="nav__selected"
             className="p-3 sm:p-5"
             to={navUser.path}

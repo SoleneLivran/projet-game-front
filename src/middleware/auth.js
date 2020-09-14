@@ -12,7 +12,7 @@ const auth = (store) => (next) => (action) => {
           password: state.auth.password,
         })
         .then((response) => {
-          console.log(response.status)
+          console.log(response.data)
           if (response.status === 200) {
             store.dispatch(saveUser())
           }
