@@ -6,14 +6,14 @@ import { checkInput } from "src/selectors/signupform"
 import { Redirect } from "react-router-dom"
 
 const SignupForm = ({
-  pseudo,
+  username,
   email,
   password,
   passwordCheck,
   handleSignup,
   isSignedUp,
 }) => {
-  const errors = checkInput(pseudo, email, password, passwordCheck)
+  const errors = checkInput(username, email, password, passwordCheck)
   return (
     <div className="signup-form mt-8">
       <form
@@ -76,7 +76,7 @@ const SignupForm = ({
 }
 
 SignupForm.propTypes = {
-  pseudo: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
   passwordCheck: PropTypes.string.isRequired,

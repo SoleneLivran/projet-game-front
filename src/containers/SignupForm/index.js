@@ -3,7 +3,7 @@ import SignupForm from "src/components/SignupForm/index"
 import { signup } from "src/actions/auth"
 
 const mapStateToProps = (state) => ({
-  pseudo: state.auth.pseudo,
+  username: state.auth.username,
   email: state.auth.email,
   password: state.auth.password,
   passwordCheck: state.auth.passwordCheck,
