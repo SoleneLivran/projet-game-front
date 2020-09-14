@@ -32,11 +32,11 @@ const SignupForm = ({
 
         <label
           className="signup-form__label mt-4 mb-2 text-orange-400"
-          htmlFor="pseudo"
+          htmlFor="username"
         >
-          * Pseudo
+          * Nom d'utilisateur
         </label>
-        <Field type="text" name="pseudo" placeholder="Pseudo" />
+        <Field type="text" name="username" placeholder="Nom d'utilisateur" />
 
         <label
           className="signup-form__label mt-4 mb-2 text-orange-400"

@@ -6,15 +6,11 @@ const auth = (store) => (next) => (action) => {
     case LOGIN: {
       // access data in store
       const state = store.getState()
-      const user = {
-        username: "Toto",
-        password: "toto",
-      }
       axios
-        .post(
-          "http://ec2-18-234-186-84.compute-1.amazonaws.com/api/login_check",
-          user
-        )
+        .post("http://ec2-18-234-186-84.compute-1.amazonaws.com/api/login_check", {
+          username: state.auth.username,
+          password: state.auth.password,
+        })
         .then((response) => {
           console.log(response)
         })
