@@ -16,10 +16,13 @@ const LoginForm = ({ handleLogin }) => (
       <h1 className="login-form__title text-xl font-bold text-center text-orange-400">
         Prouvez que vous n'êtes pas n'importe quel guerrier.
       </h1>
-      <label className="login-form__label mt-4 mb-2 text-orange-400" htmlFor="email">
-        Email
+      <label
+        className="login-form__label mt-4 mb-2 text-orange-400"
+        htmlFor="username"
+      >
+        Nom d'utilisateur
       </label>
-      <Field type="email" name="email" placeholder="Email" />
+      <Field type="username" name="username" placeholder="Nom d'utilisateur" />
 
       <label className="login-form my-2 text-orange-400" htmlFor="password">
         Mot de passe

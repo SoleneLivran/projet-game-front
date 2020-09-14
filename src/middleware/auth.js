@@ -6,6 +6,17 @@ const auth = (store) => (next) => (action) => {
     case LOGIN: {
       // access data in store
       const state = store.getState()
+      axios
+        .post("http://ec2-18-234-186-84.compute-1.amazonaws.com/api/login_check", {
+          username: state.auth.username,
+          password: state.auth.password,
+        })
+        .then((response) => {
+          console.log(response)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
       // axios'll come here
       // after receive the correct status response from POST request:
       store.dispatch(saveUser())
