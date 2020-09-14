@@ -1,5 +1,4 @@
 import React from "react"
-import PropTypes from "prop-types"
 import { Route } from "react-router-dom"
 import "./App.css"
 
@@ -10,7 +9,8 @@ import LoginForm from "src/containers/LoginForm/index"
 const App = () => (
   <div className="app bg-center bg-cover h-auto w-screen ">
     <Nav />
-    <Home />
+    <Route path="/" component={Home} exact />
+    <Route path="/login" component={LoginForm} exact />
   </div>
 )
 export default App
