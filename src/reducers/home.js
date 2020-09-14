@@ -3,7 +3,7 @@ export const initialState = {
   listLastest: [],
 }
 
-const app = (state = initialState, action = {}) => {
+const home = (state = initialState, action = {}) => {
   switch (action.type) {
     case "SAVE_POPULAR_STORIES": {
       return {
@@ -16,4 +16,4 @@ const app = (state = initialState, action = {}) => {
   }
 }
 
-export default app
+export default home

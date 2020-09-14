@@ -1,7 +1,7 @@
 import axios from "axios"
-import { FETCH_POPULAR_STORIES, savePopularStories } from "src/actions/app"
+import { FETCH_POPULAR_STORIES, savePopularStories } from "src/actions/home"
 
-const app = (store) => (next) => (action) => {
+const home = (store) => (next) => (action) => {
   switch (action.type) {
     case FETCH_POPULAR_STORIES: {
       axios
@@ -13,10 +13,11 @@ const app = (store) => (next) => (action) => {
         .catch((error) => {
           console.log(error)
         })
+      break
     }
     default:
       next(action)
   }
 }
 
-export default app
+export default home
