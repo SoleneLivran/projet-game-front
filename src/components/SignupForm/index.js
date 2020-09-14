@@ -1,6 +1,6 @@
 import React from "react"
 import "./styles.css"
-import Field from "src/components/Field/index"
+import Field from "src/containers/Field/index"
 
 const SignupForm = () => (
   <div className="signup-form mt-8">
@@ -36,12 +36,12 @@ const SignupForm = () => (
       </label>
       <Field type="password" name="password" placeholder="Mot de passe" />
 
-      <label className="signup-form my-2 text-orange-400" htmlFor="password">
+      <label className="signup-form my-2 text-orange-400" htmlFor="password-check">
         * Confirmez votre mot de passe
       </label>
       <Field
         type="password"
-        name="password-check"
+        name="passwordCheck"
         placeholder="Confirmation mot de passe"
       />
 

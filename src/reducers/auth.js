@@ -1,8 +1,10 @@
 import { CHANGE_INPUT, SAVE_USER } from "src/actions/auth"
 
 export const initialState = {
+  pseudo: "",
   email: "",
   password: "",
+  passwordCheck: "",
 }
 
 const auth = (state = initialState, action = {}) => {
