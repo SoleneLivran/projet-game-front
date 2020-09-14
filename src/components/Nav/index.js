@@ -96,7 +96,7 @@ const Nav = () => {
           inscription
         </NavLink>
         {/* Deconnexion and profil path depend of connected user */}
-        {/* <NavLink activeClassName="nav__selected"  className="p-3 sm:p-5" to="/login">
+        {/* <NavLink activeClassName="nav__selected"  className="p-3 sm:p-5" to="/profil">
           mon profil
         </NavLink> 
         <NavLink activeClassName="nav__selected" className="p-3 sm:p-5" to="/login">
