@@ -1,0 +1,7 @@
+.login-form__submit {
+  box-shadow: 0 0 10px 1px black;
+}
+
+.login-form__submit:active {
+  box-shadow: 0 0 20px 1px black;
+}
