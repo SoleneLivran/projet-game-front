@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import "./styles.css"
 
-const Card = ({ author, category, difficulty, pictureFile, rating, title }) => (
+const Card = ({ author, category, difficulty, pictureFile, rating, title, handleModal }) => (
   // <li className="card border-0 rounded">
   //   <img
   //     className="card__img h-24 md:h-32 w-full object-cover border-b-2 border-gray-700"
@@ -24,7 +24,7 @@ const Card = ({ author, category, difficulty, pictureFile, rating, title }) => (
   //     </div>
   //   </section>
   // </li>
-  <li className="card border-0 rounded">
+  <li className="card border-0 rounded cursor-pointer" onClick={() => handleModal()}>
     <img
       className="card__img h-24 md:h-32 w-full object-cover border-b-2 border-gray-700"
       src={pictureFile}
@@ -56,5 +56,6 @@ Card.propTypes = {
   pictureFile: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
+  handleModal: PropTypes.func.isRequired,
 }
 export default Card
