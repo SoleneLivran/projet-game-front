@@ -1,10 +1,12 @@
-import { CHANGE_INPUT, SAVE_USER } from "src/actions/auth"
+import { CHANGE_INPUT, SAVE_USER, SAVE_NEW_USER } from "src/actions/auth"
 
 export const initialState = {
-  pseudo: "",
-  email: "",
-  password: "",
+  pseudo: "user",
+  email: "user@mail.com",
+  password: "azerty1234",
   passwordCheck: "",
+  isSignedUp: false,
+  isLogged: false,
 }
 
 const auth = (state = initialState, action = {}) => {
@@ -21,6 +23,16 @@ const auth = (state = initialState, action = {}) => {
         ...state,
         email: "",
         password: "",
+      }
+    }
+    case SAVE_NEW_USER: {
+      return {
+        ...state,
+        pseudo: "",
+        email: "",
+        password: "",
+        passwordCheck: "",
+        isSignedUp: true,
       }
     }
     default:

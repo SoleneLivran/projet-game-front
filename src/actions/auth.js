@@ -1,6 +1,9 @@
 export const CHANGE_INPUT = "CHANGE_INPUT"
 export const LOGIN = "LOGIN"
+export const SIGNUP = "SIGNUP"
 export const SAVE_USER = "SAVE_USER"
+export const SAVE_NEW_USER = "SAVE_NEW_USER"
+
 
 export const changeValue = (value, key) => ({
   type: CHANGE_INPUT,
@@ -15,11 +18,16 @@ export const login = () => ({
 })
 
 // action type for auth middleware
-export const handleSignup = () => ({
-  type: LOGIN,
+export const signup = () => ({
+  type: SIGNUP,
 })
 
 // action type from auth middleware, got to auth reducer
 export const saveUser = () => ({
   type: SAVE_USER,
+})
+
+// action type from auth middleware, got to auth reducer
+export const saveNewUser = () => ({
+  type: SAVE_NEW_USER,
 })

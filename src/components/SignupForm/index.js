@@ -1,42 +1,28 @@
-import React, { useEffect } from "react"
+import React from "react"
 import "./styles.css"
 import PropTypes from "prop-types"
 import Field from "src/containers/Field/index"
+import { checkInput } from "src/selectors/signupform"
+import { Redirect } from "react-router-dom"
 
-const SignupForm = ({ pseudo, email, password, passwordCheck, handleSignup }) => {
-  const checkInput = () => {
-    const error = {}
-    if (pseudo === "") {
-      error.pseudoErrors = ["Le pseudo ne peut-être vide"]
-    }
-    if (email === "") {
-      error.emailErrors = ["L'email ne peut être vide"]
-    }
-    if (passwordCheck === "") {
-      error.passwordCheckErrors = [
-        "La confirmation du mot de passe ne peut être vide",
-      ]
-    }
-    if (password === "") {
-      error.passwordErrors = ["Le mot de passe ne peut être vide"]
-    } else {
-      if (password !== passwordCheck && passwordCheck !== "") {
-        error.passwordErrors = ["Les mots de passes ne sont pas identiques"]
-      }
-    }
-
-    return error
-  }
-
+const SignupForm = ({
+  pseudo,
+  email,
+  password,
+  passwordCheck,
+  handleSignup,
+  isSignedUp,
+}) => {
+  const errors = checkInput(pseudo, email, password, passwordCheck)
   return (
     <div className="signup-form mt-8">
       <form
         onSubmit={(e) => {
           e.preventDefault()
-          console.log(checkInput())
-          if (checkInput().length === 0) {
-            // handleSignup()
-          }
+          handleSignup()
+          // if (Object.keys(errors).length === 0) {
+          //   handleSignup()
+          // }
         }}
         className="signup-form__panel w-64 flex flex-col justify-center mx-auto p-4 border-2 border-orange-400 bg-orange-900 font-bold"
       >
@@ -84,6 +70,7 @@ const SignupForm = ({ pseudo, email, password, passwordCheck, handleSignup }) =>
           value="Confirmer l'inscription"
         />
       </form>
+      {isSignedUp && <Redirect to="/" />}
     </div>
   )
 }
@@ -93,5 +80,7 @@ SignupForm.propTypes = {
   email: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
   passwordCheck: PropTypes.string.isRequired,
+  isSignedUp: PropTypes.bool.isRequired,
+  handleSignup: PropTypes.func.isRequired,
 }
 export default SignupForm
