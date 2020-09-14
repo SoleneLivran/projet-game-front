@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "react-router-dom"
 import "./styles.css"
 
 const UserPanel = () => (
@@ -8,18 +9,22 @@ const UserPanel = () => (
       Bienvenue, <br /> jeune aventurier.
     </p>
     <div className="user-panel__buttons mr-auto md:mr-0 md:mt-2 md:flex md:flex-col xl:flex-row xl:justify-around xl:w-full xl:h-16">
-      <button
-        type="button"
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-2 md:mx-0 md:mb-2 xl:mb-0 xl:px-8"
-      >
-        Inscription
-      </button>
-      <button
-        type="button"
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded xl:px-8"
-      >
-        Connexion
-      </button>
+      <Link to="/signup">
+        <button
+          type="button"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-2 md:mx-0 md:mb-2 xl:mb-0 xl:px-8"
+        >
+          Inscription
+        </button>
+      </Link>
+      <Link to="/login">
+        <button
+          type="button"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded xl:px-8"
+        >
+          Connexion
+        </button>
+      </Link>
     </div>
   </div>
 )
