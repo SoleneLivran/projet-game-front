@@ -4,5 +4,6 @@
   }
   .home__user--desktop {
     max-width: 28.125rem;
+    height: 24rem;
   }
 } 
