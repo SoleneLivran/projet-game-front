@@ -19,7 +19,7 @@ const Home = ({ popularStories, fetchPopularStories }) => {
       {showModal && <Modal showModal={showModal} onClose={() => setModal(false)} />}
 
       {/* Display UserPanel for mobile device */}
-      <section className="home__user-mobile hidden mt-8 sm:block md:hidden">
+      <section className="home__user home__user--desktop hidden mt-8 sm:block md:block md:order-1 md:w-1/3">
         <UserPanel />
       </section>
       <section className="home__stories my-16 sm:my-8 md:w-2/3 md:my-0 md:mr-12">
@@ -39,10 +39,6 @@ const Home = ({ popularStories, fetchPopularStories }) => {
         <section className="home__latest">
           <ul className="home__list-latest"></ul>
         </section>
-      </section>
-      {/* Display pannel for medium screen */}
-      <section className="home__user-desktop hidden mt-24 md:block md:w-1/3">
-        <UserPanel />
       </section>
     </div>
   )
