@@ -92,7 +92,7 @@ const Nav = () => {
         <NavLink activeClassName="nav__selected" className="p-3 sm:p-5" to="/login">
           connexion
         </NavLink>
-        <NavLink activeClassName="nav__selected" className="p-3 sm:p-5" to="/signin">
+        <NavLink activeClassName="nav__selected" className="p-3 sm:p-5" to="/signup">
           inscription
         </NavLink>
         {/* Deconnexion and profil path depend of connected user */}
