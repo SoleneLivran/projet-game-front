@@ -1,4 +1,5 @@
 import axios from "axios"
+import jwt_decode from "jwt-decode"
 import {
   LOGIN,
   saveUser,
@@ -20,7 +21,7 @@ const auth = (store) => (next) => (action) => {
         .then((response) => {
           console.log(response.data)
           if (response.status === 200) {
-            localStorage.setItem("token", response.data.token)
+            localStorage.setItem("user", response.data.token)
             store.dispatch(saveUser())
           }
         })
@@ -32,6 +33,10 @@ const auth = (store) => (next) => (action) => {
       break
     }
     case CHECK_IS_LOGGED: {
+      if (localStorage.getItem("user") !== null) {
+        const token = localStorage.getItem("user")
+        console.log(jwt_decode(token))
+      }
       break
     }
     case SIGNUP: {
