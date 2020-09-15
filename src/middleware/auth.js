@@ -1,5 +1,12 @@
 import axios from "axios"
-import { LOGIN, saveUser, SIGNUP, saveNewUser } from "src/actions/auth"
+import jwt_decode from "jwt-decode"
+import {
+  LOGIN,
+  saveUser,
+  SIGNUP,
+  saveNewUser,
+  CHECK_IS_LOGGED,
+} from "src/actions/auth"
 
 const auth = (store) => (next) => (action) => {
   switch (action.type) {
@@ -14,14 +21,19 @@ const auth = (store) => (next) => (action) => {
         .then((response) => {
           console.log(response.data)
           if (response.status === 200) {
-            store.dispatch(saveUser())
+            localStorage.setItem("user", response.data.token)
+            store.dispatch(saveUser(jwt_decode(localStorage.getItem("user"))))
           }
         })
         .catch((error) => {
           console.log(error)
         })
-      // axios'll come here
-      // after receive the correct status response from POST request:
+      break
+    }
+    case CHECK_IS_LOGGED: {
+      if (localStorage.getItem("user") !== null) {
+        store.dispatch(saveUser(jwt_decode(localStorage.getItem("user"))))
+      }
       break
     }
     case SIGNUP: {
@@ -33,9 +45,6 @@ const auth = (store) => (next) => (action) => {
         password: state.auth.password,
       }
       store.dispatch(saveNewUser())
-      // console.log(JSON.stringify(newUser))
-      // axios'll come here
-      // after receive the correct status response from POST request:
       break
     }
     default:
