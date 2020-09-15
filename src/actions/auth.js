@@ -23,8 +23,9 @@ export const signup = () => ({
 })
 
 // action type from auth middleware, got to auth reducer
-export const saveUser = () => ({
+export const saveUser = (userToken) => ({
   type: SAVE_USER,
+  username: userToken.username,
 })
 
 // action type from auth middleware, got to auth reducer

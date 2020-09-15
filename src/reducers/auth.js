@@ -21,10 +21,10 @@ const auth = (state = initialState, action = {}) => {
       // return the state and clean previous input for secure
       return {
         ...state,
+        username: action.username,
         password: "",
         isLogged: true,
       }
-      break
     }
     case SAVE_NEW_USER: {
       // return the state and clean previous input for secure
@@ -37,7 +37,6 @@ const auth = (state = initialState, action = {}) => {
         passwordCheck: "",
         isSignedUp: true,
       }
-      break
     }
     default:
       return state
