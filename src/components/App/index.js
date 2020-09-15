@@ -8,7 +8,7 @@ import LoginForm from "src/containers/LoginForm/index"
 import SignupForm from "src/containers/SignupForm/index"
 
 const App = () => (
-  <div className="app bg-center bg-cover h-auto w-screen ">
+  <div className="app bg-center bg-cover  w-screen ">
     <Nav />
     <Route path="/" component={Home} exact />
     <Route path="/login" component={LoginForm} exact />

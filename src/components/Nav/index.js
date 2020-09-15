@@ -50,7 +50,7 @@ const Nav = ({ isLogged }) => {
   }
 
   return (
-    <div className="nav bg-gray-900 bg-opacity-75 sm:bg-opacity-50 h-auto w-screen relative py-2">
+    <div className="nav bg-gray-900 shadow-lg  h-auto w-screen relative py-2">
       <div className="flex pl-5 pr-12 justify-between items-center">
         <button
           onClick={() => handlePanel()}
@@ -78,7 +78,7 @@ const Nav = ({ isLogged }) => {
             exact
             className={`order-${item.order} ${
               item.route === "/" ? "md:hidden" : ""
-            } p-3 sm:p-5`}
+            } p-3 duration-150  ease-in-out sm:p-5 hover:text-gray-700`}
           >
             {item.name}
           </NavLink>
