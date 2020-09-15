@@ -7,7 +7,6 @@ const home = (store) => (next) => (action) => {
       axios
         .get("http://ec2-18-234-186-84.compute-1.amazonaws.com/api/stories/top_ten")
         .then((response) => {
-          console.log(response)
           store.dispatch(savePopularStories(response.data))
         })
         .catch((error) => {

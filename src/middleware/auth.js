@@ -1,5 +1,11 @@
 import axios from "axios"
-import { LOGIN, saveUser, SIGNUP, saveNewUser } from "src/actions/auth"
+import {
+  LOGIN,
+  saveUser,
+  SIGNUP,
+  saveNewUser,
+  CHECK_IS_LOGGED,
+} from "src/actions/auth"
 
 const auth = (store) => (next) => (action) => {
   switch (action.type) {
@@ -14,6 +20,7 @@ const auth = (store) => (next) => (action) => {
         .then((response) => {
           console.log(response.data)
           if (response.status === 200) {
+            localStorage.setItem("token", response.data.token)
             store.dispatch(saveUser())
           }
         })
@@ -22,6 +29,9 @@ const auth = (store) => (next) => (action) => {
         })
       // axios'll come here
       // after receive the correct status response from POST request:
+      break
+    }
+    case CHECK_IS_LOGGED: {
       break
     }
     case SIGNUP: {
