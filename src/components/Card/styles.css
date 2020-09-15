@@ -17,13 +17,18 @@ hr {
   max-width: 100%;
   background-position: 50%;
   box-sizing: border-box;
-
 }
 
 .card__fade {
   border-width: 0 0 1px;
   color: grey;
-  border-image: linear-gradient(90deg, rgba(135, 206, 235, 0), grey 50%, rgba(135, 206, 235, 0) 100%) 0 0 100%;
+  border-image: linear-gradient(
+      90deg,
+      rgba(135, 206, 235, 0),
+      grey 50%,
+      rgba(135, 206, 235, 0) 100%
+    )
+    0 0 100%;
   border-style: solid;
 }
 
