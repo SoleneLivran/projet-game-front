@@ -89,6 +89,10 @@ const CreateGame = () => {
     currentLieuId: 0,
     bgImage: "",
   })
+  // State of current "Lieu" module
+  const [currentActionIsSelected, setActionIsSelected] = useState({
+    currentActionIsSelected: false,
+  })
   // State of current "Evenement" module
   const [currentEventState, setCurrentEvent] = useState({
     currentEvent: "EVENEMENT",
@@ -124,6 +128,16 @@ const CreateGame = () => {
 
   const [actionDoneState, setActionDone] = useState({
     array: [""],
+  })
+
+  // Current index of the action on the saved scenes
+  const [currentSceneIndexState, setCurrentSceneIndex] = useState({
+    currentSceneIndex: 0,
+    currentActionIndex: 0,
+  })
+  // Action Clicked Index Tracker
+  const [currentActionIndex, setActionIndex] = useState({
+    actionIndex: 0,
   })
 
   // Set "Action" current State to the clicked module
@@ -179,17 +193,6 @@ const CreateGame = () => {
       currentEventId: props.id,
     })
   }
-
-  // Track transition Ids
-  /*   const trackTransitionIds = () => {
-    setScenesIDTracker({
-      id: scenesIDTrackerState.id + 1,
-    })
-  } */
-
-  /*   useEffect(() => {
-
-  }, [currentActionState]) */
 
   const onDelete = (index) => {
     // Clone the current state array
@@ -261,19 +264,51 @@ const CreateGame = () => {
       setActionDone({
         array: [...actionDoneState.array, currentNextSceneId.nextSceneId],
       })
+      setActionIsSelected({
+        currentActionIsSelected: false,
+      })
     } else {
       return
     }
   }
   // Update the ID of the Current Scene for the Transition
-  const nextSceneId = (props) => {
-    console.log(props)
+  const nextSceneId = (props, index, indexaction) => {
+    console.log(
+      `currentSceneIndex : ${index} - currentActionIndex : ${indexaction} `
+    )
     setNextSceneId({
       nextSceneId: props.nextSceneId,
     })
-    /*     setScenesIDTracker({
-      id: currentNextSceneId.nextSceneId,
-    }) */
+
+    /* Scene index of the actions */
+    setCurrentSceneIndex({
+      currentSceneIndex: index,
+      currentActionIndex: indexaction,
+    })
+
+    setActionIsSelected({
+      currentActionIsSelected: true,
+    })
+  }
+
+  const loadNewAction = (props, index) => {
+    console.log(currentNextSceneId.nextSceneId) // target nextSceneId
+    console.log(props) // current nextSceneId to change
+    console.log(index) // Index of the current scene clicked
+    const newIndex = [...scenesState.scenes]
+    newIndex[currentSceneIndexState.currentSceneIndex].actions[
+      currentSceneIndexState.currentActionIndex
+    ].nextSceneId = props
+
+    setScenes({ scenes: newIndex })
+
+    // TODO Revoir affichage
+    setActionDone({
+      array: [...actionDoneState.array, currentNextSceneId.nextSceneId],
+    })
+    setActionIsSelected({
+      currentActionIsSelected: false,
+    })
   }
 
   // Execute when the author save the current scene with saveCurrentScene
@@ -286,21 +321,30 @@ const CreateGame = () => {
 
   return (
     <div className="Nav bg-gray-900 h-full w-screen ">
-      <div className="flex w-screen">
+      <div className="flex flex-col w-screen">
         {/* Saved Scenes */}
-        <div className="flex flex-wra   ">
+        <div className="flex flex-wrap   ">
           {scenesState.scenes.length > 0
             ? scenesState.scenes.map((item, index) => (
                 <div
-                  className="select-none bg-cover mx-8 my-4 w-48 py-4 rounded-lg bg-gray-200  flex flex-col justify-center  border-gray-500 items-center text-gray-100 shadow-lg font-bold text-2xl"
+                  className="select-none bg-cover mx-8 my-4 w-48  py-4 rounded-lg bg-gray-200  flex flex-col justify-between  border-gray-500 items-center text-gray-100 shadow-lg font-bold text-lg"
                   style={{
                     backgroundImage: `url(${item.lieu.lieuBg})`,
                   }}
                 >
-                  <div className="">{item.lieu.lieuName}</div>
-                  <div className="">{item.evenement.evenementName}</div>
+                  <div
+                    onClick={() => loadNewAction(item.id, index)}
+                    className="flex border-2 border-gray-200  h-16 w-16 justify-center items-center rounded-full bg-gray-900 -mt-10 shadow-lg "
+                  >
+                    {item.id}
+                  </div>
+
+                  <div>
+                    <div className="text-2xl">{item.lieu.lieuName}</div>
+                    <div className="text-2xl">{item.evenement.evenementName}</div>
+                  </div>
                   <div className="">
-                    {item.actions.map((action) => (
+                    {item.actions.map((action, indexaction) => (
                       /* {actionDoneState.array.includes(item.nextSceneId) ?  : } */
 
                       <div
@@ -310,7 +354,9 @@ const CreateGame = () => {
                             : nextSceneId(
                                 actionDoneState.array.includes(item.nextSceneId)
                                   ? ""
-                                  : action
+                                  : action,
+                                index,
+                                indexaction
                               )
                         }
                         className={
@@ -321,8 +367,21 @@ const CreateGame = () => {
                             : "py-2 select-none my-4 rounded-lg px-4 bg-gray-900 shadow-md text-white font-bold transform duration-100 ease-in-out hover:scale-95"
                         }
                       >
-                        <div className={scenesState.scenes.actions}>
+                        {/*<div className={scenesState.scenes.actions}></div> */}
+                        <div className="flex justify-evenly">
                           {action.actionName}
+                          {"  "}
+                          {actionDoneState.array.includes(action.nextSceneId) ? (
+                            <div className="mx-2">
+                              {" "}
+                              <i className="fas fa-arrow-right">
+                                {" "}
+                                {action.nextSceneId}
+                              </i>
+                            </div>
+                          ) : (
+                            ""
+                          )}
                         </div>
                       </div>
                     ))}
@@ -333,47 +392,60 @@ const CreateGame = () => {
         </div>
         {/* /Saved Scenes */}
         {/* Modules */}
-        <div className="flex flex-col w-3/4 justify-center items-center">
+        <div className="flex   justify-center items-center">
           {/* Lieu module */}
-          <div className="flex">
-            <div
-              onClick={lieuOnClick}
-              className={
-                currentLieuState.currentLieu === "LIEU"
-                  ? "select-none bg-cover my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center border-4 border-dashed border-gray-500 items-center text-gray-500 font-bold text-2xl"
-                  : "select-none bg-cover my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center  border-gray-500 items-center text-gray-100 shadow-lg font-bold text-2xl"
-              }
-              style={{
-                backgroundImage: currentLieuState.bgImage
-                  ? `url(${currentLieuState.bgImage})`
-                  : "",
-              }}
-            >
-              {currentLieuState.currentLieu}
-            </div>
-            {/* /Lieu module */}
-            {/* Evenement module */}
-            <div
-              onClick={eventOnClick}
-              className={
-                currentEventState.currentEvent === "EVENEMENT"
-                  ? "select-none bg-cover my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center border-4 border-dashed border-gray-500 items-center text-gray-500 font-bold text-2xl"
-                  : "select-none bg-cover my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center  border-gray-500 items-center text-gray-100 shadow-lg font-bold text-2xl"
-              }
-              style={{
-                backgroundImage: currentEventState.bgImage
-                  ? `url(${currentEventState.bgImage})`
-                  : "",
-              }}
-            >
-              {currentEventState.currentEvent}
-            </div>
+
+          <div
+            onClick={lieuOnClick}
+            className={
+              currentLieuState.currentLieu === "LIEU"
+                ? "select-none bg-cover my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center border-4 border-dashed border-gray-500 items-center text-gray-500 font-bold text-2xl"
+                : "select-none bg-cover my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center  border-gray-500 items-center text-gray-100 shadow-lg font-bold text-2xl"
+            }
+            style={{
+              backgroundImage: currentLieuState.bgImage
+                ? `url(${currentLieuState.bgImage})`
+                : "",
+            }}
+          >
+            {currentLieuState.currentLieu}
           </div>
+          {/* /Lieu module */}
+          {/* Evenement module */}
+          <div
+            onClick={eventOnClick}
+            className={
+              currentEventState.currentEvent === "EVENEMENT"
+                ? "select-none bg-cover my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center border-4 border-dashed border-gray-500 items-center text-gray-500 font-bold text-2xl"
+                : "select-none bg-cover my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center  border-gray-500 items-center text-gray-100 shadow-lg font-bold text-2xl"
+            }
+            style={{
+              backgroundImage: currentEventState.bgImage
+                ? `url(${currentEventState.bgImage})`
+                : "",
+            }}
+          >
+            {currentEventState.currentEvent}
+          </div>
+
           {/* /Evenement module */}
           {/* Action module */}
-          <div className="flex">
-            {currentActionState.array == false ? (
+
+          {currentActionState.array == false ? (
+            <div
+              onClick={actionOnClick}
+              className={
+                currentActionState.currentAction === "ACTION"
+                  ? "select-none my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center border-4 border-dashed border-gray-500 items-center text-gray-500 font-bold text-2xl"
+                  : "select-none my-4 w-48 h-48 rounded-lg bg-gray-700 mx-8 flex justify-center shadow-lg items-center text-gray-100 font-bold text-2xl"
+              }
+            >
+              {currentActionState.currentAction}
+            </div>
+          ) : (
+            currentActionState.array.map((item, index) => (
               <div
+                key={index}
                 onClick={actionOnClick}
                 className={
                   currentActionState.currentAction === "ACTION"
@@ -381,29 +453,16 @@ const CreateGame = () => {
                     : "select-none my-4 w-48 h-48 rounded-lg bg-gray-700 mx-8 flex justify-center shadow-lg items-center text-gray-100 font-bold text-2xl"
                 }
               >
-                {currentActionState.currentAction}
-              </div>
-            ) : (
-              currentActionState.array.map((item, index) => (
-                <div
-                  key={index}
-                  onClick={actionOnClick}
-                  className={
-                    currentActionState.currentAction === "ACTION"
-                      ? "select-none my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center border-4 border-dashed border-gray-500 items-center text-gray-500 font-bold text-2xl"
-                      : "select-none my-4 w-48 h-48 rounded-lg bg-gray-700 mx-8 flex justify-center shadow-lg items-center text-gray-100 font-bold text-2xl"
-                  }
-                >
-                  <div className="flex flex-col">
-                    {item.actionName}
-                    <span onClick={() => onDelete(index)} className="py-4">
-                      X
-                    </span>
-                  </div>
+                <div className="flex flex-col">
+                  {item.actionName}
+                  <span onClick={() => onDelete(index)} className="py-4">
+                    X
+                  </span>
                 </div>
-              ))
-            )}
-          </div>
+              </div>
+            ))
+          )}
+
           {/* /Action module */}
         </div>
         {/* /Modules */}
@@ -411,7 +470,9 @@ const CreateGame = () => {
       {/* Save Current Scene Button */}
       {currentLieuState.currentLieu != "LIEU" &&
       currentEventState.currentEvent != "EVENEMENT" &&
-      currentActionState.currentAction != "ACTION" ? (
+      currentActionState.currentAction != "ACTION" &&
+      (currentActionIsSelected.currentActionIsSelected ||
+        scenesState.scenes.length < 1) ? (
         <div>
           <button
             onClick={saveCurrentScene}
