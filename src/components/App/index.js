@@ -20,7 +20,7 @@ const App = ({ checkIsLogged }) => {
       <Route path="/" component={Home} exact />
       <Route path="/login" component={LoginForm} exact />
       <Route path="/signup" component={SignupForm} exact />
-      <Route path="/logout" component={Logout} exact />
+      {localStorage.getItem("") && <Route path="/logout" component={Logout} exact />}
     </div>
   )
 }
