@@ -1,4 +1,4 @@
-import { CHANGE_INPUT, SAVE_USER, SAVE_NEW_USER } from "src/actions/auth"
+import { CHANGE_INPUT, SAVE_USER, SAVE_NEW_USER, LOGOUT } from "src/actions/auth"
 
 export const initialState = {
   username: "",
@@ -36,6 +36,13 @@ const auth = (state = initialState, action = {}) => {
         password: "",
         passwordCheck: "",
         isSignedUp: true,
+      }
+    }
+    case LOGOUT: {
+      return {
+        ...state,
+        username: "",
+        isLogged: false,
       }
     }
     default:
