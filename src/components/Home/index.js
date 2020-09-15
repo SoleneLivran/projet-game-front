@@ -24,7 +24,7 @@ const Home = ({ popularStories, fetchPopularStories }) => {
       </section>
       <section className="home__stories my-16 sm:my-8 md:w-2/3 md:my-0 md:mr-12">
         <section className="home__popular mb-12 mt-4">
-          <h1 className="home__title uppercase text-white text-3xl font-bold">
+          <h1 className="home__title uppercase text-white text-4xl font-light ">
             Populaires
           </h1>
 
