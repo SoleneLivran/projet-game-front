@@ -33,7 +33,7 @@ const Modal = ({ showModal, onClose }) => {
 
   return (
     <div
-      className={`modal h-screen w-screen ${displayModal} absolute z-40 flex flex-col justify-center`}
+      className={`modal h-screen w-screen ${displayModal} fixed z-40 flex flex-col justify-center`}
     >
       <div
         className="h-64 w-3/4 mx-auto md:max-w-6xl relative bg-gray-200 opacity-100"
