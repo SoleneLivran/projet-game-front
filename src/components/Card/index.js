@@ -2,7 +2,15 @@ import React from "react"
 import PropTypes from "prop-types"
 import "./styles.css"
 
-const Card = ({ author, category, difficulty, pictureFile, rating, title, handleModal }) => (
+const Card = ({
+  author,
+  category,
+  difficulty,
+  pictureFile,
+  rating,
+  title,
+  handleModal,
+}) => (
   // <li className="card border-0 rounded">
   //   <img
   //     className="card__img h-24 md:h-32 w-full object-cover border-b-2 border-gray-700"
@@ -24,10 +32,13 @@ const Card = ({ author, category, difficulty, pictureFile, rating, title, handle
   //     </div>
   //   </section>
   // </li>
-  <li className="card border-0 rounded cursor-pointer" onClick={() => handleModal()}>
+  <li
+    className="card border-0 rounded cursor-pointer my-5"
+    onClick={() => handleModal()}
+  >
     <img
       className="card__img h-24 md:h-32 w-full object-cover border-b-2 border-gray-700"
-      src={pictureFile}
+      src="/assets/img/dragon.jpg"
       alt={`img_${title}`}
     />
     <section className="card__info bg-gray-900 py-4">

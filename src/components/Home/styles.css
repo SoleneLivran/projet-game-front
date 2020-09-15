@@ -2,7 +2,8 @@
   .home__stories {
     max-width: 56.25rem;
   }
-  .home__user-desktop {
+  .home__user--desktop {
     max-width: 28.125rem;
+    height: 24rem;
   }
 } 
