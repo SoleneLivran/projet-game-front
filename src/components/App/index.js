@@ -7,6 +7,7 @@ import Nav from "src/containers/Nav/index"
 import Home from "src/containers/Home/index"
 import LoginForm from "src/containers/LoginForm/index"
 import SignupForm from "src/containers/SignupForm/index"
+import Logout from "src/components/Logout/index"
 
 const App = ({ checkIsLogged }) => {
   //
@@ -19,6 +20,7 @@ const App = ({ checkIsLogged }) => {
       <Route path="/" component={Home} exact />
       <Route path="/login" component={LoginForm} exact />
       <Route path="/signup" component={SignupForm} exact />
+      <Route path="logout" component={Logout} exact />
     </div>
   )
 }
