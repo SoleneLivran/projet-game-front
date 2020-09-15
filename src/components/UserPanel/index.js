@@ -15,8 +15,8 @@ const UserPanel = ({ isLogged }) => {
         Bienvenue, <br /> jeune aventurier.
       </p>
       <div className="user-panel__buttons mr-auto text-xl md:mr-0 md:mt-2 md:flex md:flex-col xl:flex-row xl:justify-evenly xl:w-full xl:h-16 ">
-        {navListUserData.map((buttonUser) => (
-          <Link to={buttonUser.path}>
+        {navListUserData.map((buttonUser, key) => (
+          <Link to={buttonUser.path} key={key}>
             <button
               type="button"
               className="bg-white ease-in-out duration-75 hover:bg-blue-900 hover:text-white text-gray-900 font-bold py-2 px-4 sm:px-2 rounded mx-2 md:mx-0 md:mb-2 xl:mb-0 xl:px-8 capitalize"
