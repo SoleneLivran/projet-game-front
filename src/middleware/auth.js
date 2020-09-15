@@ -12,14 +12,16 @@ const auth = (store) => (next) => (action) => {
           password: state.auth.password,
         })
         .then((response) => {
-          console.log(response)
+          console.log(response.data)
+          if (response.status === 200) {
+            store.dispatch(saveUser())
+          }
         })
         .catch((error) => {
           console.log(error)
         })
       // axios'll come here
       // after receive the correct status response from POST request:
-      store.dispatch(saveUser())
       break
     }
     case SIGNUP: {

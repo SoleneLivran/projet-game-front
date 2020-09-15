@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import "./styles.css"
 import Card from "src/components/Card/index"
-import UserPanel from "src/components/UserPanel/index"
+import UserPanel from "src/containers/UserPanel/index"
 import Modal from "src/components/Modal/index"
 
 const Home = ({ popularStories, fetchPopularStories }) => {

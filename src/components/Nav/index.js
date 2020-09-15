@@ -1,21 +1,28 @@
 import React, { useState } from "react"
+import PropTypes from "prop-types"
 import "./styles.css"
 import "./hamburger.css"
 import { NavLink } from "react-router-dom"
 import navDatas from "src/datas/nav"
+import { fetchDatasUserPanel } from "src/selectors/nav"
 
-const Nav = () => {
+const Nav = ({ isLogged }) => {
   const [navIsOpen, setPanel] = useState(false)
   const [userNavIsOpen, setUserPanel] = useState(false)
+
+  // datas depends of only when user is connected
+  const navListUserData = fetchDatasUserPanel(isLogged)
 
   // hamburger depends of isOpen state
   const hamburgerClassName =
     navIsOpen === false
       ? "hamburger hamburger--collapse"
       : "hamburger hamburger--collapse is-active"
+
   // Display nav when onClick event, only mobile
   const ulClassName =
     navIsOpen === false ? "opacity-0" : "opacity-100 nav__list--active"
+
   // Display nav user panel when onClick event, only mobile
   const ulUserClassName =
     userNavIsOpen === false ? "opacity-0" : "opacity-100 nav__list-user--active"
@@ -89,22 +96,24 @@ const Nav = () => {
       <ul
         className={`nav__list-user ${ulUserClassName} overflow-hidden uppercase text-center text-gray-100 text-xl flex flex-col justify-around font-bold sm:hidden`}
       >
-        <NavLink activeClassName="nav__selected" className="p-3 sm:p-5" to="/login">
-          connexion
-        </NavLink>
-        <NavLink activeClassName="nav__selected" className="p-3 sm:p-5" to="/signup">
-          inscription
-        </NavLink>
-        {/* Deconnexion and profil path depend of connected user */}
-        {/* <NavLink activeClassName="nav__selected"  className="p-3 sm:p-5" to="/login">
-          mon profil
-        </NavLink> 
-        <NavLink activeClassName="nav__selected" className="p-3 sm:p-5" to="/login">
-          déconnexion
-        </NavLink> */}
+        {/* map the user nav, depends of the status of isLogged */}
+        {navListUserData.map((navUser, key) => (
+          <NavLink
+            key={key}
+            activeClassName="nav__selected"
+            className="p-3 sm:p-5"
+            to={navUser.path}
+          >
+            {navUser.name}
+          </NavLink>
+        ))}
       </ul>
     </div>
   )
+}
+
+Nav.propTypes = {
+  isLogged: PropTypes.bool.isRequired,
 }
 
 export default Nav
