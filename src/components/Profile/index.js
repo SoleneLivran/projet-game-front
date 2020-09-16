@@ -4,24 +4,30 @@ import Field from "src/containers/Field/index"
 import Story from "./Story/index"
 
 const Profile = () => (
-  <div className="profile px-8 h-auto sm:mt-10">
-    <section className="profile__stories mt-4 border-b-4 pb-10">
+  <div className="profile px-8 h-auto sm:px-16 sm:mt-10 sm:px-24 md:mx-auto md:mt-20">
+    <section className="profile__stories mt-4 border-b-4 pb-8">
       <h1 className="stories__title uppercase text-white text-3xl font-light">
         Mes histoires
       </h1>
       <ul className="stories__list mt-2">
         <Story />
+        <Story />
+        <Story />
+        <Story />
       </ul>
     </section>
-    <section className="profile__user mt-10">
-      <div className="profile__left-panel flex justify-center my-6">
+    <section className="profile__user mt-10 md:flex justify-around">
+      <div className="profile__left-panel flex flex-col w-64 mx-auto justify-center my-6 items-center md:mb-20">
         <img
           src="/assets/img/default_avatar.png"
           alt=""
-          className="profile__img w-40 h-40"
+          className="profile__img w-40 h-40 md:w-56 md:h-56 "
         />
+        <button className="profile__button-img mt-4 p-4 bg-white rounded-lg font-bold">
+          Choisir un avatar
+        </button>
       </div>
-      <div className="profile__right-panel">
+      <div className="profile__right-panel md:w-5/12">
         <h1 className="stories__title uppercase text-white text-3xl font-light">
           Mes informations
         </h1>
