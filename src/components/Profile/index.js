@@ -3,12 +3,12 @@ import "./styles.css"
 import Field from "src/containers/Field/index"
 import Story from "./Story/index"
 import ModalDelete from "./ModalDelete/index"
-import ModalAvatar from "./ModalAvatar/index"
+import ModalAvatar from "src/containers/ModalAvatar/index"
 
 const Profile = () => {
   // Modal state, display on button or hidden when closing it
   const [showModalDelete, setModalDelete] = useState(false)
-  const [showModalAvatar, setModalAvatar] = useState(true)
+  const [showModalAvatar, setModalAvatar] = useState(false)
 
   // Change modal current state
   const handleModalDelete = () => setModalDelete(true)
