@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react"
 import "./styles.css"
 
-const ModalDelete = ({ showDeleteModal, onClose }) => {
+const ModalDelete = ({ showModalDelete, onClose }) => {
   // State for modal, button agree default is disabled
   const [buttonActive, setButtonActive] = useState(true)
 
@@ -11,7 +11,7 @@ const ModalDelete = ({ showDeleteModal, onClose }) => {
     : "bg-green-500 cursor-pointer"
 
   // display the modal when the user click on the delete button in UserProfile
-  const displayModal = showDeleteModal === true ? "block" : "hidden"
+  const displayModal = showModalDelete === true ? "block" : "hidden"
 
   // useRef to define a current object => only the modal part who display content
   const ref = useRef(null)

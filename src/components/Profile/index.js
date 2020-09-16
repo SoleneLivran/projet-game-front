@@ -3,20 +3,30 @@ import "./styles.css"
 import Field from "src/containers/Field/index"
 import Story from "./Story/index"
 import ModalDelete from "./ModalDelete/index"
+import ModalAvatar from "./ModalAvatar/index"
 
 const Profile = () => {
   // Modal state, display on button or hidden when closing it
-  const [showDeleteModal, setDeleteModal] = useState(true)
+  const [showModalDelete, setModalDelete] = useState(false)
+  const [showModalAvatar, setModalAvatar] = useState(false)
 
   // Change modal current state
-  const handleDeleteModal = () => setDeleteModal(true)
+  const handleModalDelete = () => setModalDelete(true)
+  const handleModalAvatar = () => setModalAvatar(true)
+
   return (
     <div className="profile px-8 h-auto sm:px-16 sm:mt-10 sm:px-24 md:mx-auto md:mt-20">
       {/* Only when modal is open (true) -> Modal is display, and the event click/key can be use */}
-      {showDeleteModal && (
+      {showModalDelete && (
         <ModalDelete
-          showDeleteModal={showDeleteModal}
-          onClose={() => setDeleteModal(false)}
+          showModalDelete={showModalDelete}
+          onClose={() => setModalDelete(false)}
+        />
+      )}
+      {showModalAvatar && (
+        <ModalAvatar
+          showModalAvatar={showModalAvatar}
+          onClose={() => setModalAvatar(false)}
         />
       )}
       <section className="profile__stories mt-4 border-b-4 pb-8">
@@ -37,7 +47,10 @@ const Profile = () => {
             alt=""
             className="profile__img w-40 h-40 md:w-56 md:h-56 "
           />
-          <button className="profile__button-img mt-4 p-4 bg-white rounded-lg font-bold">
+          <button
+            onClick={() => handleModalAvatar()}
+            className="profile__button-img mt-4 p-4 bg-white rounded-lg font-bold"
+          >
             Choisir un avatar
           </button>
         </div>
@@ -70,7 +83,7 @@ const Profile = () => {
             />
           </form>
           <button
-            onClick={() => handleDeleteModal()}
+            onClick={() => handleModalDelete()}
             className="profile__delete-account w-full my-6 py-4 bg-red-600 rounded-md text-white font-bold"
           >
             Supprimer mon compte
