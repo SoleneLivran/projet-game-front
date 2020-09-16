@@ -2,7 +2,9 @@ import { connect } from "react-redux"
 import App from "src/components/App/index"
 import { checkIsLogged } from "src/actions/auth"
 
-const mapStateToProps = null
+const mapStateToProps = (state) => ({
+  isLogged: state.auth.isLogged,
+})
 
 const mapDispatchToProps = (dispatch) => ({
   // Check if token is set, so the user is connected
