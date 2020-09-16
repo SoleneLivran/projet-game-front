@@ -17,7 +17,7 @@ const Profile = () => (
       </ul>
     </section>
     <section className="profile__user mt-10 md:flex justify-around">
-      <div className="profile__left-panel flex flex-col w-64 mx-auto justify-center my-6 items-center md:mb-20">
+      <div className="profile__left-panel flex flex-col w-64 mx-auto md:mx-0 justify-center my-6 items-center md:mb-20">
         <img
           src="/assets/img/default_avatar.png"
           alt=""
@@ -27,7 +27,7 @@ const Profile = () => (
           Choisir un avatar
         </button>
       </div>
-      <div className="profile__right-panel md:w-5/12">
+      <div className="profile__right-panel md:w-6/12">
         <h1 className="stories__title uppercase text-white text-3xl font-light">
           Mes informations
         </h1>
