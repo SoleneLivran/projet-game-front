@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from "react"
+import PropTypes from "prop-types"
 import "./styles.css"
 
-const ModalAvatar = ({ showModalAvatar, onClose }) => {
+const ModalAvatar = ({ showModalAvatar, onClose, setAvatar }) => {
   // display the modal when the user click on the delete button in UserProfile
   const displayModal = showModalAvatar === true ? "block" : "hidden"
 
@@ -56,28 +57,22 @@ const ModalAvatar = ({ showModalAvatar, onClose }) => {
               <img
                 src="/assets/img/default_avatar.png"
                 alt=""
-                className="modal-avatar__img h-24 w-24 mx-auto cursor-pointer hover:scale-150"
+                className="modal-avatar__img h-24 w-24 my-5 mx-auto cursor-pointer transform hover:scale-110"
+                onClick={() => {
+                  setAvatar("/assets/img/default_avatar.png")
+                  onClose()
+                }}
               />
             </li>
             <li className="modal-avatar__item-img w-1/2">
               <img
-                src="/assets/img/default_avatar.png"
+                src="/assets/img/default_avatar2.png"
                 alt=""
-                className="modal-avatar__img h-24 w-24 mx-auto cursor-pointer"
-              />
-            </li>
-            <li className="modal-avatar__item-img w-1/2">
-              <img
-                src="/assets/img/default_avatar.png"
-                alt=""
-                className="modal-avatar__img h-24 w-24 mx-auto cursor-pointer"
-              />
-            </li>
-            <li className="modal-avatar__item-img w-1/2">
-              <img
-                src="/assets/img/default_avatar.png"
-                alt=""
-                className="modal-avatar__img h-24 w-24 mx-auto cursor-pointer"
+                className="modal-avatar__img h-24 w-24 my-5 mx-auto cursor-pointer transform hover:scale-110"
+                onClick={() => {
+                  setAvatar("/assets/img/default_avatar2.png")
+                  onClose()
+                }}
               />
             </li>
           </ul>
@@ -87,4 +82,9 @@ const ModalAvatar = ({ showModalAvatar, onClose }) => {
   )
 }
 
+ModalAvatar.propTypes = {
+  showModalAvatar: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  setAvatar: PropTypes.func.isRequired,
+}
 export default ModalAvatar

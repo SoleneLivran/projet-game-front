@@ -8,7 +8,7 @@ import ModalAvatar from "./ModalAvatar/index"
 const Profile = () => {
   // Modal state, display on button or hidden when closing it
   const [showModalDelete, setModalDelete] = useState(false)
-  const [showModalAvatar, setModalAvatar] = useState(false)
+  const [showModalAvatar, setModalAvatar] = useState(true)
 
   // Change modal current state
   const handleModalDelete = () => setModalDelete(true)
