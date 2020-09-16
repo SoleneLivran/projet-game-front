@@ -4,12 +4,12 @@ import Field from "src/containers/Field/index"
 import Story from "./Story/index"
 
 const Profile = () => (
-  <div className="profile w-screen px-8 h-auto">
+  <div className="profile px-8 h-auto sm:mt-10">
     <section className="profile__stories mt-4 border-b-4 pb-10">
       <h1 className="stories__title uppercase text-white text-3xl font-light">
         Mes histoires
       </h1>
-      <ul className="stories__list">
+      <ul className="stories__list mt-2">
         <Story />
       </ul>
     </section>

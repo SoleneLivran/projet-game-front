@@ -16,7 +16,7 @@ const App = ({ checkIsLogged, isLogged }) => {
     checkIsLogged()
   }, [])
   return (
-    <div className="app bg-center bg-cover h-auto w-screen ">
+    <div className="app bg-center bg-cover h-auto w-full ">
       <Nav />
       <Switch>
         <Route path="/" component={Home} exact />
