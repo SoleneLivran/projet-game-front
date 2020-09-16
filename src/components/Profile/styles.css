@@ -1,0 +1,29 @@
+.stories__story-edit {
+  box-shadow: 0 0 5px black;
+}
+
+.stories__story-edit:active {
+  -webkit-box-shadow: inset 0 0 1px 0 #2c5282, inset -1px -1px 0 1px #63b3ed, inset 1px 1px 0 1px #63b3ed, 0 0 4px #000;
+  -moz-box-shadow: inset 0 0 1px 0 #2c5282, inset -1px -1px 0 1px #63b3ed, inset 1px 1px 0 1px #63b3ed, 0 0 4px #000;
+  box-shadow: inset 0 0 1px 0 #2c5282, inset -1px -1px 0 1px #63b3ed, inset 1px 1px 0 1px #63b3ed, 0 0 4px #000;
+  border: 1px solid #2c5282;
+}
+
+.stories__story-edit:hover {
+  box-shadow: 0 0 3px #2c5282;
+}
+
+.stories__story-delete {
+  box-shadow: 0 0 5px black;
+}
+
+.stories__story-delete:active {
+  -webkit-box-shadow: inset 0 0 1px 0 #742a2a, inset -1px -1px 0 1px #fc8181, inset 1px 1px 0 1px #fc8181, 0 0 4px #000;
+  -moz-box-shadow: inset 0 0 1px 0 #742a2a, inset -1px -1px 0 1px #fc8181, inset 1px 1px 0 1px #fc8181, 0 0 4px #000;
+  box-shadow: inset 0 0 1px 0 #742a2a, inset -1px -1px 0 1px #fc8181, inset 1px 1px 0 1px #fc8181, 0 0 4px #000;
+  border: 1px solid #742a2a;
+}
+
+.stories__story-delete:hover {
+  box-shadow: 0 0 3px #2c5282;
+}
