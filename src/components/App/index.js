@@ -8,7 +8,7 @@ import Home from "src/containers/Home/index"
 import LoginForm from "src/containers/LoginForm/index"
 import SignupForm from "src/containers/SignupForm/index"
 import Logout from "src/containers/Logout/index"
-import Profile from "src/components/Profile/index"
+import Profile from "src/containers/Profile/index"
 
 const App = ({ checkIsLogged, isLogged }) => {
   //

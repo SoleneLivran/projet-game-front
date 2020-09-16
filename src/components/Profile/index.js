@@ -1,11 +1,12 @@
 import React, { useState } from "react"
+import PropTypes from "prop-types"
 import "./styles.css"
 import Field from "src/containers/Field/index"
 import Story from "./Story/index"
 import ModalDelete from "./ModalDelete/index"
 import ModalAvatar from "src/containers/ModalAvatar/index"
 
-const Profile = () => {
+const Profile = ({ imgFile }) => {
   // Modal state, display on button or hidden when closing it
   const [showModalDelete, setModalDelete] = useState(false)
   const [showModalAvatar, setModalAvatar] = useState(false)
@@ -43,7 +44,7 @@ const Profile = () => {
       <section className="profile__user mt-10 md:flex justify-around">
         <div className="profile__left-panel flex flex-col w-64 mx-auto md:mx-0 justify-center my-6 items-center md:mb-20">
           <img
-            src="/assets/img/default_avatar.png"
+            src={imgFile}
             alt=""
             className="profile__img w-40 h-40 md:w-56 md:h-56 "
           />
@@ -94,4 +95,7 @@ const Profile = () => {
   )
 }
 
+Profile.propTypes = {
+  imgFile: PropTypes.string.isRequired,
+}
 export default Profile
