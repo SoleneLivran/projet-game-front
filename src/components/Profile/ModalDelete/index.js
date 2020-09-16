@@ -4,6 +4,8 @@ import "./styles.css"
 const ModalDelete = ({ showDeleteModal, onClose }) => {
   // State for modal, button agree default is disabled
   const [buttonActive, setButtonActive] = useState(true)
+
+  // CHange the color of button, depends of the checkbox's state
   const buttonActiveClassName = buttonActive
     ? "bg-gray-600 cursor-not-allowed"
     : "bg-green-500 cursor-pointer"
@@ -40,7 +42,6 @@ const ModalDelete = ({ showDeleteModal, onClose }) => {
 
   // onChange on modal
   const handleInputCheckbox = () => {
-    console.log("check")
     setButtonActive(!buttonActive)
   }
 
