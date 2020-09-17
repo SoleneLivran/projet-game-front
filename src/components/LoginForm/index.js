@@ -1,10 +1,11 @@
 import React from "react"
+import { Redirect } from "react-router-dom"
 import { Link } from "react-router-dom"
 import PropTypes from "prop-types"
 import "./styles.css"
 import Field from "src/containers/Field/index"
 
-const LoginForm = ({ handleLogin }) => (
+const LoginForm = ({ handleLogin, isLogged }) => (
   <div className="h-screen">
     <div className="login-form mt-8 md:flex">
       <form
@@ -49,11 +50,13 @@ const LoginForm = ({ handleLogin }) => (
         </Link>
       </section>
     </div>
+    {isLogged && <Redirect to="/" />}
   </div>
 )
 
 LoginForm.propTypes = {
   handleLogin: PropTypes.func.isRequired,
+  isLogged: PropTypes.bool.isRequired,
 }
 
 export default LoginForm
