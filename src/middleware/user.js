@@ -1,5 +1,5 @@
 import axios from "axios"
-import { FETCH_USER } from "src/actions/user"
+import { FETCH_USER, setUser } from "src/actions/user"
 
 const user = (store) => (next) => (action) => {
   const state = store.getState()
@@ -15,7 +15,7 @@ const user = (store) => (next) => (action) => {
           }
         )
         .then((response) => {
-          console.log(response)
+          setUser(response.data)
         })
         .catch((error) => {
           console.log(error)

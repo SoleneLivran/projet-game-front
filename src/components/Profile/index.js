@@ -7,7 +7,7 @@ import Story from "./Story/index"
 import ModalDelete from "./ModalDelete/index"
 import ModalAvatar from "src/containers/ModalAvatar/index"
 
-const Profile = ({ connectedId, imgFile, fetchUser }) => {
+const Profile = ({ connectedId, fetchUser, name, mail, avatar }) => {
   // Get current user data, API GET request in user middleware:
   useEffect(fetchUser, [])
   // Get params from url
@@ -50,7 +50,7 @@ const Profile = ({ connectedId, imgFile, fetchUser }) => {
       <section className="profile__user mt-10 md:flex justify-around">
         <div className="profile__left-panel flex flex-col w-64 mx-auto md:mx-0 justify-center my-6 items-center md:mb-20">
           <img
-            src={imgFile}
+            src={`/assets/img/${avatar}.png`}
             alt=""
             className="profile__img w-40 h-40 md:w-56 md:h-56 "
           />
@@ -105,7 +105,9 @@ const Profile = ({ connectedId, imgFile, fetchUser }) => {
 
 Profile.propTypes = {
   connectedId: PropTypes.number.isRequired,
-  imgFile: PropTypes.string.isRequired,
   fetchUser: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  mail: PropTypes.string.isRequired,
+  avatar: PropTypes.string.isRequired,
 }
 export default Profile

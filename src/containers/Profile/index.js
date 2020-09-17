@@ -1,10 +1,12 @@
 import { connect } from "react-redux"
 import Profile from "src/components/Profile/index"
-import {fetchUser} from "src/actions/user"
+import { fetchUser } from "src/actions/user"
 
 const mapStateToProps = (state) => ({
   connectedId: state.auth.connectedId,
-  imgFile: state.user.imgFile,
+  avatar: state.user.avatar,
+  name: state.user.name,
+  mail: state.user.mail,
 })
 
 const mapDispatchToProps = (dispatch) => ({

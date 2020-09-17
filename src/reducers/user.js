@@ -1,7 +1,9 @@
-import { SET_AVATAR } from "src/actions/user"
+import { SET_AVATAR, SET_USER } from "src/actions/user"
 
 export const initialState = {
-  imgFile: "/assets/img/default_avatar.png",
+  avatar: "default_avatar",
+  name: null,
+  mail: null,
 }
 
 const user = (state = initialState, action = {}) => {
@@ -9,7 +11,16 @@ const user = (state = initialState, action = {}) => {
     case SET_AVATAR: {
       return {
         ...state,
-        imgFile: action.imgFile,
+        avatar: action.imgFile,
+      }
+    }
+    case SET_USER: {
+      return {
+        ...state,
+        name: action.name,
+        mail: action.mail,
+        // avatar: action.avatar,
+        avatar: "default_avatar",
       }
     }
     default:

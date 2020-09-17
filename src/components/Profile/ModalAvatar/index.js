@@ -59,7 +59,7 @@ const ModalAvatar = ({ showModalAvatar, onClose, setAvatar }) => {
                 alt=""
                 className="modal-avatar__img h-24 w-24 my-5 mx-auto cursor-pointer transform hover:scale-110"
                 onClick={() => {
-                  setAvatar("/assets/img/default_avatar.png")
+                  setAvatar("default_avatar")
                   onClose()
                 }}
               />
@@ -70,7 +70,7 @@ const ModalAvatar = ({ showModalAvatar, onClose, setAvatar }) => {
                 alt=""
                 className="modal-avatar__img h-24 w-24 my-5 mx-auto cursor-pointer transform hover:scale-110"
                 onClick={() => {
-                  setAvatar("/assets/img/default_avatar2.png")
+                  setAvatar("default_avatar2")
                   onClose()
                 }}
               />
