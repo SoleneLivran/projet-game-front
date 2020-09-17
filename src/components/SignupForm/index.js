@@ -16,7 +16,7 @@ const SignupForm = ({ username, email, password, passwordCheck, handleSignup }) 
           console.log(errors)
           if (Object.keys(errors).length === 0) {
             handleSignup()
-            // setSignedUp(true)
+            setSignedUp(true)
           }
         }}
         className="signup-form__panel w-64 flex flex-col justify-center mx-auto p-4 border-2 border-orange-400 bg-orange-900 font-bold"

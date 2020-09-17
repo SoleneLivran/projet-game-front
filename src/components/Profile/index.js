@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { useParams, Redirect } from "react-router-dom"
 import PropTypes from "prop-types"
 import "./styles.css"
 import Field from "src/containers/Field/index"
@@ -6,7 +7,10 @@ import Story from "./Story/index"
 import ModalDelete from "./ModalDelete/index"
 import ModalAvatar from "src/containers/ModalAvatar/index"
 
-const Profile = ({ imgFile }) => {
+const Profile = ({ connectedId, imgFile }) => {
+  // Get params from url
+  const { slug } = useParams()
+
   // Modal state, display on button or hidden when closing it
   const [showModalDelete, setModalDelete] = useState(false)
   const [showModalAvatar, setModalAvatar] = useState(false)
@@ -91,11 +95,14 @@ const Profile = ({ imgFile }) => {
           </button>
         </div>
       </section>
+      {/* The user can only access to his own profile */}
+      {slug !== connectedId.toString() ? <Redirect to="/" /> : ""}
     </div>
   )
 }
 
 Profile.propTypes = {
+  connectedId: PropTypes.number.isRequired,
   imgFile: PropTypes.string.isRequired,
 }
 export default Profile

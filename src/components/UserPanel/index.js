@@ -4,9 +4,9 @@ import { Link } from "react-router-dom"
 import "./styles.css"
 import { fetchDatasUserPanel } from "src/selectors/nav"
 
-const UserPanel = ({ isLogged }) => {
+const UserPanel = ({ isLogged, connectedId }) => {
   // datas depends of only when user is connected
-  const navListUserData = fetchDatasUserPanel(isLogged)
+  const navListUserData = fetchDatasUserPanel(isLogged, connectedId)
 
   return (
     <div className="user-panel h-24 w-full bg-gray-900 text-white flex items-center justify-between rounded-l-full md:flex-col md:rounded-lg md:relative md:justify-center md:text-center">
@@ -32,5 +32,6 @@ const UserPanel = ({ isLogged }) => {
 
 UserPanel.propTypes = {
   isLogged: PropTypes.bool.isRequired,
+  connectedId: PropTypes.number.isRequired,
 }
 export default UserPanel

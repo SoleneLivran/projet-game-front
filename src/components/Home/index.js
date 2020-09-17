@@ -15,7 +15,7 @@ const Home = ({
   useEffect(() => {
     showLoadingPopular()
     fetchPopularStories()
-  }, [])
+  }, [showLoadingPopular, fetchPopularStories])
   // state for loading
   // Modal state, display on button or hidden when closing it
   const [showModal, setModal] = useState(false)

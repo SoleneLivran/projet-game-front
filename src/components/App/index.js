@@ -22,8 +22,8 @@ const App = ({ checkIsLogged, isLogged }) => {
         <Route path="/login" component={LoginForm} />
         <Route path="/signup" component={SignupForm} />
         {isLogged && <Route path="/logout" component={Logout} />}
-        {isLogged && <Route path="/profile" component={Profile} />}
-        <Redirect to="/" />
+        {isLogged && <Route path="/profile/:slug" component={Profile} />}
+        {/* <Redirect to="/" /> */}
       </Switch>
     </div>
   )
@@ -32,5 +32,6 @@ const App = ({ checkIsLogged, isLogged }) => {
 App.propTypes = {
   isLogged: PropTypes.bool.isRequired,
   checkIsLogged: PropTypes.func.isRequired,
+  connectedId: PropTypes.number.isRequired,
 }
 export default App
