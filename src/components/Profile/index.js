@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useParams, Redirect } from "react-router-dom"
 import PropTypes from "prop-types"
 import "./styles.css"
@@ -8,6 +8,8 @@ import ModalDelete from "./ModalDelete/index"
 import ModalAvatar from "src/containers/ModalAvatar/index"
 
 const Profile = ({ connectedId, imgFile }) => {
+  // Get current user data:
+  // useEffect(fetchUser, [])
   // Get params from url
   const { slug } = useParams()
 

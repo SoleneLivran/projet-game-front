@@ -32,6 +32,5 @@ const App = ({ checkIsLogged, isLogged }) => {
 App.propTypes = {
   isLogged: PropTypes.bool.isRequired,
   checkIsLogged: PropTypes.func.isRequired,
-  connectedId: PropTypes.number.isRequired,
 }
 export default App
