@@ -7,9 +7,9 @@ import Story from "./Story/index"
 import ModalDelete from "./ModalDelete/index"
 import ModalAvatar from "src/containers/ModalAvatar/index"
 
-const Profile = ({ connectedId, imgFile }) => {
-  // Get current user data:
-  // useEffect(fetchUser, [])
+const Profile = ({ connectedId, imgFile, fetchUser }) => {
+  // Get current user data, API GET request in user middleware:
+  useEffect(fetchUser, [])
   // Get params from url
   const { slug } = useParams()
 
@@ -106,5 +106,6 @@ const Profile = ({ connectedId, imgFile }) => {
 Profile.propTypes = {
   connectedId: PropTypes.number.isRequired,
   imgFile: PropTypes.string.isRequired,
+  fetchUser: PropTypes.func.isRequired,
 }
 export default Profile
