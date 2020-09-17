@@ -1,7 +1,7 @@
 export const fetchDatasUserPanel = (isLogged) =>
   isLogged
     ? [
-        { name: "mon profil", path: "/profil" },
+        { name: "mon profil", path: "/profile" },
         { name: "deconnexion", path: "/logout" },
       ]
     : [

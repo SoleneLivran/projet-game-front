@@ -9,7 +9,7 @@ const Logout = ({ isLogged, logout }) => {
       localStorage.removeItem("user")
       logout()
     }
-  }, [])
+  }, [isLogged, logout])
   return (
     <>
       <Redirect to="/" />
