@@ -6,8 +6,16 @@ import UserPanel from "src/containers/UserPanel/index"
 import Modal from "src/components/Modal/index"
 import Loading from "src/components/Loading/index"
 
-const Home = ({ popularStories, fetchPopularStories, loadingPopular }) => {
-  useEffect(fetchPopularStories, [])
+const Home = ({
+  popularStories,
+  fetchPopularStories,
+  loadingPopular,
+  showLoadingPopular,
+}) => {
+  useEffect(() => {
+    showLoadingPopular()
+    fetchPopularStories()
+  }, [])
   // state for loading
   // Modal state, display on button or hidden when closing it
   const [showModal, setModal] = useState(false)
