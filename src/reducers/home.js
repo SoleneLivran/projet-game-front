@@ -1,6 +1,7 @@
 export const initialState = {
   listPopular: [],
   listLastest: [],
+  loadingPopular: true,
 }
 
 const home = (state = initialState, action = {}) => {
@@ -9,6 +10,7 @@ const home = (state = initialState, action = {}) => {
       return {
         ...state,
         listPopular: action.popularStories,
+        loadingPopular: false,
       }
     }
     default:

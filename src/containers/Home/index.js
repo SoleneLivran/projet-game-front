@@ -4,6 +4,7 @@ import { fetchPopularStories } from "src/actions/home"
 
 const mapStateToProps = (state) => ({
   popularStories: state.home.listPopular,
+  loadingPopular: state.home.loadingPopular,
 })
 
 const mapDispatchToProps = (dispatch) => ({
