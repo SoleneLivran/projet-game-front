@@ -15,8 +15,8 @@ const auth = (store) => (next) => (action) => {
       // access data in store
       axios
         .post("http://ec2-18-234-186-84.compute-1.amazonaws.com/api/login_check", {
-          username: state.auth.username,
-          password: state.auth.password,
+          username: state.auth.username.trim(),
+          password: state.auth.password.trim(),
         })
         .then((response) => {
           console.log(response.data)
@@ -40,9 +40,9 @@ const auth = (store) => (next) => (action) => {
     case SIGNUP: {
       axios
         .post("http://ec2-18-234-186-84.compute-1.amazonaws.com/api/register", {
-          name: state.auth.username.toLowerCase(),
-          mail: state.auth.email.toLowerCase(),
-          password: state.auth.password,
+          name: state.auth.username.toLowerCase().trim(),
+          mail: state.auth.email.toLowerCase().trim(),
+          password: state.auth.password.trim(),
         })
         .then((response) => {
           console.log(response)
