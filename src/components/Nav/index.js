@@ -50,7 +50,7 @@ const Nav = ({ isLogged }) => {
   }
 
   return (
-    <div className="nav bg-gray-900 shadow-lg  h-auto w-screen relative py-2">
+    <div className="nav bg-gray-900 shadow-lg  h-auto relative py-2">
       <div className="flex pl-5 pr-12 justify-between items-center">
         <button
           onClick={() => handlePanel()}

@@ -8,20 +8,22 @@ import Home from "src/containers/Home/index"
 import LoginForm from "src/containers/LoginForm/index"
 import SignupForm from "src/containers/SignupForm/index"
 import Logout from "src/containers/Logout/index"
+import Profile from "src/containers/Profile/index"
 
 const App = ({ checkIsLogged, isLogged }) => {
   //
-  useEffect(() => {
-    checkIsLogged()
-  }, [])
+  useEffect(checkIsLogged, [])
+
   return (
-    <div className="app bg-center bg-cover h-auto w-screen ">
+    <div className="app bg-center bg-cover h-auto w-full ">
       <Nav />
       <Switch>
         <Route path="/" component={Home} exact />
         <Route path="/login" component={LoginForm} />
         <Route path="/signup" component={SignupForm} />
         {isLogged && <Route path="/logout" component={Logout} />}
+        {isLogged && <Route path="/profile" component={Profile} />}
+        <Redirect to="/" />
       </Switch>
     </div>
   )
