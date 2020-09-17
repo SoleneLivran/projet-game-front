@@ -68,7 +68,7 @@ const ModalDelete = ({ showModalDelete, onClose }) => {
             La suppression de votre compte entrainera également la{" "}
             <span className="font-bold">
               {" "}
-              suppression totale des histoires créer depuis ce compte. <br />
+              suppression totale des histoires créées depuis ce compte. <br />
               Il ne sera plus possible de les récupérer.
             </span>
             <br />
