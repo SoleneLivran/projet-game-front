@@ -40,10 +40,11 @@ const auth = (store) => (next) => (action) => {
       // access data in store
       const state = store.getState()
       const newUser = {
-        pseudo: state.auth.pseudo,
-        email: state.auth.email,
+        username: state.auth.username.toLowerCase(),
+        email: state.auth.email.toLowerCase(),
         password: state.auth.password,
       }
+      console.log(newUser)
       store.dispatch(saveNewUser())
       break
     }
