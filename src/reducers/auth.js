@@ -5,7 +5,6 @@ export const initialState = {
   email: "",
   password: "",
   passwordCheck: "",
-  isSignedUp: false,
   isLogged: false,
 }
 
