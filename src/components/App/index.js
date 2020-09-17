@@ -12,9 +12,8 @@ import Profile from "src/containers/Profile/index"
 
 const App = ({ checkIsLogged, isLogged }) => {
   //
-  useEffect(() => {
-    checkIsLogged()
-  }, [])
+  useEffect(checkIsLogged, [])
+
   return (
     <div className="app bg-center bg-cover h-auto w-full ">
       <Nav />

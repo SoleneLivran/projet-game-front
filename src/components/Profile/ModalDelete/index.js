@@ -25,7 +25,7 @@ const ModalDelete = ({ showModalDelete, onClose }) => {
       document.removeEventListener("click", clickListener)
       document.removeEventListener("keyup", escapeListener)
     }
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   // true if the ref object exist and the click is not on it
   const clickListener = (e) => {
