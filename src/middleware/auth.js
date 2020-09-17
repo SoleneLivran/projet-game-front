@@ -9,10 +9,10 @@ import {
 } from "src/actions/auth"
 
 const auth = (store) => (next) => (action) => {
+  const state = store.getState()
   switch (action.type) {
     case LOGIN: {
       // access data in store
-      const state = store.getState()
       axios
         .post("http://ec2-18-234-186-84.compute-1.amazonaws.com/api/login_check", {
           username: state.auth.username,
@@ -32,20 +32,25 @@ const auth = (store) => (next) => (action) => {
     }
     case CHECK_IS_LOGGED: {
       if (localStorage.getItem("user") !== null) {
+        console.log(jwt_decode(localStorage.getItem("user")))
         store.dispatch(saveUser(jwt_decode(localStorage.getItem("user"))))
       }
       break
     }
     case SIGNUP: {
-      // access data in store
-      const state = store.getState()
-      const newUser = {
-        username: state.auth.username.toLowerCase(),
-        email: state.auth.email.toLowerCase(),
-        password: state.auth.password,
-      }
-      console.log(newUser)
-      store.dispatch(saveNewUser())
+      axios
+        .post("http://ec2-18-234-186-84.compute-1.amazonaws.com/api/register", {
+          name: state.auth.username.toLowerCase(),
+          mail: state.auth.email.toLowerCase(),
+          password: state.auth.password,
+        })
+        .then((response) => {
+          console.log(response)
+          store.dispatch(saveNewUser())
+        })
+        .catch((error) => {
+          console.log(error)
+        })
       break
     }
     default:

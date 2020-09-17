@@ -34,7 +34,6 @@ const auth = (state = initialState, action = {}) => {
         email: "",
         password: "",
         passwordCheck: "",
-        isSignedUp: true,
       }
     }
     case LOGOUT: {
