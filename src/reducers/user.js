@@ -2,8 +2,8 @@ import { SET_AVATAR, SET_USER } from "src/actions/user"
 
 export const initialState = {
   avatar: "default_avatar",
-  name: null,
-  mail: null,
+  name: "",
+  mail: "",
 }
 
 const user = (state = initialState, action = {}) => {
@@ -15,6 +15,7 @@ const user = (state = initialState, action = {}) => {
       }
     }
     case SET_USER: {
+      console.log("SET_USER")
       return {
         ...state,
         name: action.name,
