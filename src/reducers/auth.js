@@ -6,6 +6,7 @@ export const initialState = {
   password: "",
   passwordCheck: "",
   isLogged: false,
+  id: null,
 }
 
 const auth = (state = initialState, action = {}) => {
@@ -22,6 +23,7 @@ const auth = (state = initialState, action = {}) => {
         ...state,
         username: action.username,
         password: "",
+        id: action.id,
         isLogged: true,
       }
     }

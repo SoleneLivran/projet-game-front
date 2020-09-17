@@ -63,6 +63,7 @@ const Home = ({
 Home.propTypes = {
   fetchPopularStories: PropTypes.func.isRequired,
   popularStories: PropTypes.array.isRequired,
-  loading: PropTypes.bool.isRequired,
+  loadingPopular: PropTypes.bool.isRequired,
+  showLoadingPopular: PropTypes.func.isRequired,
 }
 export default Home
