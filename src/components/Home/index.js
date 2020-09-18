@@ -4,9 +4,19 @@ import "./styles.css"
 import Card from "src/components/Card/index"
 import UserPanel from "src/containers/UserPanel/index"
 import Modal from "src/components/Modal/index"
+import Loading from "src/components/Loading/index"
 
-const Home = ({ popularStories, fetchPopularStories }) => {
-  useEffect(fetchPopularStories, [])
+const Home = ({
+  popularStories,
+  fetchPopularStories,
+  loadingPopular,
+  showLoadingPopular,
+}) => {
+  useEffect(() => {
+    showLoadingPopular()
+    fetchPopularStories()
+  }, [showLoadingPopular, fetchPopularStories])
+  // state for loading
   // Modal state, display on button or hidden when closing it
   const [showModal, setModal] = useState(false)
 
@@ -28,11 +38,15 @@ const Home = ({ popularStories, fetchPopularStories }) => {
             Populaires
           </h1>
 
-          <ul className="home__list-popular">
-            {popularStories.map((story) => (
-              <Card key={story.id} {...story} handleModal={handleModal} />
-            ))}
-          </ul>
+          {!loadingPopular ? (
+            <ul className="home__list-popular">
+              {popularStories.map((story) => (
+                <Card key={story.id} {...story} handleModal={handleModal} />
+              ))}
+            </ul>
+          ) : (
+            <Loading />
+          )}
         </section>
         <section className="home__latest">
           <h1 className="home__title uppercase text-white text-3xl font-bold">
@@ -49,5 +63,7 @@ const Home = ({ popularStories, fetchPopularStories }) => {
 Home.propTypes = {
   fetchPopularStories: PropTypes.func.isRequired,
   popularStories: PropTypes.array.isRequired,
+  loadingPopular: PropTypes.bool.isRequired,
+  showLoadingPopular: PropTypes.func.isRequired,
 }
 export default Home

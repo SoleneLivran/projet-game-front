@@ -31,6 +31,7 @@ export const logout = () => ({
 export const saveUser = (userToken) => ({
   type: SAVE_USER,
   username: userToken.username,
+  id: userToken.id,
 })
 
 // action type from auth middleware, got to auth reducer

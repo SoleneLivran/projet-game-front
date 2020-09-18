@@ -1,12 +1,18 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
+import { useParams, Redirect } from "react-router-dom"
 import PropTypes from "prop-types"
 import "./styles.css"
-import Field from "src/containers/Field/index"
+import FieldProfile from "src/containers/FieldProfile/index"
 import Story from "./Story/index"
 import ModalDelete from "./ModalDelete/index"
 import ModalAvatar from "src/containers/ModalAvatar/index"
 
-const Profile = ({ imgFile }) => {
+const Profile = ({ connectedId, fetchUser, avatar, handleUserEdit }) => {
+  // Get current user data, API GET request in user middleware:
+  useEffect(fetchUser, [])
+  // Get params from url
+  const { slug } = useParams()
+
   // Modal state, display on button or hidden when closing it
   const [showModalDelete, setModalDelete] = useState(false)
   const [showModalAvatar, setModalAvatar] = useState(false)
@@ -44,7 +50,7 @@ const Profile = ({ imgFile }) => {
       <section className="profile__user mt-10 md:flex justify-around">
         <div className="profile__left-panel flex flex-col w-64 mx-auto md:mx-0 justify-center my-6 items-center md:mb-20">
           <img
-            src={imgFile}
+            src={`/assets/img/${avatar}.png`}
             alt=""
             className="profile__img w-40 h-40 md:w-56 md:h-56 "
           />
@@ -62,23 +68,32 @@ const Profile = ({ imgFile }) => {
           <form
             onSubmit={(e) => {
               e.preventDefault()
+              handleUserEdit()
             }}
             className="profile__form flex flex-col"
           >
             <label className="profile__label mt-2" htmlFor="username">
               Nom d'utilisateur
             </label>
-            <Field type="text" name="username" placeholder="Nom d'utilisateur" />
+            <FieldProfile
+              type="text"
+              name="username"
+              placeholder="Nom d'utilisateur"
+            />
             <label className="profile__label mt-2" htmlFor="email">
               Email
             </label>
-            <Field type="email" name="email" placeholder="Email" />
+            <FieldProfile type="email" name="email" placeholder="Email" />
             <label className="profile__label mt-2" htmlFor="password">
               Mot de passe
             </label>
-            <Field type="password" name="password" placeholder="Mot de passe" />
+            <FieldProfile
+              type="password"
+              name="password"
+              placeholder="Mot de passe"
+            />
             <input
-              className="profile__submit mt-4 py-4 bg-blue-400 rounded-md text-white font-bold"
+              className="profile__submit cursor-pointer mt-4 py-4 bg-blue-400 rounded-md text-white font-bold"
               type="submit"
               value="Éditer mes informations"
             />
@@ -91,11 +106,16 @@ const Profile = ({ imgFile }) => {
           </button>
         </div>
       </section>
+      {/* The user can only access to his own profile */}
+      {slug !== connectedId.toString() ? <Redirect to="/" /> : ""}
     </div>
   )
 }
 
 Profile.propTypes = {
-  imgFile: PropTypes.string.isRequired,
+  connectedId: PropTypes.number.isRequired,
+  fetchUser: PropTypes.func.isRequired,
+  avatar: PropTypes.string.isRequired,
+  handleUserEdit: PropTypes.func.isRequired,
 }
 export default Profile

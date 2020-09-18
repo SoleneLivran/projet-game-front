@@ -5,8 +5,8 @@ export const initialState = {
   email: "",
   password: "",
   passwordCheck: "",
-  isSignedUp: false,
   isLogged: false,
+  connectedId: null,
 }
 
 const auth = (state = initialState, action = {}) => {
@@ -18,11 +18,12 @@ const auth = (state = initialState, action = {}) => {
       }
     }
     case SAVE_USER: {
-      // return the state and clean previous input for secure
+      // return the state after login and clean previous input for secure
       return {
         ...state,
         username: action.username,
         password: "",
+        connectedId: action.id,
         isLogged: true,
       }
     }
@@ -35,7 +36,6 @@ const auth = (state = initialState, action = {}) => {
         email: "",
         password: "",
         passwordCheck: "",
-        isSignedUp: true,
       }
     }
     case LOGOUT: {
