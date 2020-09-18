@@ -1,5 +1,5 @@
 import axios from "axios"
-import { FETCH_STORY, setScene } from "src/actions/gameinterface"
+import { FETCH_STORY, setScene, NEXT_SCENE } from "src/actions/gameinterface"
 
 const auth = (store) => (next) => (action) => {
   const state = store.getState()
@@ -15,6 +15,24 @@ const auth = (store) => (next) => (action) => {
           console.log(error)
         })
       break
+    }
+    case NEXT_SCENE: {
+      axios
+        .get(
+          `http://ec2-18-234-186-84.compute-1.amazonaws.com/api/transitions/${action.nextSceneId}/next_scene`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("user")}`,
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response)
+          store.dispatch(setScene(response.data))
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
     default:
       next(action)
