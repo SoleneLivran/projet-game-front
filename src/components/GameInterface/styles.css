@@ -1,6 +1,5 @@
 .is-forest {
   transition: background 1s ease;
-
   background-position: bottom;
   background-repeat: no-repeat;
   background-size: cover;
@@ -11,10 +10,11 @@
 .card__place--active,
 .card__event--active {
   transform-style: preserve-3d;
-  transform: rotateY(180deg)
+  transform: rotateY(180deg);
 }
 
 .card__title--active {
   color: #FFF;
-  transform: rotateY(180deg)
+  transform: rotateY(180deg);
+
 }
