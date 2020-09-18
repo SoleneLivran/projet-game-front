@@ -34,6 +34,7 @@ const user = (state = initialState, action = {}) => {
         email: action.mail,
         // avatar: action.avatar,
         avatar: "default_avatar",
+        password: "",
       }
     }
     case CLEAR_EDIT: {
