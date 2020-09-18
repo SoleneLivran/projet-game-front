@@ -1,5 +1,5 @@
 import axios from "axios"
-import { FETCH_USER, setUser } from "src/actions/user"
+import { FETCH_USER, setUser, USER_EDIT, clearEdit } from "src/actions/user"
 
 const user = (store) => (next) => (action) => {
   const state = store.getState()
@@ -20,6 +20,9 @@ const user = (store) => (next) => (action) => {
         .catch((error) => {
           console.log(error)
         })
+    }
+    case USER_EDIT: {
+      store.dispatch(clearEdit())
     }
     default:
       next(action)

@@ -7,7 +7,7 @@ import Story from "./Story/index"
 import ModalDelete from "./ModalDelete/index"
 import ModalAvatar from "src/containers/ModalAvatar/index"
 
-const Profile = ({ connectedId, fetchUser, name, mail, avatar }) => {
+const Profile = ({ connectedId, fetchUser, avatar, handleUserEdit }) => {
   // Get current user data, API GET request in user middleware:
   useEffect(fetchUser, [])
   // Get params from url
@@ -68,6 +68,7 @@ const Profile = ({ connectedId, fetchUser, name, mail, avatar }) => {
           <form
             onSubmit={(e) => {
               e.preventDefault()
+              handleUserEdit()
             }}
             className="profile__form flex flex-col"
           >
@@ -92,7 +93,7 @@ const Profile = ({ connectedId, fetchUser, name, mail, avatar }) => {
               placeholder="Mot de passe"
             />
             <input
-              className="profile__submit mt-4 py-4 bg-blue-400 rounded-md text-white font-bold"
+              className="profile__submit cursor-pointer mt-4 py-4 bg-blue-400 rounded-md text-white font-bold"
               type="submit"
               value="Éditer mes informations"
             />
@@ -114,8 +115,7 @@ const Profile = ({ connectedId, fetchUser, name, mail, avatar }) => {
 Profile.propTypes = {
   connectedId: PropTypes.number.isRequired,
   fetchUser: PropTypes.func.isRequired,
-  name: PropTypes.string.isRequired,
-  mail: PropTypes.string.isRequired,
   avatar: PropTypes.string.isRequired,
+  handleUserEdit: PropTypes.func.isRequired,
 }
 export default Profile

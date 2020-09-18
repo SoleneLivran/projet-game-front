@@ -1,9 +1,15 @@
-import { SET_AVATAR, SET_USER, CHANGE_USER_INPUT } from "src/actions/user"
+import {
+  SET_AVATAR,
+  SET_USER,
+  CHANGE_USER_INPUT,
+  CLEAR_EDIT,
+} from "src/actions/user"
 
 export const initialState = {
   avatar: "default_avatar",
   username: "",
   email: "",
+  password: "",
 }
 
 const user = (state = initialState, action = {}) => {
@@ -28,6 +34,12 @@ const user = (state = initialState, action = {}) => {
         email: action.mail,
         // avatar: action.avatar,
         avatar: "default_avatar",
+      }
+    }
+    case CLEAR_EDIT: {
+      return {
+        ...state,
+        password: "",
       }
     }
     default:

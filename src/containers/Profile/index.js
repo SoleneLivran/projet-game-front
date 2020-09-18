@@ -1,6 +1,6 @@
 import { connect } from "react-redux"
 import Profile from "src/components/Profile/index"
-import { fetchUser } from "src/actions/user"
+import { fetchUser, userEdit } from "src/actions/user"
 
 const mapStateToProps = (state) => ({
   connectedId: state.auth.connectedId,
@@ -12,6 +12,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   fetchUser: () => {
     dispatch(fetchUser())
+  },
+  handleUserEdit: () => {
+    dispatch(userEdit())
   },
 })
 
