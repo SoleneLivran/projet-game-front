@@ -1,13 +1,19 @@
-import { SET_AVATAR, SET_USER } from "src/actions/user"
+import { SET_AVATAR, SET_USER, CHANGE_USER_INPUT } from "src/actions/user"
 
 export const initialState = {
   avatar: "default_avatar",
-  name: "",
-  mail: "",
+  username: "",
+  email: "",
 }
 
 const user = (state = initialState, action = {}) => {
   switch (action.type) {
+    case CHANGE_USER_INPUT: {
+      return {
+        ...state,
+        [action.key]: action.value,
+      }
+    }
     case SET_AVATAR: {
       return {
         ...state,
@@ -18,8 +24,8 @@ const user = (state = initialState, action = {}) => {
       console.log("SET_USER")
       return {
         ...state,
-        name: action.name,
-        mail: action.mail,
+        username: action.name,
+        email: action.mail,
         // avatar: action.avatar,
         avatar: "default_avatar",
       }

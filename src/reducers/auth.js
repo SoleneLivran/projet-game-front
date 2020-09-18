@@ -18,7 +18,7 @@ const auth = (state = initialState, action = {}) => {
       }
     }
     case SAVE_USER: {
-      // return the state and clean previous input for secure
+      // return the state after login and clean previous input for secure
       return {
         ...state,
         username: action.username,

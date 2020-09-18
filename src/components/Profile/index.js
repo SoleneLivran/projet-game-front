@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import { useParams, Redirect } from "react-router-dom"
 import PropTypes from "prop-types"
 import "./styles.css"
-import Field from "src/containers/Field/index"
+import FieldProfile from "src/containers/FieldProfile/index"
 import Story from "./Story/index"
 import ModalDelete from "./ModalDelete/index"
 import ModalAvatar from "src/containers/ModalAvatar/index"
@@ -74,15 +74,23 @@ const Profile = ({ connectedId, fetchUser, name, mail, avatar }) => {
             <label className="profile__label mt-2" htmlFor="username">
               Nom d'utilisateur
             </label>
-            <Field type="text" name="username" placeholder="Nom d'utilisateur" />
+            <FieldProfile
+              type="text"
+              name="username"
+              placeholder="Nom d'utilisateur"
+            />
             <label className="profile__label mt-2" htmlFor="email">
               Email
             </label>
-            <Field type="email" name="email" placeholder="Email" />
+            <FieldProfile type="email" name="email" placeholder="Email" />
             <label className="profile__label mt-2" htmlFor="password">
               Mot de passe
             </label>
-            <Field type="password" name="password" placeholder="Mot de passe" />
+            <FieldProfile
+              type="password"
+              name="password"
+              placeholder="Mot de passe"
+            />
             <input
               className="profile__submit mt-4 py-4 bg-blue-400 rounded-md text-white font-bold"
               type="submit"
