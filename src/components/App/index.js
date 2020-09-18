@@ -9,20 +9,22 @@ import LoginForm from "src/containers/LoginForm/index"
 import SignupForm from "src/containers/SignupForm/index"
 import Logout from "src/containers/Logout/index"
 import Profile from "src/containers/Profile/index"
+import GameInterface from "src/containers/GameInterface/index"
 
-const App = ({ checkIsLogged, isLogged }) => {
+const App = ({ checkIsLogged, isLogged, showNav }) => {
   //
   useEffect(checkIsLogged, [])
 
   return (
     <div className="app bg-center bg-cover h-auto w-full ">
-      <Nav />
+      {showNav && <Nav />}
       <Switch>
         <Route path="/" component={Home} exact />
         <Route path="/login" component={LoginForm} />
         <Route path="/signup" component={SignupForm} />
         {isLogged && <Route path="/logout" component={Logout} />}
         {isLogged && <Route path="/profile/:slug" component={Profile} />}
+        {isLogged && <Route path="/letsplay/:slug" component={GameInterface} />}
         {/* <Redirect to="/" /> */}
       </Switch>
     </div>
