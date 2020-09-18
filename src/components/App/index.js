@@ -16,7 +16,7 @@ const App = ({ checkIsLogged, isLogged, showNav }) => {
   useEffect(checkIsLogged, [])
 
   return (
-    <div className="app bg-center bg-cover h-auto w-full ">
+    <div className="app bg-center bg-cover h-full w-full ">
       {showNav && <Nav />}
       <Switch>
         <Route path="/" component={Home} exact />
