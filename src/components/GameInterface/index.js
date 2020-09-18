@@ -1,6 +1,9 @@
-import React from "react"
+import React, { useEffect } from "react"
 import "./styles.css"
 
-const GameInterface = () => <div className="game-interface">GameInterface</div>
+const GameInterface = ({ hideNav }) => {
+  useEffect(hideNav, [])
+  return <div className="game-interface">GameInterface</div>
+}
 
 export default GameInterface

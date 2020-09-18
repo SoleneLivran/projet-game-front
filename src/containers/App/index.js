@@ -5,6 +5,7 @@ import { checkIsLogged } from "src/actions/auth"
 const mapStateToProps = (state) => ({
   isLogged: state.auth.isLogged,
   connectedId: state.auth.connectedId,
+  showNav: state.gameinterface.showNav,
 })
 
 const mapDispatchToProps = (dispatch) => ({
