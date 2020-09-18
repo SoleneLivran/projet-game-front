@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
 import "./styles.css"
 
-const GameInterface = ({ hideNav }) => {
+const GameInterface = ({ hideNav, fetchStory }) => {
   // Hide Nav when component is mounted
-  useEffect(hideNav, [])
+  useEffect(() => {
+    fetchStory()
+    hideNav()
+  }, [fetchStory, hideNav])
 
   const [placeName, setNamePlace] = useState("Lieu")
   const [eventName, setNameEvent] = useState("Évenement")
@@ -25,7 +29,7 @@ const GameInterface = ({ hideNav }) => {
 
   return (
     <div
-      className={`game-interface w-screen h-screen bg-gray-900 px-4 flex flex-col items-center justify-center ${
+      className={`game-interface w-screen h-screen bg-gray-900 px-4 flex flex-col items-center justify-center relative ${
         placeName === "Lieu" ? "" : "is-forest"
       }`}
       style={{
@@ -35,6 +39,13 @@ const GameInterface = ({ hideNav }) => {
             : `url("https://cdnb.artstation.com/p/assets/images/images/010/310/039/large/kasia-kosobucka-landscape-bg.jpg?1523743339")`,
       }}
     >
+      <div className="game-interface__button fixed right-0 top-0">
+        <Link to="/">
+          <button className="game-interface__leave mr-12 mt-12 focus:outline-none bg-red-700 w-12 h-12 ml-auto duration-150 transform easy-in-out hover:scale-105 rounded-full font-bold text-gray-300 flex justify-center items-center">
+            <i className="fas fa-2x fa-times font-light"></i>
+          </button>
+        </Link>
+      </div>
       <div className="game-interface__scene pt-10">
         <div className="card__place-event mx-1 my-2 flex justify-center">
           <div

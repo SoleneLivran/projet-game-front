@@ -20,9 +20,11 @@ const user = (store) => (next) => (action) => {
         .catch((error) => {
           console.log(error)
         })
+      break
     }
     case USER_EDIT: {
       store.dispatch(clearEdit())
+      break
     }
     default:
       next(action)
