@@ -1,26 +1,32 @@
 import React, { useState, useEffect } from "react"
+import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
 import "./styles.css"
 
-const GameInterface = ({ hideNav, fetchStory }) => {
+const GameInterface = ({
+  hideNav,
+  fetchStory,
+  place,
+  event,
+  transitions,
+  nextScene,
+}) => {
   // Hide Nav when component is mounted
   useEffect(() => {
     fetchStory()
     hideNav()
   }, [fetchStory, hideNav])
 
-  const [placeName, setNamePlace] = useState("Lieu")
-  const [eventName, setNameEvent] = useState("Évenement")
+  const [placeName, setNamePlace] = useState(place.name)
+  const [eventName, setNameEvent] = useState(event.name)
 
   const handleNamePlace = () => {
-    placeName === "Lieu"
-      ? setNamePlace("Une superbe et très grande forêt")
-      : setNamePlace("Lieu")
+    placeName === "Lieu" ? setNamePlace(place.name) : setNamePlace("Lieu")
   }
 
   const handleNameEvent = () => {
     return eventName === "Évenement"
-      ? setNameEvent("rencontre")
+      ? setNameEvent(event.name)
       : setNameEvent("Évenement")
   }
 
@@ -85,12 +91,17 @@ const GameInterface = ({ hideNav, fetchStory }) => {
             Que faites-vous ?
           </p>
           <div className="game-interface__actions my-2 py-4 overflow-x-auto flex">
-            <div className="card__action my-2 mx-2 bg-gray-200 select-none px-12 h-56 w-48 rounded-lg flex justify-center items-center transform hover:scale-105 cursor-pointer shadow-lg text-gray-800 text-2xl font-bold">
-              Action
-            </div>
-            <div className="card__action my-2 mx-2 bg-gray-200 select-none px-12 h-56 w-48 rounded-lg flex justify-center items-center transform hover:scale-105 cursor-pointer shadow-lg text-gray-800 text-2xl font-bold">
-              Action
-            </div>
+            {transitions.map((action, key) => {
+              return (
+                <div
+                  key={key}
+                  onClick={() => nextScene(action.action.id)}
+                  className="card__action my-2 mx-2 bg-gray-200 select-none px-12 h-56 w-48 rounded-lg flex justify-center items-center transform hover:scale-105 cursor-pointer shadow-lg text-gray-800 text-2xl font-bold"
+                >
+                  {action.action.name}
+                </div>
+              )
+            })}
           </div>
         </div>
       </div>
@@ -98,4 +109,12 @@ const GameInterface = ({ hideNav, fetchStory }) => {
   )
 }
 
+GameInterface.propTypes = {
+  event: PropTypes.object.isRequired,
+  place: PropTypes.object.isRequired,
+  transitions: PropTypes.array.isRequired,
+  hideNav: PropTypes.func.isRequired,
+  fetchStory: PropTypes.func.isRequired,
+  nextScene: PropTypes.func.isRequired,
+}
 export default GameInterface

@@ -1,7 +1,10 @@
-import { HIDE_NAV } from "src/actions/gameinterface"
+import { HIDE_NAV, SET_SCENE } from "src/actions/gameinterface"
 
 export const initialState = {
   showNav: true,
+  transitions: [],
+  place: {},
+  event: {},
 }
 
 const home = (state = initialState, action = {}) => {
@@ -10,6 +13,14 @@ const home = (state = initialState, action = {}) => {
       return {
         ...state,
         showNav: false,
+      }
+    }
+    case SET_SCENE: {
+      return {
+        ...state,
+        transitions: action.transitions,
+        place: action.place,
+        event: action.event,
       }
     }
     default:
