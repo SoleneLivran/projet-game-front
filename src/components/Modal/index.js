@@ -1,11 +1,12 @@
 import Axios from "axios"
 import React, { useEffect, useRef, useState } from "react"
+import { Link } from "react-router-dom"
 import Loading from "src/components/Loading/index"
 import "./styles.css"
 
-const Modal = ({ showModal, onClose }) => {
+const Modal = ({ showModal, onClose, storyId }) => {
   const displayModal = showModal === true ? "block" : "hidden"
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [story, setStory] = useState([])
   const [error, setError] = useState([])
 
@@ -17,7 +18,7 @@ const Modal = ({ showModal, onClose }) => {
   useEffect(() => {
     document.addEventListener("click", clickListener)
     document.addEventListener("keyup", escapeListener)
-    // fetchStory()
+    fetchStory()
     return () => {
       document.removeEventListener("click", clickListener)
       document.removeEventListener("keyup", escapeListener)
@@ -39,10 +40,9 @@ const Modal = ({ showModal, onClose }) => {
 
   const fetchStory = () => {
     Axios.get(
-      "http://ec2-18-234-186-84.compute-1.amazonaws.com/api/public/stories/1"
+      `http://ec2-18-234-186-84.compute-1.amazonaws.com/api/public/stories/${storyId}`
     )
       .then((response) => {
-        console.log(response)
         setStory(response.data)
         setLoading(false)
       })
@@ -66,37 +66,22 @@ const Modal = ({ showModal, onClose }) => {
           <div className="modal__story h-full w-full md:flex md:flex-col">
             <div className="modal__content m-2 p-4 shadow-2xl bg-gray-300 h-full">
               <h1 className="modal__title font-bold text-2xl text-center">
-                Lorem ipsum dolor sit.
+                {story.title}
               </h1>
               <p className="modal__author text-center text-md my-2 text-gray-700">
-                Par Toto
+                {story.author.name}
               </p>
-              <p className="modal__category text-center text-sm my-2">Horreur</p>
-              <p className="modal__synopsis text-justify">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque
-                quisquam est obcaecati dicta quo unde adipisci perspiciatis quis
-                nesciunt corrupti id, commodi fugiat mollitia eligendi voluptatem
-                dignissimos, doloremque fuga ea laboriosam odit laudantium odio
-                explicabo? Maxime expedita quis minima porro necessitatibus,
-                inventore cupiditate quibusdam consequuntur reprehenderit illum
-                voluptatum unde accusamus minus dolore, iure nihil omnis ad quisquam
-                velit magni provident? Voluptas, consequuntur officia? Veritatis
-                dignissimos praesentium non culpa vero consequuntur, voluptatum
-                voluptas, rerum reiciendis ducimus, necessitatibus a consectetur
-                maxime voluptatibus quidem. Laudantium, quasi culpa neque velit
-                itaque ratione temporibus doloremque sint ullam atque inventore fugit
-                nobis totam perferendis aperiam a harum ab non explicabo eum ut nemo
-                reprehenderit nostrum. Numquam aperiam placeat sit voluptatum cumque
-                tempora similique incidunt neque quas temporibus sed consequatur
-                voluptatibus eius distinctio labore sunt dicta ea, assumenda autem
-                optio, ullam natus voluptas nihil quod. Laudantium voluptas hic iure!
-                Maxime provident debitis quo, dolor ea dolore veritatis?
+              <p className="modal__category text-center text-sm my-2">
+                {story.category.name}
               </p>
+              <p className="modal__synopsis text-justify">{story.synopsis}</p>
             </div>
             <div className="modal__buttons flex justify-around w-full">
-              <button className="modal__play w-24 my-2 py-4 bg-green-400 rounded-lg font-bold text-white sm:w-48 md:w-64">
-                Jouer
-              </button>
+              <Link to={`/letsplay/${story.id}`}>
+                <button className="modal__play w-24 my-2 py-4 bg-green-400 rounded-lg font-bold text-white sm:w-48 md:w-64">
+                  Jouer
+                </button>
+              </Link>
               <button
                 className="modal__close w-24 py-4 my-2 bg-red-500 rounded-lg font-bold text-white sm:w-48 md:w-64"
                 type="button"

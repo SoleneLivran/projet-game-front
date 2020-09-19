@@ -18,15 +18,27 @@ const Home = ({
   }, [showLoadingPopular, fetchPopularStories])
   // state for loading
   // Modal state, display on button or hidden when closing it
-  const [showModal, setModal] = useState(true)
+  const [showModal, setModal] = useState(false)
 
-  // Change modal current state
-  const handleModal = () => setModal(true)
+  // Const for story id
+  const [storyId, setStoryId] = useState(null)
+
+  // Change modal current state and set the story id
+  const handleModal = (id) => {
+    setStoryId(id)
+    setModal(true)
+  }
 
   return (
     <div className="home md:mt-32 mx-8 md:flex md:mt-16 md:justify-around">
       {/* Only when modal is open (true) -> Modal is display, and the event click/key can be use */}
-      {showModal && <Modal showModal={showModal} onClose={() => setModal(false)} />}
+      {showModal && (
+        <Modal
+          showModal={showModal}
+          onClose={() => setModal(false)}
+          storyId={storyId}
+        />
+      )}
 
       {/* Display UserPanel for mobile device */}
       <section className="home__user home__user--desktop hidden mt-8 sm:block md:block md:order-1 md:w-1/3">
