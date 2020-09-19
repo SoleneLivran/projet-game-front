@@ -18,7 +18,7 @@ const Home = ({
   }, [showLoadingPopular, fetchPopularStories])
   // state for loading
   // Modal state, display on button or hidden when closing it
-  const [showModal, setModal] = useState(false)
+  const [showModal, setModal] = useState(true)
 
   // Change modal current state
   const handleModal = () => setModal(true)
@@ -45,7 +45,12 @@ const Home = ({
               ))}
             </ul>
           ) : (
-            <Loading />
+            <Loading
+              type="Bars"
+              color="#5BC1FF"
+              heightValue={100}
+              widthValue={100}
+            />
           )}
         </section>
         <section className="home__latest">
