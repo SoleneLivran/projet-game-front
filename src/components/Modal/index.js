@@ -38,6 +38,7 @@ const Modal = ({ showModal, onClose, storyId }) => {
     }
   }
 
+  // API request to have the selected story
   const fetchStory = () => {
     Axios.get(
       `http://ec2-18-234-186-84.compute-1.amazonaws.com/api/public/stories/${storyId}`
@@ -56,7 +57,9 @@ const Modal = ({ showModal, onClose, storyId }) => {
       className={`modal h-screen w-screen ${displayModal} fixed z-40 flex justify-center items-center`}
     >
       <div
-        className="modal__container w-3/4 mx-auto md:max-w-6xl relative bg-gray-300 opacity-100 rounded-md flex justify-center items-center"
+        className={`modal__container w-3/4 mx-auto md:max-w-6xl relative bg-gray-300 opacity-100 rounded-md flex justify-center items-center ${
+          loading ? "h-64" : ""
+        }`}
         ref={ref}
       >
         {loading && (

@@ -6,12 +6,12 @@ import { NavLink } from "react-router-dom"
 import navDatas from "src/datas/nav"
 import { fetchDatasUserPanel } from "src/selectors/nav"
 
-const Nav = ({ isLogged }) => {
+const Nav = ({ isLogged, connectedId }) => {
   const [navIsOpen, setPanel] = useState(false)
   const [userNavIsOpen, setUserPanel] = useState(false)
 
   // datas depends of only when user is connected
-  const navListUserData = fetchDatasUserPanel(isLogged)
+  const navListUserData = fetchDatasUserPanel(isLogged, connectedId)
 
   // hamburger depends of isOpen state
   const hamburgerClassName =
