@@ -27,7 +27,6 @@ const user = (state = initialState, action = {}) => {
       }
     }
     case SET_USER: {
-      console.log("SET_USER")
       return {
         ...state,
         username: action.name,

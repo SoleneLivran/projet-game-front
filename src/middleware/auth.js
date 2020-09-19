@@ -32,7 +32,6 @@ const auth = (store) => (next) => (action) => {
     }
     case CHECK_IS_LOGGED: {
       if (localStorage.getItem("user") !== null) {
-        console.log(jwt_decode(localStorage.getItem("user")))
         store.dispatch(saveUser(jwt_decode(localStorage.getItem("user"))))
       }
       break

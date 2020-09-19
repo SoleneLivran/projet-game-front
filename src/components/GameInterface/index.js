@@ -3,19 +3,11 @@ import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
 import "./styles.css"
 
-const GameInterface = ({
-  hideNav,
-  fetchStory,
-  place,
-  event,
-  transitions,
-  nextScene,
-}) => {
+const GameInterface = ({ fetchStory, place, event, transitions, nextScene }) => {
   // Hide Nav when component is mounted
   useEffect(() => {
     fetchStory()
-    hideNav()
-  }, [fetchStory, hideNav])
+  }, [fetchStory])
 
   const [placeName, setNamePlace] = useState("Lieu")
   const [eventName, setNameEvent] = useState("Évenement")
@@ -123,7 +115,6 @@ GameInterface.propTypes = {
   event: PropTypes.object.isRequired,
   place: PropTypes.object.isRequired,
   transitions: PropTypes.array.isRequired,
-  hideNav: PropTypes.func.isRequired,
   fetchStory: PropTypes.func.isRequired,
   nextScene: PropTypes.func.isRequired,
 }

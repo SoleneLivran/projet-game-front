@@ -1,7 +1,6 @@
-import { HIDE_NAV, SET_SCENE } from "src/actions/gameinterface"
+import { SET_SCENE } from "src/actions/gameinterface"
 
 export const initialState = {
-  showNav: true,
   transitions: [],
   place: {},
   event: {},
@@ -9,12 +8,6 @@ export const initialState = {
 
 const home = (state = initialState, action = {}) => {
   switch (action.type) {
-    case HIDE_NAV: {
-      return {
-        ...state,
-        showNav: false,
-      }
-    }
     case SET_SCENE: {
       return {
         ...state,

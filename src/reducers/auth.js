@@ -6,7 +6,7 @@ export const initialState = {
   password: "",
   passwordCheck: "",
   isLogged: false,
-  connectedId: null,
+  connectedId: 0,
 }
 
 const auth = (state = initialState, action = {}) => {

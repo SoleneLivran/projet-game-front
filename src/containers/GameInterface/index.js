@@ -1,6 +1,6 @@
 import { connect } from "react-redux"
 import GameInterface from "src/components/GameInterface/index"
-import { hideNav, fetchStory, nextScene } from "src/actions/gameinterface"
+import { fetchStory, nextScene } from "src/actions/gameinterface"
 
 const mapStateToProps = (state) => ({
   place: state.gameinterface.place,
@@ -9,9 +9,6 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  hideNav: () => {
-    dispatch(hideNav())
-  },
   fetchStory: () => {
     dispatch(fetchStory())
   },
