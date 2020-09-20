@@ -1,17 +1,12 @@
 import { connect } from "react-redux"
 import Home from "src/components/Home/index"
-import { fetchPopularStories, showLoadingPopular } from "src/actions/home"
+import { fetchPopularStories } from "src/actions/home"
 
 const mapStateToProps = (state) => ({
   popularStories: state.home.listPopular,
-  loadingPopular: state.home.loadingPopular,
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  showLoadingPopular: () => {
-    dispatch(showLoadingPopular())
-  },
-
   fetchPopularStories: () => {
     dispatch(fetchPopularStories())
   },

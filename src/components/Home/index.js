@@ -6,17 +6,15 @@ import UserPanel from "src/containers/UserPanel/index"
 import Modal from "src/components/Modal/index"
 import Loading from "src/components/Loading/index"
 
-const Home = ({
-  popularStories,
-  fetchPopularStories,
-  loadingPopular,
-  showLoadingPopular,
-}) => {
+const Home = ({ popularStories, fetchPopularStories }) => {
   useEffect(() => {
-    showLoadingPopular()
     fetchPopularStories()
-  }, [showLoadingPopular, fetchPopularStories])
+    if (popularStories.length > 0) {
+      setLoadingPopular(false)
+    }
+  }, [fetchPopularStories, popularStories])
   // state for loading
+  const [loadingPopular, setLoadingPopular] = useState(true)
   // Modal state, display on button or hidden when closing it
   const [showModal, setModal] = useState(false)
 
@@ -57,12 +55,14 @@ const Home = ({
               ))}
             </ul>
           ) : (
-            <Loading
-              type="Bars"
-              color="#5BC1FF"
-              heightValue={100}
-              widthValue={100}
-            />
+            <div className="home__loading-popular flex justify-center mt-4">
+              <Loading
+                type="Bars"
+                color="#5BC1FF"
+                heightValue={50}
+                widthValue={50}
+              />
+            </div>
           )}
         </section>
         <section className="home__latest">
@@ -80,7 +80,5 @@ const Home = ({
 Home.propTypes = {
   fetchPopularStories: PropTypes.func.isRequired,
   popularStories: PropTypes.array.isRequired,
-  loadingPopular: PropTypes.bool.isRequired,
-  showLoadingPopular: PropTypes.func.isRequired,
 }
 export default Home
