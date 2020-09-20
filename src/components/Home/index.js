@@ -6,9 +6,10 @@ import UserPanel from "src/containers/UserPanel/index"
 import Modal from "src/components/Modal/index"
 import Loading from "src/components/Loading/index"
 
-const Home = ({ popularStories, fetchPopularStories }) => {
+const Home = ({ popularStories, fetchPopularStories, fetchLatestStories }) => {
   useEffect(() => {
     fetchPopularStories()
+    fetchLatestStories()
     if (popularStories.length > 0) {
       setLoadingPopular(false)
     }

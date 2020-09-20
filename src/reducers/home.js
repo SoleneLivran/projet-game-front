@@ -1,4 +1,4 @@
-import { SAVE_POPULAR_STORIES } from "src/actions/home"
+import { SAVE_POPULAR_STORIES, SAVE_LATEST_STORIES } from "src/actions/home"
 
 export const initialState = {
   listPopular: [],
@@ -11,7 +11,12 @@ const home = (state = initialState, action = {}) => {
       return {
         ...state,
         listPopular: action.popularStories,
-        loadingPopular: false,
+      }
+    }
+    case SAVE_LATEST_STORIES: {
+      return {
+        ...state,
+        listLastest: action.latestStories,
       }
     }
     default:
