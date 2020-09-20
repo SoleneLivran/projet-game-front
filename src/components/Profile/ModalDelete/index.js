@@ -7,9 +7,10 @@ const ModalDelete = ({ showModalDelete, onClose, handleDeleteUser }) => {
   // State for modal, button agree default is disabled
   const [buttonActive, setButtonActive] = useState(true)
 
+  // State use for redirect user after delete hiw account
   const [isDeleted, setIsDeleted] = useState(false)
 
-  // CHange the color of button, depends of the checkbox's state
+  // Change the color of button, depends of the checkbox's state
   const buttonActiveClassName = buttonActive
     ? "bg-gray-600 cursor-not-allowed"
     : "bg-green-500 cursor-pointer"
@@ -49,6 +50,7 @@ const ModalDelete = ({ showModalDelete, onClose, handleDeleteUser }) => {
     setButtonActive(!buttonActive)
   }
 
+  // API delete request for the user account
   const deleteUser = () => {
     axios
       .delete("http://ec2-18-234-186-84.compute-1.amazonaws.com/api/account", {
