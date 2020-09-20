@@ -35,7 +35,7 @@ const Card = ({
   // </li>
   <div className="rounded-lg ">
     <li
-      className="card transform duration-150 ease-in-out cursor-pointer my-5 hover:scale-105"
+      className="card transform duration-150 ease-in-out cursor-pointer mt-5 hover:scale-105"
       onClick={() => handleModal(id)}
     >
       <img

@@ -2,7 +2,7 @@ import { SAVE_POPULAR_STORIES, SAVE_LATEST_STORIES } from "src/actions/home"
 
 export const initialState = {
   listPopular: [],
-  listLastest: [],
+  listLatest: [],
 }
 
 const home = (state = initialState, action = {}) => {
@@ -16,7 +16,7 @@ const home = (state = initialState, action = {}) => {
     case SAVE_LATEST_STORIES: {
       return {
         ...state,
-        listLastest: action.latestStories,
+        listLatest: action.latestStories,
       }
     }
     default:

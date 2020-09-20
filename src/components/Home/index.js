@@ -6,16 +6,35 @@ import UserPanel from "src/containers/UserPanel/index"
 import Modal from "src/components/Modal/index"
 import Loading from "src/components/Loading/index"
 
-const Home = ({ popularStories, fetchPopularStories, fetchLatestStories }) => {
+const Home = ({
+  popularStories,
+  fetchPopularStories,
+  latestStories,
+  fetchLatestStories,
+}) => {
   useEffect(() => {
     fetchPopularStories()
     fetchLatestStories()
+  }, [fetchPopularStories, fetchLatestStories])
+
+  // Change loading when array popularStories is change
+  useEffect(() => {
     if (popularStories.length > 0) {
       setLoadingPopular(false)
     }
-  }, [fetchPopularStories, popularStories])
-  // state for loading
+  }, [popularStories])
+
+  // Change loading when array latestStories is change
+  useEffect(() => {
+    if (latestStories.length > 0) {
+      setLoadingLatest(false)
+    }
+  }, [latestStories])
+
+  // state for popular loading
   const [loadingPopular, setLoadingPopular] = useState(true)
+  // state for latest loading
+  const [loadingLatest, setLoadingLatest] = useState(true)
   // Modal state, display on button or hidden when closing it
   const [showModal, setModal] = useState(false)
 
@@ -43,7 +62,7 @@ const Home = ({ popularStories, fetchPopularStories, fetchLatestStories }) => {
       <section className="home__user home__user--desktop hidden mt-8 sm:block md:block md:order-1 md:w-1/3">
         <UserPanel />
       </section>
-      <section className="home__stories my-16 sm:my-8 md:w-2/3 md:my-0 md:mr-12">
+      <section className="home__stories mt-16 sm:my-8 md:w-2/3 md:my-0 md:mr-12">
         <section className="home__popular mb-12 mt-4">
           <h1 className="home__title uppercase text-white text-4xl font-light ">
             Populaires
@@ -71,7 +90,22 @@ const Home = ({ popularStories, fetchPopularStories, fetchLatestStories }) => {
             Nouveautés
           </h1>
 
-          <ul className="home__list-latest"></ul>
+          {!loadingLatest ? (
+            <ul className="home__list-latest pb-4">
+              {latestStories.map((story) => (
+                <Card key={story.id} {...story} handleModal={handleModal} />
+              ))}
+            </ul>
+          ) : (
+            <div className="home__loading-latest flex justify-center mt-4">
+              <Loading
+                type="Bars"
+                color="#5BC1FF"
+                heightValue={50}
+                widthValue={50}
+              />
+            </div>
+          )}
         </section>
       </section>
     </div>
@@ -81,5 +115,7 @@ const Home = ({ popularStories, fetchPopularStories, fetchLatestStories }) => {
 Home.propTypes = {
   fetchPopularStories: PropTypes.func.isRequired,
   popularStories: PropTypes.array.isRequired,
+  latestStories: PropTypes.array.isRequired,
+  fetchLatestStories: PropTypes.func.isRequired,
 }
 export default Home
