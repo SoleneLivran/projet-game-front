@@ -1,9 +1,13 @@
 import React, { useEffect, useRef, useState } from "react"
+import axios from "axios"
 import "./styles.css"
+import { Redirect } from "react-router-dom"
 
-const ModalDelete = ({ showModalDelete, onClose }) => {
+const ModalDelete = ({ showModalDelete, onClose, handleDeleteUser }) => {
   // State for modal, button agree default is disabled
   const [buttonActive, setButtonActive] = useState(true)
+
+  const [isDeleted, setIsDeleted] = useState(false)
 
   // CHange the color of button, depends of the checkbox's state
   const buttonActiveClassName = buttonActive
@@ -40,9 +44,27 @@ const ModalDelete = ({ showModalDelete, onClose }) => {
     }
   }
 
-  // onChange on modal
+  // onChange on modal, button is active/disabled
   const handleInputCheckbox = () => {
     setButtonActive(!buttonActive)
+  }
+
+  const deleteUser = () => {
+    axios
+      .delete("http://ec2-18-234-186-84.compute-1.amazonaws.com/api/account", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("user")}`,
+        },
+      })
+      .then((response) => {
+        console.log(response)
+        setIsDeleted(true)
+        handleDeleteUser()
+        localStorage.removeItem("user")
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
   return (
@@ -86,6 +108,7 @@ const ModalDelete = ({ showModalDelete, onClose }) => {
             <button
               className={`modal-delete__agree w-8/12 sm:w-64 p-2 rounded-lg my-3 ${buttonActiveClassName}`}
               disabled={buttonActive}
+              onClick={() => deleteUser()}
             >
               Supprimer mon compte
             </button>
@@ -98,6 +121,7 @@ const ModalDelete = ({ showModalDelete, onClose }) => {
           </div>
         </div>
       </div>
+      {isDeleted && <Redirect to="/" />}
     </div>
   )
 }

@@ -1,4 +1,10 @@
-import { CHANGE_INPUT, SAVE_USER, SAVE_NEW_USER, LOGOUT } from "src/actions/auth"
+import {
+  CHANGE_INPUT,
+  SAVE_USER,
+  SAVE_NEW_USER,
+  LOGOUT,
+  USER_DELETE,
+} from "src/actions/auth"
 
 export const initialState = {
   username: "",
@@ -43,6 +49,13 @@ const auth = (state = initialState, action = {}) => {
         ...state,
         username: "",
         isLogged: false,
+      }
+    }
+    case USER_DELETE: {
+      return {
+        ...state,
+        isLogged: false,
+        connectedId: 0,
       }
     }
     default:

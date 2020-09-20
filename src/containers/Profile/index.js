@@ -1,6 +1,7 @@
 import { connect } from "react-redux"
 import Profile from "src/components/Profile/index"
 import { fetchUser, userEdit } from "src/actions/user"
+import { deleteUser } from "src/actions/auth"
 
 const mapStateToProps = (state) => ({
   connectedId: state.auth.connectedId,
@@ -15,6 +16,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   handleUserEdit: () => {
     dispatch(userEdit())
+  },
+  handleDeleteUser: () => {
+    dispatch(deleteUser())
   },
 })
 

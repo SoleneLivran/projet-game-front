@@ -5,6 +5,7 @@ export const LOGOUT = "LOGOUT"
 export const SAVE_USER = "SAVE_USER"
 export const SAVE_NEW_USER = "SAVE_NEW_USER"
 export const CHECK_IS_LOGGED = "CHECK_IS_LOGGED"
+export const USER_DELETE = "USER_DELETE"
 
 export const changeValue = (value, key) => ({
   type: CHANGE_INPUT,
@@ -41,4 +42,8 @@ export const saveNewUser = () => ({
 
 export const checkIsLogged = () => ({
   type: CHECK_IS_LOGGED,
+})
+
+export const deleteUser = () => ({
+  type: USER_DELETE,
 })
