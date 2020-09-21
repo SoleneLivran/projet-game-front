@@ -23,7 +23,24 @@ const user = (store) => (next) => (action) => {
       break
     }
     case USER_EDIT: {
-      store.dispatch(clearEdit())
+      axios
+        .put(
+          `http://ec2-18-234-186-84.compute-1.amazonaws.com/api/app_users/${state.auth.connectedId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("user")}`,
+            },
+            name: state.user.username.toLowerCase().trim(),
+            mail: state.user.email.toLowerCase().trim(),
+            password: state.user.password.trim(),
+          }
+        )
+        .then((response) => {
+          store.dispatch(clearEdit())
+        })
+        .catch((error) => {
+          console.log(error)
+        })
       break
     }
     default:
