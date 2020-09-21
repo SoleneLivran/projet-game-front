@@ -9,16 +9,17 @@ const Filter = ({ title, datas, setSelectedRadioValue, selectedRadioValue }) => 
       <h3 className="filter__title my-1">{title}</h3>
       <ul className="filter__list mx-2">
         {datas.map((item) => (
-          <li className="filter__radio my-1">
-            <input
-              type="radio"
-              name={item.name}
-              id={item.id}
-              value={item.value}
-              onClick={() => setSelectedRadioValue(item.value)}
-              checked={selectedRadioValue === item.value}
-            />
-            <label htmlFor="category1" className="mx-2">
+          <li className="filter__radio" key={item.id}>
+            <label htmlFor={item.name} className="my-2 cursor-pointer">
+              <input
+                type="radio"
+                name={item.name}
+                id={item.name}
+                value={item.value}
+                onChange={() => setSelectedRadioValue(item.name)}
+                checked={selectedRadioValue === item.name}
+                className="cursor-pointer mx-2"
+              />
               {item.name}
             </label>
           </li>

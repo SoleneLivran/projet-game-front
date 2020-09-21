@@ -20,7 +20,7 @@ const GameList = () => {
 
   // state to display filter in mobile screen
   const [displayFilter, setDisplayFilter] = useState(false)
-
+  // state displayFilter return different class for the aside bloc
   const asideFilterClassName = displayFilter
     ? "opacity-100 gamelist__filter--active"
     : "opacity-0"
@@ -57,6 +57,7 @@ const GameList = () => {
         Sélectionner un scénario
       </h1>
       <button
+        name="button-display-filter"
         onClick={() => setDisplayFilter(!displayFilter)}
         className="gamelist__button bg-gray-200 py-2 w-full rounded-lg text-xl my-1 shadow-lg"
       >
