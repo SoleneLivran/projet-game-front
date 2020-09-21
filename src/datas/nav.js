@@ -12,7 +12,7 @@ export default [
   {
     order: 3,
     name: "jouer",
-    route: "/play",
+    route: "/gamelist",
   },
   {
     order: 4,
