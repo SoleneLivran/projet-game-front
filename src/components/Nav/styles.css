@@ -10,7 +10,7 @@
 
 @media (max-width: 640px) {
   .nav__list {
-    transition: all 0.5s ease-out;
+    transition: all 0.5s ease-in-out;
     max-height: 0;
   }
 
@@ -19,7 +19,7 @@
   }
 
   .nav__list-user {
-    transition: all 0.5s ease-out;
+    transition: all 0.5s ease-in-out;
     max-height: 0;
   }
 

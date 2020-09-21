@@ -15,7 +15,15 @@ const GameList = () => {
   // state for filter loading
   const [loadingFilter, setLoadingFilter] = useState(true)
 
+  // state to define the radio checked and set the value
   const [selectedRadioValue, setSelectedRadioValue] = useState("")
+
+  // state to display filter in mobile screen
+  const [displayFilter, setDisplayFilter] = useState(false)
+
+  const asideFilterClassName = displayFilter
+    ? "opacity-100 gamelist__filter--active"
+    : "opacity-0"
 
   // API Request for categories list
   const fetchCategories = () => {
@@ -36,6 +44,7 @@ const GameList = () => {
     fetchCategories()
   }, [])
 
+  // Loading is unset when categories is set after success request API
   useEffect(() => {
     if (categoriesList.length > 0) {
       setLoadingFilter(false)
@@ -43,15 +52,20 @@ const GameList = () => {
   }, [categoriesList])
 
   return (
-    <div className="gamelist mt-4 mx-4">
+    <div className="gamelist mt-4 mx-4 h-auto">
       <h1 className="gamelist__title uppercase text-white text-2xl font-light text-center my-2">
         Sélectionner un scénario
       </h1>
-      <button className="gamelist__button bg-gray-200 py-2 w-full rounded-lg text-xl my-1 shadow-lg">
+      <button
+        onClick={() => setDisplayFilter(!displayFilter)}
+        className="gamelist__button bg-gray-200 py-2 w-full rounded-lg text-xl my-1 shadow-lg"
+      >
         Voir les filtres
       </button>
-      <aside className="gamelist__filter bg-gray-200 px-6 py-2 rounded-lg">
-        <h2 className="gamelist__filter-title text-xl font-bold my-2">
+      <aside
+        className={`gamelist__filter overflow-hidden ${asideFilterClassName} bg-gray-200 px-6 rounded-lg`}
+      >
+        <h2 className="gamelist__filter-title text-xl font-bold my-2 px-6">
           Affiner les histoire
         </h2>
         <div className="filter__blog flex justify-around mb-2">
