@@ -79,88 +79,99 @@ const GameList = () => {
   }, [storiesList])
 
   return (
-    <div className="gamelist mt-4 mx-8 h-auto">
-      <h1 className="gamelist__title uppercase text-white text-2xl font-light text-center my-2">
+    <div className="gamelist mt-4 mx-8 h-auto md:mt-32 lg:w-8/12 lg:flex lg:flex-col lg:mx-auto">
+      <h1 className="gamelist__title uppercase text-white text-2xl font-light text-center my-2 md:text-4xl md:text-left lg:self-start">
         Sélectionner un scénario
       </h1>
       <button
         name="button-display-filter"
         onClick={() => setDisplayFilter(!displayFilter)}
-        className="gamelist__button bg-gray-200 py-2 w-full rounded-lg text-xl my-1 shadow-lg"
+        className="gamelist__button bg-gray-200 py-2 w-full rounded-lg text-xl my-1 shadow-lg md:hidden"
       >
         Voir les filtres
       </button>
-      <aside
-        className={`gamelist__filter overflow-hidden ${asideFilterClassName} bg-gray-200 px-6 rounded-lg`}
-      >
-        <h2 className="gamelist__filter-title text-xl font-bold my-2 px-6">
-          Affiner les histoire
-        </h2>
-        <div className="filter__blog flex justify-around mb-2">
-          {loadingFilter && (
-            <Loading type="Oval" color="#5BC1FF" heightValue={50} widthValue={50} />
-          )}
-          {!loadingFilter && (
-            <Filter
-              title="Categories"
-              datas={categoriesList}
-              setSelectedRadioValue={setSelectedRadioValue}
-              selectedRadioValue={selectedRadioValue}
-            />
-          )}
-          {!loadingFilter && (
-            <Filter
-              title="Difficultés"
-              datas={difficulties}
-              setSelectedRadioValue={setSelectedRadioValue}
-              selectedRadioValue={selectedRadioValue}
-            />
-          )}
-        </div>
-      </aside>
-      <section className="gameList__display">
-        <div className="dropdown bg-gray-200 rounded-lg my-2 p-4 flex flex-col">
-          <div className="dropdown__list flex items-center my-1">
-            <label htmlFor="dropdown" className="dropdown__label">
-              Afficher par:
-            </label>
-            <select
-              name="filter-by"
-              id="filter-by"
-              className="dropdown__select bg-transparent border rounded-sm border-black w-7/12 mx-auto py-1"
-            >
-              <option value="name">Nom (défaut)</option>
-              <option value="popularity">Date de publication</option>
-              <option value="difficulty">Difficulté</option>
-              <option value="category">Categorie</option>
-              <option value="popularity">Populaire</option>
-            </select>
+      <div className="gamelist__container md:flex md:my-4 lg:justify-between">
+        <aside
+          className={`gamelist__filter overflow-hidden ${asideFilterClassName} bg-gray-200 px-6 rounded-lg md:opacity-100 md:mr-6 md:w-48 md:px-2`}
+        >
+          <h2 className="gamelist__filter-title text-xl font-bold my-2 px-6 md:text-center mx:px-0">
+            Affiner les histoire
+          </h2>
+          <div className="filter__blog flex justify-around mb-4 md:flex-col md:items-center">
+            {loadingFilter && (
+              <Loading
+                type="Oval"
+                color="#5BC1FF"
+                heightValue={50}
+                widthValue={50}
+              />
+            )}
+            {!loadingFilter && (
+              <Filter
+                title="Categories"
+                datas={categoriesList}
+                setSelectedRadioValue={setSelectedRadioValue}
+                selectedRadioValue={selectedRadioValue}
+              />
+            )}
+            {!loadingFilter && (
+              <Filter
+                title="Difficultés"
+                datas={difficulties}
+                setSelectedRadioValue={setSelectedRadioValue}
+                selectedRadioValue={selectedRadioValue}
+              />
+            )}
           </div>
-          <div className="dropdown__inverse flex items-center my-1">
-            <label className="dropdown__label pr-2" htmlFor="checkbox-reverse">
-              Inverser l'ordre
-            </label>
-            <input type="checkbox" name="reverse" id="reverse" />
+        </aside>
+        <section className="gameList__display my-4 md:my-0 md:flex md:justify-center md:w-10/12">
+          <div className="gameList__display-container md:flex md:flex-col md:items-center">
+            <div className="dropdown bg-gray-200 rounded-lg p-4 flex flex-col md:self-start">
+              <div className="dropdown__list flex items-center my-1">
+                <label htmlFor="dropdown" className="dropdown__label">
+                  Afficher par:
+                </label>
+                <select
+                  name="filter-by"
+                  id="filter-by"
+                  className="dropdown__select bg-transparent border rounded-sm border-black w-7/12 mx-auto py-1"
+                >
+                  <option value="name">Nom (défaut)</option>
+                  <option value="popularity">Date de publication</option>
+                  <option value="difficulty">Difficulté</option>
+                  <option value="category">Categorie</option>
+                  <option value="popularity">Populaire</option>
+                </select>
+              </div>
+              <div className="dropdown__inverse flex items-center my-1">
+                <label className="dropdown__label pr-2" htmlFor="checkbox-reverse">
+                  Inverser l'ordre
+                </label>
+                <input type="checkbox" name="reverse" id="reverse" />
+              </div>
+            </div>
+            {!loadingStories ? (
+              <ul className="gamelist__list mt-8">
+                {storiesList.map((story) => (
+                  <Card key={story.id} {...story} />
+                ))}
+                {storiesList.map((story) => (
+                  <Card key={story.id} {...story} />
+                ))}
+              </ul>
+            ) : (
+              <div className="home__loading-latest flex justify-center mt-4">
+                <Loading
+                  type="Bars"
+                  color="#5BC1FF"
+                  heightValue={50}
+                  widthValue={50}
+                />
+              </div>
+            )}
           </div>
-        </div>
-        {!loadingStories ? (
-          <ul className="gamelist__list mt-8">
-            {storiesList.map((story) => (
-              <Card key={story.id} {...story} />
-            ))}
-            {storiesList.map((story) => (
-              <Card key={story.id} {...story} />
-            ))}
-            {storiesList.map((story) => (
-              <Card key={story.id} {...story} />
-            ))}
-          </ul>
-        ) : (
-          <div className="home__loading-latest flex justify-center mt-4">
-            <Loading type="Bars" color="#5BC1FF" heightValue={50} widthValue={50} />
-          </div>
-        )}
-      </section>
+        </section>
+      </div>
     </div>
   )
 }
