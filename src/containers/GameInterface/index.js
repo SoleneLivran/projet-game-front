@@ -9,8 +9,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchStory: () => {
-    dispatch(fetchStory())
+  fetchStory: (storyId) => {
+    dispatch(fetchStory(storyId))
   },
 
   nextScene: (nextSceneId) => {

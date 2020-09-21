@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import "./styles.css"
 
 const Card = ({
+  id,
   author,
   category,
   difficulty,
@@ -35,7 +36,7 @@ const Card = ({
   <div className="rounded-lg ">
     <li
       className="card transform duration-150 ease-in-out cursor-pointer my-5 hover:scale-105"
-      onClick={() => handleModal()}
+      onClick={() => handleModal(id)}
     >
       <img
         className="card__img h-24 md:h-32 w-full object-cover rounded-t-lg shadow-lg"
@@ -64,6 +65,7 @@ const Card = ({
 )
 
 Card.propTypes = {
+  id: PropTypes.number.isRequired,
   author: PropTypes.object.isRequired,
   category: PropTypes.object.isRequired,
   difficulty: PropTypes.number.isRequired,

@@ -6,7 +6,9 @@ const auth = (store) => (next) => (action) => {
   switch (action.type) {
     case FETCH_STORY: {
       axios
-        .get("http://ec2-18-234-186-84.compute-1.amazonaws.com/api/public/stories/1")
+        .get(
+          `http://ec2-18-234-186-84.compute-1.amazonaws.com/api/public/stories/${action.storyId}`
+        )
         .then((response) => {
           console.log(response.data.firstScene)
           store.dispatch(setScene(response.data.firstScene))

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import "./styles.css"
 
 const GameInterface = ({ fetchStory, place, event, transitions, nextScene }) => {
+  const { slug } = useParams()
   // Hide Nav when component is mounted
   useEffect(() => {
-    fetchStory()
+    fetchStory(slug)
   }, [fetchStory])
 
   const [placeName, setNamePlace] = useState("Lieu")
@@ -90,7 +91,7 @@ const GameInterface = ({ fetchStory, place, event, transitions, nextScene }) => 
             {place.description} et {event.description} <br />
             Que faites-vous ?
           </p>
-          <div className="game-interface__actions py-6 overflow-x-auto flex sm:justify-center">
+          <div className="game-interface__actions py-6 overflow-x-auto flex">
             {transitions.map((action, key) => {
               return (
                 <div
