@@ -1,13 +1,11 @@
-.nav {
-
-}
+.nav {}
 
 .nav__user {
   background-image: url("/assets/img/default_visitor.jpg");
 }
 
 .nav__selected {
-  color: red   
+  color: gray;
 }
 
 @media (max-width: 640px) {
@@ -19,6 +17,7 @@
   .nav__list--active {
     max-height: 270px;
   }
+
   .nav__list-user {
     transition: all 0.5s ease-out;
     max-height: 0;
@@ -38,10 +37,16 @@
   top: 10px;
 }
 
+.nav__logo:hover {
+  transform: scale(1.05, 1.05) translateX(-47.5%);
+  transition: all 0.2s ease-in-out;
+}
+
 @keyframes upanddown {
   from {
     margin-top: 7px;
   }
+
   to {
     margin-top: 0;
   }

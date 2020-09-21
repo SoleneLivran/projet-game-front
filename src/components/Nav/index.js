@@ -6,12 +6,12 @@ import { NavLink } from "react-router-dom"
 import navDatas from "src/datas/nav"
 import { fetchDatasUserPanel } from "src/selectors/nav"
 
-const Nav = ({ isLogged }) => {
+const Nav = ({ isLogged, connectedId }) => {
   const [navIsOpen, setPanel] = useState(false)
   const [userNavIsOpen, setUserPanel] = useState(false)
 
   // datas depends of only when user is connected
-  const navListUserData = fetchDatasUserPanel(isLogged)
+  const navListUserData = fetchDatasUserPanel(isLogged, connectedId)
 
   // hamburger depends of isOpen state
   const hamburgerClassName =
@@ -50,7 +50,7 @@ const Nav = ({ isLogged }) => {
   }
 
   return (
-    <div className="nav bg-gray-900 bg-opacity-75 sm:bg-opacity-50 h-auto w-screen relative py-2">
+    <div className="nav bg-gray-900 shadow-lg  h-auto relative py-2">
       <div className="flex pl-5 pr-12 justify-between items-center">
         <button
           onClick={() => handlePanel()}
@@ -67,7 +67,7 @@ const Nav = ({ isLogged }) => {
         />
       </div>
       <ul
-        className={`nav__list overflow-hidden ${ulClassName} sm:static sm:opacity-100 sm:h-auto uppercase text-center sm:py-5 text-gray-100 text-xl flex flex-col sm:flex-row justify-around sm:items-center font-bold`}
+        className={`nav__list overflow-hidden ${ulClassName} sm:static sm:opacity-100 sm:h-auto uppercase text-center sm:py-5 text-gray-100 text-xl flex flex-col sm:flex-row justify-around sm:items-center font-bold md:justify-around`}
       >
         {/* Display all button in nav, except home */}
         {navDatas.map((item, key) => (
@@ -78,7 +78,7 @@ const Nav = ({ isLogged }) => {
             exact
             className={`order-${item.order} ${
               item.route === "/" ? "md:hidden" : ""
-            } p-3 sm:p-5`}
+            } p-3 duration-150 ease-in-out sm:p-5 hover:text-gray-700 md:w-48 md:mx-2`}
           >
             {item.name}
           </NavLink>
@@ -88,7 +88,7 @@ const Nav = ({ isLogged }) => {
         <NavLink to="/" className={`md:order-${Math.ceil(navDatas.length / 2)}`}>
           <img
             src="/assets/img/logo.png"
-            className="nav__logo absolute transform duration-200 ease-in-out h-64 hover:scale-110 hidden md:block"
+            className="nav__logo absolute h-64 hidden md:block mx-auto"
             alt=""
           />
         </NavLink>

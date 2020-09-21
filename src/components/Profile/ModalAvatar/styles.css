@@ -1,0 +1,10 @@
+.modal-avatar {
+  top: 0;
+  left: 0;
+  backdrop-filter: blur(5px);
+}
+
+.modal-avatar__close {
+  right: -2rem;
+  top: -4rem;
+}

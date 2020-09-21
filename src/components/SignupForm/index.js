@@ -1,19 +1,13 @@
-import React from "react"
+import React, { useState } from "react"
 import "./styles.css"
 import PropTypes from "prop-types"
 import Field from "src/containers/Field/index"
 import { checkInput } from "src/selectors/signupform"
 import { Redirect } from "react-router-dom"
 
-const SignupForm = ({
-  username,
-  email,
-  password,
-  passwordCheck,
-  handleSignup,
-  isSignedUp,
-}) => {
+const SignupForm = ({ username, email, password, passwordCheck, handleSignup }) => {
   const errors = checkInput(username, email, password, passwordCheck)
+  const [isSignedUp, setSignedUp] = useState(false)
   return (
     <div className="signup-form mt-8">
       <form
@@ -22,6 +16,7 @@ const SignupForm = ({
           console.log(errors)
           if (Object.keys(errors).length === 0) {
             handleSignup()
+            setSignedUp(true)
           }
         }}
         className="signup-form__panel w-64 flex flex-col justify-center mx-auto p-4 border-2 border-orange-400 bg-orange-900 font-bold"
@@ -80,7 +75,6 @@ SignupForm.propTypes = {
   email: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
   passwordCheck: PropTypes.string.isRequired,
-  isSignedUp: PropTypes.bool.isRequired,
   handleSignup: PropTypes.func.isRequired,
 }
 export default SignupForm

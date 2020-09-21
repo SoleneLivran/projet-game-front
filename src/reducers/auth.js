@@ -1,12 +1,18 @@
-import { CHANGE_INPUT, SAVE_USER, SAVE_NEW_USER } from "src/actions/auth"
+import {
+  CHANGE_INPUT,
+  SAVE_USER,
+  SAVE_NEW_USER,
+  LOGOUT,
+  USER_DELETE,
+} from "src/actions/auth"
 
 export const initialState = {
   username: "",
   email: "",
   password: "",
   passwordCheck: "",
-  isSignedUp: false,
   isLogged: false,
+  connectedId: 0,
 }
 
 const auth = (state = initialState, action = {}) => {
@@ -18,10 +24,12 @@ const auth = (state = initialState, action = {}) => {
       }
     }
     case SAVE_USER: {
-      // return the state and clean previous input for secure
+      // return the state after login and clean previous input for secure
       return {
         ...state,
+        username: action.username,
         password: "",
+        connectedId: action.id,
         isLogged: true,
       }
     }
@@ -34,7 +42,20 @@ const auth = (state = initialState, action = {}) => {
         email: "",
         password: "",
         passwordCheck: "",
-        isSignedUp: true,
+      }
+    }
+    case LOGOUT: {
+      return {
+        ...state,
+        username: "",
+        isLogged: false,
+      }
+    }
+    case USER_DELETE: {
+      return {
+        ...state,
+        isLogged: false,
+        connectedId: 0,
       }
     }
     default:

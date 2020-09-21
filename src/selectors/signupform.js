@@ -1,7 +1,11 @@
-export const checkInput = (pseudo, email, password, passwordCheck) => {
+export const checkInput = (username, email, password, passwordCheck) => {
   const errors = {}
-  if (pseudo === "") {
-    errors.pseudoErrors = ["Le pseudo ne peut-être vide"]
+  if (username === "") {
+    errors.usernameErrors = ["Le nom d'utilisateur ne peut-être vide"]
+  } else if (username.length < 2) {
+    errors.usernameErrors = [
+      "Le nom d'utilisateur doit contenir 2 caractères minimum",
+    ]
   }
   if (email === "") {
     errors.emailErrors = ["L'email ne peut être vide"]
@@ -13,6 +17,8 @@ export const checkInput = (pseudo, email, password, passwordCheck) => {
   }
   if (password === "") {
     errors.passwordErrors = ["Le mot de passe ne peut être vide"]
+  } else if (password.length < 6) {
+    errors.passwordErrors = ["Le mot de passe doit contenir 6 caractères minimum"]
   } else {
     if (password !== passwordCheck && passwordCheck !== "") {
       errors.passwordErrors = ["Les mots de passes ne sont pas identiques"]
