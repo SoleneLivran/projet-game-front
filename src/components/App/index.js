@@ -14,11 +14,8 @@ import SignupForm from "src/containers/SignupForm/index"
 import Logout from "src/containers/Logout/index"
 import Profile from "src/containers/Profile/index"
 import GameInterface from "src/containers/GameInterface/index"
-<<<<<<< HEAD
 import GameList from "src/components/GameList/index"
-=======
 import Create from "src/components/Create/index"
->>>>>>> development
 
 const App = ({ checkIsLogged, isLogged }) => {
   const location = useLocation().pathname
