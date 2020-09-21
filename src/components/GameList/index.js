@@ -1,5 +1,6 @@
 import React from "react"
 import Card from "src/components/Card/index"
+import Filter from "src/components/Filter/index"
 import "./styles.css"
 
 const GameList = () => (
@@ -8,76 +9,42 @@ const GameList = () => (
       Sélectionner un scénario
     </h1>
     <button className="gamelist__button bg-gray-200 py-2 w-full rounded-lg text-xl my-1 shadow-lg">
-      Filtrer
+      Voir les filtres
     </button>
     <aside className="gamelist__filter bg-gray-200 px-6 py-2 rounded-lg">
-      <h2 className="filter__title text-xl font-bold">Affiner les histoire</h2>
-      <div className="filter__categories">
-        <h3 className="filter__category-title">Genre</h3>
-        <div className="filter__radio">
-          <input type="radio" name="category1" id="category1" value="category1" />
-          <label htmlFor="category1" className="mx-2">
-            Category1
-          </label>
-        </div>
-        <div className="filter__radio">
-          <input type="radio" name="category2" id="category2" value="category2" />
-          <label htmlFor="category2">Category2</label>
-        </div>
-        <div className="filter__radio">
-          <input type="radio" name="category3" id="category3" value="category3" />
-          <label htmlFor="category3">Category3</label>
-        </div>
-        <div className="filter__radio">
-          <input type="radio" name="category4" id="category4" value="category4" />
-          <label htmlFor="category4">Category4</label>
-        </div>
-        <div className="filter__radio">
-          <input type="radio" name="category5" id="category5" value="category5" />
-          <label htmlFor="category5">Category5</label>
-        </div>
-      </div>
-      <div className="filter__difficulties">
-        <h3 className="filter__difficulties-title">Difficultés</h3>
-        <div className="filter__radio">
-          <div className="filter__radio">
-            <input type="radio" name="category1" id="category1" value="category1" />
-            <label htmlFor="category1" className="mx-4">
-              Category1
-            </label>
-          </div>
-          <div className="filter__radio">
-            <input type="radio" name="category2" id="category2" value="category2" />
-            <label htmlFor="category2">Category2</label>
-          </div>
-          <div className="filter__radio">
-            <input type="radio" name="category3" id="category3" value="category3" />
-            <label htmlFor="category3">Category3</label>
-          </div>
-          <div className="filter__radio">
-            <input type="radio" name="category4" id="category4" value="category4" />
-            <label htmlFor="category4">Category4</label>
-          </div>
-          <div className="filter__radio">
-            <input type="radio" name="category5" id="category5" value="category5" />
-            <label htmlFor="category5">Category5</label>
-          </div>
-        </div>
+      <h2 className="gamelist__filter-title text-xl font-bold my-2">
+        Affiner les histoire
+      </h2>
+      <div className="filter__blog">
+        <Filter title="Categories" />
       </div>
     </aside>
     <section className="gameList__display">
-      <div className="gamelist__dropdown">
-        <label htmlFor="dropdown" className="dropdown__title">
-          Afficher par:
-        </label>
-        <select name="filter-by" id="filter-by" className="dropdown__select">
-          <option value="name">Nom</option>
-          <option value="date">Date</option>
-          <option value="difficulty">Difficulté</option>
-          <option value="category">Categorie</option>
-        </select>
+      <div className="dropdown bg-gray-200 rounded-lg my-2 p-4 flex flex-col">
+        <div className="dropdown__list flex items-center my-1">
+          <label htmlFor="dropdown" className="dropdown__label">
+            Afficher par:
+          </label>
+          <select
+            name="filter-by"
+            id="filter-by"
+            className="dropdown__select bg-transparent border rounded-sm border-black w-7/12 mx-auto py-1"
+          >
+            <option value="name">Nom (défaut)</option>
+            <option value="popularity">Date de publication</option>
+            <option value="difficulty">Difficulté</option>
+            <option value="category">Categorie</option>
+            <option value="popularity">Populaire</option>
+          </select>
+        </div>
+        <div className="dropdown__inverse flex items-center my-1">
+          <label className="dropdown__label pr-2" htmlFor="checkbox-reverse">
+            Inverser l'ordre
+          </label>
+          <input type="checkbox" name="reverse" id="reverse" />
+        </div>
       </div>
-      <ul className="gamelist__list">
+      <ul className="gamelist__list mt-4 py-4">
         <li className="card transform duration-150 ease-in-out cursor-pointer mt-5 hover:scale-105">
           <img
             className="card__img h-24 md:h-32 w-full object-cover rounded-t-lg shadow-lg"
