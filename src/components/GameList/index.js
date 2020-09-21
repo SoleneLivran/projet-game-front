@@ -4,10 +4,11 @@ import axios from "axios"
 import Card from "src/components/Card/index"
 import Filter from "src/components/Filter/index"
 import Loading from "src/components/Loading/index"
+import Modal from "src/components/Modal/index"
 
 import difficulties from "src/datas/difficulties"
+import { fetchCategories, fetchStories } from "src/selectors/gamelist"
 import "./styles.css"
-import { fetchLatestStories } from "src/actions/home"
 
 const GameList = () => {
   // Set the category after request, empty array default
@@ -32,37 +33,22 @@ const GameList = () => {
     ? "opacity-100 gamelist__filter--active"
     : "opacity-0"
 
-  // API Request for categories list
-  const fetchCategories = () => {
-    axios
-      .get(
-        "http://ec2-18-234-186-84.compute-1.amazonaws.com/api/public/story_categories"
-      )
-      .then((response) => {
-        console.log(response)
-        setCategoriesList(response.data)
-      })
-      .catch((error) => {
-        console.log("error")
-      })
-  }
+  // Modal state, display on button or hidden when closing it
+  const [showModal, setModal] = useState(false)
 
-  const fetchStories = () => {
-    axios
-      .get("http://ec2-18-234-186-84.compute-1.amazonaws.com/api/public/stories")
-      .then((response) => {
-        console.log(response)
-        setStoriesList(response.data)
-      })
-      .catch((error) => {
-        console.log("error")
-      })
+  // Const for story id
+  const [storyId, setStoryId] = useState(null)
+
+  // Change modal current state and set the story id
+  const handleModal = (id) => {
+    setStoryId(id)
+    setModal(true)
   }
 
   // Initiate the request for categories list when Component is mounted
   useEffect(() => {
-    fetchCategories()
-    fetchStories()
+    fetchCategories(setCategoriesList)
+    fetchStories(setStoriesList)
   }, [])
 
   // Loading is unset when categories is set after success request API
@@ -72,6 +58,7 @@ const GameList = () => {
     }
   }, [categoriesList])
 
+  // Loading is unset when stories is set after success request API
   useEffect(() => {
     if (storiesList.length > 0) {
       setLoadingStories(false)
@@ -80,6 +67,13 @@ const GameList = () => {
 
   return (
     <div className="gamelist mt-4 mx-8 h-auto md:mt-32 lg:w-8/12 lg:flex lg:flex-col lg:mx-auto">
+      {showModal && (
+        <Modal
+          showModal={showModal}
+          onClose={() => setModal(false)}
+          storyId={storyId}
+        />
+      )}
       <h1 className="gamelist__title uppercase text-white text-2xl font-light text-center my-2 md:text-4xl md:text-left lg:self-start">
         Sélectionner un scénario
       </h1>
@@ -153,10 +147,7 @@ const GameList = () => {
             {!loadingStories ? (
               <ul className="gamelist__list mt-8">
                 {storiesList.map((story) => (
-                  <Card key={story.id} {...story} />
-                ))}
-                {storiesList.map((story) => (
-                  <Card key={story.id} {...story} />
+                  <Card key={story.id} {...story} handleModal={handleModal} />
                 ))}
               </ul>
             ) : (
