@@ -14,6 +14,7 @@ import SignupForm from "src/containers/SignupForm/index"
 import Logout from "src/containers/Logout/index"
 import Profile from "src/containers/Profile/index"
 import GameInterface from "src/containers/GameInterface/index"
+import Create from "src/components/Create/index"
 
 const App = ({ checkIsLogged, isLogged }) => {
   const location = useLocation().pathname
@@ -37,6 +38,7 @@ const App = ({ checkIsLogged, isLogged }) => {
         <Route path="/" component={Home} exact />
         <Route path="/login" component={LoginForm} />
         <Route path="/signup" component={SignupForm} />
+        <Route path="/create" component={Create} exact />
         {isLogged && <Route path="/logout" component={Logout} />}
         {isLogged && <Route path="/profile/:slug" component={Profile} />}
         {isLogged && <Route path="/letsplay/:slug" component={GameInterface} />}
