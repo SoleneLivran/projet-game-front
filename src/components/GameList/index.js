@@ -86,7 +86,7 @@ const GameList = () => {
       </button>
       <div className="gamelist__container md:flex md:my-4 lg:justify-between">
         <aside
-          className={`gamelist__filter overflow-hidden ${asideFilterClassName} bg-gray-200 px-6 rounded-lg md:opacity-100 md:mr-6 md:w-48 md:px-2`}
+          className={`gamelist__filter ${asideFilterClassName} bg-gray-200 px-6 rounded-lg md:opacity-100 md:mr-6 md:w-48 md:px-2`}
         >
           <h2 className="gamelist__filter-title text-xl font-bold my-2 px-6 md:text-center mx:px-0">
             Affiner les histoire

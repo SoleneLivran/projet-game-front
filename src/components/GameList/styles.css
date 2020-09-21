@@ -5,8 +5,14 @@
   }
 
   .gamelist__filter--active {
-    max-height: 300px;
+    max-height: 18.75rem;
     padding: 0.5rem 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .gamelist__filter {
+    max-height: 27.5rem;
   }
 }
 
