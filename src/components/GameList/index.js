@@ -7,6 +7,7 @@ import Loading from "src/components/Loading/index"
 
 import difficulties from "src/datas/difficulties"
 import "./styles.css"
+import { fetchLatestStories } from "src/actions/home"
 
 const GameList = () => {
   // Set the category after request, empty array default
@@ -14,6 +15,12 @@ const GameList = () => {
 
   // state for filter loading
   const [loadingFilter, setLoadingFilter] = useState(true)
+
+  // Set the category after request, empty array default
+  const [storiesList, setStoriesList] = useState([])
+
+  // state for filter loading
+  const [loadingStories, setLoadingStories] = useState(true)
 
   // state to define the radio checked and set the value
   const [selectedRadioValue, setSelectedRadioValue] = useState("")
@@ -32,7 +39,20 @@ const GameList = () => {
         "http://ec2-18-234-186-84.compute-1.amazonaws.com/api/public/story_categories"
       )
       .then((response) => {
+        console.log(response)
         setCategoriesList(response.data)
+      })
+      .catch((error) => {
+        console.log("error")
+      })
+  }
+
+  const fetchStories = () => {
+    axios
+      .get("http://ec2-18-234-186-84.compute-1.amazonaws.com/api/public/stories")
+      .then((response) => {
+        console.log(response)
+        setStoriesList(response.data)
       })
       .catch((error) => {
         console.log("error")
@@ -42,6 +62,7 @@ const GameList = () => {
   // Initiate the request for categories list when Component is mounted
   useEffect(() => {
     fetchCategories()
+    fetchStories()
   }, [])
 
   // Loading is unset when categories is set after success request API
@@ -51,8 +72,14 @@ const GameList = () => {
     }
   }, [categoriesList])
 
+  useEffect(() => {
+    if (storiesList.length > 0) {
+      setLoadingStories(false)
+    }
+  }, [storiesList])
+
   return (
-    <div className="gamelist mt-4 mx-4 h-auto">
+    <div className="gamelist mt-4 mx-8 h-auto">
       <h1 className="gamelist__title uppercase text-white text-2xl font-light text-center my-2">
         Sélectionner un scénario
       </h1>
@@ -116,54 +143,23 @@ const GameList = () => {
             <input type="checkbox" name="reverse" id="reverse" />
           </div>
         </div>
-        <ul className="gamelist__list mt-4 py-4">
-          <li className="card transform duration-150 ease-in-out cursor-pointer mt-5 hover:scale-105">
-            <img
-              className="card__img h-24 md:h-32 w-full object-cover rounded-t-lg shadow-lg"
-              src="/assets/img/dragon.jpg"
-            />
-            <section className="card__info bg-gray-900 py-4">
-              <div className="card__top-info flex justify-center pt-1 px-5 items-center">
-                <h2 className="card__title-top text-2xl font-bold py-2 text-white text-center overflow-auto">
-                  title
-                </h2>
-              </div>
-              <hr className="card__fade" />
-              <div className="card__bottom-info font-light text-lg  grid grid-cols-3 py-1 px-2 text-sm text-white items-center overflow-auto">
-                <h3 className="card__title-bottom text-center p-1 overflow-hidden h-8">
-                  Auteur
-                </h3>
-                <p className="card__category italic text-center p-1">category </p>
-                <p className="card__difficulty text-center p-1">
-                  /5 <i className="px-2 fas fa-star text-yellow-500"></i>
-                </p>
-              </div>
-            </section>
-          </li>{" "}
-          <li className="card transform duration-150 ease-in-out cursor-pointer mt-5 hover:scale-105">
-            <img
-              className="card__img h-24 md:h-32 w-full object-cover rounded-t-lg shadow-lg"
-              src="/assets/img/dragon.jpg"
-            />
-            <section className="card__info bg-gray-900 py-4">
-              <div className="card__top-info flex justify-center pt-1 px-5 items-center">
-                <h2 className="card__title-top text-2xl font-bold py-2 text-white text-center overflow-auto">
-                  title
-                </h2>
-              </div>
-              <hr className="card__fade" />
-              <div className="card__bottom-info font-light text-lg  grid grid-cols-3 py-1 px-2 text-sm text-white items-center overflow-auto">
-                <h3 className="card__title-bottom text-center p-1 overflow-hidden h-8">
-                  Auteur
-                </h3>
-                <p className="card__category italic text-center p-1">category </p>
-                <p className="card__difficulty text-center p-1">
-                  /5 <i className="px-2 fas fa-star text-yellow-500"></i>
-                </p>
-              </div>
-            </section>
-          </li>
-        </ul>
+        {!loadingStories ? (
+          <ul className="gamelist__list mt-8">
+            {storiesList.map((story) => (
+              <Card key={story.id} {...story} />
+            ))}
+            {storiesList.map((story) => (
+              <Card key={story.id} {...story} />
+            ))}
+            {storiesList.map((story) => (
+              <Card key={story.id} {...story} />
+            ))}
+          </ul>
+        ) : (
+          <div className="home__loading-latest flex justify-center mt-4">
+            <Loading type="Bars" color="#5BC1FF" heightValue={50} widthValue={50} />
+          </div>
+        )}
       </section>
     </div>
   )

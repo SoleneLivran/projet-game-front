@@ -32,7 +32,7 @@ const App = ({ checkIsLogged, isLogged }) => {
     checkIsLogged()
   }, [checkIsLogged, displayNav])
   return (
-    <div className="app bg-center bg-cover h-full w-full ">
+    <div className="app bg-center bg-cover h-screen w-full overflow-auto">
       {showNav && <Nav />}
       <Switch>
         <Route path="/" component={Home} exact />
