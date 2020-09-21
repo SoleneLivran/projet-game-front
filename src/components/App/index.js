@@ -22,13 +22,13 @@ const App = ({ checkIsLogged, isLogged }) => {
   const displayNav = lodash.startsWith(location, "/letsplay")
   // visitor to user if jwt is here !
   useEffect(() => {
-    checkIsLogged()
-
     if (displayNav) {
       setShowNav(false)
     } else {
       setShowNav(true)
     }
+
+    checkIsLogged()
   }, [checkIsLogged, displayNav])
   return (
     <div className="app bg-center bg-cover h-full w-full ">

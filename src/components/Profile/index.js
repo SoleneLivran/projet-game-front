@@ -7,7 +7,13 @@ import Story from "./Story/index"
 import ModalDelete from "./ModalDelete/index"
 import ModalAvatar from "src/containers/ModalAvatar/index"
 
-const Profile = ({ connectedId, fetchUser, avatar, handleUserEdit }) => {
+const Profile = ({
+  connectedId,
+  fetchUser,
+  avatar,
+  handleUserEdit,
+  handleDeleteUser,
+}) => {
   // Get current user data, API GET request in user middleware:
   useEffect(fetchUser, [])
   // Get params from url
@@ -28,6 +34,7 @@ const Profile = ({ connectedId, fetchUser, avatar, handleUserEdit }) => {
         <ModalDelete
           showModalDelete={showModalDelete}
           onClose={() => setModalDelete(false)}
+          handleDeleteUser={handleDeleteUser}
         />
       )}
       {showModalAvatar && (
@@ -117,5 +124,6 @@ Profile.propTypes = {
   fetchUser: PropTypes.func.isRequired,
   avatar: PropTypes.string.isRequired,
   handleUserEdit: PropTypes.func.isRequired,
+  handleDeleteUser: PropTypes.func.isRequired,
 }
 export default Profile
