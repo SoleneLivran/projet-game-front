@@ -1,24 +1,22 @@
-import { SHOW_LOADING_POPULAR } from "src/actions/home"
+import { SAVE_POPULAR_STORIES, SAVE_LATEST_STORIES } from "src/actions/home"
 
 export const initialState = {
   listPopular: [],
-  listLastest: [],
-  loadingPopular: true,
+  listLatest: [],
 }
 
 const home = (state = initialState, action = {}) => {
   switch (action.type) {
-    case SHOW_LOADING_POPULAR: {
-      return {
-        ...state,
-        loadingPopular: true,
-      }
-    }
-    case "SAVE_POPULAR_STORIES": {
+    case SAVE_POPULAR_STORIES: {
       return {
         ...state,
         listPopular: action.popularStories,
-        loadingPopular: false,
+      }
+    }
+    case SAVE_LATEST_STORIES: {
+      return {
+        ...state,
+        listLatest: action.latestStories,
       }
     }
     default:
