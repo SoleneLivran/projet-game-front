@@ -1,9 +1,15 @@
 import React, { useEffect, useRef, useState } from "react"
+import PropTypes from "prop-types"
 import axios from "axios"
 import "./styles.css"
 import { Redirect } from "react-router-dom"
 
-const ModalDelete = ({ showModalDelete, onClose, handleDeleteUser }) => {
+const ModalDelete = ({
+  showModalDelete,
+  onClose,
+  handleDeleteUser,
+  connectedId,
+}) => {
   // State for modal, button agree default is disabled
   const [buttonActive, setButtonActive] = useState(true)
 
@@ -53,11 +59,14 @@ const ModalDelete = ({ showModalDelete, onClose, handleDeleteUser }) => {
   // API delete request for the user account
   const deleteUser = () => {
     axios
-      .delete("http://ec2-18-234-186-84.compute-1.amazonaws.com/api/account", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("user")}`,
-        },
-      })
+      .delete(
+        `http://ec2-18-234-186-84.compute-1.amazonaws.com/api/account/${connectedId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("user")}`,
+          },
+        }
+      )
       .then((response) => {
         console.log(response)
         setIsDeleted(true)
@@ -128,4 +137,10 @@ const ModalDelete = ({ showModalDelete, onClose, handleDeleteUser }) => {
   )
 }
 
+ModalDelete.propTypes = {
+  showModalDelete: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  handleDeleteUser: PropTypes.func.isRequired,
+  connectedId: PropTypes.number.isRequired,
+}
 export default ModalDelete
