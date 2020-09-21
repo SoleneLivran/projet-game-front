@@ -3,6 +3,7 @@ import axios from "axios"
 
 import Card from "src/components/Card/index"
 import Filter from "src/components/Filter/index"
+import Loading from "src/components/Loading/index"
 
 import difficulties from "src/datas/difficulties"
 import "./styles.css"
@@ -10,6 +11,11 @@ import "./styles.css"
 const GameList = () => {
   // Set the category after request, empty array default
   const [categoriesList, setCategoriesList] = useState([])
+
+  // state for filter loading
+  const [loadingFilter, setLoadingFilter] = useState(true)
+
+  const [selectedRadioValue, setSelectedRadioValue] = useState("")
 
   // API Request for categories list
   const fetchCategories = () => {
@@ -30,6 +36,12 @@ const GameList = () => {
     fetchCategories()
   }, [])
 
+  useEffect(() => {
+    if (categoriesList.length > 0) {
+      setLoadingFilter(false)
+    }
+  }, [categoriesList])
+
   return (
     <div className="gamelist mt-4 mx-4">
       <h1 className="gamelist__title uppercase text-white text-2xl font-light text-center my-2">
@@ -42,9 +54,26 @@ const GameList = () => {
         <h2 className="gamelist__filter-title text-xl font-bold my-2">
           Affiner les histoire
         </h2>
-        <div className="filter__blog">
-          {<Filter title="Categories" datas={categoriesList} />}
-          {<Filter title="Difficultés" datas={difficulties} />}
+        <div className="filter__blog flex justify-around mb-2">
+          {loadingFilter && (
+            <Loading type="Oval" color="#5BC1FF" heightValue={50} widthValue={50} />
+          )}
+          {!loadingFilter && (
+            <Filter
+              title="Categories"
+              datas={categoriesList}
+              setSelectedRadioValue={setSelectedRadioValue}
+              selectedRadioValue={selectedRadioValue}
+            />
+          )}
+          {!loadingFilter && (
+            <Filter
+              title="Difficultés"
+              datas={difficulties}
+              setSelectedRadioValue={setSelectedRadioValue}
+              selectedRadioValue={selectedRadioValue}
+            />
+          )}
         </div>
       </aside>
       <section className="gameList__display">
