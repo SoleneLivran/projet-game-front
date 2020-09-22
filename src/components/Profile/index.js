@@ -7,12 +7,18 @@ import Story from "./Story/index"
 import ModalDelete from "./ModalDelete/index"
 import ModalAvatar from "src/containers/ModalAvatar/index"
 
+import { checkInput } from "src/selectors/profile"
+
 const Profile = ({
   connectedId,
   fetchUser,
   avatar,
   handleUserEdit,
   handleDeleteUser,
+  name,
+  mail,
+  password,
+  newPassword,
 }) => {
   // Get current user data, API GET request in user middleware:
   useEffect(fetchUser, [])
@@ -26,6 +32,8 @@ const Profile = ({
   // Change modal current state
   const handleModalDelete = () => setModalDelete(true)
   const handleModalAvatar = () => setModalAvatar(true)
+
+  const errors = "checkInput(name, mail, password, newPassword)"
 
   return (
     <div className="profile px-8 h-auto sm:px-16 sm:mt-10 sm:px-24 md:mx-auto md:mt-20">
@@ -76,7 +84,9 @@ const Profile = ({
           <form
             onSubmit={(e) => {
               e.preventDefault()
-              handleUserEdit()
+              if (Object.keys(errors).length === 0) {
+                handleUserEdit()
+              }
             }}
             className="profile__form flex flex-col"
           >
@@ -92,13 +102,22 @@ const Profile = ({
               Email
             </label>
             <FieldProfile type="email" name="email" placeholder="Email" />
+
             <label className="profile__label mt-2" htmlFor="password">
-              Mot de passe
+              Mot de passe actuel
             </label>
             <FieldProfile
               type="password"
               name="password"
               placeholder="Mot de passe"
+            />
+            <label className="profile__label mt-2" htmlFor="password">
+              Nouveau mot de passe
+            </label>
+            <FieldProfile
+              type="password"
+              name="newPassword"
+              placeholder="Nouveau mot de passe"
             />
             <input
               className="profile__submit cursor-pointer mt-4 py-4 bg-blue-400 rounded-md text-white font-bold"

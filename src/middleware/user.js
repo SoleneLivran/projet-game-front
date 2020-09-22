@@ -31,9 +31,10 @@ const user = (store) => (next) => (action) => {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("user")}`,
             },
-            name: state.user.username.toLowerCase().trim(),
-            mail: state.user.email.toLowerCase().trim(),
-            password: state.user.password.trim(),
+            newName: state.user.username.toLowerCase().trim(),
+            newMail: state.user.email.toLowerCase().trim(),
+            oldPassword: state.user.password.trim(),
+            // newPassword
           }
         )
         .then((response) => {

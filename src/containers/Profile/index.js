@@ -8,6 +8,8 @@ const mapStateToProps = (state) => ({
   avatar: state.user.avatar,
   name: state.user.name,
   mail: state.user.mail,
+  password: state.user.password,
+  newPassword: state.user.newPassword,
 })
 
 const mapDispatchToProps = (dispatch) => ({
