@@ -47,7 +47,7 @@ export const fetchFilterRequest = (setStoriesList, filterId, filterTitle) => {
   if (filterTitle === "Difficultés") {
     axios
       .get(
-        `http://ec2-18-234-186-84.compute-1.amazonaws.com/api/public/stories?difficulty=${filterId}`
+        `http://ec2-18-234-186-84.compute-1.amazonaws.com/api/public/stories?story_difficulty=${filterId}`
       )
       .then((response) => {
         setStoriesList(response.data)
