@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useParams, Redirect } from "react-router-dom"
 import PropTypes from "prop-types"
+import axios from "axios"
 import "./styles.css"
 import FieldProfile from "src/containers/FieldProfile/index"
 import Story from "./Story/index"
@@ -20,8 +21,28 @@ const Profile = ({
   password,
   newPassword,
 }) => {
+  const fetchUserStories = () => {
+    axios
+      .get(
+        `http://ec2-18-234-186-84.compute-1.amazonaws.com/api/app_user/${connectedId}/stories`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("user")}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
   // Get current user data, API GET request in user middleware:
-  useEffect(fetchUser, [])
+  useEffect(() => {
+    fetchUser()
+    fetchUserStories()
+  }, [])
   // Get params from url
   const { slug } = useParams()
 
