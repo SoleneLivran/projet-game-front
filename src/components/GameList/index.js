@@ -8,7 +8,12 @@ import Modal from "src/components/Modal/index"
 import Dropdown from "./Dropdown/index"
 
 import difficulties from "src/datas/difficulties"
-import { fetchCategories, fetchStories } from "src/selectors/gamelist"
+import {
+  fetchCategories,
+  fetchStories,
+  fetchFilterRequest,
+  sortStories,
+} from "src/selectors/gamelist"
 import "./styles.css"
 
 const GameList = () => {
@@ -46,96 +51,22 @@ const GameList = () => {
     setModal(true)
   }
 
+  // function to call reset filter only when a filter is applied
   const handleOnResetFilter = () => {
-    setSelectedRadioValue(0)
-    fetchStories(setStoriesList)
-  }
-
-  const fetchFilterRequest = (filterId, filterTitle) => {
-    if (filterId === 0) {
-      return fetchStories(setStoriesList)
-    }
-
-    if (filterTitle === "Catégories") {
-      axios
-        .get(
-          `http://ec2-18-234-186-84.compute-1.amazonaws.com/api/public/stories?story_category=${filterId}`
-        )
-        .then((response) => {
-          console.log(response)
-          setStoriesList(response.data)
-        })
-        .catch((error) => {
-          console.log(error)
-        })
-    }
-
-    if (filterTitle === "Difficultés") {
-      console.log("diff")
-      axios
-        .get(
-          `http://ec2-18-234-186-84.compute-1.amazonaws.com/api/public/stories?difficulty=${filterId}`
-        )
-        .then((response) => {
-          console.log(response)
-          setStoriesList(response.data)
-        })
-        .catch((error) => {
-          console.log(error)
-        })
+    if (selectedRadioValue !== 0) {
+      setSelectedRadioValue(0)
+      fetchStories(setStoriesList)
     }
   }
 
-  const sortStories = (sortMethod, activeCheckbox) => {
-    const copyStories = [...storiesList]
-    console.log(activeCheckbox)
-    switch (sortMethod) {
-      case "name":
-        setStoriesList(
-          copyStories.sort((a, b) =>
-            activeCheckbox
-              ? b.title.localeCompare(a.title)
-              : a.title.localeCompare(b.title)
-          )
-        )
-        break
-      case "category":
-        setStoriesList(
-          copyStories.sort((a, b) =>
-            activeCheckbox
-              ? b.category.name.localeCompare(a.category.name)
-              : a.category.name.localeCompare(b.category.name)
-          )
-        )
-        break
-      case "difficulty":
-        setStoriesList(
-          copyStories.sort((a, b) =>
-            activeCheckbox
-              ? b.difficulty - a.difficulty
-              : a.difficulty - b.difficulty
-          )
-        )
-        break
-      case "rating":
-        setStoriesList(
-          copyStories.sort((a, b) =>
-            activeCheckbox ? b.rating - a.rating : a.rating - b.rating
-          )
-        )
-        break
-      case "date":
-        setStoriesList(
-          copyStories.sort((a, b) =>
-            activeCheckbox
-              ? b.publishedAt.localeCompare(a.publishedAt)
-              : a.publishedAt.localeCompare(b.publishedAt)
-          )
-        )
-        break
-      default:
-        break
-    }
+  // function to call fetchFilterRequest in selector and filtered story
+  const handleFetchFilterRequest = (filterId, filterTitle) => {
+    fetchFilterRequest(setStoriesList, filterId, filterTitle)
+  }
+
+  // function to call sortStories in selector and sort by dropdown options
+  const handleSortStories = (sortMethod, activeCheckbox) => {
+    sortStories(storiesList, setStoriesList, sortMethod, activeCheckbox)
   }
 
   // Initiate the request for categories list when Component is mounted
@@ -207,7 +138,7 @@ const GameList = () => {
                 datas={categoriesList}
                 setSelectedRadioValue={setSelectedRadioValue}
                 selectedRadioValue={selectedRadioValue}
-                fetchFilterRequest={fetchFilterRequest}
+                fetchFilterRequest={handleFetchFilterRequest}
               />
             )}
             {!loadingFilter && (
@@ -216,14 +147,14 @@ const GameList = () => {
                 datas={difficulties}
                 setSelectedRadioValue={setSelectedRadioValue}
                 selectedRadioValue={selectedRadioValue}
-                fetchFilterRequest={fetchFilterRequest}
+                fetchFilterRequest={handleFetchFilterRequest}
               />
             )}
           </div>
         </aside>
         <section className="gameList__display my-4 md:my-0 md:flex md:justify-center md:w-10/12">
           <div className="gameList__display-container md:flex md:flex-col md:items-center">
-            <Dropdown sortStories={sortStories} />
+            <Dropdown sortStories={handleSortStories} />
             {!loadingStories ? (
               <ul className="gamelist__list mt-8">
                 {storiesList.map((story) => (
