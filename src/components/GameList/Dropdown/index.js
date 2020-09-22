@@ -3,10 +3,15 @@ import PropTypes from "prop-types"
 
 const Dropdown = ({ sortStories }) => {
   const [selectedOption, setSelectedOption] = useState("name")
+  const [activeCheckbox, setActiveCheckbox] = useState(false)
 
-  const handleChange = (e) => {
+  const handleChangeSelect = (e) => {
     setSelectedOption(e.target.value)
-    sortStories(e.target.value)
+    sortStories(e.target.value, activeCheckbox)
+  }
+  const handleChangeCheckbox = (e) => {
+    setActiveCheckbox(!activeCheckbox)
+    sortStories(selectedOption, !activeCheckbox)
   }
 
   return (
@@ -20,20 +25,25 @@ const Dropdown = ({ sortStories }) => {
           id="filter-by"
           className="dropdown__select bg-transparent border rounded-sm border-black w-7/12 mx-auto py-1"
           value={selectedOption}
-          onChange={handleChange}
+          onChange={handleChangeSelect}
         >
           <option value="name">Nom (défaut)</option>
           <option value="date">Date de publication</option>
           <option value="difficulty">Difficulté</option>
           <option value="category">Categorie</option>
-          <option value="popularity">Populaire</option>
+          <option value="rating">Populaire</option>
         </select>
       </div>
       <div className="dropdown__inverse flex items-center my-1">
         <label className="dropdown__label pr-2" htmlFor="checkbox-reverse">
           Inverser l'ordre
         </label>
-        <input type="checkbox" name="reverse" id="reverse" />
+        <input
+          onChange={handleChangeCheckbox}
+          type="checkbox"
+          name="reverse"
+          id="reverse"
+        />
       </div>
     </div>
   )

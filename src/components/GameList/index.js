@@ -81,17 +81,56 @@ const GameList = () => {
     }
   }
 
-  const sortStories = (sortMethod) => {
+  const sortStories = (sortMethod, activeCheckbox) => {
     const copyStories = [...storiesList]
-    
-    // console.log(copyStories)
-    // console.log(sortMethod)
-    // const compare = (a, b) => {
-    //   const itemA = a.category.name
-    //   const itemB = b.category.name
-    //   return itemA < itemB ? -1 : itemA > itemB ? 1 : 0
-    // }
-    // setStoriesList(copyStories.sort(compare))
+    console.log(activeCheckbox)
+    switch (sortMethod) {
+      case "name":
+        setStoriesList(
+          copyStories.sort((a, b) =>
+            activeCheckbox
+              ? b.title.localeCompare(a.title)
+              : a.title.localeCompare(b.title)
+          )
+        )
+        break
+      case "category":
+        setStoriesList(
+          copyStories.sort((a, b) =>
+            activeCheckbox
+              ? b.category.name.localeCompare(a.category.name)
+              : a.category.name.localeCompare(b.category.name)
+          )
+        )
+        break
+      case "difficulty":
+        setStoriesList(
+          copyStories.sort((a, b) =>
+            activeCheckbox
+              ? b.difficulty - a.difficulty
+              : a.difficulty - b.difficulty
+          )
+        )
+        break
+      case "rating":
+        setStoriesList(
+          copyStories.sort((a, b) =>
+            activeCheckbox ? b.rating - a.rating : a.rating - b.rating
+          )
+        )
+        break
+      case "date":
+        setStoriesList(
+          copyStories.sort((a, b) =>
+            activeCheckbox
+              ? b.publishedAt.localeCompare(a.publishedAt)
+              : a.publishedAt.localeCompare(b.publishedAt)
+          )
+        )
+        break
+      default:
+        break
+    }
   }
 
   // Initiate the request for categories list when Component is mounted
