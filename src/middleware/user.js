@@ -34,7 +34,7 @@ const user = (store) => (next) => (action) => {
             newName: state.user.username.toLowerCase().trim(),
             newMail: state.user.email.toLowerCase().trim(),
             oldPassword: state.user.password.trim(),
-            // newPassword
+            newPassword: state.user.newPassword.trim(),
           }
         )
         .then((response) => {

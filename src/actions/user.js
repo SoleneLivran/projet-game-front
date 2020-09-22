@@ -33,5 +33,5 @@ export const setUser = (userData) => ({
   type: SET_USER,
   name: userData.name,
   mail: userData.mail,
-  avatar: userData.mail,
+  avatar: userData.avatar,
 })

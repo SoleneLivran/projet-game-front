@@ -33,7 +33,7 @@ const Profile = ({
   const handleModalDelete = () => setModalDelete(true)
   const handleModalAvatar = () => setModalAvatar(true)
 
-  const errors = "checkInput(name, mail, password, newPassword)"
+  const errors = checkInput(name, mail, password, newPassword)
 
   return (
     <div className="profile px-8 h-auto sm:px-16 sm:mt-10 sm:px-24 md:mx-auto md:mt-20">
@@ -84,6 +84,7 @@ const Profile = ({
           <form
             onSubmit={(e) => {
               e.preventDefault()
+              console.log(errors)
               if (Object.keys(errors).length === 0) {
                 handleUserEdit()
               }

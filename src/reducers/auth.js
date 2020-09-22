@@ -1,5 +1,6 @@
 import {
   CHANGE_INPUT,
+  CLEAR_INPUT,
   SAVE_USER,
   SAVE_NEW_USER,
   LOGOUT,
@@ -21,6 +22,12 @@ const auth = (state = initialState, action = {}) => {
       return {
         ...state,
         [action.key]: action.value,
+      }
+    }
+    case CLEAR_INPUT: {
+      return {
+        ...state,
+        [action.key]: "",
       }
     }
     case SAVE_USER: {
