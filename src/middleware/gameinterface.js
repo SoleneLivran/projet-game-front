@@ -2,7 +2,6 @@ import axios from "axios"
 import { FETCH_STORY, setScene, NEXT_SCENE } from "src/actions/gameinterface"
 
 const auth = (store) => (next) => (action) => {
-  const state = store.getState()
   switch (action.type) {
     case FETCH_STORY: {
       axios
