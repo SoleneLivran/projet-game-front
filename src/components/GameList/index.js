@@ -45,13 +45,30 @@ const GameList = () => {
     setModal(true)
   }
 
-  const fetchFilterRequest = (filterId) => {
+  const fetchFilterRequest = (filterId, filterTitle) => {
     if (filterId === 0) {
-      fetchStories(setStoriesList)
-    } else {
+      return fetchStories(setStoriesList)
+    }
+
+    if (filterTitle === "Catégories") {
       axios
         .get(
           `http://ec2-18-234-186-84.compute-1.amazonaws.com/api/public/stories?story_category=${filterId}`
+        )
+        .then((response) => {
+          console.log(response)
+          setStoriesList(response.data)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
+
+    if (filterTitle === "Difficultés") {
+      console.log("diff");
+      axios
+        .get(
+          `http://ec2-18-234-186-84.compute-1.amazonaws.com/api/public/stories?difficulty=${filterId}`
         )
         .then((response) => {
           console.log(response)
@@ -120,7 +137,7 @@ const GameList = () => {
             )}
             {!loadingFilter && (
               <Filter
-                title="Categories"
+                title="Catégories"
                 datas={categoriesList}
                 setSelectedRadioValue={setSelectedRadioValue}
                 selectedRadioValue={selectedRadioValue}

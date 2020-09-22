@@ -10,9 +10,9 @@ const Filter = ({
   selectedRadioValue,
   fetchFilterRequest,
 }) => {
-  const handleRequestValue = (filterId) => {
+  const handleRequestValue = (filterId, filterTitle) => {
     setSelectedRadioValue(filterId)
-    fetchFilterRequest(filterId)
+    fetchFilterRequest(filterId, filterTitle)
   }
   return (
     <div className="filter">
@@ -25,7 +25,7 @@ const Filter = ({
               name={`default-${title}`}
               id={`default-${title}`}
               value={`default-${title}`}
-              onChange={() => handleRequestValue(0)}
+              onChange={() => handleRequestValue(0, title)}
               checked={selectedRadioValue === 0}
               className="cursor-pointer mx-2"
             />
@@ -40,7 +40,7 @@ const Filter = ({
                 name={item.name}
                 id={item.name}
                 value={item.name}
-                onChange={() => handleRequestValue(item.id)}
+                onChange={() => handleRequestValue(item.id, title)}
                 checked={selectedRadioValue === item.id}
                 className="cursor-pointer mx-2"
               />
