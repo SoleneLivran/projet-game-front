@@ -5,6 +5,7 @@ import Card from "src/components/Card/index"
 import Filter from "src/components/Filter/index"
 import Loading from "src/components/Loading/index"
 import Modal from "src/components/Modal/index"
+import Dropdown from "./Dropdown/index"
 
 import difficulties from "src/datas/difficulties"
 import { fetchCategories, fetchStories } from "src/selectors/gamelist"
@@ -65,7 +66,7 @@ const GameList = () => {
     }
 
     if (filterTitle === "Difficultés") {
-      console.log("diff");
+      console.log("diff")
       axios
         .get(
           `http://ec2-18-234-186-84.compute-1.amazonaws.com/api/public/stories?difficulty=${filterId}`
@@ -78,6 +79,19 @@ const GameList = () => {
           console.log(error)
         })
     }
+  }
+
+  const sortStories = (sortMethod) => {
+    const copyStories = [...storiesList]
+    
+    // console.log(copyStories)
+    // console.log(sortMethod)
+    // const compare = (a, b) => {
+    //   const itemA = a.category.name
+    //   const itemB = b.category.name
+    //   return itemA < itemB ? -1 : itemA > itemB ? 1 : 0
+    // }
+    // setStoriesList(copyStories.sort(compare))
   }
 
   // Initiate the request for categories list when Component is mounted
@@ -157,30 +171,7 @@ const GameList = () => {
         </aside>
         <section className="gameList__display my-4 md:my-0 md:flex md:justify-center md:w-10/12">
           <div className="gameList__display-container md:flex md:flex-col md:items-center">
-            <div className="dropdown bg-gray-200 rounded-lg p-4 flex flex-col md:self-start">
-              <div className="dropdown__list flex items-center my-1">
-                <label htmlFor="dropdown" className="dropdown__label">
-                  Afficher par:
-                </label>
-                <select
-                  name="filter-by"
-                  id="filter-by"
-                  className="dropdown__select bg-transparent border rounded-sm border-black w-7/12 mx-auto py-1"
-                >
-                  <option value="name">Nom (défaut)</option>
-                  <option value="popularity">Date de publication</option>
-                  <option value="difficulty">Difficulté</option>
-                  <option value="category">Categorie</option>
-                  <option value="popularity">Populaire</option>
-                </select>
-              </div>
-              <div className="dropdown__inverse flex items-center my-1">
-                <label className="dropdown__label pr-2" htmlFor="checkbox-reverse">
-                  Inverser l'ordre
-                </label>
-                <input type="checkbox" name="reverse" id="reverse" />
-              </div>
-            </div>
+            <Dropdown sortStories={sortStories} />
             {!loadingStories ? (
               <ul className="gamelist__list mt-8">
                 {storiesList.map((story) => (
