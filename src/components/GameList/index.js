@@ -46,6 +46,11 @@ const GameList = () => {
     setModal(true)
   }
 
+  const handleOnResetFilter = () => {
+    setSelectedRadioValue(0)
+    fetchStories(setStoriesList)
+  }
+
   const fetchFilterRequest = (filterId, filterTitle) => {
     if (filterId === 0) {
       return fetchStories(setStoriesList)
@@ -176,9 +181,17 @@ const GameList = () => {
         <aside
           className={`gamelist__filter overflow-hidden ${asideFilterClassName} bg-gray-200 px-6 rounded-lg md:opacity-100 md:mr-6 md:w-48 md:px-2`}
         >
-          <h2 className="gamelist__filter-title text-xl font-bold my-2 px-6 md:text-center mx:px-0">
+          <h2 className="gamelist__filter-title text-xl font-bold my-2 px-6 md:text-center md:px-0">
             Affiner les histoire
           </h2>
+          <div className="gamelist__filter-button flex justify-center my-2">
+            <button
+              onClick={handleOnResetFilter}
+              className="gamelist__filter-reset bg-blue-200 rounded-lg px-4 py-2 border border-black shadow-lg text-sm"
+            >
+              Réinitialiser les filtres
+            </button>
+          </div>
           <div className="filter__blog flex justify-around mb-4 md:flex-col md:items-center">
             {loadingFilter && (
               <Loading

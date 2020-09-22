@@ -5,7 +5,7 @@
   }
 
   .gamelist__filter--active {
-    max-height: 18.75rem;
+    max-height: 20rem;
     padding: 0.5rem 0;
   }
 }
