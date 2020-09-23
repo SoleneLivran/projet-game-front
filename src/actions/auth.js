@@ -1,4 +1,5 @@
 export const CHANGE_INPUT = "CHANGE_INPUT"
+export const CLEAR_INPUT = "CLEAR_INPUT"
 export const LOGIN = "LOGIN"
 export const SIGNUP = "SIGNUP"
 export const LOGOUT = "LOGOUT"
@@ -11,6 +12,11 @@ export const changeValue = (value, key) => ({
   type: CHANGE_INPUT,
   value,
   // key => ownProps.name
+  key,
+})
+
+export const clearInput = (key) => ({
+  type: CLEAR_INPUT,
   key,
 })
 

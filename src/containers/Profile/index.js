@@ -6,8 +6,10 @@ import { deleteUser } from "src/actions/auth"
 const mapStateToProps = (state) => ({
   connectedId: state.auth.connectedId,
   avatar: state.user.avatar,
-  name: state.user.name,
-  mail: state.user.mail,
+  name: state.user.username,
+  mail: state.user.email,
+  password: state.user.password,
+  newPassword: state.user.newPassword,
 })
 
 const mapDispatchToProps = (dispatch) => ({

@@ -10,6 +10,7 @@ export const initialState = {
   username: "",
   email: "",
   password: "",
+  newPassword: "",
 }
 
 const user = (state = initialState, action = {}) => {
@@ -34,6 +35,7 @@ const user = (state = initialState, action = {}) => {
         // avatar: action.avatar,
         avatar: "default_avatar",
         password: "",
+        newPassword: "",
       }
     }
     case CLEAR_EDIT: {
