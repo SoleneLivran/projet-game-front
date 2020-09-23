@@ -35,7 +35,7 @@ const user = (store) => (next) => (action) => {
             oldPassword: state.user.password.trim(),
             newPassword: state.user.newPassword.trim(),
           },
-          // 2e arg = options (including headers)
+          // 3e arg = options (including headers)
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("user")}`,
