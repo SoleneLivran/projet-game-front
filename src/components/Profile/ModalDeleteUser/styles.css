@@ -1,14 +1,10 @@
-.modal-avatar {
+.modal-delete {
   top: 0;
   left: 0;
   backdrop-filter: blur(5px);
 }
 
-.modal-avatar__close {
+.modal-delete__close {
   right: -2rem;
   top: -4rem;
-}
-
-.modal-avatar__list {
-  max-height: 25rem;
 }

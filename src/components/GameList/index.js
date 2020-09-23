@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react"
-import axios from "axios"
 
 import Card from "src/components/Card/index"
 import Filter from "src/components/Filter/index"
