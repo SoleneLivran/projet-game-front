@@ -35,6 +35,7 @@ const Profile = ({
           showModalDelete={showModalDelete}
           onClose={() => setModalDelete(false)}
           handleDeleteUser={handleDeleteUser}
+          connectedId={connectedId}
         />
       )}
       {showModalAvatar && (

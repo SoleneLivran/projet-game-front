@@ -14,6 +14,7 @@ import SignupForm from "src/containers/SignupForm/index"
 import Logout from "src/containers/Logout/index"
 import Profile from "src/containers/Profile/index"
 import GameInterface from "src/containers/GameInterface/index"
+import GameList from "src/components/GameList/index"
 import Create from "src/components/Create/index"
 
 const App = ({ checkIsLogged, isLogged }) => {
@@ -32,13 +33,14 @@ const App = ({ checkIsLogged, isLogged }) => {
     checkIsLogged()
   }, [checkIsLogged, displayNav])
   return (
-    <div className="app bg-center bg-cover h-full w-full ">
+    <div className="app bg-center bg-cover h-screen w-full overflow-auto">
       {showNav && <Nav />}
       <Switch>
         <Route path="/" component={Home} exact />
         <Route path="/login" component={LoginForm} />
         <Route path="/signup" component={SignupForm} />
-        <Route path="/create" component={Create} exact />
+        <Route path="/gamelist" component={GameList} />
+        {isLogged && <Route path="/create" component={Create} />}
         {isLogged && <Route path="/logout" component={Logout} />}
         {isLogged && <Route path="/profile/:slug" component={Profile} />}
         {isLogged && <Route path="/letsplay/:slug" component={GameInterface} />}

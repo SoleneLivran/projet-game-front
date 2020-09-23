@@ -15,6 +15,7 @@ const user = (store) => (next) => (action) => {
           }
         )
         .then((response) => {
+          console.log(response.data)
           store.dispatch(setUser(response.data))
         })
         .catch((error) => {
@@ -25,7 +26,7 @@ const user = (store) => (next) => (action) => {
     case USER_EDIT: {
       axios
         .put(
-          `http://ec2-18-234-186-84.compute-1.amazonaws.com/api/app_users/${state.auth.connectedId}`,
+          `http://ec2-18-234-186-84.compute-1.amazonaws.com/api/account/${state.auth.connectedId}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("user")}`,

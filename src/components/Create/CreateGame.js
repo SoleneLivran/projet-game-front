@@ -529,7 +529,7 @@ const CreateGame = () => {
   }
 
   return (
-    <div className="Nav bg-gray-900 flex  flex-col justify-evenly items-center  h-full mt-32 ">
+    <div className="Nav bg-gray-900 flex  flex-col justify-evenly items-center mt-32 ">
       {/* Modal */}
       <div
         className={
