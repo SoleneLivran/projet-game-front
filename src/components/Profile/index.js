@@ -7,6 +7,7 @@ import Story from "./Story/index"
 import ModalDeleteUser from "./ModalDeleteUser/index"
 import ModalAvatar from "src/containers/ModalAvatar/index"
 import ModalDeleteStory from "./ModalDeleteStory/index"
+import Loading from "src/components/Loading/index"
 
 import { checkInput, fetchUserStories } from "src/selectors/profile"
 
@@ -32,6 +33,9 @@ const Profile = ({
   // state for story list written by connected user
   const [userStoriesList, setUserStoriesList] = useState([])
 
+  // state for loading stories
+  const [loadingStories, setLoadingStories] = useState([true])
+
   // state storyId for delete request
   const [storyId, setstoryId] = useState(null)
 
@@ -46,6 +50,7 @@ const Profile = ({
   }
 
   const refreshStory = () => {
+    setLoadingStories(true)
     fetchUserStories(setUserStoriesList, connectedId)
   }
 
@@ -56,6 +61,13 @@ const Profile = ({
     fetchUser()
     fetchUserStories(setUserStoriesList, connectedId)
   }, [])
+
+  // Loading is unset when stories is set after success request API
+  useEffect(() => {
+    setTimeout(() => {
+      setLoadingStories(false)
+    }, 1000)
+  }, [userStoriesList])
   return (
     <div className="profile px-8 h-auto sm:px-16 sm:mt-10 sm:px-24 md:mx-auto md:mt-20">
       {/* Only when modal is open (true) -> Modal is display, and the event click/key can be use */}
@@ -87,18 +99,30 @@ const Profile = ({
           Mes histoires
         </h1>
         <ul className="stories__list my-6 overflow-y-auto">
-          {userStoriesList.length === 0 && (
+          {loadingStories && (
+            <div className="stories__loading flex justify-center">
+              <Loading
+                type="Oval"
+                color="#5BC1FF"
+                heightValue={50}
+                widthValue={50}
+              />
+            </div>
+          )}
+          {!loadingStories &&
+            userStoriesList.map((story) => (
+              <Story
+                key={story.id}
+                id={story.id}
+                title={story.title}
+                status={story.status}
+                handleModalDeleteStory={handleModalDeleteStory}
+              />
+            ))}
+
+          {!loadingStories && userStoriesList.length === 0 && (
             <p className="text-center text-white">Aucune histoires créées</p>
           )}
-          {userStoriesList.map((story) => (
-            <Story
-              key={story.id}
-              id={story.id}
-              title={story.title}
-              status={story.status}
-              handleModalDeleteStory={handleModalDeleteStory}
-            />
-          ))}
         </ul>
       </section>
       <section className="profile__user mt-10 md:flex justify-around">
