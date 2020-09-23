@@ -26,10 +26,12 @@ const Profile = ({
   // Modal state, display on button or hidden when closing it
   const [showModalDeleteUser, setModalDeleteUser] = useState(false)
   const [showModalAvatar, setModalAvatar] = useState(false)
+  const [showModalDeleteStory, setModalDeleteStory] = useState(false)
 
   // Change modal current state
   const handleModalDeleteUser = () => setModalDeleteUser(true)
   const handleModalAvatar = () => setModalAvatar(true)
+  const handleModalDeleteStory = () => setModalDeleteStory(true)
 
   const [userStoriesList, setUserStoriesList] = useState([])
 
@@ -71,6 +73,7 @@ const Profile = ({
               id={story.id}
               title={story.title}
               status={story.status}
+              handleModalDeleteStory={handleModalDeleteStory}
             />
           ))}
         </ul>
