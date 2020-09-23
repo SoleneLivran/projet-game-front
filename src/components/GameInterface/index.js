@@ -138,8 +138,8 @@ const GameInterface = ({
                     onClick={() => handleNextScene(action.id)}
                     className="card__action my-2 mx-2 bg-gray-200 select-none px-4 h-48 w-32 rounded-lg flex justify-center items-center transform hover:scale-105 cursor-pointer shadow-lg text-gray-800 text-center text-md font-bold sm:text-2xl sm:h-56 sm:w-48"
                   >
-                    <p className="card__action-title overflow-y-auto w-24">
-                      {action.action.name}
+                    <p className="card__action-title overflow-y-auto w-30">
+                    {action.action.name}
                     </p>
                   </div>
                 )
