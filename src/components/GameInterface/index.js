@@ -15,8 +15,8 @@ const GameInterface = ({
 }) => {
   const { slug } = useParams()
 
-  const [placeName, setNamePlace] = useState("Lie")
-  const [eventName, setNameEvent] = useState("Évenemen")
+  const [placeName, setNamePlace] = useState("Lieu")
+  const [eventName, setNameEvent] = useState("Évenement")
 
   const [isEnd, setIsEnd] = useState(false)
 
@@ -94,7 +94,7 @@ const GameInterface = ({
             onClick={() => handleNamePlace()}
             className={`card__place mr-4 ${
               placeName === "Lieu" ? "" : "card__place--active bg-teal-500"
-            } bg-gray-200 select-none duration-500 h-56 w-40 rounded-lg flex justify-center items-center transform hover:scale-105 cursor-pointer shadow-lg text-gray-800 text-2xl font-bold`}
+            } bg-gray-200 select-none duration-500 h-56 w-32 rounded-lg flex justify-center items-center transform hover:scale-105 cursor-pointer shadow-lg text-gray-800 text-xl font-bold sm:text-2xl sm:w-40`}
           >
             <h1
               className={`card__title text-center mx-auto p-1 max-h-full overflow-y-auto ${
@@ -108,7 +108,7 @@ const GameInterface = ({
             onClick={() => handleNameEvent()}
             className={`card__event ml-4 ${
               eventName === "Évenement" ? "" : "card__event--active bg-teal-500"
-            } bg-gray-200 select-none duration-500 h-56 w-40 rounded-lg flex justify-center items-center transform hover:scale-105 cursor-pointer shadow-lg text-gray-800 text-2xl font-bold`}
+            } bg-gray-200 select-none duration-500 h-56 w-32 rounded-lg flex justify-center items-center transform hover:scale-105 cursor-pointer shadow-lg text-gray-800 text-xl font-bold sm:text-2xl sm:w-40`}
           >
             <h1
               className={`card__title text-center mx-auto p-1 max-h-full ${
@@ -136,9 +136,9 @@ const GameInterface = ({
                   <div
                     key={key}
                     onClick={() => handleNextScene(action.id)}
-                    className="card__action my-2 mx-2 bg-gray-200 select-none px-4 h-48 w-40 rounded-lg flex justify-center items-center transform hover:scale-105 cursor-pointer shadow-lg text-gray-800 text-center text-lg font-bold sm:text-2xl sm:h-56 sm:w-48"
+                    className="card__action my-2 mx-2 bg-gray-200 select-none px-4 h-48 w-32 rounded-lg flex justify-center items-center transform hover:scale-105 cursor-pointer shadow-lg text-gray-800 text-center text-md font-bold sm:text-2xl sm:h-56 sm:w-48"
                   >
-                    <p className="card__action-title overflow-y-auto">
+                    <p className="card__action-title overflow-y-auto w-24">
                       {action.action.name}
                     </p>
                   </div>
