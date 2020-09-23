@@ -23,6 +23,10 @@ const CreateGame = () => {
   const [actionsState, setActions] = useState({
     transitions: [],
   })
+  /* Categories State  */
+  const [categoriesState, setCategories] = useState({
+    categories: [],
+  })
 
   // Sauvegarder Brouillon
   const saveStory = () => {
@@ -37,9 +41,9 @@ const CreateGame = () => {
           {
             title: currentTitleState.title,
             /* pictureFile: "pictureFile", */
-            category: 8,
+            category: currentCategoryState.category,
             /* status: 2, */
-            difficulty: 2,
+            difficulty: currentDifficultyState.difficulty,
             synopsis: currentSynopsisState.synopsis,
             scenes: [...scenesState.scenes],
           },
@@ -65,9 +69,9 @@ const CreateGame = () => {
           {
             title: currentTitleState.title,
             /* pictureFile: "pictureFile", */
-            category: 8,
+            category: currentCategoryState.category,
             /* status: 2, */
-            difficulty: 2,
+            difficulty: currentDifficultyState.difficulty,
             synopsis: currentSynopsisState.synopsis,
             scenes: [...scenesState.scenes],
           },
@@ -100,9 +104,9 @@ const CreateGame = () => {
           {
             title: currentTitleState.title,
             /* pictureFile: "pictureFile", */
-            category: 1,
+            category: currentCategoryState.category,
             /* status: 2, */
-            difficulty: 2,
+            difficulty: currentDifficultyState.difficulty,
             synopsis: currentSynopsisState.synopsis,
             scenes: [...scenesState.scenes],
           },
@@ -121,34 +125,6 @@ const CreateGame = () => {
           console.log(error.response)
         })
     }
-    axios
-      .patch(
-        "http://ec2-18-234-186-84.compute-1.amazonaws.com/api/stories/" +
-          currentStoryID.story_id +
-          "/publish",
-        {
-          title: currentTitleState.title,
-          /* pictureFile: "pictureFile", */
-          category: 1,
-          /* status: 2, */
-          difficulty: 2,
-          synopsis: currentSynopsisState.synopsis,
-          scenes: [...scenesState.scenes],
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      .then((response) => {
-        console.log("PUT :")
-        console.log(response)
-        setStoryID({ story_id: response.data.story_id })
-      })
-      .catch((error) => {
-        console.log(error.response)
-      })
   }
 
   useEffect(() => {
@@ -184,11 +160,67 @@ const CreateGame = () => {
       .then((response) => {
         setActions({ transitions: response.data })
       })
+
+    // /api/public/story_categories
+    axios
+      .get(
+        "http://ec2-18-234-186-84.compute-1.amazonaws.com/api/public/story_categories",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((response) => {
+        setCategories({ categories: response.data })
+      })
   }, [setAppState])
 
   // State of current "Title"
   const [currentStoryID, setStoryID] = useState({
     story_id: null,
+  })
+  // Publish Story
+  useEffect(() => {
+    const token = localStorage.getItem("user")
+
+    axios
+      .patch(
+        "http://ec2-18-234-186-84.compute-1.amazonaws.com/api/stories/" +
+          currentStoryID.story_id +
+          "/publish",
+        {
+          title: currentTitleState.title,
+          /* pictureFile: "pictureFile", */
+          category: currentCategoryState.category,
+          /* status: 2, */
+          difficulty: currentDifficultyState.difficulty,
+          synopsis: currentSynopsisState.synopsis,
+          scenes: [...scenesState.scenes],
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log("PUT :")
+        console.log(response)
+      })
+      .catch((error) => {
+        console.log(error.response)
+      })
+  }, [currentStoryID])
+  // State of current "Difficulty"
+  const [currentDifficultyState, setDifficultyState] = useState({
+    difficulty: 1,
+  })
+
+  //setCategoryState
+  // State of current "Category"
+  const [currentCategoryState, setCategoryState] = useState({
+    category: 22,
   })
   // State of current "Title"
   const [currentTitleState, setTitleState] = useState({
@@ -528,6 +560,16 @@ const CreateGame = () => {
     setSynopsisState({ synopsis: e.target.value })
   }
 
+  // Change current Difficulty State
+  const difficulty = (e) => {
+    setDifficultyState({ difficulty: e.target.value })
+  }
+
+  // Change current Category State
+  const category = (e) => {
+    setCategoryState({ category: e.target.value })
+  }
+
   return (
     <div className="Nav bg-gray-900 flex  flex-col justify-evenly items-center mt-32 ">
       {/* Modal */}
@@ -551,6 +593,18 @@ const CreateGame = () => {
             placeholder="Votre titre"
             className="px-4 py-2 shadow-inner w-64"
           ></textarea>
+          <select onChange={difficulty} name="difficulty" id="difficulty">
+            <option value="1">Facile</option>
+            <option value="2">Moyen</option>
+            <option value="3">Difficile</option>
+          </select>{" "}
+          <select onChange={category} name="categories" id="category">
+            {categoriesState.categories.length > 0
+              ? categoriesState.categories.map((catItem, index) => (
+                  <option value={catItem.id}>{catItem.name}</option>
+                ))
+              : ""}
+          </select>
           <button
             className="bg-teal-500 ease-in duration-100 transform my-6 font-bold uppercase shadow-lg text-center px-4 py-2 text-2xl w-64 text-white rounded-lg hover:scale-105"
             onClick={publishStory}
@@ -713,12 +767,14 @@ const CreateGame = () => {
         </div>
         {/* /Modules */}
       </div>
+      {/*
       <button
         className="bg-teal-500 ease-in duration-100 transform my-6 font-bold uppercase shadow-lg text-center px-4 py-2 text-2xl w-64 text-white rounded-lg hover:scale-105"
         onClick={saveStory}
       >
         Enregistrer
       </button>
+      */}
       <button
         className="bg-teal-500 ease-in duration-100 transform my-6 font-bold uppercase shadow-lg text-center px-4 py-2 text-2xl w-64 text-white rounded-lg hover:scale-105"
         onClick={() => showModalFun(true)}
@@ -808,3 +864,6 @@ const CreateGame = () => {
 }
 
 export default CreateGame
+
+// TODO Add Category Story
+// TODO Add Difficulty
