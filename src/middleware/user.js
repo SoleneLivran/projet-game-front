@@ -26,15 +26,20 @@ const user = (store) => (next) => (action) => {
     case USER_EDIT: {
       axios
         .put(
+          // 1rst arg = url
           `http://ec2-18-234-186-84.compute-1.amazonaws.com/api/account/${state.auth.connectedId}`,
+          // 2e arg = body
           {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("user")}`,
-            },
             newName: state.user.username.toLowerCase().trim(),
             newMail: state.user.email.toLowerCase().trim(),
             oldPassword: state.user.password.trim(),
             newPassword: state.user.newPassword.trim(),
+          },
+          // 2e arg = options (including headers)
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("user")}`,
+            },
           }
         )
         .then((response) => {
