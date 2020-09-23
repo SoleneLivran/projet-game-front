@@ -38,7 +38,7 @@ const LoginForm = ({ handleLogin, isLogged }) => (
         />
       </form>
 
-      <section className="login-form__noaccount w-64 h-32 flex flex-col justify-center mx-auto p-4 border-2 border-orange-400 bg-orange-900 font-bold mt-4">
+      <section className="login-form__noaccount w-64 h-32 flex flex-col justify-center mx-auto p-4 border-2 border-orange-400 bg-orange-900 font-bold mt-4 md:mt-0 md:self-center">
         <p className="login-form__signup text-center">Pas encore de compte ?</p>
         <Link to="/signup" className="mx-auto">
           <button
