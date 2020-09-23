@@ -1,7 +1,7 @@
 .nav {}
 
 .nav__user {
-  background-image: url("/assets/img/default_visitor.jpg");
+  background-image: url("/assets/img/avatar_viking.jpg");
 }
 
 .nav__selected {

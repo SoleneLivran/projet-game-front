@@ -55,7 +55,7 @@ const ModalAvatar = ({ showModalAvatar, onClose, setAvatar }) => {
           <ul className="modal-avatar__list flex flex-wrap overflow-y-auto">
             <li className="modal-avatar__item-img w-1/2">
               <img
-                src="/assets/img/default_avatar.png"
+                src="/assets/img/human_girl.png"
                 alt=""
                 className="modal-avatar__img h-24 w-24 my-5 mx-auto cursor-pointer transform hover:scale-110"
                 onClick={() => {
@@ -66,7 +66,7 @@ const ModalAvatar = ({ showModalAvatar, onClose, setAvatar }) => {
             </li>
             <li className="modal-avatar__item-img w-1/2">
               <img
-                src="/assets/img/default_avatar2.png"
+                src="/assets/img/human_boy.png"
                 alt=""
                 className="modal-avatar__img h-24 w-24 my-5 mx-auto cursor-pointer transform hover:scale-110"
                 onClick={() => {
