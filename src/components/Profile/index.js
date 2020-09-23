@@ -21,28 +21,6 @@ const Profile = ({
   password,
   newPassword,
 }) => {
-  const fetchUserStories = () => {
-    axios
-      .get(
-        `http://ec2-18-234-186-84.compute-1.amazonaws.com/api/app_user/${connectedId}/stories`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("user")}`,
-          },
-        }
-      )
-      .then((response) => {
-        console.log(response)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }
-  // Get current user data, API GET request in user middleware:
-  useEffect(() => {
-    fetchUser()
-    fetchUserStories()
-  }, [])
   // Get params from url
   const { slug } = useParams()
 
@@ -54,8 +32,33 @@ const Profile = ({
   const handleModalDelete = () => setModalDelete(true)
   const handleModalAvatar = () => setModalAvatar(true)
 
+  const [userStoriesList, setUserStoriesList] = useState([])
+
+  const fetchUserStories = () => {
+    axios
+      .get(
+        `http://ec2-18-234-186-84.compute-1.amazonaws.com/api/app_users/${connectedId}/stories`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("user")}`,
+          },
+        }
+      )
+      .then((response) => {
+        setUserStoriesList(response.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
   const errors = checkInput(name, mail, password, newPassword)
 
+  // Get current user data, API GET request in user middleware:
+  useEffect(() => {
+    fetchUser()
+    fetchUserStories()
+  }, [])
   return (
     <div className="profile px-8 h-auto sm:px-16 sm:mt-10 sm:px-24 md:mx-auto md:mt-20">
       {/* Only when modal is open (true) -> Modal is display, and the event click/key can be use */}
@@ -73,15 +76,22 @@ const Profile = ({
           onClose={() => setModalAvatar(false)}
         />
       )}
-      <section className="profile__stories mt-4 border-b-4 pb-8">
+      <section className="profile__stories mt-4 border-b-4 py-8">
         <h1 className="stories__title uppercase text-white text-3xl font-light">
           Mes histoires
         </h1>
-        <ul className="stories__list mt-2">
-          <Story />
-          <Story />
-          <Story />
-          <Story />
+        <ul className="stories__list my-6 overflow-y-auto">
+          {userStoriesList.length === 0 && (
+            <p className="text-center text-white">Aucune histoires créées</p>
+          )}
+          {userStoriesList.map((story) => (
+            <Story
+              key={story.id}
+              id={story.id}
+              title={story.title}
+              status={story.status}
+            />
+          ))}
         </ul>
       </section>
       <section className="profile__user mt-10 md:flex justify-around">

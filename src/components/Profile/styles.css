@@ -2,6 +2,10 @@
   max-width: 70rem;
 }
 
+.stories__list {
+  max-height: 20rem;
+}
+
 .stories__story-edit {
   box-shadow: 0 0 5px black;
 }
