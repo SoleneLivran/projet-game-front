@@ -572,7 +572,6 @@ const CreateGame = () => {
 
   return (
     <div className="Nav bg-gray-900 flex  flex-col justify-evenly items-center mt-32 ">
-      {/* Modal */}
       <div
         className={
           showModal.showModal
@@ -620,9 +619,7 @@ const CreateGame = () => {
         </div>
         <div className="absolute  w-screen h-screen opacity-50 bg-white z-30"></div>
       </div>
-      {/* /Modal */}
       <div className="flex flex-col w-screen">
-        {/* Saved Scenes */}
         <div className="flex    ">
           {scenesState.scenes.length > 0
             ? scenesState.scenes.map((item, index) => (
@@ -645,8 +642,6 @@ const CreateGame = () => {
                   </div>
                   <div className="">
                     {item.transitions.map((action, indexaction) => (
-                      /* {actionDoneState.array.includes(item.nextSceneId) ?  : } */
-
                       <div
                         onClick={() =>
                           actionDoneState.array.includes(action.nextSceneRef)
@@ -667,7 +662,6 @@ const CreateGame = () => {
                             : "py-2 select-none my-4 rounded-lg px-4 bg-gray-900 shadow-md text-white font-bold transform duration-100 ease-in-out hover:scale-95"
                         }
                       >
-                        {/*<div className={scenesState.scenes.actions}></div> */}
                         <div className="flex flex-wrap justify-evenly">
                           {action.actionName}
                           {"  "}
@@ -690,11 +684,8 @@ const CreateGame = () => {
               ))
             : ""}
         </div>
-        {/* /Saved Scenes */}
-        {/* Modules */}
-        <div className="flex justify-center items-center">
-          {/* Lieu module */}
 
+        <div className="flex justify-center items-center">
           <div
             onClick={lieuOnClick}
             className={
@@ -710,8 +701,7 @@ const CreateGame = () => {
           >
             {currentLieuState.currentLieu}
           </div>
-          {/* /Lieu module */}
-          {/* Evenement module */}
+
           <div
             onClick={eventOnClick}
             className={
@@ -727,9 +717,6 @@ const CreateGame = () => {
           >
             {currentEventState.currentEvent}
           </div>
-
-          {/* /Evenement module */}
-          {/* Action module */}
 
           {currentActionState.array == false ? (
             <div
@@ -762,26 +749,15 @@ const CreateGame = () => {
               </div>
             ))
           )}
-
-          {/* /Action module */}
         </div>
-        {/* /Modules */}
       </div>
-      {/*
-      <button
-        className="bg-teal-500 ease-in duration-100 transform my-6 font-bold uppercase shadow-lg text-center px-4 py-2 text-2xl w-64 text-white rounded-lg hover:scale-105"
-        onClick={saveStory}
-      >
-        Enregistrer
-      </button>
-      */}
+
       <button
         className="bg-teal-500 ease-in duration-100 transform my-6 font-bold uppercase shadow-lg text-center px-4 py-2 text-2xl w-64 text-white rounded-lg hover:scale-105"
         onClick={() => showModalFun(true)}
       >
         Publier
       </button>
-      {/* Save Current Scene Button */}
       {currentLieuState.currentLieu != "LIEU" &&
       currentEventState.currentEvent != "EVENEMENT" &&
       currentActionState.currentAction != "ACTION" &&
@@ -807,10 +783,8 @@ const CreateGame = () => {
       ) : (
         ""
       )}
-      {/* /Save Current Scene Button */}
-      {/* Cards */}
+
       <div className=" my-16 flex overflow-x-auto w-screen">
-        {/* Display Lieu data cards */}
         {cardsState.currentCards === "lieuState"
           ? lieuState.lieux.map((item, i) => (
               <div
@@ -826,7 +800,6 @@ const CreateGame = () => {
               </div>
             ))
           : ""}
-        {/* Display Evement data cards */}
         {cardsState.currentCards === "evenementState"
           ? eventState.event.map((item, i) => (
               <div
@@ -842,7 +815,6 @@ const CreateGame = () => {
               </div>
             ))
           : ""}
-        {/* Display Action data cards */}
         {cardsState.currentCards === "actionState"
           ? actionsState.transitions.map((item, i) => (
               <div
@@ -858,12 +830,8 @@ const CreateGame = () => {
             ))
           : ""}
       </div>
-      {/* /Cards */}
     </div>
   )
 }
 
 export default CreateGame
-
-// TODO Add Category Story
-// TODO Add Difficulty
