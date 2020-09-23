@@ -1,8 +1,13 @@
 import React, { useEffect, useRef } from "react"
 import PropTypes from "prop-types"
-import "./styles.css"
+import axios from "axios"
 
-const ModalAvatar = ({ showModalDeleteStory, onClose }) => {
+const ModalDeleteStory = ({
+  showModalDeleteStory,
+  onClose,
+  storyId,
+  setstoryId,
+}) => {
   // display the modal when the user click on the delete button in UserProfile
   const displayModal = showModalDeleteStory === true ? "block" : "hidden"
 
@@ -33,34 +38,69 @@ const ModalAvatar = ({ showModalDeleteStory, onClose }) => {
     }
   }
 
+  const deleteStory = () => {
+    axios
+      .delete(
+        `http://ec2-18-234-186-84.compute-1.amazonaws.com/api/stories/${storyId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("user")}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response)
+        onClose()
+        setstoryId(null)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
   return (
     <div
-      className={`modale-delete h-screen w-screen ${displayModal} fixed z-40 flex flex-col justify-center`}
+      className={`modal-delete h-screen w-screen ${displayModal} fixed z-40 flex flex-col justify-center`}
     >
       <div
         className="w-3/4 mx-auto md:max-w-6xl relative bg-gray-200 opacity-100 rounded-lg"
         ref={ref}
       >
         <button
-          className="modale-delete__close h-12 w-12 bg-red-500 text-white font-bold absolute rounded-full"
+          className="modal-delete__close h-12 w-12 bg-red-500 text-white font-bold absolute rounded-full"
           type="button"
           onClick={() => onClose()}
         >
           X
         </button>
-        <div className="modale-delete__content p-3">
-          <h1 className="modale-delete__title text-2xl font-bold text-center mb-2">
+        <div className="modal-delete__content p-3">
+          <h1 className="modal-delete__title text-2xl font-bold text-center mb-2">
             Confirmer la suppression de l'histoire ?
           </h1>
+          <div className="modal-delete__buttons flex flex-col items-center sm:flex-row sm:justify-center">
+            <button
+              onClick={() => deleteStory()}
+              className="modal-delete__agree bg-red-500 w-8/12 p-2 rounded-lg my-3 sm:w-56 sm:mx-1 md:mx-4 md:w-64"
+            >
+              Supprimer l'histoire
+            </button>
+            <button
+              onClick={() => onClose()}
+              className="modal-delete__close w-8/12 p-2 bg-green-400 rounded-lg my-3 sm:w-56 sm:mx-1 md:mx-4 md:w-64"
+            >
+              Annuler
+            </button>
+          </div>
         </div>
       </div>
     </div>
   )
 }
 
-ModalAvatar.propTypes = {
+ModalDeleteStory.propTypes = {
   showModalDeleteStory: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  setAvatar: PropTypes.func.isRequired,
+  storyId: PropTypes.number.isRequired,
+  setstoryId: PropTypes.func.isRequired,
 }
-export default ModalAvatar
+export default ModalDeleteStory

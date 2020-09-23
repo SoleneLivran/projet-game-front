@@ -19,7 +19,7 @@ const ModalDeleteUser = ({
   // Change the color of button, depends of the checkbox's state
   const buttonActiveClassName = buttonActive
     ? "bg-gray-600 cursor-not-allowed"
-    : "bg-green-500 cursor-pointer"
+    : "bg-red-500 cursor-pointer"
 
   // display the modal when the user click on the delete button in UserProfile
   const displayModal = showModalDeleteUser === true ? "block" : "hidden"
@@ -125,7 +125,7 @@ const ModalDeleteUser = ({
             </button>
             <button
               onClick={() => onClose()}
-              className="modal-delete__close w-8/12 sm:w-64 p-2 bg-red-500 rounded-lg my-3"
+              className="modal-delete__close w-8/12 sm:w-64 p-2 bg-green-300 rounded-lg my-3"
             >
               Je ne souhaite pas supprimer mon compte
             </button>

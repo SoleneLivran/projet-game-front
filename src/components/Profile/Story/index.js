@@ -12,7 +12,7 @@ const Story = ({ id, title, status, handleModalDeleteStory }) => {
           <i className="fas fa-edit" />
         </button>
         <button
-          onClick={() => handleModalDeleteStory()}
+          onClick={() => handleModalDeleteStory(id)}
           className="stories__story-delete bg-red-700 rounded-full h-10 w-10 m-1"
         >
           <i className="fas fa-trash-alt" />

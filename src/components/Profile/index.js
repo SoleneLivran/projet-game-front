@@ -6,6 +6,7 @@ import FieldProfile from "src/containers/FieldProfile/index"
 import Story from "./Story/index"
 import ModalDeleteUser from "./ModalDeleteUser/index"
 import ModalAvatar from "src/containers/ModalAvatar/index"
+import ModalDeleteStory from "./ModalDeleteStory/index"
 
 import { checkInput, fetchUserStories } from "src/selectors/profile"
 
@@ -27,11 +28,15 @@ const Profile = ({
   const [showModalDeleteUser, setModalDeleteUser] = useState(false)
   const [showModalAvatar, setModalAvatar] = useState(false)
   const [showModalDeleteStory, setModalDeleteStory] = useState(false)
+  const [storyId, setstoryId] = useState(null)
 
   // Change modal current state
   const handleModalDeleteUser = () => setModalDeleteUser(true)
   const handleModalAvatar = () => setModalAvatar(true)
-  const handleModalDeleteStory = () => setModalDeleteStory(true)
+  const handleModalDeleteStory = (storyId) => {
+    setstoryId(storyId)
+    setModalDeleteStory(true)
+  }
 
   const [userStoriesList, setUserStoriesList] = useState([])
 
@@ -57,6 +62,14 @@ const Profile = ({
         <ModalAvatar
           showModalAvatar={showModalAvatar}
           onClose={() => setModalAvatar(false)}
+        />
+      )}
+      {showModalDeleteStory && (
+        <ModalDeleteStory
+          showModalDeleteStory={showModalDeleteStory}
+          onClose={() => setModalDeleteStory(false)}
+          storyId={storyId}
+          setstoryId={setstoryId}
         />
       )}
       <section className="profile__stories mt-4 border-b-4 py-8">
