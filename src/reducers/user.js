@@ -6,7 +6,7 @@ import {
 } from "src/actions/user"
 
 export const initialState = {
-  avatar: "default_avatar",
+  avatar: "",
   username: "",
   email: "",
   password: "",
@@ -33,7 +33,7 @@ const user = (state = initialState, action = {}) => {
         username: action.name,
         email: action.mail,
         // avatar: action.avatar,
-        avatar: "default_avatar",
+        avatar: "human_girl",
         password: "",
         newPassword: "",
       }

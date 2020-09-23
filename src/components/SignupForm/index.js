@@ -3,13 +3,13 @@ import "./styles.css"
 import PropTypes from "prop-types"
 import Field from "src/containers/Field/index"
 import { checkInput } from "src/selectors/signupform"
-import { Redirect } from "react-router-dom"
+import { Redirect, Link } from "react-router-dom"
 
 const SignupForm = ({ username, email, password, passwordCheck, handleSignup }) => {
   const errors = checkInput(username, email, password, passwordCheck)
   const [isSignedUp, setSignedUp] = useState(false)
   return (
-    <div className="signup-form mt-8">
+    <div className="signup-form mt-8 sm:flex">
       <form
         onSubmit={(e) => {
           e.preventDefault()
@@ -19,7 +19,7 @@ const SignupForm = ({ username, email, password, passwordCheck, handleSignup }) 
             setSignedUp(true)
           }
         }}
-        className="signup-form__panel w-64 flex flex-col justify-center mx-auto p-4 border-2 border-orange-400 bg-orange-900 font-bold"
+        className="signup-form__panel  w-64 flex flex-col justify-center mx-auto p-4 border-2 border-orange-400 bg-orange-900 font-bold"
       >
         <h1 className="signup-form__title text-xl font-bold text-center text-orange-400">
           Inscription
@@ -65,6 +65,17 @@ const SignupForm = ({ username, email, password, passwordCheck, handleSignup }) 
           value="Confirmer l'inscription"
         />
       </form>
+      <section className="login-form__noaccount w-64 h-32 flex flex-col justify-center mx-auto p-4 border-2 border-orange-400 bg-orange-900 font-bold mt-4 sm:mt-0 sm:self-center">
+        <p className="login-form__signup text-center">Déjà inscrit ?</p>
+        <Link to="/login" className="mx-auto">
+          <button
+            type="button"
+            className="login-form__btn-signup cursor-pointer h-12 px-6 mt-2 uppercase font-bold whitespace-pre-wrap border-4 border-double border-yellow-400 bg-orange-600 rounded-sm shadow-inner"
+          >
+            Se connecter
+          </button>
+        </Link>
+      </section>
       {isSignedUp && <Redirect to="/" />}
     </div>
   )
