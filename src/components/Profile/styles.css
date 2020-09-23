@@ -6,7 +6,7 @@
   max-height: 20rem;
 }
 
-.stories__story-edit {
+/* .stories__story-edit {
   box-shadow: 0 0 5px black;
 }
 
@@ -19,7 +19,7 @@
 
 .stories__story-edit:hover {
   box-shadow: 0 0 3px #2c5282;
-}
+} */
 
 .stories__story-delete {
   box-shadow: 0 0 5px black;

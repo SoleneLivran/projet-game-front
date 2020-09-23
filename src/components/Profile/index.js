@@ -98,6 +98,9 @@ const Profile = ({
         <h1 className="stories__title uppercase text-white text-3xl font-light">
           Mes histoires
         </h1>
+        <p className="text-xs text-white italic">
+          La fonction d'édition sera prochainement proposée
+        </p>
         <ul className="stories__list my-6 overflow-y-auto">
           {loadingStories && (
             <div className="stories__loading flex justify-center">

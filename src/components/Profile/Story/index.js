@@ -8,7 +8,10 @@ const Story = ({ id, title, status, handleModalDeleteStory }) => {
         <p className="stories__story-status text-xs bg-green-500 h-8 px-1 py-2 w-20 rounded-md m-1 text-center">
           {status === 1 ? "Publiée" : "Brouillon"}
         </p>
-        <button className="stories__story-edit bg-blue-400 rounded-full h-10 w-10 m-1">
+        <button
+          disabled
+          className="stories__story-edit cursor-not-allowed bg-gray-400 rounded-full h-10 w-10 m-1"
+        >
           <i className="fas fa-edit" />
         </button>
         <button
