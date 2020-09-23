@@ -4,8 +4,8 @@ import axios from "axios"
 import "./styles.css"
 import { Redirect } from "react-router-dom"
 
-const ModalDelete = ({
-  showModalDelete,
+const ModalDeleteUser = ({
+  showModalDeleteUser,
   onClose,
   handleDeleteUser,
   connectedId,
@@ -22,7 +22,7 @@ const ModalDelete = ({
     : "bg-green-500 cursor-pointer"
 
   // display the modal when the user click on the delete button in UserProfile
-  const displayModal = showModalDelete === true ? "block" : "hidden"
+  const displayModal = showModalDeleteUser === true ? "block" : "hidden"
 
   // useRef to define a current object => only the modal part who display content
   const ref = useRef(null)
@@ -137,10 +137,10 @@ const ModalDelete = ({
   )
 }
 
-ModalDelete.propTypes = {
-  showModalDelete: PropTypes.bool.isRequired,
+ModalDeleteUser.propTypes = {
+  showModalDeleteUser: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   handleDeleteUser: PropTypes.func.isRequired,
   connectedId: PropTypes.number.isRequired,
 }
-export default ModalDelete
+export default ModalDeleteUser

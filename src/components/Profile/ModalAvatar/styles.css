@@ -8,3 +8,7 @@
   right: -2rem;
   top: -4rem;
 }
+
+.modal-avatar__list {
+  max-height: 25rem;
+}
