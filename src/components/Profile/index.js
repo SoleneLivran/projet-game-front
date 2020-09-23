@@ -28,17 +28,26 @@ const Profile = ({
   const [showModalDeleteUser, setModalDeleteUser] = useState(false)
   const [showModalAvatar, setModalAvatar] = useState(false)
   const [showModalDeleteStory, setModalDeleteStory] = useState(false)
+
+  // state for story list written by connected user
+  const [userStoriesList, setUserStoriesList] = useState([])
+
+  // state storyId for delete request
   const [storyId, setstoryId] = useState(null)
 
   // Change modal current state
   const handleModalDeleteUser = () => setModalDeleteUser(true)
   const handleModalAvatar = () => setModalAvatar(true)
+
+  // Change modal delete current state & set the selected story
   const handleModalDeleteStory = (storyId) => {
     setstoryId(storyId)
     setModalDeleteStory(true)
   }
 
-  const [userStoriesList, setUserStoriesList] = useState([])
+  const refreshStory = () => {
+    fetchUserStories(setUserStoriesList, connectedId)
+  }
 
   const errors = checkInput(name, mail, password, newPassword)
 
@@ -70,6 +79,7 @@ const Profile = ({
           onClose={() => setModalDeleteStory(false)}
           storyId={storyId}
           setstoryId={setstoryId}
+          refreshStory={refreshStory}
         />
       )}
       <section className="profile__stories mt-4 border-b-4 py-8">

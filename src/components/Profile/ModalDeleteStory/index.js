@@ -7,6 +7,7 @@ const ModalDeleteStory = ({
   onClose,
   storyId,
   setstoryId,
+  refreshStory,
 }) => {
   // display the modal when the user click on the delete button in UserProfile
   const displayModal = showModalDeleteStory === true ? "block" : "hidden"
@@ -52,6 +53,7 @@ const ModalDeleteStory = ({
         console.log(response)
         onClose()
         setstoryId(null)
+        refreshStory()
       })
       .catch((error) => {
         console.log(error)
@@ -102,5 +104,6 @@ ModalDeleteStory.propTypes = {
   onClose: PropTypes.func.isRequired,
   storyId: PropTypes.number.isRequired,
   setstoryId: PropTypes.func.isRequired,
+  refreshStory: PropTypes.func.isRequired,
 }
 export default ModalDeleteStory
