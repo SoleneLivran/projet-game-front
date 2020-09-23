@@ -1,17 +1,24 @@
 import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import { Link, useParams } from "react-router-dom"
+
+import GameEnd from "./GameEnd/index"
 import "./styles.css"
 
-const GameInterface = ({ fetchStory, place, event, transitions, nextScene }) => {
+const GameInterface = ({
+  fetchStory,
+  place,
+  event,
+  transitions,
+  nextScene,
+  clearPreviousGame,
+}) => {
   const { slug } = useParams()
-  // Hide Nav when component is mounted
-  useEffect(() => {
-    fetchStory(slug)
-  }, [fetchStory, slug])
 
-  const [placeName, setNamePlace] = useState("Lieu")
-  const [eventName, setNameEvent] = useState("Évenement")
+  const [placeName, setNamePlace] = useState("Lie")
+  const [eventName, setNameEvent] = useState("Évenemen")
+
+  const [isEnd, setIsEnd] = useState(false)
 
   const handleNamePlace = () => {
     placeName === "Lieu" ? setNamePlace(place.name) : setNamePlace("Lieu")
@@ -30,6 +37,25 @@ const GameInterface = ({ fetchStory, place, event, transitions, nextScene }) => 
       nextScene(id)
     }, 500)
   }
+
+  // load stories when component is mounted
+  useEffect(() => {
+    fetchStory(slug)
+  }, [clearPreviousGame, fetchStory, slug])
+
+  // update isEnd state when event change
+  useEffect(() => {
+    if (event.isEnd === true) {
+      setIsEnd(true)
+    }
+  }, [event])
+
+  // Cleanup function to remove stories array
+  useEffect(() => {
+    return () => {
+      clearPreviousGame()
+    }
+  }, [])
 
   const describeClassName =
     placeName !== "Lieu" && eventName !== "Évenement" ? "opacity-100" : "opacity-0"
@@ -89,23 +115,28 @@ const GameInterface = ({ fetchStory, place, event, transitions, nextScene }) => 
         >
           <p className="game-interface__content my-2 px-4 py-2 text-white font-bold text-lg sm:text-xl text-center bg-gray-800 bg-opacity-50 rounded-lg">
             {place.description} et {event.description} <br />
-            Que faites-vous ?
+            {isEnd ? "" : "Que faites-vous ?"}
           </p>
-          <div className="game-interface__actions py-6 overflow-x-auto flex">
-            {transitions.map((action, key) => {
-              return (
-                <div
-                  key={key}
-                  onClick={() => handleNextScene(action.id)}
-                  className="card__action my-2 mx-2 bg-gray-200 select-none px-4 h-48 w-40 rounded-lg flex justify-center items-center transform hover:scale-105 cursor-pointer shadow-lg text-gray-800 text-center text-lg font-bold sm:text-2xl sm:h-56 sm:w-48"
-                >
-                  <p className="card__action-title overflow-y-auto">
-                    {action.action.name}
-                  </p>
-                </div>
-              )
-            })}
-          </div>
+
+          {isEnd ? (
+            <GameEnd />
+          ) : (
+            <div className="game-interface__actions py-6 overflow-x-auto flex">
+              {transitions.map((action, key) => {
+                return (
+                  <div
+                    key={key}
+                    onClick={() => handleNextScene(action.id)}
+                    className="card__action my-2 mx-2 bg-gray-200 select-none px-4 h-48 w-40 rounded-lg flex justify-center items-center transform hover:scale-105 cursor-pointer shadow-lg text-gray-800 text-center text-lg font-bold sm:text-2xl sm:h-56 sm:w-48"
+                  >
+                    <p className="card__action-title overflow-y-auto">
+                      {action.action.name}
+                    </p>
+                  </div>
+                )
+              })}
+            </div>
+          )}
         </div>
       </div>
     </div>
