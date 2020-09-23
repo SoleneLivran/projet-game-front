@@ -47,9 +47,18 @@ const GameInterface = ({
   useEffect(() => {
     if (event.isEnd === true) {
       setIsEnd(true)
+    } else {
+      setIsEnd(false)
     }
   }, [event])
 
+  const handleRestart = () => {
+    setNamePlace("Lieu")
+    setNameEvent("Évenement")
+    setTimeout(() => {
+      fetchStory(slug)
+    }, 500)
+  }
   // Cleanup function to remove stories array
   useEffect(() => {
     return () => {
@@ -119,7 +128,7 @@ const GameInterface = ({
           </p>
 
           {isEnd ? (
-            <GameEnd />
+            <GameEnd handleRestart={handleRestart} />
           ) : (
             <div className="game-interface__actions py-6 overflow-x-auto flex">
               {transitions.map((action, key) => {
