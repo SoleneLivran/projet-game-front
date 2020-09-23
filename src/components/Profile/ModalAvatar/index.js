@@ -38,11 +38,11 @@ const ModalAvatar = ({ showModalAvatar, onClose, setAvatar }) => {
       className={`modal-avatar h-screen w-screen ${displayModal} fixed z-40 flex flex-col justify-center`}
     >
       <div
-        className="w-3/4 mx-auto md:max-w-6xl relative bg-gray-200 opacity-100 rounded-lg overflow-y-auto"
+        className="w-3/4 mx-auto md:max-w-6xl relative bg-gray-200 opacity-100 rounded-lg"
         ref={ref}
       >
         <button
-          className="modal-avatar__close h-12 w-12 bg-red-500 text-white font-bold absolute rounded-full"
+          className="modal-avatar__close z-40 h-12 w-12 bg-red-500 text-white font-bold absolute rounded-full"
           type="button"
           onClick={() => onClose()}
         >
@@ -52,7 +52,7 @@ const ModalAvatar = ({ showModalAvatar, onClose, setAvatar }) => {
           <h1 className="modal-avatar__title text-2xl font-bold text-center mb-2">
             Choix d'un avatar
           </h1>
-          <ul className="modal-avatar__list flex flex-wrap">
+          <ul className="modal-avatar__list flex flex-wrap overflow-y-auto">
             <li className="modal-avatar__item-img w-1/2">
               <img
                 src="/assets/img/default_avatar.png"

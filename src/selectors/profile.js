@@ -1,3 +1,5 @@
+import axios from "axios"
+
 export const checkInput = (name, mail, password, newPassword) => {
   const errors = {}
   if (name === "") {
@@ -20,4 +22,22 @@ export const checkInput = (name, mail, password, newPassword) => {
   }
 
   return errors
+}
+
+export const fetchUserStories = (setUserStoriesList, connectedId) => {
+  axios
+    .get(
+      `http://ec2-18-234-186-84.compute-1.amazonaws.com/api/app_users/${connectedId}/stories`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("user")}`,
+        },
+      }
+    )
+    .then((response) => {
+      setUserStoriesList(response.data)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 }

@@ -19,7 +19,7 @@ const UserPanel = ({ isLogged, connectedId }) => {
           <Link to={buttonUser.path} key={key}>
             <button
               type="button"
-              className="bg-white ease-in-out duration-75 hover:bg-blue-900 hover:text-white text-gray-900 font-bold py-2 px-4 sm:px-2 rounded mx-2 md:mx-0 md:mb-2 xl:mb-0 xl:px-8 capitalize"
+              className="bg-white ease-in-out duration-75 hover:bg-blue-900 hover:text-white text-gray-900 font-bold py-2 px-4 sm:text-base sm:px-2 rounded mx-2 md:mx-0 md:mb-2 md:text-xl xl:mb-0 xl:px-8 capitalize"
             >
               {buttonUser.name}
             </button>

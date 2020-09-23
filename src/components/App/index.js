@@ -44,7 +44,7 @@ const App = ({ checkIsLogged, isLogged }) => {
         {isLogged && <Route path="/logout" component={Logout} />}
         {isLogged && <Route path="/profile/:slug" component={Profile} />}
         {isLogged && <Route path="/letsplay/:slug" component={GameInterface} />}
-        <Redirect to="/login" />
+        {/* <Redirect to="/login" /> */}
       </Switch>
     </div>
   )

@@ -4,8 +4,8 @@ import axios from "axios"
 import "./styles.css"
 import { Redirect } from "react-router-dom"
 
-const ModalDelete = ({
-  showModalDelete,
+const ModalDeleteUser = ({
+  showModalDeleteUser,
   onClose,
   handleDeleteUser,
   connectedId,
@@ -19,10 +19,10 @@ const ModalDelete = ({
   // Change the color of button, depends of the checkbox's state
   const buttonActiveClassName = buttonActive
     ? "bg-gray-600 cursor-not-allowed"
-    : "bg-green-500 cursor-pointer"
+    : "bg-red-500 cursor-pointer"
 
   // display the modal when the user click on the delete button in UserProfile
-  const displayModal = showModalDelete === true ? "block" : "hidden"
+  const displayModal = showModalDeleteUser === true ? "block" : "hidden"
 
   // useRef to define a current object => only the modal part who display content
   const ref = useRef(null)
@@ -125,7 +125,7 @@ const ModalDelete = ({
             </button>
             <button
               onClick={() => onClose()}
-              className="modal-delete__close w-8/12 sm:w-64 p-2 bg-red-500 rounded-lg my-3"
+              className="modal-delete__close w-8/12 sm:w-64 p-2 bg-green-300 rounded-lg my-3"
             >
               Je ne souhaite pas supprimer mon compte
             </button>
@@ -137,10 +137,10 @@ const ModalDelete = ({
   )
 }
 
-ModalDelete.propTypes = {
-  showModalDelete: PropTypes.bool.isRequired,
+ModalDeleteUser.propTypes = {
+  showModalDeleteUser: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   handleDeleteUser: PropTypes.func.isRequired,
   connectedId: PropTypes.number.isRequired,
 }
-export default ModalDelete
+export default ModalDeleteUser

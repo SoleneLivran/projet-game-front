@@ -4,10 +4,12 @@ import PropTypes from "prop-types"
 import "./styles.css"
 import FieldProfile from "src/containers/FieldProfile/index"
 import Story from "./Story/index"
-import ModalDelete from "./ModalDelete/index"
+import ModalDeleteUser from "./ModalDeleteUser/index"
 import ModalAvatar from "src/containers/ModalAvatar/index"
+import ModalDeleteStory from "./ModalDeleteStory/index"
+import Loading from "src/components/Loading/index"
 
-import { checkInput } from "src/selectors/profile"
+import { checkInput, fetchUserStories } from "src/selectors/profile"
 
 const Profile = ({
   connectedId,
@@ -20,28 +22,59 @@ const Profile = ({
   password,
   newPassword,
 }) => {
-  // Get current user data, API GET request in user middleware:
-  useEffect(fetchUser, [])
   // Get params from url
   const { slug } = useParams()
 
   // Modal state, display on button or hidden when closing it
-  const [showModalDelete, setModalDelete] = useState(false)
+  const [showModalDeleteUser, setModalDeleteUser] = useState(false)
   const [showModalAvatar, setModalAvatar] = useState(false)
+  const [showModalDeleteStory, setModalDeleteStory] = useState(false)
+
+  // state for story list written by connected user
+  const [userStoriesList, setUserStoriesList] = useState([])
+
+  // state for loading stories
+  const [loadingStories, setLoadingStories] = useState([true])
+
+  // state storyId for delete request
+  const [storyId, setstoryId] = useState(null)
 
   // Change modal current state
-  const handleModalDelete = () => setModalDelete(true)
+  const handleModalDeleteUser = () => setModalDeleteUser(true)
   const handleModalAvatar = () => setModalAvatar(true)
+
+  // Change modal delete current state & set the selected story
+  const handleModalDeleteStory = (storyId) => {
+    setstoryId(storyId)
+    setModalDeleteStory(true)
+  }
+
+  const refreshStory = () => {
+    setLoadingStories(true)
+    fetchUserStories(setUserStoriesList, connectedId)
+  }
 
   const errors = checkInput(name, mail, password, newPassword)
 
+  // Get current user data, API GET request in user middleware:
+  useEffect(() => {
+    fetchUser()
+    fetchUserStories(setUserStoriesList, connectedId)
+  }, [])
+
+  // Loading is unset when stories is set after success request API
+  useEffect(() => {
+    setTimeout(() => {
+      setLoadingStories(false)
+    }, 1000)
+  }, [userStoriesList])
   return (
     <div className="profile px-8 h-auto sm:px-16 sm:mt-10 sm:px-24 md:mx-auto md:mt-20">
       {/* Only when modal is open (true) -> Modal is display, and the event click/key can be use */}
-      {showModalDelete && (
-        <ModalDelete
-          showModalDelete={showModalDelete}
-          onClose={() => setModalDelete(false)}
+      {showModalDeleteUser && (
+        <ModalDeleteUser
+          showModalDeleteUser={showModalDeleteUser}
+          onClose={() => setModalDeleteUser(false)}
           handleDeleteUser={handleDeleteUser}
           connectedId={connectedId}
         />
@@ -52,15 +85,47 @@ const Profile = ({
           onClose={() => setModalAvatar(false)}
         />
       )}
-      <section className="profile__stories mt-4 border-b-4 pb-8">
+      {showModalDeleteStory && (
+        <ModalDeleteStory
+          showModalDeleteStory={showModalDeleteStory}
+          onClose={() => setModalDeleteStory(false)}
+          storyId={storyId}
+          setstoryId={setstoryId}
+          refreshStory={refreshStory}
+        />
+      )}
+      <section className="profile__stories mt-4 border-b-4 py-8">
         <h1 className="stories__title uppercase text-white text-3xl font-light">
           Mes histoires
         </h1>
-        <ul className="stories__list mt-2">
-          <Story />
-          <Story />
-          <Story />
-          <Story />
+        <p className="text-xs text-white italic">
+          La fonction d'édition sera prochainement proposée
+        </p>
+        <ul className="stories__list my-6 overflow-y-auto">
+          {loadingStories && (
+            <div className="stories__loading flex justify-center">
+              <Loading
+                type="Oval"
+                color="#5BC1FF"
+                heightValue={50}
+                widthValue={50}
+              />
+            </div>
+          )}
+          {!loadingStories &&
+            userStoriesList.map((story) => (
+              <Story
+                key={story.id}
+                id={story.id}
+                title={story.title}
+                status={story.status}
+                handleModalDeleteStory={handleModalDeleteStory}
+              />
+            ))}
+
+          {!loadingStories && userStoriesList.length === 0 && (
+            <p className="text-center text-white">Aucune histoires créées</p>
+          )}
         </ul>
       </section>
       <section className="profile__user mt-10 md:flex justify-around">
@@ -127,7 +192,7 @@ const Profile = ({
             />
           </form>
           <button
-            onClick={() => handleModalDelete()}
+            onClick={() => handleModalDeleteUser()}
             className="profile__delete-account w-full my-6 py-4 bg-red-600 rounded-md text-white font-bold"
           >
             Supprimer mon compte

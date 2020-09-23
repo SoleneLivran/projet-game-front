@@ -8,7 +8,7 @@ const GameInterface = ({ fetchStory, place, event, transitions, nextScene }) => 
   // Hide Nav when component is mounted
   useEffect(() => {
     fetchStory(slug)
-  }, [fetchStory])
+  }, [fetchStory, slug])
 
   const [placeName, setNamePlace] = useState("Lieu")
   const [eventName, setNameEvent] = useState("Évenement")
