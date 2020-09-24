@@ -10,5 +10,6 @@
 }
 
 .modal-avatar__list {
+  min-height: 10rem;
   max-height: 25rem;
 }

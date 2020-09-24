@@ -1,4 +1,4 @@
-import { SET_SCENE } from "src/actions/gameinterface"
+import { SET_SCENE, CLEAR_PREVIOUS_GAME } from "src/actions/gameinterface"
 
 export const initialState = {
   transitions: [],
@@ -14,6 +14,14 @@ const home = (state = initialState, action = {}) => {
         transitions: action.transitions,
         place: action.place,
         event: action.event,
+      }
+    }
+    case CLEAR_PREVIOUS_GAME: {
+      return {
+        ...state,
+        transitions: [],
+        place: {},
+        event: {},
       }
     }
     default:

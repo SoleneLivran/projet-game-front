@@ -7,14 +7,12 @@ import home from "src/middleware/home"
 import auth from "src/middleware/auth"
 import user from "src/middleware/user"
 import gameinterface from "src/middleware/gameinterface"
-import logMiddleware from "../middleware/logMiddleware"
+// import logMiddleware from "../middleware/logMiddleware"
 
 // == Enhancers
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-const enhancers = composeEnhancers(
-  applyMiddleware(logMiddleware, home, auth, user, gameinterface)
-)
+const enhancers = composeEnhancers(applyMiddleware(home, auth, user, gameinterface))
 
 // == Store
 const store = createStore(

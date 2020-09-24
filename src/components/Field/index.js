@@ -10,7 +10,11 @@ const Field = ({
   setInputValue,
   clearInput,
 }) => {
-  useEffect(clearInput, [])
+  useEffect(() => {
+    return () => {
+      clearInput()
+    }
+  }, [])
   return (
     <>
       <input

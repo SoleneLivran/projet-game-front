@@ -3,10 +3,11 @@ import {
   SET_USER,
   CHANGE_USER_INPUT,
   CLEAR_EDIT,
+  CLEAR_USER_INPUT,
 } from "src/actions/user"
 
 export const initialState = {
-  avatar: "default_avatar",
+  avatar: "",
   username: "",
   email: "",
   password: "",
@@ -33,7 +34,7 @@ const user = (state = initialState, action = {}) => {
         username: action.name,
         email: action.mail,
         // avatar: action.avatar,
-        avatar: "default_avatar",
+        avatar: "human_girl",
         password: "",
         newPassword: "",
       }
@@ -42,6 +43,12 @@ const user = (state = initialState, action = {}) => {
       return {
         ...state,
         password: "",
+      }
+    }
+    case CLEAR_USER_INPUT: {
+      return {
+        ...state,
+        [action.key]: "",
       }
     }
     default:

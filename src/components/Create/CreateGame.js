@@ -328,9 +328,10 @@ const CreateGame = () => {
   }
   // Set "Lieu" current State to the clicked module
   const chooseLieuOnClick = (props) => {
+    console.log(props)
     setCurrentLieu({
       currentLieu: props.name,
-      bgImage: props.image,
+      bgImage: props.pictureFile,
       currentLieuId: props.id,
     })
   }
@@ -338,7 +339,7 @@ const CreateGame = () => {
   const chooseEventOnClick = (props) => {
     setCurrentEvent({
       currentEvent: props.name,
-      bgImage: props.image,
+      bgImage: props.pictureFile,
       currentEventId: props.id,
       isEnd: props.isEnd,
     })
@@ -520,7 +521,6 @@ const CreateGame = () => {
 
     setScenes({ scenes: newIndex })
 
-    // TODO Revoir affichage
     setActionDone({
       array: [...actionDoneState.array, currentNextSceneId.nextSceneRef],
     })
@@ -571,7 +571,7 @@ const CreateGame = () => {
   }
 
   return (
-    <div className="Nav bg-gray-900 flex  flex-col justify-evenly items-center mt-32 ">
+    <div className=" bg-gray-900 flex flex-col justify-evenly items-center mt-32">
       <div
         className={
           showModal.showModal
@@ -592,18 +592,30 @@ const CreateGame = () => {
             placeholder="Votre titre"
             className="px-4 py-2 shadow-inner w-64"
           ></textarea>
-          <select onChange={difficulty} name="difficulty" id="difficulty">
-            <option value="1">Facile</option>
-            <option value="2">Moyen</option>
-            <option value="3">Difficile</option>
-          </select>{" "}
-          <select onChange={category} name="categories" id="category">
-            {categoriesState.categories.length > 0
-              ? categoriesState.categories.map((catItem, index) => (
-                  <option value={catItem.id}>{catItem.name}</option>
-                ))
-              : ""}
-          </select>
+          <div className="flex justify-evenly">
+            <select
+              onChange={difficulty}
+              name="difficulty"
+              id="difficulty"
+              className="px-8 rounded-lg my-4 mx-2 py-4 bg-white shadow-inner text-xl"
+            >
+              <option value="1">Facile</option>
+              <option value="2">Moyen</option>
+              <option value="3">Difficile</option>
+            </select>{" "}
+            <select
+              onChange={category}
+              name="categories"
+              id="category"
+              className="px-8 rounded-lg my-4 mx-2 py-4 bg-white shadow-inner text-xl"
+            >
+              {categoriesState.categories.length > 0
+                ? categoriesState.categories.map((catItem, index) => (
+                    <option value={catItem.id}>{catItem.name}</option>
+                  ))
+                : ""}
+            </select>
+          </div>
           <button
             className="bg-teal-500 ease-in duration-100 transform my-6 font-bold uppercase shadow-lg text-center px-4 py-2 text-2xl w-64 text-white rounded-lg hover:scale-105"
             onClick={publishStory}
@@ -617,16 +629,16 @@ const CreateGame = () => {
             annuler
           </button>
         </div>
-        <div className="absolute  w-screen h-screen opacity-50 bg-white z-30"></div>
+        <div className="fixed  w-screen h-screen opacity-50 bg-white z-30"></div>
       </div>
       <div className="flex flex-col w-screen">
-        <div className="flex    ">
+        <div className="flex  ">
           {scenesState.scenes.length > 0
             ? scenesState.scenes.map((item, index) => (
                 <div
                   className="select-none bg-cover mx-8 my-4 w-64  py-4 rounded-lg bg-gray-200  flex flex-col justify-between  border-gray-500 items-center text-gray-100 shadow-lg font-bold text-lg"
                   style={{
-                    backgroundImage: `url(${item.lieu.lieuBg})`,
+                    backgroundImage: `url("/assets/img/${item.lieu.lieuBg}.jpg")`,
                   }}
                 >
                   <div
@@ -695,7 +707,7 @@ const CreateGame = () => {
             }
             style={{
               backgroundImage: currentLieuState.bgImage
-                ? `url(${currentLieuState.bgImage})`
+                ? `url("assets/img/${currentLieuState.bgImage}.jpg")`
                 : "",
             }}
           >
@@ -711,7 +723,7 @@ const CreateGame = () => {
             }
             style={{
               backgroundImage: currentEventState.bgImage
-                ? `url(${currentEventState.bgImage})`
+                ? `url("/assets/img/${currentEventState.bgImage}.jpg")`
                 : "",
             }}
           >
@@ -740,7 +752,7 @@ const CreateGame = () => {
                     : "select-none my-4 w-48 h-48 rounded-lg bg-gray-700 mx-8 flex justify-center shadow-lg items-center text-gray-100 font-bold text-2xl"
                 }
               >
-                <div className="flex flex-col">
+                <div className="flex flex-col items-center justify-center">
                   {item.actionName}
                   <span onClick={() => onDelete(index)} className="py-4">
                     X
@@ -783,52 +795,57 @@ const CreateGame = () => {
       ) : (
         ""
       )}
-
-      <div className=" my-16 flex overflow-x-auto w-screen">
-        {cardsState.currentCards === "lieuState"
-          ? lieuState.lieux.map((item, i) => (
-              <div
-                key={i}
-                onClick={() => chooseLieuOnClick(item)}
-                className="select-none  text-gray-200 w-48 h-64 rounded-lg bg-gray-800 m-8 flex justify-center items-center text-white font-bold text-2xl transform  duration-200 ease-in-out hover:-translate-y-2"
-                style={{ backgroundImage: `url(${item.image})` }}
-              >
-                <div className="flex flex-col justify-center items-center text-center w-48 h-64">
-                  <p> {item.name} </p>
-                  <p className="text-lg font-normal w-full">{item.description}</p>
+      <div className="w-screen">
+        <div className=" my-16 flex overflow-x-auto w-full">
+          {cardsState.currentCards === "lieuState"
+            ? lieuState.lieux.map((item, i) => (
+                <div
+                  key={i}
+                  onClick={() => chooseLieuOnClick(item)}
+                  className="select-none  text-gray-200 w-48 h-64 rounded-lg bg-gray-800 m-8 flex justify-center items-center text-white font-bold text-2xl transform  duration-200 ease-in-out hover:-translate-y-2"
+                  style={{
+                    backgroundImage: `url("/assets/img/${item.pictureFile}.jpg")`,
+                  }}
+                >
+                  <div className="flex flex-col justify-center items-center text-center w-48 h-64">
+                    <p> {item.name} </p>
+                    <p className="text-lg font-normal w-full">{item.description}</p>
+                  </div>
                 </div>
-              </div>
-            ))
-          : ""}
-        {cardsState.currentCards === "evenementState"
-          ? eventState.event.map((item, i) => (
-              <div
-                key={i}
-                onClick={() => chooseEventOnClick(item)}
-                className="select-none bg-cover text-gray-200 w-48 h-64 px-8 rounded-lg bg-gray-800 m-8 flex justify-center items-center text-white font-bold text-2xl transform  duration-200 ease-in-out hover:-translate-y-2"
-                style={{ backgroundImage: `url(${item.pictureFile})` }}
-              >
-                <div className="flex flex-col justify-center items-center text-center w-48 h-64  ">
-                  <p> {item.name} </p>
-                  <p className="text-lg font-normal ">{item.description}</p>
+              ))
+            : ""}
+          {cardsState.currentCards === "evenementState"
+            ? eventState.event.map((item, i) => (
+                <div
+                  key={i}
+                  onClick={() => chooseEventOnClick(item)}
+                  className="select-none bg-cover text-gray-200 w-48 h-64 px-8 rounded-lg bg-gray-800 m-8 flex justify-center items-center text-white font-bold text-2xl transform  duration-200 ease-in-out hover:-translate-y-2"
+                  style={{
+                    backgroundImage: `url("/assets/img/${item.pictureFile}.jpg")`,
+                  }}
+                >
+                  <div className="flex flex-col justify-center items-center text-center w-48 h-64  ">
+                    <p> {item.name} </p>
+                    <p className="text-lg font-normal ">{item.description}</p>
+                  </div>
                 </div>
-              </div>
-            ))
-          : ""}
-        {cardsState.currentCards === "actionState"
-          ? actionsState.transitions.map((item, i) => (
-              <div
-                key={i}
-                onClick={() => chooseActionOnClick(item)}
-                className="select-none  text-gray-200 w-48 h-64 rounded-lg bg-gray-800 m-8 flex justify-center items-center text-white font-bold text-2xl transform  duration-200 ease-in-out hover:-translate-y-2"
-              >
-                <div className="flex flex-col justify-center items-center text-center w-48 h-64  ">
-                  <p> {item.name} </p>
-                  <p className="text-lg font-normal ">{item.description}</p>
+              ))
+            : ""}
+          {cardsState.currentCards === "actionState"
+            ? actionsState.transitions.map((item, i) => (
+                <div
+                  key={i}
+                  onClick={() => chooseActionOnClick(item)}
+                  className="select-none  text-gray-200 w-48 h-64 rounded-lg bg-gray-800 m-8 flex justify-center items-center text-white font-bold text-2xl transform  duration-200 ease-in-out hover:-translate-y-2"
+                >
+                  <div className="flex flex-col justify-center items-center text-center w-48 h-64  ">
+                    <p> {item.name} </p>
+                    <p className="text-lg font-normal ">{item.description}</p>
+                  </div>
                 </div>
-              </div>
-            ))
-          : ""}
+              ))
+            : ""}
+        </div>
       </div>
     </div>
   )

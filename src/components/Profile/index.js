@@ -34,10 +34,13 @@ const Profile = ({
   const [userStoriesList, setUserStoriesList] = useState([])
 
   // state for loading stories
-  const [loadingStories, setLoadingStories] = useState([true])
+  const [loadingStories, setLoadingStories] = useState(true)
 
   // state storyId for delete request
   const [storyId, setstoryId] = useState(null)
+
+  // state for loading avatar
+  const [avatarLoading, setLoadingAvatar] = useState(true)
 
   // Change modal current state
   const handleModalDeleteUser = () => setModalDeleteUser(true)
@@ -68,6 +71,12 @@ const Profile = ({
       setLoadingStories(false)
     }, 1000)
   }, [userStoriesList])
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoadingAvatar(false)
+    }, 1000)
+  }, [avatar])
   return (
     <div className="profile px-8 h-auto sm:px-16 sm:mt-10 sm:px-24 md:mx-auto md:mt-20">
       {/* Only when modal is open (true) -> Modal is display, and the event click/key can be use */}
@@ -130,11 +139,15 @@ const Profile = ({
       </section>
       <section className="profile__user mt-10 md:flex justify-around">
         <div className="profile__left-panel flex flex-col w-64 mx-auto md:mx-0 justify-center my-6 items-center md:mb-20">
-          <img
-            src={`/assets/img/${avatar}.png`}
-            alt=""
-            className="profile__img w-40 h-40 md:w-56 md:h-56 "
-          />
+          {avatarLoading ? (
+            <Loading type="Oval" color="#5BC1FF" heightValue={40} widthValue={40} />
+          ) : (
+            <img
+              src={`/assets/img/${avatar}.png`}
+              alt=""
+              className="profile__img w-40 h-40 md:w-56 md:h-56 "
+            />
+          )}
           <button
             onClick={() => handleModalAvatar()}
             className="profile__button-img mt-4 p-4 bg-white rounded-lg font-bold"
