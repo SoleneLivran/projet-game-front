@@ -15,8 +15,8 @@ const GameInterface = ({
 }) => {
   const { slug } = useParams()
 
-  const [placeName, setNamePlace] = useState("Lieu")
-  const [eventName, setNameEvent] = useState("Évenement")
+  const [placeName, setNamePlace] = useState("Lie")
+  const [eventName, setNameEvent] = useState("Évenemen")
 
   const [isEnd, setIsEnd] = useState(false)
 

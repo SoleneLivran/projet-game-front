@@ -17,7 +17,6 @@ const home = (state = initialState, action = {}) => {
       }
     }
     case CLEAR_PREVIOUS_GAME: {
-      console.log("CLEAR");
       return {
         ...state,
         transitions: [],
