@@ -15,21 +15,24 @@ const GameInterface = ({
 }) => {
   const { slug } = useParams()
 
-  const [placeName, setNamePlace] = useState("Lie")
-  const [eventName, setNameEvent] = useState("Évenemen")
+  const [placeName, setNamePlace] = useState("Lieu")
+  const [eventName, setNameEvent] = useState("Évenement")
 
   const [isEnd, setIsEnd] = useState(false)
 
+  // change the state when the card is clicked
   const handleNamePlace = () => {
     placeName === "Lieu" ? setNamePlace(place.name) : setNamePlace("Lieu")
   }
 
+  // change the state when the card is clicked
   const handleNameEvent = () => {
     return eventName === "Évenement"
       ? setNameEvent(event.name)
       : setNameEvent("Évenement")
   }
 
+  // change the scene when an action is choosen
   const handleNextScene = (id) => {
     setNamePlace("Lieu")
     setNameEvent("Évenement")
@@ -52,6 +55,7 @@ const GameInterface = ({
     }
   }, [event])
 
+  // restart the game after finished it
   const handleRestart = () => {
     setNamePlace("Lieu")
     setNameEvent("Évenement")
@@ -59,7 +63,7 @@ const GameInterface = ({
       fetchStory(slug)
     }, 500)
   }
-  // Cleanup function to remove stories array
+  // Cleanup function to remove stories array when leaving the game
   useEffect(() => {
     return () => {
       clearPreviousGame()
@@ -128,7 +132,7 @@ const GameInterface = ({
           </p>
 
           {isEnd ? (
-            <GameEnd handleRestart={handleRestart} />
+            <GameEnd handleRestart={handleRestart} storyId={slug} />
           ) : (
             <div className="game-interface__actions py-6 overflow-x-auto flex">
               {transitions.map((action, key) => {
@@ -139,7 +143,7 @@ const GameInterface = ({
                     className="card__action my-2 mx-2 bg-gray-200 select-none px-4 h-48 w-32 rounded-lg flex justify-center items-center transform hover:scale-105 cursor-pointer shadow-lg text-gray-800 text-center text-md font-bold sm:text-2xl sm:h-56 sm:w-48"
                   >
                     <p className="card__action-title overflow-y-auto w-30">
-                    {action.action.name}
+                      {action.action.name}
                     </p>
                   </div>
                 )
@@ -158,5 +162,6 @@ GameInterface.propTypes = {
   transitions: PropTypes.array.isRequired,
   fetchStory: PropTypes.func.isRequired,
   nextScene: PropTypes.func.isRequired,
+  clearPreviousGame: PropTypes.func.isRequired,
 }
 export default GameInterface
