@@ -47,7 +47,7 @@ const GameEnd = ({ handleRestart, storyId }) => {
               onClick={() => setRating(star)}
               className={`${
                 rating >= star ? "fas" : "far"
-              } fa-star fa-2x text-yellow-400 mx-1 transform hover:scale-125 cursor-pointer`}
+              } fa-star fa-2x text-yellow-500 mx-1 transform hover:scale-125 cursor-pointer`}
             />
           ))}
         </div>
