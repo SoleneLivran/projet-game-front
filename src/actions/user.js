@@ -4,6 +4,7 @@ export const CLEAR_EDIT = "CLEAR_EDIT"
 export const SET_AVATAR = "SET_AVATAR"
 export const FETCH_USER = "FETCH_USER"
 export const SET_USER = "SET_USER"
+export const CLEAR_USER_INPUT = "CLEAR_USER_INPUT"
 
 export const changeUserValue = (value, key) => ({
   type: CHANGE_USER_INPUT,
@@ -34,4 +35,9 @@ export const setUser = (userData) => ({
   name: userData.name,
   mail: userData.mail,
   avatar: userData.avatar,
+})
+
+export const clearUserInput = (key) => ({
+  type: CLEAR_USER_INPUT,
+  key,
 })
