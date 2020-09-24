@@ -520,7 +520,6 @@ const CreateGame = () => {
 
     setScenes({ scenes: newIndex })
 
-    // TODO Revoir affichage
     setActionDone({
       array: [...actionDoneState.array, currentNextSceneId.nextSceneRef],
     })
@@ -592,18 +591,30 @@ const CreateGame = () => {
             placeholder="Votre titre"
             className="px-4 py-2 shadow-inner w-64"
           ></textarea>
-          <select onChange={difficulty} name="difficulty" id="difficulty">
-            <option value="1">Facile</option>
-            <option value="2">Moyen</option>
-            <option value="3">Difficile</option>
-          </select>{" "}
-          <select onChange={category} name="categories" id="category">
-            {categoriesState.categories.length > 0
-              ? categoriesState.categories.map((catItem, index) => (
-                  <option value={catItem.id}>{catItem.name}</option>
-                ))
-              : ""}
-          </select>
+          <div className="flex justify-evenly">
+            <select
+              onChange={difficulty}
+              name="difficulty"
+              id="difficulty"
+              className="px-8 rounded-lg my-4 mx-2 py-4 bg-white shadow-inner text-xl"
+            >
+              <option value="1">Facile</option>
+              <option value="2">Moyen</option>
+              <option value="3">Difficile</option>
+            </select>{" "}
+            <select
+              onChange={category}
+              name="categories"
+              id="category"
+              className="px-8 rounded-lg my-4 mx-2 py-4 bg-white shadow-inner text-xl"
+            >
+              {categoriesState.categories.length > 0
+                ? categoriesState.categories.map((catItem, index) => (
+                    <option value={catItem.id}>{catItem.name}</option>
+                  ))
+                : ""}
+            </select>
+          </div>
           <button
             className="bg-teal-500 ease-in duration-100 transform my-6 font-bold uppercase shadow-lg text-center px-4 py-2 text-2xl w-64 text-white rounded-lg hover:scale-105"
             onClick={publishStory}
@@ -740,7 +751,7 @@ const CreateGame = () => {
                     : "select-none my-4 w-48 h-48 rounded-lg bg-gray-700 mx-8 flex justify-center shadow-lg items-center text-gray-100 font-bold text-2xl"
                 }
               >
-                <div className="flex flex-col">
+                <div className="flex flex-col items-center justify-center">
                   {item.actionName}
                   <span onClick={() => onDelete(index)} className="py-4">
                     X
