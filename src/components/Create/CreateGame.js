@@ -571,7 +571,7 @@ const CreateGame = () => {
   }
 
   return (
-    <div className="Nav bg-gray-900 flex  flex-col justify-evenly items-center mt-32 ">
+    <div className=" bg-gray-900 flex flex-col justify-evenly items-center mt-32">
       <div
         className={
           showModal.showModal
@@ -629,10 +629,10 @@ const CreateGame = () => {
             annuler
           </button>
         </div>
-        <div className="absolute  w-screen h-screen opacity-50 bg-white z-30"></div>
+        <div className="fixed  w-screen h-screen opacity-50 bg-white z-30"></div>
       </div>
       <div className="flex flex-col w-screen">
-        <div className="flex    ">
+        <div className="flex  ">
           {scenesState.scenes.length > 0
             ? scenesState.scenes.map((item, index) => (
                 <div
@@ -795,56 +795,57 @@ const CreateGame = () => {
       ) : (
         ""
       )}
-
-      <div className=" my-16 flex overflow-x-auto w-screen">
-        {cardsState.currentCards === "lieuState"
-          ? lieuState.lieux.map((item, i) => (
-              <div
-                key={i}
-                onClick={() => chooseLieuOnClick(item)}
-                className="select-none  text-gray-200 w-48 h-64 rounded-lg bg-gray-800 m-8 flex justify-center items-center text-white font-bold text-2xl transform  duration-200 ease-in-out hover:-translate-y-2"
-                style={{
-                  backgroundImage: `url("/assets/img/${item.pictureFile}.jpg")`,
-                }}
-              >
-                <div className="flex flex-col justify-center items-center text-center w-48 h-64">
-                  <p> {item.name} </p>
-                  <p className="text-lg font-normal w-full">{item.description}</p>
+      <div className="w-screen">
+        <div className=" my-16 flex overflow-x-auto w-full">
+          {cardsState.currentCards === "lieuState"
+            ? lieuState.lieux.map((item, i) => (
+                <div
+                  key={i}
+                  onClick={() => chooseLieuOnClick(item)}
+                  className="select-none  text-gray-200 w-48 h-64 rounded-lg bg-gray-800 m-8 flex justify-center items-center text-white font-bold text-2xl transform  duration-200 ease-in-out hover:-translate-y-2"
+                  style={{
+                    backgroundImage: `url("/assets/img/${item.pictureFile}.jpg")`,
+                  }}
+                >
+                  <div className="flex flex-col justify-center items-center text-center w-48 h-64">
+                    <p> {item.name} </p>
+                    <p className="text-lg font-normal w-full">{item.description}</p>
+                  </div>
                 </div>
-              </div>
-            ))
-          : ""}
-        {cardsState.currentCards === "evenementState"
-          ? eventState.event.map((item, i) => (
-              <div
-                key={i}
-                onClick={() => chooseEventOnClick(item)}
-                className="select-none bg-cover text-gray-200 w-48 h-64 px-8 rounded-lg bg-gray-800 m-8 flex justify-center items-center text-white font-bold text-2xl transform  duration-200 ease-in-out hover:-translate-y-2"
-                style={{
-                  backgroundImage: `url("/assets/img/${item.pictureFile}.jpg")`,
-                }}
-              >
-                <div className="flex flex-col justify-center items-center text-center w-48 h-64  ">
-                  <p> {item.name} </p>
-                  <p className="text-lg font-normal ">{item.description}</p>
+              ))
+            : ""}
+          {cardsState.currentCards === "evenementState"
+            ? eventState.event.map((item, i) => (
+                <div
+                  key={i}
+                  onClick={() => chooseEventOnClick(item)}
+                  className="select-none bg-cover text-gray-200 w-48 h-64 px-8 rounded-lg bg-gray-800 m-8 flex justify-center items-center text-white font-bold text-2xl transform  duration-200 ease-in-out hover:-translate-y-2"
+                  style={{
+                    backgroundImage: `url("/assets/img/${item.pictureFile}.jpg")`,
+                  }}
+                >
+                  <div className="flex flex-col justify-center items-center text-center w-48 h-64  ">
+                    <p> {item.name} </p>
+                    <p className="text-lg font-normal ">{item.description}</p>
+                  </div>
                 </div>
-              </div>
-            ))
-          : ""}
-        {cardsState.currentCards === "actionState"
-          ? actionsState.transitions.map((item, i) => (
-              <div
-                key={i}
-                onClick={() => chooseActionOnClick(item)}
-                className="select-none  text-gray-200 w-48 h-64 rounded-lg bg-gray-800 m-8 flex justify-center items-center text-white font-bold text-2xl transform  duration-200 ease-in-out hover:-translate-y-2"
-              >
-                <div className="flex flex-col justify-center items-center text-center w-48 h-64  ">
-                  <p> {item.name} </p>
-                  <p className="text-lg font-normal ">{item.description}</p>
+              ))
+            : ""}
+          {cardsState.currentCards === "actionState"
+            ? actionsState.transitions.map((item, i) => (
+                <div
+                  key={i}
+                  onClick={() => chooseActionOnClick(item)}
+                  className="select-none  text-gray-200 w-48 h-64 rounded-lg bg-gray-800 m-8 flex justify-center items-center text-white font-bold text-2xl transform  duration-200 ease-in-out hover:-translate-y-2"
+                >
+                  <div className="flex flex-col justify-center items-center text-center w-48 h-64  ">
+                    <p> {item.name} </p>
+                    <p className="text-lg font-normal ">{item.description}</p>
+                  </div>
                 </div>
-              </div>
-            ))
-          : ""}
+              ))
+            : ""}
+        </div>
       </div>
     </div>
   )
