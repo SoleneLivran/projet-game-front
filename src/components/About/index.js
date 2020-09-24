@@ -6,13 +6,13 @@ const About = () => (
   <div className="about">
     <div className="about-presentation text-center text-white mt-4 mx-auto md:mt-40 lg:w-8/12 bg-indigo-800 p-3 bg-opacity-75 rounded-lg">
       <h1 className="welcome font-bold uppercase mb-2 text-2xl md:text-4xl">Bienvenue sur GWITH - Game Where I'm The Hero !</h1>
-      <p className="website-presentation text-xl mb-2">
+      <p className="website-presentation mb-text-xl mb-5">
         Sur ce site, vous pouvez jouer à des histoires dont vous êtes le héros : à chaque situation, vos choix influenceront la suite de l'aventure ! Vous pouvez également composer vos propres histoires, pour que d'autres utilisateurs et utilisatrices puissent y jouer.
       </p>
-      <p className="project-presentation text-xl mb-2">
+      <p className="project-presentation mb-text-xl mb-5">
         Il s'agit de notre projet de fin de formation à l’école O'Clock. Nous avons suivi la formation "Développeur web" pendant 5 mois intensifs, au sein de la promotion Hypérion. Ce projet a été développé en un mois, depuis sa conception fonctionnelle jusqu’à son développement dans sa forme actuelle.
       </p>
-      <p className="project-presentation text-xl mb-2">
+      <p className="project-presentation text-xl mb-text-2xl mb-2 font-bold">
         Découvrez notre équipe, et suivez nos aventures !
       </p>
     </div>
