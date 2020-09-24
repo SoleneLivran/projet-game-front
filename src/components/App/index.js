@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Redirect, Route, Switch, useLocation } from "react-router-dom"
+import { Route, Switch, useLocation } from "react-router-dom"
 import PropTypes from "prop-types"
 import lodash from "lodash"
 
@@ -27,14 +27,14 @@ const App = ({ checkIsLogged, isLogged }) => {
   const displayNav = lodash.startsWith(location, "/letsplay")
   // visitor to user if jwt is here !
   useEffect(() => {
-    if (displayNav) {
+    if (displayNav && isLogged) {
       setShowNav(false)
     } else {
       setShowNav(true)
     }
 
     checkIsLogged()
-  }, [checkIsLogged, displayNav])
+  }, [checkIsLogged, isLogged, displayNav])
   return (
     <div className="app bg-center bg-cover h-screen w-full overflow-x-hidden">
       {showNav && <Nav />}

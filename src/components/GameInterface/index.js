@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
-import { Link, useParams } from "react-router-dom"
+import { Link, useParams, Redirect } from "react-router-dom"
 
 import GameEnd from "./GameEnd/index"
 import "./styles.css"
@@ -12,6 +12,7 @@ const GameInterface = ({
   transitions,
   nextScene,
   clearPreviousGame,
+  isLogged,
 }) => {
   const { slug } = useParams()
 
@@ -154,6 +155,7 @@ const GameInterface = ({
           )}
         </div>
       </div>
+      {!isLogged && <Redirect to="/login" />}
     </div>
   )
 }
@@ -165,5 +167,6 @@ GameInterface.propTypes = {
   fetchStory: PropTypes.func.isRequired,
   nextScene: PropTypes.func.isRequired,
   clearPreviousGame: PropTypes.func.isRequired,
+  isLogged: PropTypes.bool.isRequired,
 }
 export default GameInterface
