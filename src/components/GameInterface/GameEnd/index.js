@@ -68,8 +68,6 @@ const GameEnd = ({ handleRestart, storyId }) => {
             className="game-end__quit w-32 bg-red-400 py-4 font-bold rounded-md my-2 sm:mx-6 md:py-6 md:w-40 md:text-lg"
           >
             Quitter
-          <button className="game-end__quit w-40 h-16 px-2 bg-red-400 py-2 font-bold rounded-md my-2 sm:h-20 sm:mx-6 md:py-2 md:w-40 md:text-lg">
-            Retourner à l'accueil
           </button>
         </Link>
       </div>
