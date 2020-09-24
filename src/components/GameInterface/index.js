@@ -122,10 +122,15 @@ const GameInterface = ({
         <div
           className={`game-interface__describe pt-10 sm:pt-20 transform duration-500 px-8 flex flex-col ${describeClassName}`}
         >
-          <p className="game-interface__content my-2 px-4 py-2 text-white font-bold text-lg sm:text-xl text-center bg-gray-800 bg-opacity-50 rounded-lg">
-            {place.description} et {event.description} <br />
-            {isEnd ? "" : "Que faites-vous ?"}
-          </p>
+          <div className="game-interface__content mt-2 px-4 py-2 text-white font-bold text-lg sm:text-xl text-center bg-gray-800 bg-opacity-50 rounded-t-lg sm:flex sm:justify-center">
+            <p className="mx-1">{place.description} et</p>
+            <p className="lowercase mx-1">{event.description}</p>
+          </div>
+          {!isEnd && (
+            <p className="bg-gray-800 bg-opacity-50 rounded-b-lg py-2 text-white font-bold text-lg sm:text-xl text-center">
+              Que faites-vous ?
+            </p>
+          )}
 
           {isEnd ? (
             <GameEnd handleRestart={handleRestart} />
@@ -139,7 +144,7 @@ const GameInterface = ({
                     className="card__action my-2 mx-2 bg-gray-200 select-none px-4 h-48 w-32 rounded-lg flex justify-center items-center transform hover:scale-105 cursor-pointer shadow-lg text-gray-800 text-center text-md font-bold sm:text-2xl sm:h-56 sm:w-48"
                   >
                     <p className="card__action-title overflow-y-auto w-30">
-                    {action.action.name}
+                      {action.action.name}
                     </p>
                   </div>
                 )

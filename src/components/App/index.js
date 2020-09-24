@@ -18,6 +18,7 @@ import GameList from "src/components/GameList/index"
 import Create from "src/components/Create/index"
 import About from "src/components/About/index"
 import Contact from "src/components/Contact/index"
+import NotFound from "src/components/NotFound/index"
 
 const App = ({ checkIsLogged, isLogged }) => {
   const location = useLocation().pathname
@@ -48,7 +49,7 @@ const App = ({ checkIsLogged, isLogged }) => {
         {isLogged && <Route path="/logout" component={Logout} />}
         {isLogged && <Route path="/profile/:slug" component={Profile} />}
         {isLogged && <Route path="/letsplay/:slug" component={GameInterface} />}
-        {/* <Redirect to="/login" /> */}
+        <Route component={NotFound} />
       </Switch>
     </div>
   )
