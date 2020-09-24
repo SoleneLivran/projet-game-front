@@ -20,16 +20,19 @@ const GameInterface = ({
 
   const [isEnd, setIsEnd] = useState(false)
 
+  // change the state when the card is clicked
   const handleNamePlace = () => {
     placeName === "Lieu" ? setNamePlace(place.name) : setNamePlace("Lieu")
   }
 
+  // change the state when the card is clicked
   const handleNameEvent = () => {
     return eventName === "Évenement"
       ? setNameEvent(event.name)
       : setNameEvent("Évenement")
   }
 
+  // change the scene when an action is choosen
   const handleNextScene = (id) => {
     setNamePlace("Lieu")
     setNameEvent("Évenement")
@@ -52,6 +55,7 @@ const GameInterface = ({
     }
   }, [event])
 
+  // restart the game after finished it
   const handleRestart = () => {
     setNamePlace("Lieu")
     setNameEvent("Évenement")
@@ -59,7 +63,7 @@ const GameInterface = ({
       fetchStory(slug)
     }, 500)
   }
-  // Cleanup function to remove stories array
+  // Cleanup function to remove stories array when leaving the game
   useEffect(() => {
     return () => {
       clearPreviousGame()
@@ -133,7 +137,7 @@ const GameInterface = ({
           )}
 
           {isEnd ? (
-            <GameEnd handleRestart={handleRestart} />
+            <GameEnd handleRestart={handleRestart} storyId={slug} />
           ) : (
             <div className="game-interface__actions py-6 overflow-x-auto flex">
               {transitions.map((action, key) => {
@@ -163,5 +167,6 @@ GameInterface.propTypes = {
   transitions: PropTypes.array.isRequired,
   fetchStory: PropTypes.func.isRequired,
   nextScene: PropTypes.func.isRequired,
+  clearPreviousGame: PropTypes.func.isRequired,
 }
 export default GameInterface
