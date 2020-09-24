@@ -328,9 +328,10 @@ const CreateGame = () => {
   }
   // Set "Lieu" current State to the clicked module
   const chooseLieuOnClick = (props) => {
+    console.log(props)
     setCurrentLieu({
       currentLieu: props.name,
-      bgImage: props.image,
+      bgImage: props.pictureFile,
       currentLieuId: props.id,
     })
   }
@@ -338,7 +339,7 @@ const CreateGame = () => {
   const chooseEventOnClick = (props) => {
     setCurrentEvent({
       currentEvent: props.name,
-      bgImage: props.image,
+      bgImage: props.pictureFile,
       currentEventId: props.id,
       isEnd: props.isEnd,
     })
@@ -637,7 +638,7 @@ const CreateGame = () => {
                 <div
                   className="select-none bg-cover mx-8 my-4 w-64  py-4 rounded-lg bg-gray-200  flex flex-col justify-between  border-gray-500 items-center text-gray-100 shadow-lg font-bold text-lg"
                   style={{
-                    backgroundImage: `url(${item.lieu.lieuBg})`,
+                    backgroundImage: `url("/assets/img/${item.lieu.lieuBg}.jpg")`,
                   }}
                 >
                   <div
@@ -706,7 +707,7 @@ const CreateGame = () => {
             }
             style={{
               backgroundImage: currentLieuState.bgImage
-                ? `url(${currentLieuState.bgImage})`
+                ? `url("assets/img/${currentLieuState.bgImage}.jpg")`
                 : "",
             }}
           >
@@ -722,7 +723,7 @@ const CreateGame = () => {
             }
             style={{
               backgroundImage: currentEventState.bgImage
-                ? `url(${currentEventState.bgImage})`
+                ? `url("/assets/img/${currentEventState.bgImage}.jpg")`
                 : "",
             }}
           >
@@ -802,7 +803,9 @@ const CreateGame = () => {
                 key={i}
                 onClick={() => chooseLieuOnClick(item)}
                 className="select-none  text-gray-200 w-48 h-64 rounded-lg bg-gray-800 m-8 flex justify-center items-center text-white font-bold text-2xl transform  duration-200 ease-in-out hover:-translate-y-2"
-                style={{ backgroundImage: `url(${item.image})` }}
+                style={{
+                  backgroundImage: `url("/assets/img/${item.pictureFile}.jpg")`,
+                }}
               >
                 <div className="flex flex-col justify-center items-center text-center w-48 h-64">
                   <p> {item.name} </p>
@@ -817,7 +820,9 @@ const CreateGame = () => {
                 key={i}
                 onClick={() => chooseEventOnClick(item)}
                 className="select-none bg-cover text-gray-200 w-48 h-64 px-8 rounded-lg bg-gray-800 m-8 flex justify-center items-center text-white font-bold text-2xl transform  duration-200 ease-in-out hover:-translate-y-2"
-                style={{ backgroundImage: `url(${item.pictureFile})` }}
+                style={{
+                  backgroundImage: `url("/assets/img/${item.pictureFile}.jpg")`,
+                }}
               >
                 <div className="flex flex-col justify-center items-center text-center w-48 h-64  ">
                   <p> {item.name} </p>
