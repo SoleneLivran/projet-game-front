@@ -20,6 +20,8 @@ import About from "src/components/About/index"
 import Contact from "src/components/Contact/index"
 import NotFound from "src/components/NotFound/index"
 
+import Loading from "src/components/Loading/index"
+
 const App = ({ checkIsLogged, isLogged }) => {
   const location = useLocation().pathname
   const [showNav, setShowNav] = useState(true)
@@ -35,8 +37,16 @@ const App = ({ checkIsLogged, isLogged }) => {
 
     checkIsLogged()
   }, [checkIsLogged, displayNav])
+
+  // const [loading, setLoading] = useState(true)
+  // useEffect(() => {
+  //   setLoading(true)
+  //   setTimeout(() => {
+  //     setLoading(false)
+  //   }, 500)
+  // }, [location])
   return (
-    <div className="app bg-center bg-cover h-screen w-full overflow-auto">
+    <div className="app bg-center bg-cover h-screen w-full overflow-x-hidden">
       {showNav && <Nav />}
       <Switch>
         <Route path="/" component={Home} exact />
@@ -45,9 +55,14 @@ const App = ({ checkIsLogged, isLogged }) => {
         <Route path="/login" component={LoginForm} />
         <Route path="/signup" component={SignupForm} />
         <Route path="/gamelist" component={GameList} />
+        <Route
+          exact
+          path="/profile/:slug"
+          render={() => (isLogged ? <Profile /> : <Redirect to="/login" />)}
+        />
         {isLogged && <Route path="/create" component={Create} />}
         {isLogged && <Route path="/logout" component={Logout} />}
-        {isLogged && <Route path="/profile/:slug" component={Profile} />}
+        // {isLogged && <Route path="/profile/:slug" component={Profile} />}
         {isLogged && <Route path="/letsplay/:slug" component={GameInterface} />}
         <Route component={NotFound} />
       </Switch>

@@ -63,7 +63,7 @@ const Profile = ({
   useEffect(() => {
     fetchUser()
     fetchUserStories(setUserStoriesList, connectedId)
-  }, [])
+  }, [fetchUser, connectedId])
 
   // Loading is unset when stories is set after success request API
   useEffect(() => {

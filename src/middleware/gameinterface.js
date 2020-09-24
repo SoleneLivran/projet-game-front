@@ -34,6 +34,7 @@ const auth = (store) => (next) => (action) => {
         .catch((error) => {
           console.log(error)
         })
+      break
     }
     default:
       next(action)

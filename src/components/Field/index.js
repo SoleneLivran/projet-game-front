@@ -14,7 +14,7 @@ const Field = ({
     return () => {
       clearInput()
     }
-  }, [])
+  }, [clearInput])
   return (
     <>
       <input

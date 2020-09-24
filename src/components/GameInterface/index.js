@@ -17,6 +17,7 @@ const GameInterface = ({
 
   const [placeName, setNamePlace] = useState("Lieu")
   const [eventName, setNameEvent] = useState("Évenement")
+  const [samePlace, setSamePlace] = useState("")
 
   const [isEnd, setIsEnd] = useState(false)
 
@@ -68,7 +69,7 @@ const GameInterface = ({
     return () => {
       clearPreviousGame()
     }
-  }, [])
+  }, [clearPreviousGame])
 
   const describeClassName =
     placeName !== "Lieu" && eventName !== "Évenement" ? "opacity-100" : "opacity-0"
