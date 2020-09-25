@@ -39,7 +39,9 @@ const GameInterface = ({
     nextScene(id)
   }
 
+  // component is updated when place & event change
   useEffect(() => {
+    // check is place card have to be return
     if (placeName === place.name) {
       setNameEvent("Évenement")
     } else {
@@ -47,6 +49,7 @@ const GameInterface = ({
       setNameEvent("Évenement")
     }
 
+    // wait for the describe to change or to display the GameEnd component
     setTimeout(() => {
       setPlaceDescribe(place.description)
       setEventDescribe(event.description)
