@@ -669,7 +669,7 @@ const CreateGame = () => {
             {scenesState.scenes.length > 0
               ? scenesState.scenes.map((item, index) => (
                   <div
-                    className="select-none bg-cover mx-8 my-4 w-64  py-4 rounded-lg bg-gray-200  flex flex-col justify-between  border-gray-500 items-center text-gray-100 shadow-lg font-bold text-lg"
+                    className="select-none object-cover mx-8 my-4 w-64  py-4 rounded-lg bg-gray-200  flex flex-col justify-between  border-gray-500 items-center text-gray-100 shadow-lg font-bold text-lg"
                     style={{
                       backgroundImage: `url("/assets/img/${item.lieu.lieuBg}.jpg")`,
                     }}
@@ -835,12 +835,12 @@ const CreateGame = () => {
                   <div
                     key={i}
                     onClick={() => chooseLieuOnClick(item)}
-                    className="select-none  text-gray-200 w-48 h-64 rounded-lg bg-gray-800 m-8 flex justify-center items-center text-white font-bold text-2xl transform  duration-200 ease-in-out hover:-translate-y-2"
+                    className="select-none bg-cover  text-gray-200 w-48 h-64 rounded-lg bg-gray-800 m-8 flex justify-center items-center text-white font-bold text-2xl transform  duration-200 ease-in-out hover:-translate-y-2"
                     style={{
                       backgroundImage: `url("/assets/img/${item.pictureFile}.jpg")`,
                     }}
                   >
-                    <div className="flex flex-col justify-center items-center text-center w-48 h-64">
+                    <div className="flex flex-col bg-gray-900  p-4 rounded-lg justify-center items-center transition duration-150 ease-in-out text-center w-48 mx-4 hover:opacity-0">
                       <p> {item.name} </p>
                       <p className="text-lg font-normal w-full">
                         {item.description}
@@ -859,7 +859,7 @@ const CreateGame = () => {
                       backgroundImage: `url("/assets/img/${item.pictureFile}.jpg")`,
                     }}
                   >
-                    <div className="flex flex-col justify-center items-center text-center w-48 h-64  ">
+                    <div className="flex flex-col justify-center items-center text-center w-64 bg-gray-900 transition duration-150 ease-in-out rounded-lg p-2 hover:opacity-0">
                       <p> {item.name} </p>
                       <p className="text-lg font-normal ">{item.description}</p>
                     </div>
