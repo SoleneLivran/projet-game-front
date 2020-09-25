@@ -17,7 +17,6 @@ const user = (store) => (next) => (action) => {
           }
         )
         .then((response) => {
-          console.log(response.data)
           store.dispatch(setUser(response.data))
         })
         .catch((error) => {

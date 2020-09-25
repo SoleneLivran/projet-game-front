@@ -147,7 +147,6 @@ const CreateGame = () => {
         },
       })
       .then((response) => {
-        console.log(response.data)
         setEvenement({ event: response.data })
       })
 
