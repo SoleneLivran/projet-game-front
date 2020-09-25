@@ -57,7 +57,7 @@ const ModalAvatar = ({ showModalAvatar, onClose, setAvatar, connectedId }) => {
       .put(
         `http://ec2-18-234-186-84.compute-1.amazonaws.com/api/account/${connectedId}/avatar`,
         {
-          avatar_id: id,
+          avatar: id,
         },
         {
           headers: {
@@ -67,6 +67,7 @@ const ModalAvatar = ({ showModalAvatar, onClose, setAvatar, connectedId }) => {
       )
       .then((response) => {
         console.log(response)
+        setAvatar(pictureFile, id)
       })
       .catch((error) => {
         console.log(error)
@@ -118,5 +119,6 @@ ModalAvatar.propTypes = {
   showModalAvatar: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   connectedId: PropTypes.number.isRequired,
+  setAvatar: PropTypes.func.isRequired,
 }
 export default ModalAvatar

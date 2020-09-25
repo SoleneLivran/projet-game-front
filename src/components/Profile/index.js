@@ -10,7 +10,6 @@ import ModalDeleteStory from "./ModalDeleteStory/index"
 import Loading from "src/components/Loading/index"
 
 import { checkInput, fetchUserStories } from "src/selectors/profile"
-import axios from "axios"
 
 const Profile = ({
   connectedId,

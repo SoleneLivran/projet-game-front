@@ -14,7 +14,6 @@ const Card = ({
   handleModal,
 }) => {
   const stars = [1, 2, 3, 4, 5]
-  console.log(category);
 
   return (
     <div className="rounded-lg ">
@@ -23,8 +22,9 @@ const Card = ({
         onClick={() => handleModal(id)}
       >
         <img
-          className="card__img h-24 md:h-32 w-full object-cover rounded-t-lg shadow-lg"
-          src={`/assets/img/${findCategoryImg(category.name)}.jpg`}
+          className="card__img h-24 md:h-32 w-full object-cover object-center rounded-t-lg shadow-lg"
+          // src={`/assets/img/${findCategoryImg(category.name)}.jpg`}
+          src={`/assets/img/category_combat.jpg`}
           alt={`img_${findCategoryImg(category.name)}`}
         />
         <section className="card__info bg-gray-900 py-4">
