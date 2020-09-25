@@ -141,11 +141,15 @@ const Profile = ({
         <div className="profile__left-panel flex flex-col w-64 mx-auto md:mx-0 justify-center my-6 items-center md:mb-20">
           {avatarLoading ? (
             <Loading type="Oval" color="#5BC1FF" heightValue={40} widthValue={40} />
+          ) : avatar === null ? (
+            <p className="profile__img-null mb-2 text-white italic">
+              Pas encore d'avatar
+            </p>
           ) : (
             <img
-              src={`/assets/img/${avatar}.png`}
+              src={`/assets/img/${avatar}.jpg`}
               alt=""
-              className="profile__img w-40 h-40 md:w-56 md:h-56 "
+              className="profile__img w-40 h-40 md:w-56 md:h-56 rounded-full"
             />
           )}
           <button
@@ -162,7 +166,6 @@ const Profile = ({
           <form
             onSubmit={(e) => {
               e.preventDefault()
-              console.log(errors)
               if (Object.keys(errors).length === 0) {
                 handleUserEdit()
               }
@@ -221,7 +224,10 @@ const Profile = ({
 Profile.propTypes = {
   connectedId: PropTypes.number.isRequired,
   fetchUser: PropTypes.func.isRequired,
-  avatar: PropTypes.string.isRequired,
+  avatar: PropTypes.oneOfType([
+    PropTypes.string.isRequired,
+    PropTypes.object.isRequired,
+  ]),
   handleUserEdit: PropTypes.func.isRequired,
   handleDeleteUser: PropTypes.func.isRequired,
 }

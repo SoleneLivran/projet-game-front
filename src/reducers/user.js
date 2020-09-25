@@ -33,8 +33,7 @@ const user = (state = initialState, action = {}) => {
         ...state,
         username: action.name,
         email: action.mail,
-        // avatar: action.avatar,
-        avatar: "human_girl",
+        avatar: action.avatar,
         password: "",
         newPassword: "",
       }
