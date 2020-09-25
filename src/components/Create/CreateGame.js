@@ -594,189 +594,178 @@ const CreateGame = () => {
   }
 
   return (
-    <div className=" bg-gray-900 flex flex-col justify-evenly items-center mt-32">
-      <div
-        className={
-          showModal.showModal
-            ? "absolute h-screen flex justify-center items-center z-50 top-0"
-            : "hidden"
-        }
-      >
-        <div className="z-50 bg-white flex flex-col justify-center items-center text-gray-900 text-center rounded-lg shadow-lg p-16">
-          {currentPublishedMessage.message === null
-            ? ""
-            : currentPublishedMessage.message}
+    <div>
+      <div className="hidden bg-gray-900 md:flex flex-col justify-evenly items-center mt-32">
+        <div
+          className={
+            showModal.showModal
+              ? "absolute h-screen flex justify-center items-center z-50 top-0"
+              : "hidden"
+          }
+        >
+          <div className="z-50 bg-white flex flex-col justify-center items-center text-gray-900 text-center rounded-lg shadow-lg p-16">
+            {currentPublishedMessage.message === null
+              ? ""
+              : currentPublishedMessage.message}
 
-          <h2 className="text-3xl ">Titre de votre histoire : </h2>
-          <input
-            onChange={handleTitle}
-            placeholder="Votre titre"
-            className="px-4 py-2 shadow-inner w-64 focus:border-2 focus:border-gray-700"
-          ></input>
-          <h2 className="text-3xl ">Synopsis : </h2>
-          <textarea
-            onChange={handleSynopsis}
-            placeholder="Votre titre"
-            className="px-4 py-2 shadow-inner w-64"
-          ></textarea>
-          <div className="flex justify-evenly">
-            <select
-              onChange={difficulty}
-              name="difficulty"
-              id="difficulty"
-              className="px-8 rounded-lg my-4 mx-2 py-4 bg-white shadow-inner text-xl"
-            >
-              <option value="1">Facile</option>
-              <option value="2">Moyen</option>
-              <option value="3">Difficile</option>
-            </select>{" "}
-            <select
-              onChange={category}
-              name="categories"
-              id="category"
-              className="px-8 rounded-lg my-4 mx-2 py-4 bg-white shadow-inner text-xl"
-            >
-              {categoriesState.categories.length > 0
-                ? categoriesState.categories.map((catItem, index) => (
-                    <option value={catItem.id}>{catItem.name}</option>
-                  ))
-                : ""}
-            </select>
-          </div>
-          <button
-            className="bg-teal-500 ease-in duration-100 transform my-6 font-bold uppercase shadow-lg text-center px-4 py-2 text-2xl w-64 text-white rounded-lg hover:scale-105"
-            onClick={publishStory}
-          >
-            Publier
-          </button>
-          <button
-            className="bg-red-500 ease-in duration-100 transform  font-bold uppercase shadow-lg text-center px-4 py-2 text-2xl w-64 text-white rounded-lg hover:scale-105"
-            onClick={() => {
-              showModalFun(false)
-              setPublishedMessage({
-                message: null,
-              })
-            }}
-          >
-            annuler
-          </button>
-        </div>
-        <div className="fixed  w-screen h-screen opacity-50 bg-white z-30"></div>
-      </div>
-      <div className="flex flex-col w-screen">
-        <div className="flex  ">
-          {scenesState.scenes.length > 0
-            ? scenesState.scenes.map((item, index) => (
-                <div
-                  className="select-none bg-cover mx-8 my-4 w-64  py-4 rounded-lg bg-gray-200  flex flex-col justify-between  border-gray-500 items-center text-gray-100 shadow-lg font-bold text-lg"
-                  style={{
-                    backgroundImage: `url("/assets/img/${item.lieu.lieuBg}.jpg")`,
-                  }}
-                >
-                  <div
-                    onClick={() => loadNewAction(item.reference, index)}
-                    className="flex border-2 border-gray-200  h-16 w-16 justify-center items-center rounded-full bg-gray-900 -mt-10 shadow-lg "
-                  >
-                    {item.reference}
-                  </div>
-
-                  <div>
-                    <div className="text-2xl">{item.lieu.lieuName}</div>
-                    <div className="text-2xl">{item.evenement.evenementName}</div>
-                  </div>
-                  <div className="">
-                    {item.transitions.map((action, indexaction) => (
-                      <div
-                        onClick={() =>
-                          actionDoneState.array.includes(action.nextSceneRef)
-                            ? ""
-                            : nextSceneId(
-                                actionDoneState.array.includes(item.nextSceneRef)
-                                  ? ""
-                                  : action,
-                                index,
-                                indexaction
-                              )
-                        }
-                        className={
-                          actionDoneState.array.includes(action.nextSceneRef)
-                            ? "py-2 select-none my-4 rounded-lg px-4 bg-teal-500 shadow-md text-white font-bold"
-                            : action.nextSceneRef === currentNextSceneId.nextSceneRef
-                            ? "py-2 select-none my-4 rounded-lg px-4 bg-blue-600 shadow-md text-white font-bold transform duration-100 ease-in-out hover:scale-95"
-                            : "py-2 select-none my-4 rounded-lg px-4 bg-gray-900 shadow-md text-white font-bold transform duration-100 ease-in-out hover:scale-95"
-                        }
-                      >
-                        <div className="flex flex-wrap justify-evenly">
-                          {action.actionName}
-                          {"  "}
-                          {actionDoneState.array.includes(action.nextSceneRef) ? (
-                            <div className="mx-2">
-                              {" "}
-                              <i className="fas fa-arrow-right">
-                                {" "}
-                                {action.nextSceneRef}
-                              </i>
-                            </div>
-                          ) : (
-                            ""
-                          )}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))
-            : ""}
-        </div>
-
-        <div className="flex justify-center items-center">
-          <div
-            onClick={lieuOnClick}
-            className={
-              currentLieuState.currentLieu === "LIEU"
-                ? "select-none bg-cover my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center border-4 border-dashed border-gray-500 items-center text-gray-500 font-bold text-2xl"
-                : "select-none bg-cover my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center  border-gray-500 items-center text-gray-100 shadow-lg font-bold text-2xl"
-            }
-            style={{
-              backgroundImage: currentLieuState.bgImage
-                ? `url("assets/img/${currentLieuState.bgImage}.jpg")`
-                : "",
-            }}
-          >
-            {currentLieuState.currentLieu}
-          </div>
-
-          <div
-            onClick={eventOnClick}
-            className={
-              currentEventState.currentEvent === "EVENEMENT"
-                ? "select-none bg-cover my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center border-4 border-dashed border-gray-500 items-center text-gray-500 font-bold text-2xl"
-                : "select-none bg-cover my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center  border-gray-500 items-center text-gray-100 shadow-lg font-bold text-2xl"
-            }
-            style={{
-              backgroundImage: currentEventState.bgImage
-                ? `url("/assets/img/${currentEventState.bgImage}.jpg")`
-                : "",
-            }}
-          >
-            {currentEventState.currentEvent}
-          </div>
-
-          {currentActionState.array == false ? (
-            <div
-              onClick={actionOnClick}
-              className={
-                currentActionState.currentAction === "ACTION"
-                  ? "select-none my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center border-4 border-dashed border-gray-500 items-center text-gray-500 font-bold text-2xl"
-                  : "select-none my-4 w-48 h-48 rounded-lg bg-gray-700 mx-8 flex justify-center shadow-lg items-center text-gray-100 font-bold text-2xl"
-              }
-            >
-              {currentActionState.currentAction}
+            <h2 className="text-3xl ">Titre de votre histoire : </h2>
+            <input
+              onChange={handleTitle}
+              placeholder="Votre titre"
+              className="px-4 py-2 shadow-inner w-64 focus:border-2 focus:border-gray-700"
+            ></input>
+            <h2 className="text-3xl ">Synopsis : </h2>
+            <textarea
+              onChange={handleSynopsis}
+              placeholder="Votre titre"
+              className="px-4 py-2 shadow-inner w-64"
+            ></textarea>
+            <div className="flex justify-evenly">
+              <select
+                onChange={difficulty}
+                name="difficulty"
+                id="difficulty"
+                className="px-8 rounded-lg my-4 mx-2 py-4 bg-white shadow-inner text-xl"
+              >
+                <option value="1">Facile</option>
+                <option value="2">Moyen</option>
+                <option value="3">Difficile</option>
+              </select>{" "}
+              <select
+                onChange={category}
+                name="categories"
+                id="category"
+                className="px-8 rounded-lg my-4 mx-2 py-4 bg-white shadow-inner text-xl"
+              >
+                {categoriesState.categories.length > 0
+                  ? categoriesState.categories.map((catItem, index) => (
+                      <option value={catItem.id}>{catItem.name}</option>
+                    ))
+                  : ""}
+              </select>
             </div>
-          ) : (
-            currentActionState.array.map((item, index) => (
+            <button
+              className="bg-teal-500 ease-in duration-100 transform my-6 font-bold uppercase shadow-lg text-center px-4 py-2 text-2xl w-64 text-white rounded-lg hover:scale-105"
+              onClick={publishStory}
+            >
+              Publier
+            </button>
+            <button
+              className="bg-red-500 ease-in duration-100 transform  font-bold uppercase shadow-lg text-center px-4 py-2 text-2xl w-64 text-white rounded-lg hover:scale-105"
+              onClick={() => {
+                showModalFun(false)
+                setPublishedMessage({
+                  message: null,
+                })
+              }}
+            >
+              annuler
+            </button>
+          </div>
+          <div className="fixed  w-screen h-screen opacity-50 bg-white z-30"></div>
+        </div>
+        <div className="flex flex-col w-screen">
+          <div className="flex  ">
+            {scenesState.scenes.length > 0
+              ? scenesState.scenes.map((item, index) => (
+                  <div
+                    className="select-none bg-cover mx-8 my-4 w-64  py-4 rounded-lg bg-gray-200  flex flex-col justify-between  border-gray-500 items-center text-gray-100 shadow-lg font-bold text-lg"
+                    style={{
+                      backgroundImage: `url("/assets/img/${item.lieu.lieuBg}.jpg")`,
+                    }}
+                  >
+                    <div
+                      onClick={() => loadNewAction(item.reference, index)}
+                      className="flex border-2 border-gray-200  h-16 w-16 justify-center items-center rounded-full bg-gray-900 -mt-10 shadow-lg "
+                    >
+                      {item.reference}
+                    </div>
+
+                    <div>
+                      <div className="text-2xl">{item.lieu.lieuName}</div>
+                      <div className="text-2xl">{item.evenement.evenementName}</div>
+                    </div>
+                    <div className="">
+                      {item.transitions.map((action, indexaction) => (
+                        <div
+                          onClick={() =>
+                            actionDoneState.array.includes(action.nextSceneRef)
+                              ? ""
+                              : nextSceneId(
+                                  actionDoneState.array.includes(item.nextSceneRef)
+                                    ? ""
+                                    : action,
+                                  index,
+                                  indexaction
+                                )
+                          }
+                          className={
+                            actionDoneState.array.includes(action.nextSceneRef)
+                              ? "py-2 select-none my-4 rounded-lg px-4 bg-teal-500 shadow-md text-white font-bold"
+                              : action.nextSceneRef ===
+                                currentNextSceneId.nextSceneRef
+                              ? "py-2 select-none my-4 rounded-lg px-4 bg-blue-600 shadow-md text-white font-bold transform duration-100 ease-in-out hover:scale-95"
+                              : "py-2 select-none my-4 rounded-lg px-4 bg-gray-900 shadow-md text-white font-bold transform duration-100 ease-in-out hover:scale-95"
+                          }
+                        >
+                          <div className="flex flex-wrap justify-evenly">
+                            {action.actionName}
+                            {"  "}
+                            {actionDoneState.array.includes(action.nextSceneRef) ? (
+                              <div className="mx-2">
+                                {" "}
+                                <i className="fas fa-arrow-right">
+                                  {" "}
+                                  {action.nextSceneRef}
+                                </i>
+                              </div>
+                            ) : (
+                              ""
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))
+              : ""}
+          </div>
+
+          <div className="flex justify-center items-center">
+            <div
+              onClick={lieuOnClick}
+              className={
+                currentLieuState.currentLieu === "LIEU"
+                  ? "select-none bg-cover my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center border-4 border-dashed border-gray-500 items-center text-gray-500 font-bold text-2xl"
+                  : "select-none bg-cover my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center  border-gray-500 items-center text-gray-100 shadow-lg font-bold text-2xl"
+              }
+              style={{
+                backgroundImage: currentLieuState.bgImage
+                  ? `url("assets/img/${currentLieuState.bgImage}.jpg")`
+                  : "",
+              }}
+            >
+              {currentLieuState.currentLieu}
+            </div>
+
+            <div
+              onClick={eventOnClick}
+              className={
+                currentEventState.currentEvent === "EVENEMENT"
+                  ? "select-none bg-cover my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center border-4 border-dashed border-gray-500 items-center text-gray-500 font-bold text-2xl"
+                  : "select-none bg-cover my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center  border-gray-500 items-center text-gray-100 shadow-lg font-bold text-2xl"
+              }
+              style={{
+                backgroundImage: currentEventState.bgImage
+                  ? `url("/assets/img/${currentEventState.bgImage}.jpg")`
+                  : "",
+              }}
+            >
+              {currentEventState.currentEvent}
+            </div>
+
+            {currentActionState.array == false ? (
               <div
-                key={index}
                 onClick={actionOnClick}
                 className={
                   currentActionState.currentAction === "ACTION"
@@ -784,99 +773,119 @@ const CreateGame = () => {
                     : "select-none my-4 w-48 h-48 rounded-lg bg-gray-700 mx-8 flex justify-center shadow-lg items-center text-gray-100 font-bold text-2xl"
                 }
               >
-                <div className="flex flex-col items-center justify-center">
-                  {item.actionName}
-                  <span onClick={() => onDelete(index)} className="py-4">
-                    X
-                  </span>
-                </div>
+                {currentActionState.currentAction}
               </div>
-            ))
-          )}
+            ) : (
+              currentActionState.array.map((item, index) => (
+                <div
+                  key={index}
+                  onClick={actionOnClick}
+                  className={
+                    currentActionState.currentAction === "ACTION"
+                      ? "select-none my-4 w-48 h-48 rounded-lg bg-gray-200 mx-8 flex justify-center border-4 border-dashed border-gray-500 items-center text-gray-500 font-bold text-2xl"
+                      : "select-none my-4 w-48 h-48 rounded-lg bg-gray-700 mx-8 flex justify-center shadow-lg items-center text-gray-100 font-bold text-2xl"
+                  }
+                >
+                  <div className="flex flex-col items-center justify-center">
+                    {item.actionName}
+                    <span onClick={() => onDelete(index)} className="py-4">
+                      X
+                    </span>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+        <button
+          className="bg-teal-500 ease-in duration-100 transform my-6 font-bold uppercase shadow-lg text-center px-4 py-2 text-2xl w-64 text-white rounded-lg hover:scale-105"
+          onClick={() => showModalFun(true)}
+        >
+          Publier
+        </button>
+        {currentLieuState.currentLieu != "LIEU" &&
+        currentEventState.currentEvent != "EVENEMENT" &&
+        currentActionState.currentAction != "ACTION" &&
+        (currentActionIsSelected.currentActionIsSelected ||
+          scenesState.scenes.length < 1) ? (
+          <div>
+            <button
+              onClick={saveCurrentScene}
+              className="text-white text-lg py-2 px-4 bg-gray-700 shadow-lg rounded-md"
+            >
+              Ajouter une nouvelle scène
+            </button>
+          </div>
+        ) : currentEventState.isEnd ? (
+          <div>
+            <button
+              onClick={saveEndScene}
+              className="text-white text-lg py-2 px-4 bg-gray-700 shadow-lg rounded-md"
+            >
+              Ajouter une nouvelle scène
+            </button>
+          </div>
+        ) : (
+          ""
+        )}
+        <div className="w-screen">
+          <div className=" my-16 flex overflow-x-auto w-full">
+            {cardsState.currentCards === "lieuState"
+              ? lieuState.lieux.map((item, i) => (
+                  <div
+                    key={i}
+                    onClick={() => chooseLieuOnClick(item)}
+                    className="select-none  text-gray-200 w-48 h-64 rounded-lg bg-gray-800 m-8 flex justify-center items-center text-white font-bold text-2xl transform  duration-200 ease-in-out hover:-translate-y-2"
+                    style={{
+                      backgroundImage: `url("/assets/img/${item.pictureFile}.jpg")`,
+                    }}
+                  >
+                    <div className="flex flex-col justify-center items-center text-center w-48 h-64">
+                      <p> {item.name} </p>
+                      <p className="text-lg font-normal w-full">
+                        {item.description}
+                      </p>
+                    </div>
+                  </div>
+                ))
+              : ""}
+            {cardsState.currentCards === "evenementState"
+              ? eventState.event.map((item, i) => (
+                  <div
+                    key={i}
+                    onClick={() => chooseEventOnClick(item)}
+                    className="select-none bg-cover text-gray-200 w-48 h-64 px-8 rounded-lg bg-gray-800 m-8 flex justify-center items-center text-white font-bold text-2xl transform  duration-200 ease-in-out hover:-translate-y-2 hover:bg-black"
+                    style={{
+                      backgroundImage: `url("/assets/img/${item.pictureFile}.jpg")`,
+                    }}
+                  >
+                    <div className="flex flex-col justify-center items-center text-center w-48 h-64  ">
+                      <p> {item.name} </p>
+                      <p className="text-lg font-normal ">{item.description}</p>
+                    </div>
+                  </div>
+                ))
+              : ""}
+            {cardsState.currentCards === "actionState"
+              ? actionsState.transitions.map((item, i) => (
+                  <div
+                    key={i}
+                    onClick={() => chooseActionOnClick(item)}
+                    className="select-none  text-gray-200 w-48 h-64 rounded-lg bg-gray-800 m-8 flex justify-center items-center text-white font-bold text-2xl transform  duration-200 ease-in-out hover:-translate-y-2"
+                  >
+                    <div className="flex flex-col justify-center items-center text-center w-48 h-64  ">
+                      <p> {item.name} </p>
+                      <p className="text-lg font-normal ">{item.description}</p>
+                    </div>
+                  </div>
+                ))
+              : ""}
+          </div>
         </div>
       </div>
-      <button
-        className="bg-teal-500 ease-in duration-100 transform my-6 font-bold uppercase shadow-lg text-center px-4 py-2 text-2xl w-64 text-white rounded-lg hover:scale-105"
-        onClick={() => showModalFun(true)}
-      >
-        Publier
-      </button>
-      {currentLieuState.currentLieu != "LIEU" &&
-      currentEventState.currentEvent != "EVENEMENT" &&
-      currentActionState.currentAction != "ACTION" &&
-      (currentActionIsSelected.currentActionIsSelected ||
-        scenesState.scenes.length < 1) ? (
-        <div>
-          <button
-            onClick={saveCurrentScene}
-            className="text-white text-lg py-2 px-4 bg-gray-700 shadow-lg rounded-md"
-          >
-            Ajouter une nouvelle scène
-          </button>
-        </div>
-      ) : currentEventState.isEnd ? (
-        <div>
-          <button
-            onClick={saveEndScene}
-            className="text-white text-lg py-2 px-4 bg-gray-700 shadow-lg rounded-md"
-          >
-            Ajouter une nouvelle scène
-          </button>
-        </div>
-      ) : (
-        ""
-      )}
-      <div className="w-screen">
-        <div className=" my-16 flex overflow-x-auto w-full">
-          {cardsState.currentCards === "lieuState"
-            ? lieuState.lieux.map((item, i) => (
-                <div
-                  key={i}
-                  onClick={() => chooseLieuOnClick(item)}
-                  className="select-none  text-gray-200 w-48 h-64 rounded-lg bg-gray-800 m-8 flex justify-center items-center text-white font-bold text-2xl transform  duration-200 ease-in-out hover:-translate-y-2"
-                  style={{
-                    backgroundImage: `url("/assets/img/${item.pictureFile}.jpg")`,
-                  }}
-                >
-                  <div className="flex flex-col justify-center items-center text-center w-48 h-64">
-                    <p> {item.name} </p>
-                    <p className="text-lg font-normal w-full">{item.description}</p>
-                  </div>
-                </div>
-              ))
-            : ""}
-          {cardsState.currentCards === "evenementState"
-            ? eventState.event.map((item, i) => (
-                <div
-                  key={i}
-                  onClick={() => chooseEventOnClick(item)}
-                  className="select-none bg-cover text-gray-200 w-48 h-64 px-8 rounded-lg bg-gray-800 m-8 flex justify-center items-center text-white font-bold text-2xl transform  duration-200 ease-in-out hover:-translate-y-2 hover:bg-black"
-                  style={{
-                    backgroundImage: `url("/assets/img/${item.pictureFile}.jpg")`,
-                  }}
-                >
-                  <div className="flex flex-col justify-center items-center text-center w-48 h-64  ">
-                    <p> {item.name} </p>
-                    <p className="text-lg font-normal ">{item.description}</p>
-                  </div>
-                </div>
-              ))
-            : ""}
-          {cardsState.currentCards === "actionState"
-            ? actionsState.transitions.map((item, i) => (
-                <div
-                  key={i}
-                  onClick={() => chooseActionOnClick(item)}
-                  className="select-none  text-gray-200 w-48 h-64 rounded-lg bg-gray-800 m-8 flex justify-center items-center text-white font-bold text-2xl transform  duration-200 ease-in-out hover:-translate-y-2"
-                >
-                  <div className="flex flex-col justify-center items-center text-center w-48 h-64  ">
-                    <p> {item.name} </p>
-                    <p className="text-lg font-normal ">{item.description}</p>
-                  </div>
-                </div>
-              ))
-            : ""}
-        </div>
+
+      <div className="flex justify-center items-center h-screen text-2xl text-white md:hidden">
+        Cette page n'est pas disponible en version mobile
       </div>
     </div>
   )
