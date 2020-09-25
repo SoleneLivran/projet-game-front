@@ -120,6 +120,15 @@ const CreateGame = () => {
           console.log("POST :")
           console.log(response)
           setStoryID({ story_id: response.data.story_id })
+          if (response.status === 200) {
+            setPublishedMessage({
+              message: "Brouillon enregistré avec succés!",
+            })
+          } else {
+            setPublishedMessage({
+              message: "Il y a eu une erreur.",
+            })
+          }
         })
         .catch((error) => {
           console.log(error.response)
@@ -207,6 +216,15 @@ const CreateGame = () => {
       .then((response) => {
         console.log("PUT :")
         console.log(response)
+        if (response.status === 200) {
+          setPublishedMessage({
+            message: "Histoire publié avec succés!",
+          })
+        } else {
+          setPublishedMessage({
+            message: "Il y a eu une erreur.",
+          })
+        }
       })
       .catch((error) => {
         console.log(error.response)
@@ -215,6 +233,11 @@ const CreateGame = () => {
   // State of current "Difficulty"
   const [currentDifficultyState, setDifficultyState] = useState({
     difficulty: 1,
+  })
+
+  // State of current "Success message"
+  const [currentPublishedMessage, setPublishedMessage] = useState({
+    message: null,
   })
 
   //setCategoryState
@@ -580,6 +603,10 @@ const CreateGame = () => {
         }
       >
         <div className="z-50 bg-white flex flex-col justify-center items-center text-gray-900 text-center rounded-lg shadow-lg p-16">
+          {currentPublishedMessage.message === null
+            ? ""
+            : currentPublishedMessage.message}
+
           <h2 className="text-3xl ">Titre de votre histoire : </h2>
           <input
             onChange={handleTitle}
@@ -624,7 +651,12 @@ const CreateGame = () => {
           </button>
           <button
             className="bg-red-500 ease-in duration-100 transform  font-bold uppercase shadow-lg text-center px-4 py-2 text-2xl w-64 text-white rounded-lg hover:scale-105"
-            onClick={() => showModalFun(false)}
+            onClick={() => {
+              showModalFun(false)
+              setPublishedMessage({
+                message: null,
+              })
+            }}
           >
             annuler
           </button>
@@ -763,7 +795,6 @@ const CreateGame = () => {
           )}
         </div>
       </div>
-
       <button
         className="bg-teal-500 ease-in duration-100 transform my-6 font-bold uppercase shadow-lg text-center px-4 py-2 text-2xl w-64 text-white rounded-lg hover:scale-105"
         onClick={() => showModalFun(true)}
@@ -819,7 +850,7 @@ const CreateGame = () => {
                 <div
                   key={i}
                   onClick={() => chooseEventOnClick(item)}
-                  className="select-none bg-cover text-gray-200 w-48 h-64 px-8 rounded-lg bg-gray-800 m-8 flex justify-center items-center text-white font-bold text-2xl transform  duration-200 ease-in-out hover:-translate-y-2"
+                  className="select-none bg-cover text-gray-200 w-48 h-64 px-8 rounded-lg bg-gray-800 m-8 flex justify-center items-center text-white font-bold text-2xl transform  duration-200 ease-in-out hover:-translate-y-2 hover:bg-black"
                   style={{
                     backgroundImage: `url("/assets/img/${item.pictureFile}.jpg")`,
                   }}
