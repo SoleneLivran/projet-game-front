@@ -18,8 +18,13 @@ h2 {
     font-size: 2rem;
 }
 
+.devcard__img {
+    height: 300px;
+    object-fit: contain;
+}
+
 @media (min-width: 1280px) {
-    .card__img {
+    .devcard__img {
         object-position: 0% 32%;
     }
 }

@@ -21,8 +21,8 @@ const About = () => (
       {/* Cyrille */}
       <div className="devcard transform duration-150 ease-in-out hover:scale-105">
         <img
-          className="devcard__img h-50 md:h-50 w-full object-cover rounded-t-lg shadow-lg"
-          src="/assets/img/avatar_viking.jpg"
+          className="devcard__img h-50 md:h-50 w-full object-cover rounded-t-lg shadow-lg bg-indigo-800 bg-opacity-75"
+          src="/assets/team/avatar_cyrille.png"
           alt="Cyrille"
         />
         <section className="devcard__info bg-gray-900 py-4">
@@ -37,17 +37,16 @@ const About = () => (
             </h3>
           </div>
           <div className="devcard__bottom-info font-light text-lg text-sm text-white text-center overflow-auto">
-            <a href="https://www.linkedin.com/in/cyrille-coignard-9911b6176/" className="devcard__social-linkedin text-center inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-1 my-2"><i className="fab fa-linkedin"></i></a>
-            <a href="#" className="devcard__social-github text-center inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-1 my-2"><i className="fab fa-github"></i></a>
-            <a href="#" className="devcard__social-portfolio text-center inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-1 my-2"><i className="fas fa-globe"></i></a>
+            <a target="_blank" href="https://www.linkedin.com/in/cyrille-coignard-9911b6176/" className="devcard__social-linkedin text-center inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-1 my-2"><i className="fab fa-linkedin"></i></a>
+            <a target="_blank" href="https://github.com/JackMandrake" className="devcard__social-github text-center inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-1 my-2"><i className="fab fa-github"></i></a>
           </div>
         </section>
       </div>
       {/* Florian */}
       <div className="devcard transform duration-150 ease-in-out hover:scale-105">
         <img
-          className="devcard__img h-50 md:h-50 w-full object-cover rounded-t-lg shadow-lg"
-          src="/assets/team/florian.jpeg"
+          className="devcard__img h-50 md:h-50 w-full object-cover rounded-t-lg shadow-lg bg-indigo-800 bg-opacity-75"
+          src="/assets/team/avatar_florian.png"
           alt="Florian"
         />
         <section className="devcard__info bg-gray-900 py-4">
@@ -62,17 +61,16 @@ const About = () => (
             </h3>
           </div>
           <div className="devcard__bottom-info font-light text-lg text-sm text-white text-center overflow-auto">
-            <a href="https://www.linkedin.com/in/florian-argaud/" className="devcard__social-linkedin text-center inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-1 my-2"><i className="fab fa-linkedin"></i></a>
-            <a href="#" className="devcard__social-github text-center inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-1 my-2"><i className="fab fa-github"></i></a>
-            <a href="#" className="devcard__social-portfolio text-center inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-1 my-2"><i className="fas fa-globe"></i></a>
+            <a target="_blank" href="https://www.linkedin.com/in/florian-argaud/" className="devcard__social-linkedin text-center inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-1 my-2"><i className="fab fa-linkedin"></i></a>
+            <a target="_blank" href="https://github.com/Icesofty" className="devcard__social-github text-center inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-1 my-2"><i className="fab fa-github"></i></a>
           </div>
         </section>
       </div>
       {/* Jordi */}
       <div className="devcard transform duration-150 ease-in-out hover:scale-105">
         <img
-          className="devcard__img h-50 md:h-50 w-full object-cover rounded-t-lg shadow-lg"
-          src="/assets/team/jordi.png"
+          className="devcard__img h-50 md:h-50 w-full object-cover rounded-t-lg shadow-lg bg-indigo-800 bg-opacity-75"
+          src="/assets/team/avatar_jordi.png"
           alt="Jordi"
         />
         <section className="devcard__info bg-gray-900 py-4">
@@ -87,17 +85,17 @@ const About = () => (
             </h3>
           </div>
           <div className="devcard__bottom-info font-light text-lg text-sm text-white text-center overflow-auto">
-            <a href="https://www.linkedin.com/in/jordileguet/" className="devcard__social-linkedin text-center inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-1 my-2"><i className="fab fa-linkedin"></i></a>
-            <a href="https://github.com/Jordi-LG" className="devcard__social-github text-center inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-1 my-2"><i className="fab fa-github"></i></a>
-            <a href="https://jordi-lg.github.io/#/" className="devcard__social-portfolio text-center inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-1 my-2"><i className="fas fa-globe"></i></a>
+            <a target="_blank" href="https://www.linkedin.com/in/jordileguet/" className="devcard__social-linkedin text-center inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-1 my-2"><i className="fab fa-linkedin"></i></a>
+            <a target="_blank" href="https://github.com/Jordi-LG" className="devcard__social-github text-center inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-1 my-2"><i className="fab fa-github"></i></a>
+            <a target="_blank" href="https://jordi-lg.github.io/#/" className="devcard__social-portfolio text-center inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-1 my-2"><i className="fas fa-globe"></i></a>
           </div>
         </section>
       </div>
       {/* Milan */}
       <div className="devcard transform duration-150 ease-in-out hover:scale-105">
         <img
-          className="devcard__img h-50 md:h-50 w-full object-cover rounded-t-lg shadow-lg"
-          src="/assets/team/milan.jpeg"
+          className="devcard__img h-50 md:h-50 w-full object-cover rounded-t-lg shadow-lg bg-indigo-800 bg-opacity-75"
+          src="/assets/team/avatar_milan.png"
           alt="Milan"
         />
         <section className="devcard__info bg-gray-900 py-4">
@@ -112,17 +110,16 @@ const About = () => (
             </h3>
           </div>
           <div className="devcard__bottom-info font-light text-lg text-sm text-white text-center overflow-auto">
-            <a href="#" className="devcard__social-linkedin text-center inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-1 my-2"><i className="fab fa-linkedin"></i></a>
-            <a href="#" className="devcard__social-github text-center inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-1 my-2"><i className="fab fa-github"></i></a>
-            <a href="#" className="devcard__social-portfolio text-center inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-1 my-2"><i className="fas fa-globe"></i></a>
+            <a target="_blank" href="https://www.linkedin.com/in/milan-forrat-09043925/" className="devcard__social-linkedin text-center inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-1 my-2"><i className="fab fa-linkedin"></i></a>
+            <a target="_blank" href="https://github.com/MilanForrat" className="devcard__social-github text-center inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-1 my-2"><i className="fab fa-github"></i></a>
           </div>
         </section>
       </div>
       {/* Solène */}
       <div className="devcard transform duration-150 ease-in-out hover:scale-105">
         <img
-          className="devcard__img h-50 md:h-50 w-full object-cover rounded-t-lg shadow-lg"
-          src="/assets/team/solene.png"
+          className="devcard__img h-50 md:h-50 w-full object-cover rounded-t-lg shadow-lg bg-indigo-800 bg-opacity-75"
+          src="/assets/team/avatar_solene.png"
           alt="Solène"
         />
         <section className="devcard__info bg-gray-900 py-4">
@@ -137,9 +134,9 @@ const About = () => (
             </h3>
           </div>
           <div className="devcard__bottom-info font-light text-lg text-sm text-white text-center overflow-auto">
-            <a href="https://www.linkedin.com/in/solenelivran/" className="devcard__social-linkedin text-center inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-1 my-2"><i className="fab fa-linkedin"></i></a>
-            <a href="https://github.com/SoleneLivran" className="devcard__social-github text-center inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-1 my-2"><i className="fab fa-github"></i></a>
-            <a href="https://solenelivran.github.io/" className="devcard__social-portfolio text-center inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-1 my-2"><i className="fas fa-globe"></i></a>
+            <a target="_blank" href="https://www.linkedin.com/in/solenelivran/" className="devcard__social-linkedin text-center inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-1 my-2"><i className="fab fa-linkedin"></i></a>
+            <a target="_blank" href="https://github.com/SoleneLivran" className="devcard__social-github text-center inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-1 my-2"><i className="fab fa-github"></i></a>
+            <a target="_blank" href="https://solenelivran.github.io/" className="devcard__social-portfolio text-center inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-1 my-2"><i className="fas fa-globe"></i></a>
           </div>
         </section>
       </div>
