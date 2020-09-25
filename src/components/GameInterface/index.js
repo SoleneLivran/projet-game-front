@@ -120,7 +120,9 @@ const GameInterface = ({
           >
             <h1
               className={`card__title text-center mx-auto p-1 max-h-full overflow-y-auto ${
-                placeName === "Lieu" ? "" : "card__title--active"
+                placeName === "Lieu"
+                  ? ""
+                  : "card__title--active bg-gray-800 bg-opacity-50 rounded-lg"
               }`}
             >
               {placeName}
@@ -142,7 +144,9 @@ const GameInterface = ({
           >
             <h1
               className={`card__title text-center mx-auto p-1 max-h-full ${
-                eventName === "Évenement" ? "" : "card__title--active"
+                eventName === "Évenement"
+                  ? ""
+                  : "card__title--active bg-gray-800 bg-opacity-50 rounded-lg mx-1"
               }`}
             >
               {eventName}

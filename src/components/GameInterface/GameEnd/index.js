@@ -35,7 +35,7 @@ const GameEnd = ({ handleRestart, storyId }) => {
   }
 
   return (
-    <div className="game-end text-white text-center my-4">
+    <div className="game-end text-white text-center my-4 bg-gray-800 bg-opacity-50 rounded-lg py-2">
       <h1 className="game-end__title text-2xl font-bold">Fin de partie</h1>
       <p className="game-end__greetings">Merci d'avoir joué</p>
       <div className="game-end__rating my-4">
