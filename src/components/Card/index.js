@@ -23,8 +23,7 @@ const Card = ({
       >
         <img
           className="card__img h-24 md:h-32 w-full object-cover object-center rounded-t-lg shadow-lg"
-          // src={`/assets/img/${findCategoryImg(category.name)}.jpg`}
-          src={`/assets/img/category_combat.jpg`}
+          src={`/assets/img/${findCategoryImg(category.name)}.jpg`}
           alt={`img_${findCategoryImg(category.name)}`}
         />
         <section className="card__info bg-gray-900 py-4">
