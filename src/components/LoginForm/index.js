@@ -31,6 +31,13 @@ const LoginForm = ({ handleLogin, isLogged }) => (
         </label>
         <Field type="password" name="password" placeholder="Mot de passe" />
 
+        <a
+          href="http://ec2-18-234-186-84.compute-1.amazonaws.com/reset-password"
+          className="text-sm underline text-orange-600 hover:text-orange-300"
+        >
+          Mot de passe perdu
+        </a>
+
         <input
           className="login-form__submit cursor-pointer h-32 p-6 mt-8 uppercase font-bold whitespace-pre-wrap border-4 border-double border-yellow-400 bg-orange-600 rounded-sm shadow-inner"
           type="submit"

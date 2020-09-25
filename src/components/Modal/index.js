@@ -38,6 +38,16 @@ const Modal = ({ showModal, onClose, storyId }) => {
     }
   }
 
+  const difficulty = () => {
+    if (story.difficulty === 1) {
+      return "Facile"
+    } else if (story.difficulty === 2) {
+      return "Normal"
+    } else {
+      return "Difficile"
+    }
+  }
+
   // API request to have the selected story
   const fetchStory = () => {
     Axios.get(
@@ -71,11 +81,14 @@ const Modal = ({ showModal, onClose, storyId }) => {
               <h1 className="modal__title font-bold text-2xl text-center">
                 {story.title}
               </h1>
-              <p className="modal__author text-center text-md my-2 text-gray-700">
+              <p className="modal__author text-center text-md my-2 text-gray-700 capitalize">
                 {story.author.name}
               </p>
               <p className="modal__category text-center text-sm my-2">
                 {story.category.name}
+              </p>
+              <p className="modal__difficulty text-center text-sm my-2">
+                Histoire: <span className="font-bold">{difficulty()}</span>
               </p>
               <p className="modal__synopsis text-justify">{story.synopsis}</p>
             </div>

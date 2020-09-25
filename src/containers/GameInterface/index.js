@@ -7,6 +7,7 @@ const mapStateToProps = (state) => ({
   event: state.gameinterface.event,
   transitions: state.gameinterface.transitions,
   isEnd: state.gameinterface.isEnd,
+  isLogged: state.auth.isLogged,
 })
 
 const mapDispatchToProps = (dispatch) => ({

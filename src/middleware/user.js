@@ -1,5 +1,7 @@
 import axios from "axios"
 import { FETCH_USER, setUser, USER_EDIT, clearEdit } from "src/actions/user"
+import { saveUser } from "src/actions/auth"
+import jwt_decode from "jwt-decode"
 
 const user = (store) => (next) => (action) => {
   const state = store.getState()
@@ -43,10 +45,32 @@ const user = (store) => (next) => (action) => {
           }
         )
         .then((response) => {
-          store.dispatch(clearEdit())
+          axios
+            .post(
+              "http://ec2-18-234-186-84.compute-1.amazonaws.com/api/login_check",
+              {
+                username: state.user.username.trim(),
+                password:
+                  state.user.newPassword === ""
+                    ? state.user.password.trim()
+                    : state.user.newPassword.trim(),
+              }
+            )
+            .then((response) => {
+              if (response.status === 200) {
+                localStorage.setItem("user", response.data.token)
+                store.dispatch(saveUser(jwt_decode(localStorage.getItem("user"))))
+              }
+            })
+            .catch((error) => {
+              console.log(error)
+            })
         })
         .catch((error) => {
           console.log(error)
+        })
+        .finally(() => {
+          store.dispatch(clearEdit())
         })
       break
     }

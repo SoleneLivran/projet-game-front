@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
-import { Link, useParams } from "react-router-dom"
+import { Link, useParams, Redirect } from "react-router-dom"
 
 import GameEnd from "./GameEnd/index"
 import "./styles.css"
@@ -12,11 +12,13 @@ const GameInterface = ({
   transitions,
   nextScene,
   clearPreviousGame,
+  isLogged,
 }) => {
   const { slug } = useParams()
 
   const [placeName, setNamePlace] = useState("Lieu")
   const [eventName, setNameEvent] = useState("Évenement")
+  const [samePlace, setSamePlace] = useState("")
 
   const [isEnd, setIsEnd] = useState(false)
 
@@ -68,7 +70,7 @@ const GameInterface = ({
     return () => {
       clearPreviousGame()
     }
-  }, [])
+  }, [clearPreviousGame])
 
   const describeClassName =
     placeName !== "Lieu" && eventName !== "Évenement" ? "opacity-100" : "opacity-0"
@@ -126,19 +128,15 @@ const GameInterface = ({
         <div
           className={`game-interface__describe pt-10 sm:pt-20 transform duration-500 px-8 flex flex-col ${describeClassName}`}
         >
-          <div className="game-interface__content mt-2 px-4 py-2 text-white font-bold text-lg sm:text-xl text-center bg-gray-800 bg-opacity-50 rounded-t-lg sm:flex sm:justify-center">
-            <p className="mx-1">{place.description} et</p>
-            <p className="lowercase mx-1">{event.description}</p>
-          </div>
-          {!isEnd && (
-            <p className="bg-gray-800 bg-opacity-50 rounded-b-lg py-2 text-white font-bold text-lg sm:text-xl text-center">
-              Que faites-vous ?
+          <div className="game-interface__content mt-2 px-4 py-2 text-white font-bold text-lg sm:text-xl text-center bg-gray-800 bg-opacity-50 rounded-lg">
+            <p className="mx-1">
+              {place.description} et{" "}
+              <span className="lowercase">{event.description}</span>
             </p>
-          )}
-
-          {isEnd ? (
-            <GameEnd handleRestart={handleRestart} storyId={slug} />
-          ) : (
+            {!isEnd && <p className="py-1">Que faites-vous ?</p>}
+          </div>
+          {isEnd && <GameEnd handleRestart={handleRestart} storyId={slug} />}
+          {!isEnd && placeName !== "Lieu" && eventName !== "Évenement" && (
             <div className="game-interface__actions py-6 overflow-x-auto flex">
               {transitions.map((action, key) => {
                 return (
@@ -157,6 +155,7 @@ const GameInterface = ({
           )}
         </div>
       </div>
+      {!isLogged && <Redirect to="/login" />}
     </div>
   )
 }
@@ -168,5 +167,6 @@ GameInterface.propTypes = {
   fetchStory: PropTypes.func.isRequired,
   nextScene: PropTypes.func.isRequired,
   clearPreviousGame: PropTypes.func.isRequired,
+  isLogged: PropTypes.bool.isRequired,
 }
 export default GameInterface

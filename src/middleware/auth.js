@@ -26,7 +26,7 @@ const auth = (store) => (next) => (action) => {
           }
         })
         .catch((error) => {
-          console.log(error)
+          console.log(error.response.data)
         })
       break
     }
