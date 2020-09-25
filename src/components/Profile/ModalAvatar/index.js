@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import axios from "axios"
 import "./styles.css"
 
-const ModalAvatar = ({ showModalAvatar, onClose, setAvatar }) => {
+const ModalAvatar = ({ showModalAvatar, onClose, setAvatar, connectedId }) => {
   // display the modal when the user click on the delete button in UserProfile
   const displayModal = showModalAvatar === true ? "block" : "hidden"
 
@@ -55,7 +55,7 @@ const ModalAvatar = ({ showModalAvatar, onClose, setAvatar }) => {
   const setAvatarRequest = (pictureFile, id) => {
     axios
       .put(
-        `http://ec2-18-234-186-84.compute-1.amazonaws.com/api/account/avatar/{id}`,
+        `http://ec2-18-234-186-84.compute-1.amazonaws.com/api/account/${connectedId}/avatar`,
         {
           avatar_id: id,
         },
@@ -93,7 +93,7 @@ const ModalAvatar = ({ showModalAvatar, onClose, setAvatar }) => {
           <h1 className="modal-avatar__title text-2xl font-bold text-center mb-2">
             Choix d'un avatar
           </h1>
-          <ul className="modal-avatar__list flex flex-wrap overflow-y-auto">
+          <ul className="modal-avatar__list flex flex-wrap overflow-y-auto p-4">
             {avatars.map((avatar) => (
               <li key={avatar.id} className="modal-avatar__item-img w-1/2">
                 <img
@@ -117,6 +117,6 @@ const ModalAvatar = ({ showModalAvatar, onClose, setAvatar }) => {
 ModalAvatar.propTypes = {
   showModalAvatar: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  setAvatar: PropTypes.func.isRequired,
+  connectedId: PropTypes.number.isRequired,
 }
 export default ModalAvatar

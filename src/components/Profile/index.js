@@ -94,6 +94,7 @@ const Profile = ({
         <ModalAvatar
           showModalAvatar={showModalAvatar}
           onClose={() => setModalAvatar(false)}
+          connectedId={connectedId}
         />
       )}
       {showModalDeleteStory && (
