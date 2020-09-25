@@ -122,7 +122,7 @@ const CreateGame = () => {
           setStoryID({ story_id: response.data.story_id })
           if (response.status === 200) {
             setPublishedMessage({
-              message: "Brouillon enregistré avec succés!",
+              message: "Brouillon enregistré avec succès!",
             })
           } else {
             setPublishedMessage({
@@ -218,7 +218,7 @@ const CreateGame = () => {
         console.log(response)
         if (response.status === 200) {
           setPublishedMessage({
-            message: "Histoire publié avec succés!",
+            message: "Histoire publié avec succès!",
           })
         } else {
           setPublishedMessage({
