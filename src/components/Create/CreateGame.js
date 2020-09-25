@@ -669,7 +669,7 @@ const CreateGame = () => {
             {scenesState.scenes.length > 0
               ? scenesState.scenes.map((item, index) => (
                   <div
-                    className="select-none object-cover mx-8 my-4 w-64  py-4 rounded-lg bg-gray-200  flex flex-col justify-between  border-gray-500 items-center text-gray-100 shadow-lg font-bold text-lg"
+                    className="select-none bg-cover mx-8 my-4 w-64  py-4 rounded-lg bg-gray-200  flex flex-col justify-between  border-gray-500 items-center text-gray-100 shadow-lg font-bold text-lg"
                     style={{
                       backgroundImage: `url("/assets/img/${item.lieu.lieuBg}.jpg")`,
                     }}
