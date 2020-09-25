@@ -14,10 +14,6 @@
     /* flex-basis: 15%; */
 }
 
-h2 {
-    font-size: 2rem;
-}
-
 @media (min-width: 1280px) {
     .card__img {
         object-position: 0% 32%;
