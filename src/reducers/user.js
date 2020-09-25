@@ -1,5 +1,4 @@
 import {
-  SET_AVATAR,
   SET_USER,
   CHANGE_USER_INPUT,
   CLEAR_EDIT,
@@ -20,12 +19,6 @@ const user = (state = initialState, action = {}) => {
       return {
         ...state,
         [action.key]: action.value,
-      }
-    }
-    case SET_AVATAR: {
-      return {
-        ...state,
-        avatar: action.imgFile,
       }
     }
     case SET_USER: {

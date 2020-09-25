@@ -51,6 +51,27 @@ const ModalAvatar = ({ showModalAvatar, onClose, setAvatar }) => {
         console.log(error)
       })
   }
+
+  const setAvatarRequest = (pictureFile, id) => {
+    axios
+      .put(
+        `http://ec2-18-234-186-84.compute-1.amazonaws.com/api/account/avatar/{id}`,
+        {
+          avatar_id: id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("user")}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
   useEffect(() => fetchAvatars(), [])
 
   return (
@@ -80,7 +101,7 @@ const ModalAvatar = ({ showModalAvatar, onClose, setAvatar }) => {
                   alt={avatar.pictureFile}
                   className="modal-avatar__img h-24 w-24 rounded-full my-4 mx-auto cursor-pointer transform hover:scale-110"
                   onClick={() => {
-                    setAvatar(avatar.pictureFile, avatar.id)
+                    setAvatarRequest(avatar.pictureFile, avatar.id)
                     onClose()
                   }}
                 />
