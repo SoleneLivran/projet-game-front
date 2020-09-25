@@ -29,6 +29,7 @@ const Profile = ({
   const [showModalDeleteUser, setModalDeleteUser] = useState(false)
   const [showModalAvatar, setModalAvatar] = useState(false)
   const [showModalDeleteStory, setModalDeleteStory] = useState(false)
+  const [avatarFile, setAvatarFile] = useState("")
 
   // state for story list written by connected user
   const [userStoriesList, setUserStoriesList] = useState([])
@@ -92,6 +93,7 @@ const Profile = ({
         <ModalAvatar
           showModalAvatar={showModalAvatar}
           onClose={() => setModalAvatar(false)}
+          connectedId={connectedId}
         />
       )}
       {showModalDeleteStory && (
@@ -141,11 +143,15 @@ const Profile = ({
         <div className="profile__left-panel flex flex-col w-64 mx-auto md:mx-0 justify-center my-6 items-center md:mb-20">
           {avatarLoading ? (
             <Loading type="Oval" color="#5BC1FF" heightValue={40} widthValue={40} />
+          ) : avatar === null ? (
+            <p className="profile__img-null mb-2 text-white italic">
+              Pas encore d'avatar
+            </p>
           ) : (
             <img
-              src={`/assets/img/${avatar}.png`}
+              src={`/assets/img/${avatar.pictureFile}.jpg`}
               alt=""
-              className="profile__img w-40 h-40 md:w-56 md:h-56 "
+              className="profile__img w-40 h-40 md:w-56 md:h-56 rounded-full"
             />
           )}
           <button
@@ -162,14 +168,13 @@ const Profile = ({
           <form
             onSubmit={(e) => {
               e.preventDefault()
-              console.log(errors)
               if (Object.keys(errors).length === 0) {
                 handleUserEdit()
               }
             }}
             className="profile__form flex flex-col"
           >
-            <label className="profile__label mt-2" htmlFor="username">
+            <label className="profile__label mt-2 text-white" htmlFor="username">
               Nom d'utilisateur
             </label>
             <FieldProfile
@@ -177,12 +182,12 @@ const Profile = ({
               name="username"
               placeholder="Nom d'utilisateur"
             />
-            <label className="profile__label mt-2" htmlFor="email">
+            <label className="profile__label mt-2 text-white" htmlFor="email">
               Email
             </label>
             <FieldProfile type="email" name="email" placeholder="Email" />
 
-            <label className="profile__label mt-2" htmlFor="password">
+            <label className="profile__label mt-2 text-white" htmlFor="password">
               Mot de passe actuel
             </label>
             <FieldProfile
@@ -190,7 +195,7 @@ const Profile = ({
               name="password"
               placeholder="Mot de passe"
             />
-            <label className="profile__label mt-2" htmlFor="password">
+            <label className="profile__label mt-2 text-white" htmlFor="password">
               Nouveau mot de passe
             </label>
             <FieldProfile
@@ -221,7 +226,10 @@ const Profile = ({
 Profile.propTypes = {
   connectedId: PropTypes.number.isRequired,
   fetchUser: PropTypes.func.isRequired,
-  avatar: PropTypes.string.isRequired,
+  avatar: PropTypes.oneOfType([
+    PropTypes.string.isRequired,
+    PropTypes.object.isRequired,
+  ]),
   handleUserEdit: PropTypes.func.isRequired,
   handleDeleteUser: PropTypes.func.isRequired,
 }

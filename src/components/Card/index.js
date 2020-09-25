@@ -1,6 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import "./styles.css"
+import { findCategoryImg } from "src/selectors/card"
 
 const Card = ({
   id,
@@ -21,9 +22,9 @@ const Card = ({
         onClick={() => handleModal(id)}
       >
         <img
-          className="card__img h-24 md:h-32 w-full object-cover rounded-t-lg shadow-lg"
-          src="/assets/img/event_dragon.jpg"
-          alt={`img_${title}`}
+          className="card__img h-24 md:h-32 w-full object-cover object-center rounded-t-lg shadow-lg"
+          src={`/assets/img/${findCategoryImg(category.name)}.jpg`}
+          alt={`img_${findCategoryImg(category.name)}`}
         />
         <section className="card__info bg-gray-900 py-4">
           <div className="card__top-info flex justify-center pt-1 px-5 items-center">

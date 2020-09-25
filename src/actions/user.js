@@ -21,9 +21,10 @@ export const clearEdit = () => ({
   type: CLEAR_EDIT,
 })
 
-export const setAvatar = (img) => ({
+export const setAvatar = (img, id) => ({
   type: SET_AVATAR,
   imgFile: img,
+  id: id,
 })
 
 export const fetchUser = () => ({

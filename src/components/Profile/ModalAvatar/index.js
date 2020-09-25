@@ -1,10 +1,14 @@
-import React, { useEffect, useRef } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import PropTypes from "prop-types"
+import axios from "axios"
 import "./styles.css"
 
-const ModalAvatar = ({ showModalAvatar, onClose, setAvatar }) => {
+const ModalAvatar = ({ showModalAvatar, onClose, setAvatar, connectedId }) => {
   // display the modal when the user click on the delete button in UserProfile
   const displayModal = showModalAvatar === true ? "block" : "hidden"
+
+  // state for avatars list
+  const [avatars, setAvatars] = useState([])
 
   // useRef to define a current object => only the modal part who display content
   const ref = useRef(null)
@@ -33,6 +37,44 @@ const ModalAvatar = ({ showModalAvatar, onClose, setAvatar }) => {
     }
   }
 
+  const fetchAvatars = () => {
+    axios
+      .get("http://ec2-18-234-186-84.compute-1.amazonaws.com/api/avatars", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("user")}`,
+        },
+      })
+      .then((response) => {
+        setAvatars(response.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
+  const setAvatarRequest = (pictureFile, id) => {
+    axios
+      .put(
+        `http://ec2-18-234-186-84.compute-1.amazonaws.com/api/account/${connectedId}/avatar`,
+        {
+          avatar: id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("user")}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response)
+        setAvatar(pictureFile, id)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+  useEffect(() => fetchAvatars(), [])
+
   return (
     <div
       className={`modal-avatar h-screen w-screen ${displayModal} fixed z-40 flex flex-col justify-center`}
@@ -52,29 +94,20 @@ const ModalAvatar = ({ showModalAvatar, onClose, setAvatar }) => {
           <h1 className="modal-avatar__title text-2xl font-bold text-center mb-2">
             Choix d'un avatar
           </h1>
-          <ul className="modal-avatar__list flex flex-wrap overflow-y-auto">
-            <li className="modal-avatar__item-img w-1/2">
-              <img
-                src="/assets/img/human_girl.png"
-                alt=""
-                className="modal-avatar__img h-24 w-24 my-4 mx-auto cursor-pointer transform hover:scale-110"
-                onClick={() => {
-                  setAvatar("human_girl")
-                  onClose()
-                }}
-              />
-            </li>
-            <li className="modal-avatar__item-img w-1/2">
-              <img
-                src="/assets/img/human_boy.png"
-                alt=""
-                className="modal-avatar__img h-24 w-24 my-4 mx-auto cursor-pointer transform hover:scale-110"
-                onClick={() => {
-                  setAvatar("human_boy")
-                  onClose()
-                }}
-              />
-            </li>
+          <ul className="modal-avatar__list flex flex-wrap overflow-y-auto p-4">
+            {avatars.map((avatar) => (
+              <li key={avatar.id} className="modal-avatar__item-img w-1/2">
+                <img
+                  src={`/assets/img/${avatar.pictureFile}.jpg`}
+                  alt={avatar.pictureFile}
+                  className="modal-avatar__img h-24 w-24 rounded-full my-4 mx-auto cursor-pointer transform hover:scale-110"
+                  onClick={() => {
+                    setAvatarRequest(avatar.pictureFile, avatar.id)
+                    onClose()
+                  }}
+                />
+              </li>
+            ))}
           </ul>
         </div>
       </div>
@@ -85,6 +118,7 @@ const ModalAvatar = ({ showModalAvatar, onClose, setAvatar }) => {
 ModalAvatar.propTypes = {
   showModalAvatar: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  connectedId: PropTypes.number.isRequired,
   setAvatar: PropTypes.func.isRequired,
 }
 export default ModalAvatar

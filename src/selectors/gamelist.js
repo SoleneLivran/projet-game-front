@@ -88,14 +88,14 @@ export const sortStories = (
     case "difficulty":
       setStoriesList(
         copyStories.sort((a, b) =>
-          activeCheckbox ? b.difficulty - a.difficulty : a.difficulty - b.difficulty
+          activeCheckbox ? a.difficulty - b.difficulty : b.difficulty - a.difficulty
         )
       )
       break
     case "rating":
       setStoriesList(
         copyStories.sort((a, b) =>
-          activeCheckbox ? b.rating - a.rating : a.rating - b.rating
+          activeCheckbox ? a.rating - b.rating : b.rating - a.rating
         )
       )
       break
@@ -103,8 +103,8 @@ export const sortStories = (
       setStoriesList(
         copyStories.sort((a, b) =>
           activeCheckbox
-            ? b.publishedAt.localeCompare(a.publishedAt)
-            : a.publishedAt.localeCompare(b.publishedAt)
+            ? a.publishedAt.localeCompare(b.publishedAt)
+            : b.publishedAt.localeCompare(a.publishedAt)
         )
       )
       break

@@ -5,8 +5,8 @@ import { setAvatar } from "src/actions/user"
 const mapStateToProps = null
 
 const mapDispatchToProps = (dispatch) => ({
-  setAvatar: (img) => {
-    dispatch(setAvatar(img))
+  setAvatar: (pictureFile, id) => {
+    dispatch(setAvatar(pictureFile, id))
   },
 })
 

@@ -25,7 +25,7 @@ const user = (state = initialState, action = {}) => {
     case SET_AVATAR: {
       return {
         ...state,
-        avatar: action.imgFile,
+        avatar: { id: action.id, pictureFile: action.imgFile },
       }
     }
     case SET_USER: {
@@ -33,8 +33,7 @@ const user = (state = initialState, action = {}) => {
         ...state,
         username: action.name,
         email: action.mail,
-        // avatar: action.avatar,
-        avatar: "human_girl",
+        avatar: action.avatar,
         password: "",
         newPassword: "",
       }
