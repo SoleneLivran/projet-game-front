@@ -14,10 +14,6 @@
     /* flex-basis: 15%; */
 }
 
-h2 {
-    font-size: 2rem;
-}
-
 .devcard__img {
     height: 300px;
     object-fit: contain;

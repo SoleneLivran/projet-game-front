@@ -18,7 +18,9 @@ const GameInterface = ({
 
   const [placeName, setNamePlace] = useState("Lieu")
   const [eventName, setNameEvent] = useState("Évenement")
-  const [samePlace, setSamePlace] = useState("")
+
+  const [placeDescribe, setPlaceDescribe] = useState("")
+  const [eventDescribe, setEventDescribe] = useState("")
 
   const [isEnd, setIsEnd] = useState(false)
 
@@ -29,33 +31,41 @@ const GameInterface = ({
 
   // change the state when the card is clicked
   const handleNameEvent = () => {
-    return eventName === "Évenement"
-      ? setNameEvent(event.name)
-      : setNameEvent("Évenement")
+    eventName === "Évenement" ? setNameEvent(event.name) : setNameEvent("Évenement")
   }
 
   // change the scene when an action is choosen
   const handleNextScene = (id) => {
-    setNamePlace("Lieu")
-    setNameEvent("Évenement")
-    setTimeout(() => {
-      nextScene(id)
-    }, 500)
+    nextScene(id)
   }
+
+  // component is updated when place & event change
+  useEffect(() => {
+    // check is place card have to be return
+    if (placeName === place.name) {
+      setNameEvent("Évenement")
+    } else {
+      setNamePlace("Lieu")
+      setNameEvent("Évenement")
+    }
+
+    // wait for the describe to change or to display the GameEnd component
+    setTimeout(() => {
+      setPlaceDescribe(place.description)
+      setEventDescribe(event.description)
+
+      if (event.isEnd === true) {
+        setIsEnd(true)
+      } else {
+        setIsEnd(false)
+      }
+    }, 500)
+  }, [place, event])
 
   // load stories when component is mounted
   useEffect(() => {
     fetchStory(slug)
-  }, [clearPreviousGame, fetchStory, slug])
-
-  // update isEnd state when event change
-  useEffect(() => {
-    if (event.isEnd === true) {
-      setIsEnd(true)
-    } else {
-      setIsEnd(false)
-    }
-  }, [event])
+  }, [fetchStory, slug])
 
   // restart the game after finished it
   const handleRestart = () => {
@@ -78,13 +88,11 @@ const GameInterface = ({
   return (
     <div
       className={`game-interface h-screen w-screen bg-gray-900 px-4 relative ${
-        placeName === "Lieu" ? "" : "is-forest"
+        placeName === "Lieu" ? "" : "is-bg"
       }`}
       style={{
         backgroundImage:
-          placeName === "Lieu"
-            ? ""
-            : `url("https://cdnb.artstation.com/p/assets/images/images/010/310/039/large/kasia-kosobucka-landscape-bg.jpg?1523743339")`,
+          placeName === "Lieu" ? "" : `url(/assets/img/${place.pictureFile}.jpg)`,
       }}
     >
       <div className="game-interface__button absolute right-0 top-0">
@@ -98,13 +106,23 @@ const GameInterface = ({
         <div className="card__place-event mx-1 my-2 flex justify-center">
           <div
             onClick={() => handleNamePlace()}
+            style={{
+              backgroundImage:
+                placeName === "Lieu"
+                  ? ""
+                  : `url(/assets/img/${place.pictureFile}.jpg)`,
+            }}
             className={`card__place mr-4 ${
-              placeName === "Lieu" ? "" : "card__place--active bg-teal-500"
+              placeName === "Lieu"
+                ? ""
+                : "card__place--active bg-teal-500 bg-cover bg-center"
             } bg-gray-200 select-none duration-500 h-56 w-32 rounded-lg flex justify-center items-center transform hover:scale-105 cursor-pointer shadow-lg text-gray-800 text-xl font-bold sm:text-2xl sm:w-40`}
           >
             <h1
               className={`card__title text-center mx-auto p-1 max-h-full overflow-y-auto ${
-                placeName === "Lieu" ? "" : "card__title--active"
+                placeName === "Lieu"
+                  ? ""
+                  : "card__title--active bg-gray-800 bg-opacity-50 rounded-lg"
               }`}
             >
               {placeName}
@@ -112,13 +130,23 @@ const GameInterface = ({
           </div>
           <div
             onClick={() => handleNameEvent()}
+            style={{
+              backgroundImage:
+                eventName === "Évenement"
+                  ? ""
+                  : `url(/assets/img/${event.pictureFile}.jpg)`,
+            }}
             className={`card__event ml-4 ${
-              eventName === "Évenement" ? "" : "card__event--active bg-teal-500"
+              eventName === "Évenement"
+                ? ""
+                : "card__event--active bg-teal-500 bg-cover bg-center"
             } bg-gray-200 select-none duration-500 h-56 w-32 rounded-lg flex justify-center items-center transform hover:scale-105 cursor-pointer shadow-lg text-gray-800 text-xl font-bold sm:text-2xl sm:w-40`}
           >
             <h1
               className={`card__title text-center mx-auto p-1 max-h-full ${
-                eventName === "Évenement" ? "" : "card__title--active"
+                eventName === "Évenement"
+                  ? ""
+                  : "card__title--active bg-gray-800 bg-opacity-50 rounded-lg mx-1"
               }`}
             >
               {eventName}
@@ -130,8 +158,7 @@ const GameInterface = ({
         >
           <div className="game-interface__content mt-2 px-4 py-2 text-white font-bold text-lg sm:text-xl text-center bg-gray-800 bg-opacity-50 rounded-lg">
             <p className="mx-1">
-              {place.description} et{" "}
-              <span className="lowercase">{event.description}</span>
+              {placeDescribe} et <span className="lowercase">{eventDescribe}</span>
             </p>
             {!isEnd && <p className="py-1">Que faites-vous ?</p>}
           </div>
