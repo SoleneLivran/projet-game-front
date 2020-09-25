@@ -87,7 +87,7 @@ const Nav = ({ isLogged, connectedId }) => {
         {/* display the home button with a img, always in center, depend of the nav length */}
         <NavLink to="/" className={`md:order-${Math.ceil(navDatas.length / 2)}`}>
           <img
-            src="/assets/img/logo.png"
+            src="/assets/img/front_logo.png"
             className="nav__logo absolute h-64 hidden md:block mx-auto"
             alt=""
           />
