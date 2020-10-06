@@ -22,7 +22,7 @@ const Card = ({
         onClick={() => handleModal(id)}
       >
         <img
-          className="card__img h-24 md:h-32 w-full object-cover object-center rounded-t-lg shadow-lg"
+          className="card__img h-24 md:h-32 w-screen object-cover object-center rounded-t-lg shadow-lg"
           src={`/assets/img/${findCategoryImg(category.name)}.jpg`}
           alt={`img_${findCategoryImg(category.name)}`}
         />

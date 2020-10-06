@@ -151,26 +151,24 @@ const GameList = () => {
             )}
           </div>
         </aside>
-        <section className="gameList__display my-4 md:my-0 md:flex md:justify-center md:w-10/12">
-          <div className="gameList__display-container md:flex md:flex-col md:items-center">
-            <Dropdown sortStories={handleSortStories} />
-            {!loadingStories ? (
-              <ul className="gamelist__list mt-8">
-                {storiesList.map((story) => (
-                  <Card key={story.id} {...story} handleModal={handleModal} />
-                ))}
-              </ul>
-            ) : (
-              <div className="home__loading-latest flex justify-center mt-4">
-                <Loading
-                  type="Bars"
-                  color="#5BC1FF"
-                  heightValue={50}
-                  widthValue={50}
-                />
-              </div>
-            )}
-          </div>
+        <section className="gameList__display my-4 md:my-0 md:flex md:w-9/12 md:flex-col">
+          <Dropdown sortStories={handleSortStories} />
+          {!loadingStories ? (
+            <ul className="gamelist__list mt-8">
+              {storiesList.map((story) => (
+                <Card key={story.id} {...story} handleModal={handleModal} />
+              ))}
+            </ul>
+          ) : (
+            <div className="home__loading-latest flex justify-center mt-4">
+              <Loading
+                type="Bars"
+                color="#5BC1FF"
+                heightValue={50}
+                widthValue={50}
+              />
+            </div>
+          )}
         </section>
       </div>
     </div>
