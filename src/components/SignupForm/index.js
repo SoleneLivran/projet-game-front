@@ -8,11 +8,12 @@ import { Redirect, Link } from "react-router-dom"
 const SignupForm = ({ username, email, password, passwordCheck, handleSignup }) => {
   const [isSignedUp, setSignedUp] = useState(false)
   const [errors, setErrors] = useState([])
-  const [focus, setFocus] = useState("")
 
   // useRef to block the initial render of useEffect (componentDidMounted)
   const firstUpdate = useRef(true)
 
+  // ref to define focus on field with the related error
+  const [focus, setFocus] = useState("")
   const usernameRef = useRef()
   const emailRef = useRef()
   const passwordRef = useRef()
@@ -21,18 +22,17 @@ const SignupForm = ({ username, email, password, passwordCheck, handleSignup }) 
   useEffect(() => {
     if (firstUpdate.current) {
       firstUpdate.current = false
-      // inputRef.current.focus()
     } else {
-      console.log(errors)
       if (Object.keys(errors).length === 0) {
         handleSignup()
-        // setSignedUp(true)
+        setSignedUp(true)
       } else {
         setFocus(errors[0].type)
       }
     }
   }, [errors])
 
+  // update component when error and focus the related field
   useEffect(() => {
     if (focus === "username") {
       usernameRef.current.focus()
@@ -44,6 +44,7 @@ const SignupForm = ({ username, email, password, passwordCheck, handleSignup }) 
       passwordCheckRef.current.focus()
     }
 
+    // clean const focus. Without the clean, the focus doesn't work twice on the same field
     return () => {
       setFocus("")
     }
