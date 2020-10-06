@@ -9,6 +9,7 @@ const Field = ({
   inputValue,
   setInputValue,
   clearInput,
+  inputRef,
 }) => {
   useEffect(() => {
     return () => {
@@ -18,13 +19,14 @@ const Field = ({
   return (
     <>
       <input
-        className="field__input px-4 mb-2 h-12"
+        className="field__input px-4 mb-2 h-12 border-4 border-white focus:border-black"
         id={name}
         type={type}
         name={name}
         placeholder={placeholder}
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
+        ref={inputRef}
       />
     </>
   )
