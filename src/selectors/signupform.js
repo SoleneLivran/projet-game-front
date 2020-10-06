@@ -39,7 +39,7 @@ export const checkInput = (username, email, password, passwordCheck) => {
     if (password !== passwordCheck && passwordCheck !== "") {
       errors.push({
         errorMessage: "Les mots de passes ne sont pas identiques",
-        type: "password",
+        type: "passwordCheck",
       })
     }
     return errors

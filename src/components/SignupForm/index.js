@@ -8,17 +8,20 @@ import { Redirect, Link } from "react-router-dom"
 const SignupForm = ({ username, email, password, passwordCheck, handleSignup }) => {
   const [isSignedUp, setSignedUp] = useState(false)
   const [errors, setErrors] = useState([])
-  const [focus, setFocus] = useState()
+  const [focus, setFocus] = useState("")
 
   // useRef to block the initial render of useEffect (componentDidMounted)
   const firstUpdate = useRef(true)
 
-  const inputRef = useRef()
+  const usernameRef = useRef()
+  const emailRef = useRef()
+  const passwordRef = useRef()
+  const passwordCheckRef = useRef()
 
   useEffect(() => {
     if (firstUpdate.current) {
       firstUpdate.current = false
-      inputRef.current.focus()
+      // inputRef.current.focus()
     } else {
       console.log(errors)
       if (Object.keys(errors).length === 0) {
@@ -29,6 +32,22 @@ const SignupForm = ({ username, email, password, passwordCheck, handleSignup }) 
       }
     }
   }, [errors])
+
+  useEffect(() => {
+    if (focus === "username") {
+      usernameRef.current.focus()
+    } else if (focus === "email") {
+      emailRef.current.focus()
+    } else if (focus === "password") {
+      passwordRef.current.focus()
+    } else if (focus === "passwordCheck") {
+      passwordCheckRef.current.focus()
+    }
+
+    return () => {
+      setFocus("")
+    }
+  }, [focus])
 
   return (
     <div className="signup-form mt-8 sm:flex">
@@ -61,7 +80,7 @@ const SignupForm = ({ username, email, password, passwordCheck, handleSignup }) 
           type="text"
           name="username"
           placeholder="Nom d'utilisateur"
-          inputRef={inputRef}
+          inputRef={usernameRef}
         />
 
         <label
@@ -70,12 +89,17 @@ const SignupForm = ({ username, email, password, passwordCheck, handleSignup }) 
         >
           * Email
         </label>
-        <Field type="email" name="email" placeholder="Email" />
+        <Field type="email" name="email" placeholder="Email" inputRef={emailRef} />
 
         <label className="signup-form my-2 text-orange-400" htmlFor="password">
           * Mot de passe
         </label>
-        <Field type="password" name="password" placeholder="Mot de passe" />
+        <Field
+          type="password"
+          name="password"
+          placeholder="Mot de passe"
+          inputRef={passwordRef}
+        />
 
         <label className="signup-form my-2 text-orange-400" htmlFor="password-check">
           * Confirmez votre mot de passe
@@ -84,6 +108,7 @@ const SignupForm = ({ username, email, password, passwordCheck, handleSignup }) 
           type="password"
           name="passwordCheck"
           placeholder="Confirmation mot de passe"
+          inputRef={passwordCheckRef}
         />
 
         <p className="signup-form__info italic text-xs mt-1">
