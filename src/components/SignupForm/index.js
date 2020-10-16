@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import "./styles.css"
 import PropTypes from "prop-types"
 import Field from "src/containers/Field/index"
@@ -6,18 +6,56 @@ import { checkInput } from "src/selectors/signupform"
 import { Redirect, Link } from "react-router-dom"
 
 const SignupForm = ({ username, email, password, passwordCheck, handleSignup }) => {
-  const errors = checkInput(username, email, password, passwordCheck)
   const [isSignedUp, setSignedUp] = useState(false)
+  const [errors, setErrors] = useState([])
+
+  // useRef to block the initial render of useEffect (componentDidMounted)
+  const firstUpdate = useRef(true)
+
+  // ref to define focus on field with the related error
+  const [focus, setFocus] = useState("")
+  const usernameRef = useRef()
+  const emailRef = useRef()
+  const passwordRef = useRef()
+  const passwordCheckRef = useRef()
+
+  useEffect(() => {
+    if (firstUpdate.current) {
+      firstUpdate.current = false
+    } else {
+      if (Object.keys(errors).length === 0) {
+        handleSignup()
+        setSignedUp(true)
+      } else {
+        setFocus(errors[0].type)
+      }
+    }
+  }, [errors])
+
+  // update component when error and focus the related field
+  useEffect(() => {
+    if (focus === "username") {
+      usernameRef.current.focus()
+    } else if (focus === "email") {
+      emailRef.current.focus()
+    } else if (focus === "password") {
+      passwordRef.current.focus()
+    } else if (focus === "passwordCheck") {
+      passwordCheckRef.current.focus()
+    }
+
+    // clean const focus. Without the clean, the focus doesn't work twice on the same field
+    return () => {
+      setFocus("")
+    }
+  }, [focus])
+
   return (
     <div className="signup-form mt-8 sm:flex">
       <form
         onSubmit={(e) => {
           e.preventDefault()
-          console.log(errors)
-          if (Object.keys(errors).length === 0) {
-            handleSignup()
-            setSignedUp(true)
-          }
+          setErrors(checkInput(username, email, password, passwordCheck))
         }}
         className="signup-form__panel  w-64 flex flex-col justify-center mx-auto p-4 border-2 border-orange-400 bg-orange-900 font-bold"
       >
@@ -25,13 +63,26 @@ const SignupForm = ({ username, email, password, passwordCheck, handleSignup }) 
           Inscription
         </h1>
 
+        <ul className="signup-form__errorsList">
+          {errors.map((error, index) => (
+            <li className="text-xs mt-1" key={index}>
+              {error.errorMessage}
+            </li>
+          ))}
+        </ul>
+
         <label
           className="signup-form__label mt-4 mb-2 text-orange-400"
           htmlFor="username"
         >
           * Nom d'utilisateur
         </label>
-        <Field type="text" name="username" placeholder="Nom d'utilisateur" />
+        <Field
+          type="text"
+          name="username"
+          placeholder="Nom d'utilisateur"
+          inputRef={usernameRef}
+        />
 
         <label
           className="signup-form__label mt-4 mb-2 text-orange-400"
@@ -39,12 +90,17 @@ const SignupForm = ({ username, email, password, passwordCheck, handleSignup }) 
         >
           * Email
         </label>
-        <Field type="email" name="email" placeholder="Email" />
+        <Field type="email" name="email" placeholder="Email" inputRef={emailRef} />
 
         <label className="signup-form my-2 text-orange-400" htmlFor="password">
           * Mot de passe
         </label>
-        <Field type="password" name="password" placeholder="Mot de passe" />
+        <Field
+          type="password"
+          name="password"
+          placeholder="Mot de passe"
+          inputRef={passwordRef}
+        />
 
         <label className="signup-form my-2 text-orange-400" htmlFor="password-check">
           * Confirmez votre mot de passe
@@ -53,6 +109,7 @@ const SignupForm = ({ username, email, password, passwordCheck, handleSignup }) 
           type="password"
           name="passwordCheck"
           placeholder="Confirmation mot de passe"
+          inputRef={passwordCheckRef}
         />
 
         <p className="signup-form__info italic text-xs mt-1">

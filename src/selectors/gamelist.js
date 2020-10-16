@@ -10,7 +10,7 @@ export const fetchCategories = (setCategoriesList) => {
       setCategoriesList(response.data)
     })
     .catch((error) => {
-      console.log("error")
+      console.log(error)
     })
 }
 
