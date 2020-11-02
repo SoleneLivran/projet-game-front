@@ -2,7 +2,7 @@ export const checkInput = (username, email, password, passwordCheck) => {
   const errors = []
   if (username === "") {
     errors.push({
-      errorMessage: "Le nom d'utilisateur ne peut-être vide",
+      errorMessage: "Le nom d'utilisateur ne peut être vide",
       type: "username",
     })
     return errors
@@ -38,7 +38,7 @@ export const checkInput = (username, email, password, passwordCheck) => {
   } else {
     if (password !== passwordCheck && passwordCheck !== "") {
       errors.push({
-        errorMessage: "Les mots de passes ne sont pas identiques",
+        errorMessage: "Les mots de passe ne sont pas identiques",
         type: "passwordCheck",
       })
     }
