@@ -10,7 +10,7 @@ const UserPanel = ({ isLogged, connectedId, username }) => {
   const [nameToDisplay, setNameToDisplay] = useState("jeune aventurier")
 
   useEffect(() => {
-    if (username !== "") {
+    if (isLogged && username !== "") {
       setNameToDisplay(username.charAt(0).toUpperCase() + username.slice(1))
     }
   }, [username])

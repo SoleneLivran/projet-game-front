@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Route, Switch, useLocation } from "react-router-dom"
+import { Redirect, Route, Switch, useLocation } from "react-router-dom"
 import PropTypes from "prop-types"
 import lodash from "lodash"
 
@@ -42,8 +42,16 @@ const App = ({ checkIsLogged, isLogged }) => {
         <Route path="/" component={Home} exact />
         <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
-        <Route path="/login" component={LoginForm} />
-        <Route path="/signup" component={SignupForm} />
+        {isLogged ? (
+          <Redirect from="/login" to="/" />
+        ) : (
+          <Route path="/login" component={LoginForm} />
+        )}
+        {isLogged ? (
+          <Redirect from="/signup" to="/" />
+        ) : (
+          <Route path="/signup" component={SignupForm} />
+        )}
         <Route path="/gamelist" component={GameList} />
         {isLogged && <Route path="/create" component={Create} />}
         {isLogged && <Route path="/logout" component={Logout} />}
