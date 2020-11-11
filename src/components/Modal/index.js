@@ -1,4 +1,4 @@
-import Axios from "axios"
+import axios from "axios"
 import React, { useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import Loading from "src/components/Loading/index"
@@ -50,7 +50,7 @@ const Modal = ({ showModal, onClose, storyId }) => {
 
   // API request to have the selected story
   const fetchStory = () => {
-    Axios.get(
+    axios.get(
       `http://ec2-18-234-186-84.compute-1.amazonaws.com/api/public/stories/${storyId}`
     )
       .then((response) => {
