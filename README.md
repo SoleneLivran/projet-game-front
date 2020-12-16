@@ -1,3 +1,7 @@
+**This repository is the front-end part of our end-of-cursus project with O'Clock School.<br>
+The back-end repository can be found <a href="https://github.com/SoleneLivran/projet-jeu">here<a>.
+More info and YouTube presentation can be found <a href="https://solenelivran.github.io/gwith.html">here<a> (french).**
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
 ## Available Scripts
