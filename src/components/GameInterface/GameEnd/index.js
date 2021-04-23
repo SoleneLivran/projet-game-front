@@ -12,7 +12,7 @@ const GameEnd = ({ handleRestart, storyId }) => {
     if (rating !== 0 && rating <= 5) {
       axios
         .post(
-          `http://ec2-18-234-186-84.compute-1.amazonaws.com/api/stories/${storyId}/rating`,
+          `${process.env.REACT_APP_SERVER_BACK}/api/stories/${storyId}/rating`,
           {
             note: rating,
             story_id: storyId,

@@ -27,7 +27,7 @@ export const checkInput = (name, mail, password, newPassword) => {
 export const fetchUserStories = (setUserStoriesList, connectedId) => {
   axios
     .get(
-      `http://ec2-18-234-186-84.compute-1.amazonaws.com/api/app_users/${connectedId}/stories`,
+      `${process.env.REACT_APP_SERVER_BACK}/api/app_users/${connectedId}/stories`,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("user")}`,

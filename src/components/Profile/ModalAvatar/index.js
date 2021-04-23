@@ -39,7 +39,7 @@ const ModalAvatar = ({ showModalAvatar, onClose, setAvatar, connectedId }) => {
 
   const fetchAvatars = () => {
     axios
-      .get("http://ec2-18-234-186-84.compute-1.amazonaws.com/api/avatars", {
+      .get(`${process.env.REACT_APP_SERVER_BACK}/api/avatars`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("user")}`,
         },
@@ -55,7 +55,7 @@ const ModalAvatar = ({ showModalAvatar, onClose, setAvatar, connectedId }) => {
   const setAvatarRequest = (pictureFile, id) => {
     axios
       .put(
-        `http://ec2-18-234-186-84.compute-1.amazonaws.com/api/account/${connectedId}/avatar`,
+        `${process.env.REACT_APP_SERVER_BACK}/api/account/${connectedId}/avatar`,
         {
           avatar: id,
         },

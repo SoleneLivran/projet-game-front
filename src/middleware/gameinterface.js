@@ -6,7 +6,7 @@ const auth = (store) => (next) => (action) => {
     case FETCH_STORY: {
       axios
         .get(
-          `http://ec2-18-234-186-84.compute-1.amazonaws.com/api/public/stories/${action.storyId}`
+          `${process.env.REACT_APP_SERVER_BACK}/api/public/stories/${action.storyId}`
         )
         .then((response) => {
           console.log(response.data.firstScene)
@@ -20,7 +20,7 @@ const auth = (store) => (next) => (action) => {
     case NEXT_SCENE: {
       axios
         .get(
-          `http://ec2-18-234-186-84.compute-1.amazonaws.com/api/transitions/${action.nextSceneId}/next_scene`,
+          `${process.env.REACT_APP_SERVER_BACK}/api/transitions/${action.nextSceneId}/next_scene`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("user")}`,

@@ -9,7 +9,7 @@ const user = (store) => (next) => (action) => {
     case FETCH_USER: {
       axios
         .get(
-          `http://ec2-18-234-186-84.compute-1.amazonaws.com/api/app_users/${state.auth.connectedId}`,
+          `${process.env.REACT_APP_SERVER_BACK}/api/app_users/${state.auth.connectedId}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("user")}`,
@@ -28,7 +28,7 @@ const user = (store) => (next) => (action) => {
       axios
         .put(
           // 1rst arg = url
-          `http://ec2-18-234-186-84.compute-1.amazonaws.com/api/account/${state.auth.connectedId}`,
+          `${process.env.REACT_APP_SERVER_BACK}/api/account/${state.auth.connectedId}`,
           // 2e arg = body
           {
             newName: state.user.username.toLowerCase().trim(),
@@ -46,7 +46,7 @@ const user = (store) => (next) => (action) => {
         .then((response) => {
           axios
             .post(
-              "http://ec2-18-234-186-84.compute-1.amazonaws.com/api/login_check",
+              `${process.env.REACT_APP_SERVER_BACK}/api/login_check`,
               {
                 username: state.user.username.trim(),
                 password:
