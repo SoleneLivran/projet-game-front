@@ -14,7 +14,7 @@ const auth = (store) => (next) => (action) => {
     case LOGIN: {
       // access data in store
       axios
-        .post("http://ec2-18-234-186-84.compute-1.amazonaws.com/api/login_check", {
+        .post("${process.env.REACT_APP_SERVER_BACK}/api/login_check", {
           username: state.auth.username.trim(),
           password: state.auth.password.trim(),
         })
@@ -37,7 +37,7 @@ const auth = (store) => (next) => (action) => {
     }
     case SIGNUP: {
       axios
-        .post("http://ec2-18-234-186-84.compute-1.amazonaws.com/api/register", {
+        .post("${process.env.REACT_APP_SERVER_BACK}/api/register", {
           name: state.auth.username.toLowerCase().trim(),
           mail: state.auth.email.toLowerCase().trim(),
           password: state.auth.password.trim(),

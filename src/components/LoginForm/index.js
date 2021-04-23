@@ -42,7 +42,7 @@ const LoginForm = ({ handleLogin, isLogged }) => (
         />
 
         <a
-          href="http://ec2-18-234-186-84.compute-1.amazonaws.com/reset-password"
+          href="${process.env.REACT_APP_SERVER_BACK}/reset-password"
           className="text-sm underline text-gray-100 hover:text-orange-300"
         >
           Mot de passe perdu

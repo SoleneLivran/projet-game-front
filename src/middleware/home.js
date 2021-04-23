@@ -11,7 +11,7 @@ const home = (store) => (next) => (action) => {
     case FETCH_POPULAR_STORIES: {
       axios
         .get(
-          "http://ec2-18-234-186-84.compute-1.amazonaws.com/api/public/stories/top_five"
+          "${process.env.REACT_APP_SERVER_BACK}/api/public/stories/top_five"
         )
         .then((response) => {
           store.dispatch(savePopularStories(response.data))
@@ -24,7 +24,7 @@ const home = (store) => (next) => (action) => {
     case FETCH_LATEST_STORIES: {
       axios
         .get(
-          "http://ec2-18-234-186-84.compute-1.amazonaws.com/api/public/stories/latest_five"
+          "${process.env.REACT_APP_SERVER_BACK}/api/public/stories/latest_five"
         )
         .then((response) => {
           store.dispatch(saveLatestStories(response.data))

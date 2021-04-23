@@ -42,7 +42,7 @@ const ModalDeleteStory = ({
   const deleteStory = () => {
     axios
       .delete(
-        `http://ec2-18-234-186-84.compute-1.amazonaws.com/api/stories/${storyId}`,
+        `${process.env.REACT_APP_SERVER_BACK}/api/stories/${storyId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("user")}`,

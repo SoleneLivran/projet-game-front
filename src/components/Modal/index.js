@@ -51,7 +51,7 @@ const Modal = ({ showModal, onClose, storyId }) => {
   // API request to have the selected story
   const fetchStory = () => {
     Axios.get(
-      `http://ec2-18-234-186-84.compute-1.amazonaws.com/api/public/stories/${storyId}`
+      `${process.env.REACT_APP_SERVER_BACK}/api/public/stories/${storyId}`
     )
       .then((response) => {
         setStory(response.data)

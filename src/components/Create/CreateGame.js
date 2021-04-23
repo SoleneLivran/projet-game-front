@@ -37,7 +37,7 @@ const CreateGame = () => {
     if (currentStoryID.story_id === null) {
       axios
         .post(
-          "http://ec2-18-234-186-84.compute-1.amazonaws.com/api/stories",
+          "${process.env.REACT_APP_SERVER_BACK}/api/stories",
           {
             title: currentTitleState.title,
             /* pictureFile: "pictureFile", */
@@ -64,7 +64,7 @@ const CreateGame = () => {
     } else {
       axios
         .put(
-          "http://ec2-18-234-186-84.compute-1.amazonaws.com/api/stories/" +
+          "${process.env.REACT_APP_SERVER_BACK}/api/stories/" +
             currentStoryID.story_id,
           {
             title: currentTitleState.title,
@@ -100,7 +100,7 @@ const CreateGame = () => {
     if (currentStoryID.story_id === null) {
       axios
         .post(
-          "http://ec2-18-234-186-84.compute-1.amazonaws.com/api/stories",
+          "${process.env.REACT_APP_SERVER_BACK}/api/stories",
           {
             title: currentTitleState.title,
             /* pictureFile: "pictureFile", */
@@ -141,7 +141,7 @@ const CreateGame = () => {
 
     setAppState({ loading: true })
     axios
-      .get("http://ec2-18-234-186-84.compute-1.amazonaws.com/api/events", {
+      .get("${process.env.REACT_APP_SERVER_BACK}/api/events", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -151,7 +151,7 @@ const CreateGame = () => {
       })
 
     axios
-      .get("http://ec2-18-234-186-84.compute-1.amazonaws.com/api/places", {
+      .get("${process.env.REACT_APP_SERVER_BACK}/api/places", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -160,7 +160,7 @@ const CreateGame = () => {
         setLieu({ lieux: response.data })
       })
     axios
-      .get("http://ec2-18-234-186-84.compute-1.amazonaws.com/api/actions", {
+      .get("${process.env.REACT_APP_SERVER_BACK}/api/actions", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -172,7 +172,7 @@ const CreateGame = () => {
     // /api/public/story_categories
     axios
       .get(
-        "http://ec2-18-234-186-84.compute-1.amazonaws.com/api/public/story_categories",
+        "${process.env.REACT_APP_SERVER_BACK}/api/public/story_categories",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -194,7 +194,7 @@ const CreateGame = () => {
 
     axios
       .patch(
-        "http://ec2-18-234-186-84.compute-1.amazonaws.com/api/stories/" +
+        "${process.env.REACT_APP_SERVER_BACK}/api/stories/" +
           currentStoryID.story_id +
           "/publish",
         {
