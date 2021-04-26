@@ -4,7 +4,7 @@ import axios from "axios"
 export const fetchCategories = (setCategoriesList) => {
   axios
     .get(
-      `${process.env.REACT_APP_SERVER_BACK}/api/public/story_categories`
+      `${process.env.REACT_APP_SERVER_BACK}/api/public/story_categories/`
     )
     .then((response) => {
       setCategoriesList(response.data)

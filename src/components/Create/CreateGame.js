@@ -141,7 +141,7 @@ const CreateGame = () => {
 
     setAppState({ loading: true })
     axios
-      .get(`${process.env.REACT_APP_SERVER_BACK}/api/events`, {
+      .get(`${process.env.REACT_APP_SERVER_BACK}/api/events/`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -151,7 +151,7 @@ const CreateGame = () => {
       })
 
     axios
-      .get(`${process.env.REACT_APP_SERVER_BACK}/api/places`, {
+      .get(`${process.env.REACT_APP_SERVER_BACK}/api/places/`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -160,7 +160,7 @@ const CreateGame = () => {
         setLieu({ lieux: response.data })
       })
     axios
-      .get(`${process.env.REACT_APP_SERVER_BACK}/api/actions`, {
+      .get(`${process.env.REACT_APP_SERVER_BACK}/api/actions/`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -172,7 +172,7 @@ const CreateGame = () => {
     // /api/public/story_categories
     axios
       .get(
-        `${process.env.REACT_APP_SERVER_BACK}/api/public/story_categories`,
+        `${process.env.REACT_APP_SERVER_BACK}/api/public/story_categories/`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

@@ -60,7 +60,7 @@ const ModalDeleteUser = ({
   const deleteUser = () => {
     axios
       .delete(
-        `http://https://${process.env.REACT_APP_SERVER_BACK}/api/account/${connectedId}`,
+        `${process.env.REACT_APP_SERVER_BACK}/api/account/${connectedId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("user")}`,
