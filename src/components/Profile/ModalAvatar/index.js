@@ -39,7 +39,7 @@ const ModalAvatar = ({ showModalAvatar, onClose, setAvatar, connectedId }) => {
 
   const fetchAvatars = () => {
     axios
-      .get(`${process.env.REACT_APP_SERVER_BACK}/api/avatars`, {
+      .get(`${process.env.REACT_APP_SERVER_BACK}/api/avatars/`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("user")}`,
         },
