@@ -231,7 +231,7 @@ const CreateGame = () => {
   }, [currentStoryID])
   // State of current "Difficulty"
   const [currentDifficultyState, setDifficultyState] = useState({
-    difficulty: 1,
+    difficulty: "1",
   })
 
   // State of current "Success message"
@@ -242,7 +242,7 @@ const CreateGame = () => {
   //setCategoryState
   // State of current "Category"
   const [currentCategoryState, setCategoryState] = useState({
-    category: 22,
+    category: "7",
   })
   // State of current "Title"
   const [currentTitleState, setTitleState] = useState({
