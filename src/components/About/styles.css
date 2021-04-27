@@ -51,6 +51,8 @@
     text-align: center;
     padding: 10px;
     border-radius: 6px;
+    font-size: 1rem;
+    line-height: 1.2rem;
 
     /* Position the tooltip text */
     position: absolute;
@@ -66,8 +68,6 @@
     width: 400px;
     left: 250%;
     text-align: left;
-    font-size: 1rem;
-    line-height: 1.2rem;
     margin-left: -100px;
 }
 
