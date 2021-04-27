@@ -122,7 +122,7 @@ const CreateGame = () => {
           setStoryID({ story_id: response.data.story_id })
           if (response.status === 200) {
             setPublishedMessage({
-              message: "Brouillon enregistré avec succès!",
+              message: "Brouillon enregistré avec succès !",
             })
           } else {
             setPublishedMessage({
@@ -217,7 +217,7 @@ const CreateGame = () => {
         console.log(response)
         if (response.status === 200) {
           setPublishedMessage({
-            message: "Histoire publié avec succès!",
+            message: "Histoire publiée avec succès !",
           })
         } else {
           setPublishedMessage({
@@ -658,10 +658,24 @@ const CreateGame = () => {
                 })
               }}
             >
-              annuler
+              Annuler
             </button>
           </div>
           <div className="fixed  w-screen h-screen opacity-50 bg-white z-30"></div>
+        </div>
+        <div className="tooltip"> Besoin d'aide ?
+          <span className="tooltiptext">
+            - Pour ajouter une scène, choisissez un lieu, un événement, et une ou plusieurs actions.
+            <br></br>
+            <br></br>
+            - Dans la scène créée : cliquez sur une action pour créer la scène qui en découle.
+            <br></br>
+            Ou, pour qu'une action mène à une scène déjà créée : cliquez sur l'action, puis sur le numéro de la scène
+            qui en découle.
+            <br></br>
+            <br></br>
+            - Assurez-vous que chaque action mène à une scène suivante, et que chaque branche de l'histoire a une fin.
+          </span>
         </div>
         <div className="flex flex-col w-screen">
           <div className="flex  ">
@@ -796,12 +810,6 @@ const CreateGame = () => {
             )}
           </div>
         </div>
-        <button
-          className="bg-teal-500 ease-in duration-100 transform my-6 font-bold uppercase shadow-lg text-center px-4 py-2 text-2xl w-64 text-white rounded-lg hover:scale-105"
-          onClick={() => showModalFun(true)}
-        >
-          Publier
-        </button>
         {currentLieuState.currentLieu != "LIEU" &&
         currentEventState.currentEvent != "EVENEMENT" &&
         currentActionState.currentAction != "ACTION" &&
@@ -810,23 +818,41 @@ const CreateGame = () => {
           <div>
             <button
               onClick={saveCurrentScene}
-              className="text-white text-lg py-2 px-4 bg-gray-700 shadow-lg rounded-md"
+              className="text-white text-lg py-2 px-4 bg-gray-700 shadow-lg rounded-md mt-8"
             >
-              Ajouter une nouvelle scène
+              Ajouter cette scène à l'histoire
             </button>
           </div>
         ) : currentEventState.isEnd ? (
           <div>
             <button
               onClick={saveEndScene}
-              className="text-white text-lg py-2 px-4 bg-gray-700 shadow-lg rounded-md"
+              className="text-white text-lg py-2 px-4 bg-gray-700 shadow-lg rounded-md mt-8"
             >
-              Ajouter une nouvelle scène
+              Ajouter cette scène à l'histoire
             </button>
           </div>
         ) : (
           ""
         )}
+        <div>
+          {(scenesState.scenes.length >= 1) ? (
+            <div className="text-center tooltip story-publish-button">
+              <button
+                className="bg-teal-500 ease-in duration-100 transform mt-8 mb-2 font-bold shadow-lg text-center px-4 py-2 uppercase text-xl w-64 text-white rounded-lg hover:scale-105"
+                onClick={() => showModalFun(true)}
+              >
+                Publier l'histoire
+              </button>
+              <span className="publish-tooltiptext">
+                Attention : assurez-vous que chaque action a une scène suivante, et que chaque branche de l'histoire
+                mène à un événement de type "fin".
+                </span>
+            </div>
+            ) : (
+              ""
+          )}
+        </div>
         <div className="w-screen">
           <div className=" my-16 flex overflow-x-auto w-full">
             {cardsState.currentCards === "lieuState"

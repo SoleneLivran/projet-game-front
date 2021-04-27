@@ -41,7 +41,7 @@ const About = () => (
           </div>
           <div className="devcard__bottom-info font-light text-lg text-sm text-white items-center overflow-auto">
             <h3 className="devcard__role text-center text-gray-500 mb-2">
-              Lead Back
+              Dev Back
             </h3>
           </div>
           <div className="devcard__bottom-info flex justify-evenly items-center my-4  font-light text-lg text-sm text-white text-center overflow-auto">
@@ -77,7 +77,7 @@ const About = () => (
           </div>
           <div className="devcard__bottom-info font-light text-lg text-sm text-white items-center overflow-auto">
             <h3 className="devcard__role text-center text-gray-500 mb-2">
-              Lead Front
+              Dev Front
             </h3>
           </div>
           <div className="devcard__bottom-info flex justify-evenly items-center my-4  font-light text-lg text-sm text-white text-center overflow-auto">
@@ -113,7 +113,7 @@ const About = () => (
           </div>
           <div className="devcard__bottom-info font-light text-lg text-sm text-white items-center overflow-auto">
             <h3 className="devcard__role text-center text-gray-500 mb-2">
-              Git Master - Dev Front
+              Dev Front - Git Master
             </h3>
           </div>
           <div className="devcard__bottom-info flex justify-evenly items-center my-4  font-light text-lg text-sm text-white text-center overflow-auto">
@@ -156,7 +156,7 @@ const About = () => (
           </div>
           <div className="devcard__bottom-info font-light text-lg text-sm text-white items-center overflow-auto">
             <h3 className="devcard__role text-center text-gray-500 mb-2">
-              Scrum Master - Dev Back
+              Dev Back - Scrum Master
             </h3>
           </div>
           <div className="devcard__bottom-info flex justify-evenly items-center my-4  font-light text-lg text-sm text-white text-center overflow-auto">
@@ -192,7 +192,7 @@ const About = () => (
           </div>
           <div className="devcard__bottom-info font-light text-lg text-sm text-white items-center overflow-auto">
             <h3 className="devcard__role text-center text-gray-500 mb-2">
-              Product Owner - Dev Back
+              Dev Back - Product Owner
             </h3>
           </div>
           <div className="devcard__bottom-info flex justify-evenly items-center my-4  font-light text-lg text-sm text-white text-center overflow-auto">

@@ -42,7 +42,7 @@ const Modal = ({ showModal, onClose, storyId }) => {
     if (story.difficulty === 1) {
       return "Facile"
     } else if (story.difficulty === 2) {
-      return "Normal"
+      return "Moyen"
     } else {
       return "Difficile"
     }
