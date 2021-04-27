@@ -88,7 +88,7 @@ const Modal = ({ showModal, onClose, storyId }) => {
                 {story.category.name}
               </p>
               <p className="modal__difficulty text-center text-sm my-2">
-                Histoire: <span className="font-bold">{difficulty()}</span>
+                Niveau : <span className="font-bold">{difficulty()}</span>
               </p>
               <p className="modal__synopsis text-justify">{story.synopsis}</p>
             </div>
